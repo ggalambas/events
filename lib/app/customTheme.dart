@@ -22,6 +22,13 @@ class CustomTheme with ChangeNotifier {
     notifyListeners();
   }
 
+  /* to change this in the settings use
+   * Provider.of<CustomTheme>(context, listen: false).useDarkMode()
+   * listen: false -> because when the theme changes the widget tree already
+   * updates because the material widget is already listenning to those changes
+   * so here we only need the instance to call the functions
+   */
+
   void useSystemMode() => mode = Mode.system;
   void useLightMode() => mode = Mode.light;
   void useDarkMode() => mode = Mode.dark;
