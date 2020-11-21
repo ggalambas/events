@@ -1,4 +1,4 @@
-import 'package:events/app/customTheme.dart';
+import 'package:events/app/custom_theme.dart';
 import 'package:events/ui/components/base_widget.dart';
 import 'package:events/ui/home.dart';
 import 'package:flutter/material.dart';
