@@ -20,6 +20,7 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: Drawer(),
       body: CustomScrollView(
         slivers: <Widget>[
           CustomAppBar(),

@@ -5,7 +5,6 @@ class CustomAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverAppBar(
       pinned: true,
-      leading: Icon(Icons.menu),
       title: Text(
         'Category', //!
         style: TextStyle(
@@ -18,6 +17,30 @@ class CustomAppBar extends StatelessWidget {
           onPressed: () {
             print('search'); // TODO: Search
           },
+        ),
+        Container(
+          margin: EdgeInsets.only(right: 19),
+          width: 60,
+          padding: EdgeInsets.symmetric(vertical: 13),
+          child: Material(
+            borderRadius: BorderRadius.circular(15),
+            color: Colors.deepPurpleAccent.withOpacity(0.1),
+            child: InkWell(
+              borderRadius: BorderRadius.circular(15),
+              onTap: () {
+                print('open calendar');
+              },
+              child: Center(
+                child: Text(
+                  '21 Nov',
+                  style: TextStyle(
+                    color: Colors.deepPurpleAccent,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+          ),
         ),
       ],
       // TODO: Calendar

@@ -16,6 +16,7 @@ class MyApp extends StatelessWidget {
       child: Consumer<CustomTheme>(
         builder: (_, theme, __) {
           return MaterialApp(
+            debugShowCheckedModeBanner: false, //!
             theme: theme.light,
             darkTheme: theme.dark,
             themeMode: theme.mode,
