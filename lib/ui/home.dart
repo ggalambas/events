@@ -1,4 +1,4 @@
-import 'package:events/ui/components/customAppBar.dart';
+import 'package:events/ui/components/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 
 List<String> concelhos = [
@@ -23,7 +23,10 @@ class Home extends StatelessWidget {
       drawer: Drawer(),
       body: CustomScrollView(
         slivers: <Widget>[
-          CustomAppBar(),
+          CustomAppBar(
+            title: 'Categoria',
+            subtitle: 'Concelho',
+          ),
           SliverList(delegate: SliverChildBuilderDelegate((_, index) {
             if (index < concelhos.length)
               return Container(
