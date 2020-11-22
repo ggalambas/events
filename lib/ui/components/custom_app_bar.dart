@@ -5,11 +5,11 @@ class CustomAppBar extends StatelessWidget {
   final String title;
   final String subtitle;
 
-  CustomAppBar({@required this.title, this.subtitle});
+  const CustomAppBar({@required this.title, this.subtitle});
 
   @override
   Widget build(BuildContext context) {
-    TextTheme textTheme = Theme.of(context).textTheme;
+    final TextTheme textTheme = Theme.of(context).textTheme;
     return SliverAppBar(
       pinned: true,
       shape: RoundedRectangleBorder(
