@@ -42,9 +42,9 @@ class CustomTheme with ChangeNotifier {
 
   //! Coment with use cases when used
   TextTheme _textTheme({@required Color onSurface}) {
-    FontWeight light = FontWeight.w300;
-    FontWeight regular = FontWeight.w400;
-    FontWeight medium = FontWeight.w500;
+    final FontWeight light = FontWeight.w300;
+    final FontWeight regular = FontWeight.w400;
+    final FontWeight medium = FontWeight.w500;
 
     return TextTheme(
       // headline1: TextStyle(
