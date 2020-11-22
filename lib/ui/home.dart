@@ -27,13 +27,17 @@ class Home extends StatelessWidget {
             title: 'Categoria',
             subtitle: 'Concelho',
           ),
-          SliverList(delegate: SliverChildBuilderDelegate((_, index) {
-            if (index < concelhos.length)
-              return Container(
-                height: 100,
-                child: Text(concelhos[index]),
-              );
-          }))
+          SliverList(
+            delegate: SliverChildBuilderDelegate(
+              (_, index) {
+                return Container(
+                  height: 100,
+                  child: Text(concelhos[index]),
+                );
+              },
+              childCount: concelhos.length,
+            ),
+          )
         ],
       ),
     );

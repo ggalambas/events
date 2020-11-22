@@ -1,6 +1,7 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:events/app/custom_theme.dart';
 import 'package:events/ui/components/base_widget.dart';
-import 'package:events/ui/home.dart';
+import 'package:events/ui/config/router.gr.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
@@ -29,7 +30,10 @@ class _MyAppState extends State<MyApp> {
           theme: theme.light,
           darkTheme: theme.dark,
           themeMode: theme.mode,
-          home: Home(),
+          builder: ExtendedNavigator.builder<ARouter>(
+            router: ARouter(),
+            name: 'router',
+          ),
         );
       },
     );

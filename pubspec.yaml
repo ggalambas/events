@@ -23,6 +23,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  auto_route: ^0.6.9
   cupertino_icons: ^1.0.0
   provider: ^4.3.2+2
   flutter_statusbarcolor: ^0.2.3
@@ -30,6 +31,9 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  auto_route_generator: ^0.6.10
+  build_runner: null
+  lint: ^1.3.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

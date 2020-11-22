@@ -4,24 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:events/app/palette.dart';
 import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
 
-enum Mode {
-  system,
-  light,
-  dark,
-}
-
 class CustomTheme with ChangeNotifier {
-  final Map<Mode, ThemeMode> _theme = {
-    Mode.system: ThemeMode.system,
-    Mode.light: ThemeMode.light,
-    Mode.dark: ThemeMode.dark,
-  };
-
-  Mode _mode = Mode.system;
-
-  get mode => _theme[_mode];
-  set mode(Mode mode) {
-    _mode = mode;
+  ThemeMode _mode = ThemeMode.system;
+  ThemeMode get mode => _mode;
+  set mode(ThemeMode newMode) {
+    _mode = newMode;
     notifyListeners();
   }
 
@@ -32,9 +19,9 @@ class CustomTheme with ChangeNotifier {
    * so here we only need the instance to call the functions
    */
 
-  void useSystemMode() => mode = Mode.system;
-  void useLightMode() => mode = Mode.light;
-  void useDarkMode() => mode = Mode.dark;
+  void useSystemMode() => mode = ThemeMode.system;
+  void useLightMode() => mode = ThemeMode.light;
+  void useDarkMode() => mode = ThemeMode.dark;
 
   static void statusBarListener(Window window) {
     _setStatusBarColor(window.platformBrightness);
