@@ -9,14 +9,13 @@ class Calendar extends StatelessWidget {
   Widget build(BuildContext context) {
     final CalendarModel calendar = Provider.of<CalendarModel>(context);
     final TextTheme textTheme = Theme.of(context).textTheme;
-    final double appBarHeight = SliverAppBar().toolbarHeight;
     final double statusBarHeight = MediaQuery.of(context).padding.top;
 
     return FlexibleSpaceBar(
       background: Padding(
         padding: EdgeInsets.only(
-          top: appBarHeight + statusBarHeight,
-          bottom: kAppBarExpandedHeight - appBarHeight - 50,
+          top: kAppBarHeight + statusBarHeight,
+          bottom: kAppBarExpandedHeight - kAppBarHeight - 50,
           left: kAppBarHorizPadding,
           right: kAppBarHorizPadding,
         ),
