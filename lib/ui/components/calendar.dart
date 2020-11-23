@@ -23,10 +23,10 @@ class Calendar extends StatelessWidget {
           child: ListView.separated(
             scrollDirection: Axis.horizontal,
             itemCount: calendar.totalDays,
-            separatorBuilder: (_, day) {
-              return !calendar.isLastDayOfMonth(day)
-                  ? SizedBox(width: kCalendarItemSpace)
-                  : Padding(
+            separatorBuilder: (_, daysAfter) {
+              return daysAfter < calendar.totalDays - 1 &&
+                      calendar.isLastDayOfMonth(daysAfter)
+                  ? Padding(
                       padding: EdgeInsets.only(
                         left: kCalendarItemSpace * 4 / 3,
                         right: kCalendarItemSpace,
@@ -34,18 +34,19 @@ class Calendar extends StatelessWidget {
                       child: RotatedBox(
                         quarterTurns: -1,
                         child: Text(
-                          calendar.nextMonth(day).toUpperCase(),
+                          calendar.nextMonth(daysAfter).toUpperCase(),
                           textAlign: TextAlign.center,
                           style: textTheme.overline,
                         ),
                       ),
-                    );
+                    )
+                  : SizedBox(width: kCalendarItemSpace);
             },
-            itemBuilder: (_, day) => CalendarItem(
-              weekDay: calendar.weekday(day)[0].toUpperCase(),
-              day: calendar.day(day),
-              isSelected: calendar.isSelected(day),
-              onPressed: () => calendar.select(day),
+            itemBuilder: (_, daysAfter) => CalendarItem(
+              weekDay: calendar.weekDay(daysAfter)[0].toUpperCase(),
+              day: calendar.day(daysAfter),
+              isSelected: calendar.isSelected(daysAfter),
+              onPressed: () => calendar.select(daysAfter),
             ),
           ),
         ),

@@ -44,7 +44,7 @@ class CalendarButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(kBorderRadiusMedium),
         ),
         child: scroll.isAppBarCollapsed
-            ? Text('${calendar.selectedDay()} ${calendar.selectedMonth()}',
+            ? Text('${calendar.selectedDay} ${calendar.selectedMonth}',
                 style: theme.textTheme.button)
             : Icon(Icons.expand_less),
       ),

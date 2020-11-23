@@ -35,7 +35,7 @@ class CustomAppBar extends StatelessWidget {
         actions: [
           IconButton(
             icon: Icon(Icons.search),
-            onPressed: () {}, // TODO: Search
+            onPressed: () {}, // TODO: Search Screen
           ),
           CalendarButton(),
         ],
