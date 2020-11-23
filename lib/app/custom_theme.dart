@@ -30,6 +30,7 @@ class CustomTheme with ChangeNotifier {
     };
   }
 
+  // TODO: [Bug] status bar desappears when unlocking screen
   static void _setStatusBarColor(Brightness brightness) {
     if (brightness == Brightness.light) {
       FlutterStatusbarcolor.setStatusBarColor(kLightSurface);
