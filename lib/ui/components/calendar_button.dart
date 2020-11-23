@@ -15,7 +15,7 @@ class CalendarButton extends StatelessWidget {
       margin: EdgeInsets.only(right: kAppBarHorizPadding),
       width: kAppBarButtonWidth,
       padding: EdgeInsets.symmetric(
-        vertical: (AppBar().preferredSize.height - kAppBarButtonHeight) / 2,
+        vertical: (SliverAppBar().toolbarHeight - kAppBarButtonHeight) / 2,
       ),
       child: FlatButton(
         onPressed: scroll.onCalendarButtonPressed,

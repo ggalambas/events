@@ -18,7 +18,7 @@ class CalendarModel extends ChangeNotifier {
     _refreshAtMidnight();
   }
 
-  _refreshAtMidnight() {
+  void _refreshAtMidnight() {
     final DateTime tomorrow = today.after(1);
     final DateTime midnight =
         DateTime(tomorrow.year, tomorrow.month, tomorrow.day);

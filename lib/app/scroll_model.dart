@@ -5,7 +5,7 @@ class ScrollModel extends ChangeNotifier {
   ScrollController get controller => _controller;
 
   ScrollModel() {
-    _controller = ScrollController()..addListener(_scrollAnimationListener);
+    _controller = ScrollController(); //..addListener(_scrollAnimationListener);
   }
 
   bool _isAppBarCollapsed = false;
@@ -33,8 +33,8 @@ class ScrollModel extends ChangeNotifier {
     isAppBarCollapsed = false;
     await _controller.animateTo(
       0,
-      duration: Duration(milliseconds: 300),
-      curve: Curves.fastOutSlowIn,
+      duration: Duration(milliseconds: 200),
+      curve: Curves.easeOut,
     );
     _isAnimating = false;
   }
@@ -44,8 +44,8 @@ class ScrollModel extends ChangeNotifier {
     isAppBarCollapsed = true;
     await _controller.animateTo(
       65,
-      duration: Duration(milliseconds: 300),
-      curve: Curves.fastOutSlowIn,
+      duration: Duration(milliseconds: 200),
+      curve: Curves.easeOut,
     );
     _isAnimating = false;
   }

@@ -17,7 +17,10 @@ class CustomAppBar extends StatelessWidget {
     return ChangeNotifierProvider<CalendarModel>(
       create: (_) => CalendarModel(),
       child: SliverAppBar(
+        // forceElevated: true,
         pinned: true,
+        floating: true,
+        snap: true,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
             bottomLeft: Radius.circular(kBorderRadiusBig),
@@ -37,7 +40,11 @@ class CustomAppBar extends StatelessWidget {
             icon: Icon(Icons.search),
             onPressed: () {}, // TODO: Search Screen
           ),
-          CalendarButton(),
+          IconButton(
+            icon: Icon(Icons.date_range),
+            onPressed: () {}, // TODO: CalendarButton()
+          ),
+          // CalendarButton(),
         ],
         expandedHeight: kAppBarExpandedHeight,
         flexibleSpace: Calendar(),
