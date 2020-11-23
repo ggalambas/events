@@ -1,56 +1,46 @@
+import 'package:events/app/constants.dart';
 import 'package:flutter/material.dart';
 
 class ScrollModel extends ChangeNotifier {
-  ScrollController _controller;
+  final ScrollController _controller = ScrollController();
   ScrollController get controller => _controller;
+  final double _flexbarHeight = kAppBarExpandedHeight - kAppBarHeight;
 
-  ScrollModel() {
-    _controller = ScrollController()..addListener(_scrollAnimationListener);
-  }
-
-  bool _isAppBarCollapsed = false;
-  bool get isAppBarCollapsed => _isAppBarCollapsed;
-  set isAppBarCollapsed(bool collapsed) {
-    _isAppBarCollapsed = collapsed;
+  bool _isFlexbarCollapsed = false;
+  bool get isFlexbarCollapsed => _isFlexbarCollapsed;
+  set isFlexbarCollapsed(bool collapsed) {
+    _isFlexbarCollapsed = collapsed;
     notifyListeners();
   }
 
-  bool _isAnimating = false;
-
-  // TODO: Scroll, keep scrolling after animation
-  void _scrollAnimationListener() {
-    if (!_isAnimating) {
-      if (_isAppBarCollapsed && _controller.offset < 65) {
-        _expandAppBar();
-      } else if (!_isAppBarCollapsed && _controller.offset > 0) {
-        _collapseAppBar();
+  ScrollModel() {
+    _controller.addListener(() {
+      if (_isFlexbarCollapsed && _controller.offset < _flexbarHeight) {
+        isFlexbarCollapsed = false;
+      } else if (!_isFlexbarCollapsed && _controller.offset >= _flexbarHeight) {
+        isFlexbarCollapsed = true;
       }
+    });
+  }
+
+  void snapFlexbar() {
+    if (_controller.offset > 0 && _controller.offset < _flexbarHeight) {
+      final double snapOffset =
+          _controller.offset / _flexbarHeight > 0.5 ? _flexbarHeight : 0;
+
+      Future.microtask(() => _animate(snapOffset));
     }
   }
 
-  Future _expandAppBar() async {
-    _isAnimating = true;
-    isAppBarCollapsed = false;
-    await _controller.animateTo(
-      0,
-      duration: Duration(milliseconds: 300),
-      curve: Curves.fastOutSlowIn,
-    );
-    _isAnimating = false;
+  void toggleFlexbar() {
+    !isFlexbarCollapsed ? _animate(_flexbarHeight) : _animate(0);
   }
 
-  Future _collapseAppBar() async {
-    _isAnimating = true;
-    isAppBarCollapsed = true;
-    await _controller.animateTo(
-      65,
-      duration: Duration(milliseconds: 300),
-      curve: Curves.fastOutSlowIn,
+  void _animate(double snapOffset) {
+    _controller.animateTo(
+      snapOffset,
+      duration: Duration(milliseconds: 200),
+      curve: Curves.easeOut,
     );
-    _isAnimating = false;
-  }
-
-  void onCalendarButtonPressed() {
-    isAppBarCollapsed ? _expandAppBar() : _collapseAppBar();
   }
 }

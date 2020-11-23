@@ -15,46 +15,21 @@ class CalendarButton extends StatelessWidget {
       margin: EdgeInsets.only(right: kAppBarHorizPadding),
       width: kAppBarButtonWidth,
       padding: EdgeInsets.symmetric(
-        vertical: (AppBar().preferredSize.height - kAppBarButtonHeight) / 2,
+        vertical: (kAppBarHeight - kAppBarButtonHeight) / 2,
       ),
       child: FlatButton(
-        onPressed: scroll.onCalendarButtonPressed,
+        onPressed: scroll.toggleFlexbar,
         color:
-            scroll.isAppBarCollapsed ? theme.primaryColor : Colors.transparent,
+            scroll.isFlexbarCollapsed ? theme.primaryColor : Colors.transparent,
         padding: EdgeInsets.zero,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(kBorderRadiusMedium),
         ),
-        child: scroll.isAppBarCollapsed
-            ? Text('${calendar.selectedDay()} ${calendar.selectedMonth()}',
+        child: scroll.isFlexbarCollapsed
+            ? Text('${calendar.selectedDay} ${calendar.selectedMonth}',
                 style: theme.textTheme.button)
             : Icon(Icons.expand_less),
       ),
     );
   }
 }
-
-//? ANIMATED CONTAINER
-// child: ClipRRect(
-//   borderRadius: BorderRadius.circular(kBorderRadiusMedium),
-//   child: FlatButton(
-//     onPressed: scroll.onPressed,
-//     padding: EdgeInsets.zero,
-//     child: AnimatedContainer(
-//       height: double.infinity,
-//       width: double.infinity,
-//       duration: Duration(milliseconds: 300),
-//       curve: Curves.easeIn,
-//       color: scroll.isAppBarCollapsed
-//           ? theme.primaryColor
-//           : Colors.transparent,
-//       child: Center(
-//         child: scroll.isAppBarCollapsed
-//             ? Text(
-//                 '${calendar.selectedDay()} ${calendar.selectedMonth()}',
-//                 style: theme.textTheme.button)
-//             : Icon(Icons.expand_less),
-//       ),
-//     ),
-//   ),
-// ),

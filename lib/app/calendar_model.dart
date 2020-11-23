@@ -1,53 +1,59 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+extension DateTimeX on DateTime {
+  DateTime after(int days) => add(Duration(days: days));
+  // Date Formats
+  String get monthName => DateFormat.MMM('pt_PT').format(this);
+  String get weekdayName => DateFormat.E('pt_PT').format(this);
+}
+
 class CalendarModel extends ChangeNotifier {
   DateTime _today = DateTime.now();
-  set today(DateTime day) {
-    _today = day;
-    notifyListeners();
-  }
+  DateTime _selected;
 
   CalendarModel() {
+    _selected = _today;
     _refreshAtMidnight();
   }
 
   void _refreshAtMidnight() {
-    final DateTime tomorrow = _tomorrow();
+    final DateTime tomorrow = today.after(1);
     final DateTime midnight =
         DateTime(tomorrow.year, tomorrow.month, tomorrow.day);
-    final Duration timeToMidnight = midnight.difference(_today);
+    final Duration timeToMidnight = midnight.difference(today);
     Future.delayed(timeToMidnight, () {
       today = DateTime.now();
       Timer.periodic(Duration(days: 1), (_) => today = DateTime.now());
     });
   }
 
-  final int _totalDays = 14;
-  int get totalDays => _totalDays;
-
-  int _selectedDay = 0;
-  bool isSelected(int day) => day == _selectedDay;
-  void select(int day) {
-    _selectedDay = day;
+  DateTime get today => _today;
+  set today(DateTime day) {
+    if (_selected.day == _today.day) _selected = day;
+    _today = day;
     notifyListeners();
   }
 
-  String selectedDay() => _fromNow(_selectedDay).day.toString();
-  String selectedMonth() =>
-      DateFormat.MMM('pt_PT').format(_fromNow(_selectedDay));
+  // Calendar
 
-  bool isLastDayOfMonth(int day) => day + 1 < _totalDays && _day(day + 1) == 1;
-  String nextMonth(int day) =>
-      DateFormat.MMM('pt_PT').format(_fromNow(day + 1));
+  int get totalDays => 14;
 
-  String weekday(int day) => _weekDay(_fromNow(day));
-  String day(int day) => _day(day).toString();
+  void select(int daysAfter) {
+    _selected = today.after(daysAfter);
+    notifyListeners();
+  }
 
-  int _day(int day) => _fromNow(day).day;
-  DateTime _fromNow(int days) => _today.add(Duration(days: days));
-  String _weekDay(DateTime day) => DateFormat.E('pt_PT').format(day);
-  DateTime _tomorrow() => _fromNow(1);
+  bool isSelected(int daysAfter) => today.after(daysAfter).day == _selected.day;
+  bool isLastDayOfMonth(int daysAfter) => today.after(daysAfter + 1).day == 1;
+
+  String nextMonth(int daysAfter) => today.after(daysAfter + 1).monthName;
+  String weekDay(int daysAfter) => today.after(daysAfter).weekdayName;
+  String day(int daysAfter) => today.after(daysAfter).day.toString();
+
+  // Calendar Button
+
+  String get selectedDay => _selected.day.toString();
+  String get selectedMonth => _selected.monthName;
 }

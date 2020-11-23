@@ -24,15 +24,18 @@ class Home extends StatelessWidget {
     return BaseWidget<ScrollModel>(
       model: ScrollModel(),
       builder: (_, scroll, __) {
-        return SafeArea(
-          child: Scaffold(
-            drawer: Drawer(),
-            body: CustomScrollView(
+        return Scaffold(
+          drawer: Drawer(),
+          body: NotificationListener<ScrollEndNotification>(
+            onNotification: (_) {
+              scroll.snapFlexbar();
+              return false;
+            },
+            child: CustomScrollView(
               controller: scroll.controller,
               slivers: <Widget>[
                 CustomAppBar(
                   title: 'Categoria', //!
-                  subtitle: 'Concelho', //?
                 ),
                 SliverList(
                   delegate: SliverChildBuilderDelegate(

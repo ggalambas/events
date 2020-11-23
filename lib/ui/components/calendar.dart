@@ -9,12 +9,13 @@ class Calendar extends StatelessWidget {
   Widget build(BuildContext context) {
     final CalendarModel calendar = Provider.of<CalendarModel>(context);
     final TextTheme textTheme = Theme.of(context).textTheme;
-    final double appBarHeight = AppBar().preferredSize.height;
+    final double statusBarHeight = MediaQuery.of(context).padding.top;
+
     return FlexibleSpaceBar(
       background: Padding(
         padding: EdgeInsets.only(
-          top: appBarHeight,
-          bottom: kAppBarExpandedHeight - appBarHeight - 50,
+          top: kAppBarHeight + statusBarHeight,
+          bottom: kAppBarExpandedHeight - kAppBarHeight - 50,
           left: kAppBarHorizPadding,
           right: kAppBarHorizPadding,
         ),
@@ -23,10 +24,10 @@ class Calendar extends StatelessWidget {
           child: ListView.separated(
             scrollDirection: Axis.horizontal,
             itemCount: calendar.totalDays,
-            separatorBuilder: (_, day) {
-              return !calendar.isLastDayOfMonth(day)
-                  ? SizedBox(width: kCalendarItemSpace)
-                  : Padding(
+            separatorBuilder: (_, daysAfter) {
+              return daysAfter < calendar.totalDays - 1 &&
+                      calendar.isLastDayOfMonth(daysAfter)
+                  ? Padding(
                       padding: EdgeInsets.only(
                         left: kCalendarItemSpace * 4 / 3,
                         right: kCalendarItemSpace,
@@ -34,18 +35,19 @@ class Calendar extends StatelessWidget {
                       child: RotatedBox(
                         quarterTurns: -1,
                         child: Text(
-                          calendar.nextMonth(day).toUpperCase(),
+                          calendar.nextMonth(daysAfter).toUpperCase(),
                           textAlign: TextAlign.center,
                           style: textTheme.overline,
                         ),
                       ),
-                    );
+                    )
+                  : SizedBox(width: kCalendarItemSpace);
             },
-            itemBuilder: (_, day) => CalendarItem(
-              weekDay: calendar.weekday(day)[0].toUpperCase(),
-              day: calendar.day(day),
-              isSelected: calendar.isSelected(day),
-              onPressed: () => calendar.select(day),
+            itemBuilder: (_, daysAfter) => CalendarItem(
+              weekDay: calendar.weekDay(daysAfter)[0].toUpperCase(),
+              day: calendar.day(daysAfter),
+              isSelected: calendar.isSelected(daysAfter),
+              onPressed: () => calendar.select(daysAfter),
             ),
           ),
         ),
