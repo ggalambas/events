@@ -25,15 +25,18 @@ dependencies:
     sdk: flutter
   auto_route: ^0.6.9
   cupertino_icons: ^1.0.0
-  provider: ^4.3.2+2
   flutter_statusbarcolor: ^0.2.3
+  get_it: ^5.0.1
+  injectable: ^1.0.5
   intl: ^0.16.1
+  provider: ^4.3.2+2
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   auto_route_generator: ^0.6.10
   build_runner: null
+  injectable_generator: ^1.0.6
   lint: ^1.3.0
 
 # For information on the generic Dart part of this file, see the

@@ -9,7 +9,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
-import '../home.dart';
+import 'ui/home.dart';
 
 class Routes {
   static const String home = '/';

@@ -1,4 +1,4 @@
-import 'package:events/app/constants.dart';
+import 'package:events/ui/config/constants.dart';
 import 'package:flutter/material.dart';
 
 class CalendarItem extends StatelessWidget {

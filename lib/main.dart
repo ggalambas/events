@@ -1,11 +1,16 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:events/app/custom_theme.dart';
+import 'package:events/injection.dart';
+import 'package:events/router.gr.dart';
 import 'package:events/ui/components/base_widget.dart';
-import 'package:events/ui/config/router.gr.dart';
+import 'package:events/ui/config/custom_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:injectable/injectable.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  configureInjection(Environment.prod);
+  runApp(MyApp());
+}
 
 class MyApp extends StatefulWidget {
   @override

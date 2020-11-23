@@ -1,6 +1,6 @@
 import 'package:events/app/calendar_model.dart';
-import 'package:events/app/constants.dart';
 import 'package:events/app/scroll_model.dart';
+import 'package:events/ui/config/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
