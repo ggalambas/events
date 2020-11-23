@@ -1,5 +1,7 @@
+import 'package:events/ui/components/base_widget.dart';
 import 'package:events/ui/components/custom_app_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:events/app/scroll_model.dart';
 
 List<String> concelhos = [
   'Mafra',
@@ -19,27 +21,35 @@ List<String> concelhos = [
 class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      drawer: Drawer(),
-      body: CustomScrollView(
-        slivers: <Widget>[
-          CustomAppBar(
-            title: 'Categoria',
-            subtitle: 'Concelho',
-          ),
-          SliverList(
-            delegate: SliverChildBuilderDelegate(
-              (_, index) {
-                return Container(
-                  height: 100,
-                  child: Text(concelhos[index]),
-                );
-              },
-              childCount: concelhos.length,
+    return BaseWidget<ScrollModel>(
+      model: ScrollModel(),
+      builder: (_, scroll, __) {
+        return SafeArea(
+          child: Scaffold(
+            drawer: Drawer(),
+            body: CustomScrollView(
+              controller: scroll.controller,
+              slivers: <Widget>[
+                CustomAppBar(
+                  title: 'Categoria', //!
+                  subtitle: 'Concelho', //?
+                ),
+                SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                    (_, index) {
+                      return SizedBox(
+                        height: 100,
+                        child: Text(concelhos[index]),
+                      );
+                    },
+                    childCount: concelhos.length,
+                  ),
+                )
+              ],
             ),
-          )
-        ],
-      ),
+          ),
+        );
+      },
     );
   }
 }

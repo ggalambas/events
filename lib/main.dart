@@ -3,6 +3,7 @@ import 'package:events/app/custom_theme.dart';
 import 'package:events/ui/components/base_widget.dart';
 import 'package:events/ui/config/router.gr.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 void main() => runApp(MyApp());
 
@@ -18,6 +19,8 @@ class _MyAppState extends State<MyApp> {
 
     final window = WidgetsBinding.instance.window;
     CustomTheme.statusBarListener(window);
+
+    initializeDateFormatting('pt_PT');
   }
 
   @override
@@ -32,7 +35,6 @@ class _MyAppState extends State<MyApp> {
           themeMode: theme.mode,
           builder: ExtendedNavigator.builder<ARouter>(
             router: ARouter(),
-            name: 'router',
           ),
         );
       },

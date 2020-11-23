@@ -33,15 +33,83 @@ class CustomTheme with ChangeNotifier {
   static void _setStatusBarColor(Brightness brightness) {
     if (brightness == Brightness.light) {
       FlutterStatusbarcolor.setStatusBarColor(kLightSurface);
-      // FlutterStatusbarcolor.setStatusBarWhiteForeground(false);
+      FlutterStatusbarcolor.setStatusBarWhiteForeground(false);
     } else if (brightness == Brightness.dark) {
       FlutterStatusbarcolor.setStatusBarColor(kDarkSurface);
-      // FlutterStatusbarcolor.setStatusBarWhiteForeground(true);
+      FlutterStatusbarcolor.setStatusBarWhiteForeground(true);
     }
   }
 
-  //! Coment with use cases when used
-  TextTheme _textTheme({@required Color onSurface}) {
+  ThemeData get light => ThemeData.light().copyWith(
+        colorScheme: ColorScheme(
+          primary: kLightPrimary,
+          primaryVariant: kLightPrimaryVariant,
+          secondary: kLightSecondary,
+          secondaryVariant: kLightSecondaryVariant,
+          surface: kLightSurface,
+          background: kLightBackground,
+          error: kLightError,
+          onPrimary: kLightOnPrimary,
+          onSecondary: kLightOnSecondary,
+          onSurface: kLightOnSurface,
+          onBackground: kLightOnBackground,
+          onError: kLightOnError,
+          brightness: Brightness.light,
+        ),
+        primaryColor: kLightPrimary,
+        appBarTheme: AppBarTheme(
+          color: kLightSurface,
+          brightness: Brightness.light,
+          iconTheme: IconThemeData(
+            color: kLightOnSurface,
+          ),
+        ),
+        scaffoldBackgroundColor: kLightBackground,
+        textTheme: _textTheme(
+          onSurface: kLightOnSurface,
+          onPrimary: kLightOnPrimary,
+          onBackground: kLightOnBackground,
+        ),
+      );
+
+  ThemeData get dark => ThemeData.dark().copyWith(
+        colorScheme: ColorScheme(
+          primary: kDarkPrimary,
+          primaryVariant: kDarkPrimaryVariant,
+          secondary: kDarkSecondary,
+          secondaryVariant: kDarkSecondary,
+          surface: kDarkSurface,
+          background: kDarkBackground,
+          error: kDarkError,
+          onPrimary: kDarkOnPrimary,
+          onSecondary: kDarkOnSecondary,
+          onSurface: kDarkOnSurface,
+          onBackground: kDarkOnBackground,
+          onError: kDarkOnError,
+          brightness: Brightness.dark,
+        ),
+        primaryColor: kDarkPrimary,
+        appBarTheme: AppBarTheme(
+          color: kDarkSurface,
+          brightness: Brightness.dark,
+          iconTheme: IconThemeData(
+            color: kDarkOnSurface,
+          ),
+        ),
+        scaffoldBackgroundColor: kDarkBackground,
+        textTheme: _textTheme(
+          onSurface: kDarkOnSurface,
+          onPrimary: kDarkOnPrimary,
+          onBackground: kDarkOnBackground,
+        ),
+      );
+
+//! Coment with use cases when used
+  TextTheme _textTheme({
+    @required Color onSurface,
+    @required Color onPrimary,
+    @required Color onBackground,
+  }) {
     final FontWeight light = FontWeight.w300;
     final FontWeight regular = FontWeight.w400;
     final FontWeight medium = FontWeight.w500;
@@ -102,61 +170,34 @@ class CustomTheme with ChangeNotifier {
       //   fontWeight: regular,
       //   letterSpacing: 0.5,
       // ),
-      bodyText2: TextStyle(
+      // bodyText2: TextStyle(
+      //   color: onSurface,
+      //   fontSize: 14.0,
+      //   fontWeight: regular,
+      //   letterSpacing: 0.25,
+      // ),
+      button: TextStyle(
+        //* Calendar Buttons
+        color: onPrimary,
+        fontSize: 14.0,
+        fontWeight: medium,
+        letterSpacing: 0.25, //default: 1.25
+      ),
+      caption: TextStyle(
         //* AppBar Subtitle
         color: onSurface,
-        fontSize: 14.0,
+        fontSize: 12.0,
         fontWeight: regular,
-        letterSpacing: 0.25,
+        letterSpacing: 0.4,
       ),
-      // button: TextStyle(
-      //   // color: onSurface,
-      //   fontSize: 14.0,
-      //   fontWeight: medium,
-      //   letterSpacing: 1.25,
-      // ),
-      // caption: TextStyle(
-      //   // color: onSurface,
-      //   fontSize: 12.0,
-      //   fontWeight: regular,
-      //   letterSpacing: 0.4,
-      // ),
-      // overline: TextStyle(
-      //   // color: onSurface,
-      //   fontSize: 10.0,
-      //   fontWeight: regular,
-      //   letterSpacing: 1.5,
-      // ),
+      overline: TextStyle(
+        //* Week days
+        //* Month
+        color: onBackground,
+        fontSize: 12.0, //default: 10.0
+        fontWeight: regular,
+        letterSpacing: 1.5,
+      ),
     );
   }
-
-  ThemeData get light => ThemeData.light().copyWith(
-        primaryColor: kLightPrimary,
-        appBarTheme: AppBarTheme(
-          color: kLightSurface,
-          brightness: Brightness.light,
-          iconTheme: IconThemeData(
-            color: kLightOnSurface,
-          ),
-        ),
-        scaffoldBackgroundColor: kLightBackground,
-        textTheme: _textTheme(
-          onSurface: kLightOnSurface,
-        ),
-      );
-
-  ThemeData get dark => ThemeData.dark().copyWith(
-        primaryColor: kDarkPrimary,
-        appBarTheme: AppBarTheme(
-          color: kDarkSurface,
-          brightness: Brightness.dark,
-          iconTheme: IconThemeData(
-            color: kDarkOnSurface,
-          ),
-        ),
-        scaffoldBackgroundColor: kDarkBackground,
-        textTheme: _textTheme(
-          onSurface: kDarkOnSurface,
-        ),
-      );
 }
