@@ -14,8 +14,8 @@ class Calendar extends StatelessWidget {
     return FlexibleSpaceBar(
       background: Padding(
         padding: EdgeInsets.only(
-          top: kAppBarHeight + statusBarHeight,
-          bottom: kAppBarExpandedHeight - kAppBarHeight - 50,
+          top: kToolbarHeight + statusBarHeight,
+          bottom: kAppBarExpandedHeight - kToolbarHeight - 50,
           left: kAppBarHorizPadding,
           right: kAppBarHorizPadding,
         ),

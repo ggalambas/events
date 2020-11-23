@@ -2,7 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:events/app/scroll_model.dart';
 import 'package:events/injection.dart';
 import 'package:events/router.gr.dart';
-import 'package:events/ui/components/base_widget.dart';
 import 'package:events/ui/config/custom_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';

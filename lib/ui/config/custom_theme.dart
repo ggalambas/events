@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:events/ui/config/palette.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
+// import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
 
 class CustomTheme with ChangeNotifier {
   ThemeMode _mode = ThemeMode.system;
