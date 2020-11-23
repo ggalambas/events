@@ -24,29 +24,26 @@ class Home extends StatelessWidget {
     return BaseWidget<ScrollModel>(
       model: ScrollModel(),
       builder: (_, scroll, __) {
-        return SafeArea(
-          child: Scaffold(
-            drawer: Drawer(),
-            body: CustomScrollView(
-              controller: scroll.controller,
-              slivers: <Widget>[
-                CustomAppBar(
-                  title: 'Categoria', //!
-                  subtitle: 'Concelho', //?
+        return Scaffold(
+          drawer: Drawer(),
+          body: CustomScrollView(
+            controller: scroll.controller,
+            slivers: <Widget>[
+              CustomAppBar(
+                title: 'Categoria', //!
+              ),
+              SliverList(
+                delegate: SliverChildBuilderDelegate(
+                  (_, index) {
+                    return SizedBox(
+                      height: 100,
+                      child: Text(concelhos[index]),
+                    );
+                  },
+                  childCount: concelhos.length,
                 ),
-                SliverList(
-                  delegate: SliverChildBuilderDelegate(
-                    (_, index) {
-                      return SizedBox(
-                        height: 100,
-                        child: Text(concelhos[index]),
-                      );
-                    },
-                    childCount: concelhos.length,
-                  ),
-                )
-              ],
-            ),
+              )
+            ],
           ),
         );
       },
