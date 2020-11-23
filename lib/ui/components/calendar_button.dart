@@ -10,24 +10,6 @@ class CalendarButton extends StatelessWidget {
     final CalendarModel calendar = Provider.of<CalendarModel>(context);
     final ScrollModel scroll = Provider.of<ScrollModel>(context);
     final ThemeData theme = Theme.of(context);
-    // Animatable<Color> color = TweenSequence<Color>(
-    //   [
-    //     TweenSequenceItem(
-    //       weight: 1.0,
-    //       tween: ColorTween(
-    //         begin: Colors.transparent,
-    //         end: theme.primaryColor,
-    //       ),
-    //     ),
-    //     TweenSequenceItem(
-    //       weight: 1.0,
-    //       tween: ColorTween(
-    //         begin: theme.primaryColor,
-    //         end: Colors.transparent,
-    //       ),
-    //     ),
-    //   ],
-    // );
 
     return Container(
       margin: EdgeInsets.only(right: kAppBarHorizPadding),
@@ -36,7 +18,7 @@ class CalendarButton extends StatelessWidget {
         vertical: (AppBar().preferredSize.height - kAppBarButtonHeight) / 2,
       ),
       child: FlatButton(
-        onPressed: scroll.onPressed,
+        onPressed: scroll.onCalendarButtonPressed,
         color:
             scroll.isAppBarCollapsed ? theme.primaryColor : Colors.transparent,
         padding: EdgeInsets.zero,
@@ -48,7 +30,31 @@ class CalendarButton extends StatelessWidget {
                 style: theme.textTheme.button)
             : Icon(Icons.expand_less),
       ),
-      // ),
     );
   }
 }
+
+//? ANIMATED CONTAINER
+// child: ClipRRect(
+//   borderRadius: BorderRadius.circular(kBorderRadiusMedium),
+//   child: FlatButton(
+//     onPressed: scroll.onPressed,
+//     padding: EdgeInsets.zero,
+//     child: AnimatedContainer(
+//       height: double.infinity,
+//       width: double.infinity,
+//       duration: Duration(milliseconds: 300),
+//       curve: Curves.easeIn,
+//       color: scroll.isAppBarCollapsed
+//           ? theme.primaryColor
+//           : Colors.transparent,
+//       child: Center(
+//         child: scroll.isAppBarCollapsed
+//             ? Text(
+//                 '${calendar.selectedDay()} ${calendar.selectedMonth()}',
+//                 style: theme.textTheme.button)
+//             : Icon(Icons.expand_less),
+//       ),
+//     ),
+//   ),
+// ),

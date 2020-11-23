@@ -1,37 +1,11 @@
 import 'package:flutter/material.dart';
 
 class ScrollModel extends ChangeNotifier {
-  ScrollController controller;
-  bool _animating = false;
-
-  Future _autoCollapse() async {
-    // TODO: Scroll, keep scrolling after animation
-    // controller.position
-    if (!_animating) {
-      if (_isAppBarCollapsed && controller.offset < 64) {
-        _animating = true;
-        isAppBarCollapsed = false;
-        await controller.animateTo(
-          0,
-          duration: Duration(milliseconds: 300),
-          curve: Curves.fastOutSlowIn,
-        );
-        _animating = false;
-      } else if (!_isAppBarCollapsed && controller.offset > 0) {
-        _animating = true;
-        isAppBarCollapsed = true;
-        await controller.animateTo(
-          64,
-          duration: Duration(milliseconds: 300),
-          curve: Curves.fastOutSlowIn,
-        );
-        _animating = false;
-      }
-    }
-  }
+  ScrollController _controller;
+  ScrollController get controller => _controller;
 
   ScrollModel() {
-    controller = ScrollController()..addListener(_autoCollapse);
+    _controller = ScrollController()..addListener(_scrollAnimationListener);
   }
 
   bool _isAppBarCollapsed = false;
@@ -41,7 +15,42 @@ class ScrollModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void onPressed() {
-    //TODO
+  bool _isAnimating = false;
+
+  // TODO: Scroll, keep scrolling after animation
+  void _scrollAnimationListener() {
+    if (!_isAnimating) {
+      if (_isAppBarCollapsed && _controller.offset < 65) {
+        _expandAppBar();
+      } else if (!_isAppBarCollapsed && _controller.offset > 0) {
+        _collapseAppBar();
+      }
+    }
+  }
+
+  Future _expandAppBar() async {
+    _isAnimating = true;
+    isAppBarCollapsed = false;
+    await _controller.animateTo(
+      0,
+      duration: Duration(milliseconds: 300),
+      curve: Curves.fastOutSlowIn,
+    );
+    _isAnimating = false;
+  }
+
+  Future _collapseAppBar() async {
+    _isAnimating = true;
+    isAppBarCollapsed = true;
+    await _controller.animateTo(
+      65,
+      duration: Duration(milliseconds: 300),
+      curve: Curves.fastOutSlowIn,
+    );
+    _isAnimating = false;
+  }
+
+  void onCalendarButtonPressed() {
+    isAppBarCollapsed ? _expandAppBar() : _collapseAppBar();
   }
 }
