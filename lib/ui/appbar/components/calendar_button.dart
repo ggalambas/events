@@ -1,8 +1,9 @@
-import 'package:events/app/calendar_model.dart';
-import 'package:events/app/scroll_model.dart';
-import 'package:events/ui/config/constants.dart';
+import 'package:events/app/appbar/calendar_model.dart';
+import 'package:events/app/appbar/scroll_model.dart';
+import 'package:events/config/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:events/app/helpers/string_x.dart';
 
 class CalendarButton extends StatelessWidget {
   @override
@@ -28,7 +29,7 @@ class CalendarButton extends StatelessWidget {
                 borderRadius: BorderRadius.circular(kBorderRadiusMedium),
               ),
               child: Text(
-                '${calendar.selectedDay} ${calendar.selectedMonth}',
+                '${calendar.selectedDay} ${calendar.selectedMonth.capitalize()}',
                 style: theme.textTheme.button,
               ),
             ),

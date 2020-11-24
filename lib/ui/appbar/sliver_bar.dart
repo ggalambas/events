@@ -1,15 +1,15 @@
-import 'package:events/app/calendar_model.dart';
-import 'package:events/ui/components/calendar_button.dart';
-import 'package:events/ui/components/calendar.dart';
-import 'package:events/ui/config/constants.dart';
+import 'package:events/app/appbar/calendar_model.dart';
+import 'package:events/config/constants.dart';
+import 'package:events/ui/appbar/components/calendar_button.dart';
+import 'package:events/ui/appbar/components/calendar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class CustomAppBar extends StatelessWidget {
+class SliverBar extends StatelessWidget {
   final String title;
   final String subtitle;
 
-  const CustomAppBar({@required this.title, this.subtitle});
+  const SliverBar({@required this.title, this.subtitle});
 
   @override
   Widget build(BuildContext context) {

@@ -1,10 +1,10 @@
 import 'dart:ui';
 
-import 'package:events/ui/config/palette.dart';
+import 'package:events/config/theme/palette.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
 
-class CustomTheme with ChangeNotifier {
+class ThemeConfig with ChangeNotifier {
   ThemeMode _mode = ThemeMode.system;
   ThemeMode get mode => _mode;
   set mode(ThemeMode newMode) {
@@ -12,8 +12,9 @@ class CustomTheme with ChangeNotifier {
     notifyListeners();
   }
 
+// TODO create light and dark theme files
   /* to change this in the settings use
-   * Provider.of<CustomTheme>(context, listen: false).useDarkMode()
+   * Provider.of<ThemeConfig>(context, listen: false).useDarkMode()
    * listen: false -> because when the theme changes the widget tree already
    * updates because the material widget is already listenning to those changes
    * so here we only need the instance to call the functions
@@ -71,6 +72,7 @@ class CustomTheme with ChangeNotifier {
           onPrimary: kLightOnPrimary,
           onBackground: kLightOnBackground,
         ),
+        dividerTheme: _dividerTheme,
       );
 
   ThemeData get dark => ThemeData.dark().copyWith(
@@ -103,7 +105,14 @@ class CustomTheme with ChangeNotifier {
           onPrimary: kDarkOnPrimary,
           onBackground: kDarkOnBackground,
         ),
+        dividerTheme: _dividerTheme,
       );
+
+  final DividerThemeData _dividerTheme = DividerThemeData(
+    space: 0.0,
+    indent: 12.0,
+    endIndent: 12.0,
+  );
 
 //! Coment with use cases when used
   TextTheme _textTheme({
@@ -197,7 +206,7 @@ class CustomTheme with ChangeNotifier {
         //* Week days
         //* Month
         color: onBackground,
-        fontSize: 12.0, //default: 10.0
+        fontSize: 10.0,
         fontWeight: regular,
         letterSpacing: 1.5,
       ),

@@ -9,12 +9,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
-import 'ui/home.dart';
+import '../../ui/regions_view.dart';
 
 class Routes {
-  static const String home = '/';
+  static const String regionsView = '/';
   static const all = <String>{
-    home,
+    regionsView,
   };
 }
 
@@ -22,14 +22,14 @@ class ARouter extends RouterBase {
   @override
   List<RouteDef> get routes => _routes;
   final _routes = <RouteDef>[
-    RouteDef(Routes.home, page: Home),
+    RouteDef(Routes.regionsView, page: RegionsView),
   ];
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
   final _pagesMap = <Type, AutoRouteFactory>{
-    Home: (data) {
+    RegionsView: (data) {
       return MaterialPageRoute<dynamic>(
-        builder: (context) => Home(),
+        builder: (context) => RegionsView(),
         settings: data,
       );
     },
@@ -41,5 +41,5 @@ class ARouter extends RouterBase {
 /// *************************************************************************
 
 extension ARouterExtendedNavigatorStateX on ExtendedNavigatorState {
-  Future<dynamic> pushHome() => push<dynamic>(Routes.home);
+  Future<dynamic> pushRegionsView() => push<dynamic>(Routes.regionsView);
 }

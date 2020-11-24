@@ -1,12 +1,13 @@
 import 'package:auto_route/auto_route_annotations.dart';
-import 'package:events/ui/home.dart';
+import 'package:events/ui/regions_view.dart';
 
-// ExtendedNavigator.root.pushHome
+//* ExtendedNavigator.root.pushHome
+//* flutter pub run build_runner watch --delete-conflicting-outputs
 
 @MaterialAutoRouter(
   generateNavigationHelperExtension: true,
   routes: [
-    MaterialRoute(page: Home, initial: true),
+    MaterialRoute(page: RegionsView, initial: true),
     // MaterialRoute(page: Events),
     // MaterialRoute(page: EventInfo),
     // MaterialRoute(page: SignInPage),
