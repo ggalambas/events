@@ -22,6 +22,7 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ScrollModel scroll = Provider.of<ScrollModel>(context, listen: false);
+    final ThemeData theme = Theme.of(context);
     return Scaffold(
       drawer: Drawer(),
       body: NotificationListener<ScrollEndNotification>(
@@ -36,14 +37,8 @@ class Home extends StatelessWidget {
               title: 'Categoria', //!
             ),
             SliverList(
-              delegate: SliverChildBuilderDelegate(
-                (_, index) {
-                  return SizedBox(
-                    height: 100,
-                    child: Text(concelhos[index]),
-                  );
-                },
-                childCount: concelhos.length,
+              delegate: SliverChildListDelegate.fixed(
+                [],
               ),
             )
           ],
