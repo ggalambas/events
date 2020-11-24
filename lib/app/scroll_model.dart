@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class ScrollModel extends ChangeNotifier {
   final ScrollController _controller = ScrollController();
   ScrollController get controller => _controller;
-  final double _flexbarHeight = kAppBarExpandedHeight - kAppBarHeight;
+  final double _flexbarHeight = kAppBarExpandedHeight - kToolbarHeight;
 
   bool _isFlexbarCollapsed = false;
   bool get isFlexbarCollapsed => _isFlexbarCollapsed;
