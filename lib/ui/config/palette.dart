@@ -13,7 +13,7 @@ const kLightError = Color(0xFFFF1744);
 const kLightOnPrimary = Colors.white;
 const kLightOnSecondary = Colors.black;
 const kLightOnSurface = Color(0xFF202124);
-const kLightOnBackground = Color(0xFF9AA0A6);
+const kLightOnBackground = Color(0xFF5F6368);
 const kLightOnError = Colors.white;
 
 // Dark Mode

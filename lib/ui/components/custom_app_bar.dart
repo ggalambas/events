@@ -17,6 +17,7 @@ class CustomAppBar extends StatelessWidget {
     return ChangeNotifierProvider<CalendarModel>(
       create: (_) => CalendarModel(),
       child: SliverAppBar(
+        forceElevated: true,
         pinned: true,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.only(

@@ -165,18 +165,20 @@ class CustomTheme with ChangeNotifier {
       //   fontWeight: medium,
       //   letterSpacing: 0.1,
       // ),
-      // bodyText1: TextStyle(
-      //   // color: onSurface,
-      //   fontSize: 16.0,
-      //   fontWeight: regular,
-      //   letterSpacing: 0.5,
-      // ),
-      // bodyText2: TextStyle(
-      //   color: onSurface,
-      //   fontSize: 14.0,
-      //   fontWeight: regular,
-      //   letterSpacing: 0.25,
-      // ),
+      bodyText1: TextStyle(
+        //* List Items
+        color: onSurface,
+        fontSize: 14.0, //default: 16
+        fontWeight: regular,
+        letterSpacing: 0.5,
+      ),
+      bodyText2: TextStyle(
+        //* Event Counter
+        color: onSurface,
+        fontSize: 14.0,
+        fontWeight: medium, //default: regular
+        letterSpacing: 0.25,
+      ),
       button: TextStyle(
         //* Calendar Buttons
         color: onPrimary,

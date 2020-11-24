@@ -23,7 +23,7 @@ class CalendarItem extends StatelessWidget {
       width: kCalendarItemWidth,
       child: FlatButton(
         onPressed: onPressed,
-        color: isSelected ? theme.primaryColor : Colors.transparent,
+        color: isSelected ? theme.colorScheme.primary : Colors.transparent,
         padding: EdgeInsets.zero,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(kBorderRadiusMedium),

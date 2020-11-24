@@ -13,7 +13,8 @@ class CalendarButton extends StatelessWidget {
 
     return scroll.isFlexbarCollapsed
         ? Container(
-            //TODO: TOo long to build
+            //TODO: onPressed: close even when not scrollable
+            //TODO: Too long to build
             margin: EdgeInsets.only(right: kAppBarHorizPadding),
             width: kAppBarButtonWidth,
             padding: EdgeInsets.symmetric(
@@ -21,7 +22,7 @@ class CalendarButton extends StatelessWidget {
             ),
             child: FlatButton(
               onPressed: scroll.toggleFlexbar,
-              color: theme.primaryColor,
+              color: theme.colorScheme.primary,
               padding: EdgeInsets.zero,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(kBorderRadiusMedium),
