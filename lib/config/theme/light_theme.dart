@@ -20,6 +20,7 @@ ThemeData lightTheme = ThemeData.light().copyWith(
     brightness: Brightness.light,
   ),
   primaryColor: kLightPrimary,
+  canvasColor: kLightSurface,
   appBarTheme: AppBarTheme(
     color: kLightSurface,
     brightness: Brightness.light,

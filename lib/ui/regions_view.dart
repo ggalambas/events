@@ -5,6 +5,7 @@ import 'package:events/ui/body/components/list_group.dart';
 import 'package:events/ui/body/components/list_subtitle.dart';
 import 'package:events/ui/body/components/region_item.dart';
 import 'package:events/ui/body/sliver_scaffold.dart';
+import 'package:events/ui/drawer/category_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -16,7 +17,7 @@ class RegionsView extends StatelessWidget {
       child: Consumer<RegionsModel>(
         builder: (_, regions, __) {
           return SliverScaffold(
-            drawer: Drawer(),
+            drawer: CategoryDrawer(),
             appbar: SliverBar(
               title: 'Categoria', //!
             ),

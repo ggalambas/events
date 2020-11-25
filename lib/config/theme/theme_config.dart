@@ -26,6 +26,7 @@ class ThemeConfig with ChangeNotifier {
   void useLightMode() => mode = ThemeMode.light;
   void useDarkMode() => mode = ThemeMode.dark;
 
+  // TODO: Change systemBar color
   // TODO: [Bug] status bar desappears when unlocking the screen
   static void statusBarListener(Window window) {
     _setStatusBarColor(window.platformBrightness);

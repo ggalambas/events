@@ -20,6 +20,7 @@ ThemeData darkTheme = ThemeData.dark().copyWith(
     brightness: Brightness.dark,
   ),
   primaryColor: kDarkPrimary,
+  canvasColor: kDarkSurface,
   appBarTheme: AppBarTheme(
     color: kDarkSurface,
     brightness: Brightness.dark,
