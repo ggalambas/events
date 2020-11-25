@@ -19,10 +19,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-
-    final window = WidgetsBinding.instance.window;
-    ThemeConfig.statusBarListener(window);
-
+    ThemeConfig.statusBarListener(WidgetsBinding.instance.window);
     initializeDateFormatting('pt_PT');
   }
 

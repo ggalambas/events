@@ -1,8 +1,9 @@
 import 'dart:ui';
 import 'package:events/config/theme/dark_theme.dart';
 import 'package:events/config/theme/light_theme.dart';
+import 'package:events/config/theme/palette.dart';
 import 'package:flutter/material.dart';
-// import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
+import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
 
 class ThemeConfig with ChangeNotifier {
   ThemeMode _mode = ThemeMode.system;
@@ -26,22 +27,30 @@ class ThemeConfig with ChangeNotifier {
   void useLightMode() => mode = ThemeMode.light;
   void useDarkMode() => mode = ThemeMode.dark;
 
-  // TODO: Change systemBar color
-  // TODO: [Bug] status bar desappears when unlocking the screen
   static void statusBarListener(Window window) {
-    _setStatusBarColor(window.platformBrightness);
-    // window.onPlatformBrightnessChanged = () {
-    //   _setStatusBarColor(window.platformBrightness);
-    // };
+    _setSystemBarsColors(window.platformBrightness);
+    window.onPlatformBrightnessChanged = () {
+      _setSystemBarsColors(window.platformBrightness);
+    };
   }
 
-  static void _setStatusBarColor(Brightness brightness) {
-    // if (brightness == Brightness.light) {
-    //   FlutterStatusbarcolor.setStatusBarColor(kLightSurface);
-    //   FlutterStatusbarcolor.setStatusBarWhiteForeground(false);
-    // } else if (brightness == Brightness.dark) {
-    //   FlutterStatusbarcolor.setStatusBarColor(kDarkSurface);
-    //   FlutterStatusbarcolor.setStatusBarWhiteForeground(true);
-    // }
+  static void _setSystemBarsColors(Brightness brightness) {
+    if (brightness == Brightness.light) {
+      _setStatusBarColor(Colors.transparent, false);
+      _setNavigationBarColor(kLightSurface, false);
+    } else if (brightness == Brightness.dark) {
+      _setStatusBarColor(Colors.transparent, true);
+      _setNavigationBarColor(kDarkSurface, true);
+    }
+  }
+
+  static void _setStatusBarColor(Color color, bool whiteForeground) {
+    FlutterStatusbarcolor.setStatusBarColor(color);
+    FlutterStatusbarcolor.setStatusBarWhiteForeground(whiteForeground);
+  }
+
+  static void _setNavigationBarColor(Color color, bool whiteForeground) {
+    FlutterStatusbarcolor.setNavigationBarColor(color);
+    FlutterStatusbarcolor.setNavigationBarWhiteForeground(whiteForeground);
   }
 }
