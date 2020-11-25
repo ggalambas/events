@@ -19,9 +19,9 @@ const kLightOnError = Colors.white;
 // Dark Mode
 
 const kDarkPrimary = Color(0xFF7C4DFF); // deepPurpleAccent[200]
-const kDarkPrimaryVariant = Color(0xFF6200EA); // deepPurpleAccent[700]
+const kDarkPrimaryVariant = kLightPrimaryVariant;
 const kDarkSecondary = Color(0xFF18FFFF);
-
+const kDarktSecondaryVariant = kDarkSecondary;
 const kDarkSurface = Color(0xFF202124);
 const kDarkBackground = Color(0xFF303134);
 const kDarkError = Color(0xFFFF5252);
