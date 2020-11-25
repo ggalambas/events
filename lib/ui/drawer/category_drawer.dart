@@ -10,7 +10,7 @@ class CategoryDrawer extends StatelessWidget {
       color: Colors.red,
       child: Drawer(
         child: ListView(
-          padding: EdgeInsets.only(top: 0),
+          padding: EdgeInsets.only(),
           children: [
             UserAccountsDrawerHeader(
               accountEmail: Text('galambas@gmail.com'),
