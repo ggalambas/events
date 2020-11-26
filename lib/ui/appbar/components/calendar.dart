@@ -15,7 +15,7 @@ class Calendar extends StatelessWidget {
       background: Padding(
         padding: EdgeInsets.only(
           top: kToolbarHeight + statusBarHeight,
-          bottom: kAppBarExpandedHeight - kToolbarHeight - 50,
+          bottom: kAppBarExpandedHeight - kToolbarHeight - kCalendarItemHeight,
           left: kAppBarHorizPadding,
           right: kAppBarHorizPadding,
         ),

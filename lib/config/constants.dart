@@ -13,3 +13,8 @@ const double kAppBarButtonWidth = 60.0;
 const double kCalendarItemHeight = 50.0;
 const double kCalendarItemWidth = 32.0;
 const double kCalendarItemSpace = 21.0;
+
+// List
+const double kSubtitleHeight = 24.0;
+const double kSubtitleLeftPadding = 16.0;
+const double kCounterSize = 24.0;

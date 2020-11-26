@@ -25,15 +25,13 @@ class EventCounter extends StatelessWidget {
 
   const EventCounter(this.counter, {this.live = false});
 
-  double get size => 24.0;
-
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     return Container(
       margin: live ? EdgeInsets.only(right: 5.0) : EdgeInsets.zero,
-      width: size,
-      height: size,
+      width: kCounterSize,
+      height: kCounterSize,
       decoration: BoxDecoration(
         color: live
             ? theme.colorScheme.primary.withOpacity(kPrimaryOpacity)
