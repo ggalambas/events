@@ -1,8 +1,9 @@
 import 'dart:ui';
-
+import 'package:events/config/theme/dark_theme.dart';
+import 'package:events/config/theme/light_theme.dart';
 import 'package:events/config/theme/palette.dart';
 import 'package:flutter/material.dart';
-// import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
+import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
 
 class ThemeConfig with ChangeNotifier {
   ThemeMode _mode = ThemeMode.system;
@@ -12,7 +13,9 @@ class ThemeConfig with ChangeNotifier {
     notifyListeners();
   }
 
-// TODO create light and dark theme files
+  ThemeData get light => lightTheme;
+  ThemeData get dark => darkTheme;
+
   /* to change this in the settings use
    * Provider.of<ThemeConfig>(context, listen: false).useDarkMode()
    * listen: false -> because when the theme changes the widget tree already
@@ -25,191 +28,29 @@ class ThemeConfig with ChangeNotifier {
   void useDarkMode() => mode = ThemeMode.dark;
 
   static void statusBarListener(Window window) {
-    _setStatusBarColor(window.platformBrightness);
+    _setSystemBarsColors(window.platformBrightness);
     window.onPlatformBrightnessChanged = () {
-      _setStatusBarColor(window.platformBrightness);
+      _setSystemBarsColors(window.platformBrightness);
     };
   }
 
-  // TODO: [Bug] status bar desappears when unlocking screen
-  static void _setStatusBarColor(Brightness brightness) {
-    // if (brightness == Brightness.light) {
-    //   FlutterStatusbarcolor.setStatusBarColor(kLightSurface);
-    //   FlutterStatusbarcolor.setStatusBarWhiteForeground(false);
-    // } else if (brightness == Brightness.dark) {
-    //   FlutterStatusbarcolor.setStatusBarColor(kDarkSurface);
-    //   FlutterStatusbarcolor.setStatusBarWhiteForeground(true);
-    // }
+  static void _setSystemBarsColors(Brightness brightness) {
+    if (brightness == Brightness.light) {
+      _setStatusBarColor(Colors.transparent, false);
+      _setNavigationBarColor(kLightSurface, false);
+    } else if (brightness == Brightness.dark) {
+      _setStatusBarColor(Colors.transparent, true);
+      _setNavigationBarColor(kDarkSurface, true);
+    }
   }
 
-  ThemeData get light => ThemeData.light().copyWith(
-        colorScheme: ColorScheme(
-          primary: kLightPrimary,
-          primaryVariant: kLightPrimaryVariant,
-          secondary: kLightSecondary,
-          secondaryVariant: kLightSecondaryVariant,
-          surface: kLightSurface,
-          background: kLightBackground,
-          error: kLightError,
-          onPrimary: kLightOnPrimary,
-          onSecondary: kLightOnSecondary,
-          onSurface: kLightOnSurface,
-          onBackground: kLightOnBackground,
-          onError: kLightOnError,
-          brightness: Brightness.light,
-        ),
-        primaryColor: kLightPrimary,
-        appBarTheme: AppBarTheme(
-          color: kLightSurface,
-          brightness: Brightness.light,
-          iconTheme: IconThemeData(
-            color: kLightOnSurface,
-          ),
-        ),
-        scaffoldBackgroundColor: kLightBackground,
-        textTheme: _textTheme(
-          onSurface: kLightOnSurface,
-          onPrimary: kLightOnPrimary,
-          onBackground: kLightOnBackground,
-        ),
-        dividerTheme: _dividerTheme,
-      );
+  static void _setStatusBarColor(Color color, bool whiteForeground) {
+    FlutterStatusbarcolor.setStatusBarColor(color);
+    FlutterStatusbarcolor.setStatusBarWhiteForeground(whiteForeground);
+  }
 
-  ThemeData get dark => ThemeData.dark().copyWith(
-        colorScheme: ColorScheme(
-          primary: kDarkPrimary,
-          primaryVariant: kDarkPrimaryVariant,
-          secondary: kDarkSecondary,
-          secondaryVariant: kDarkSecondary,
-          surface: kDarkSurface,
-          background: kDarkBackground,
-          error: kDarkError,
-          onPrimary: kDarkOnPrimary,
-          onSecondary: kDarkOnSecondary,
-          onSurface: kDarkOnSurface,
-          onBackground: kDarkOnBackground,
-          onError: kDarkOnError,
-          brightness: Brightness.dark,
-        ),
-        primaryColor: kDarkPrimary,
-        appBarTheme: AppBarTheme(
-          color: kDarkSurface,
-          brightness: Brightness.dark,
-          iconTheme: IconThemeData(
-            color: kDarkOnSurface,
-          ),
-        ),
-        scaffoldBackgroundColor: kDarkBackground,
-        textTheme: _textTheme(
-          onSurface: kDarkOnSurface,
-          onPrimary: kDarkOnPrimary,
-          onBackground: kDarkOnBackground,
-        ),
-        dividerTheme: _dividerTheme,
-      );
-
-  final DividerThemeData _dividerTheme = DividerThemeData(
-    space: 0.0,
-    indent: 12.0,
-    endIndent: 12.0,
-  );
-
-//! Coment with use cases when used
-  TextTheme _textTheme({
-    @required Color onSurface,
-    @required Color onPrimary,
-    @required Color onBackground,
-  }) {
-    final FontWeight light = FontWeight.w300;
-    final FontWeight regular = FontWeight.w400;
-    final FontWeight medium = FontWeight.w500;
-
-    return TextTheme(
-      // headline1: TextStyle(
-      //   // color: onSurface,
-      //   fontSize: 96.0,
-      //   fontWeight: light,
-      //   letterSpacing: -1.5,
-      // ),
-      // headline2: TextStyle(
-      //   // color: onSurface,
-      //   fontSize: 60.0,
-      //   fontWeight: light,
-      //   letterSpacing: -0.5,
-      // ),
-      // headline3: TextStyle(
-      //   // color: onSurface,
-      //   fontSize: 48.0,
-      //   fontWeight: regular,
-      //   letterSpacing: 0.0,
-      // ),
-      // headline4: TextStyle(
-      //   // color: onSurface,
-      //   fontSize: 34.0,
-      //   fontWeight: regular,
-      //   letterSpacing: 0.25,
-      // ),
-      // headline5: TextStyle(
-      //   // color: onSurface,
-      //   fontSize: 24.0,
-      //   fontWeight: regular,
-      //   letterSpacing: 0.0,
-      // ),
-      headline6: TextStyle(
-        //* AppBar Title
-        color: onSurface,
-        fontSize: 20.0,
-        fontWeight: medium,
-        letterSpacing: 0.15,
-      ),
-      // subtitle1: TextStyle(
-      //   // color: onSurface,
-      //   fontSize: 16.0,
-      //   fontWeight: regular,
-      //   letterSpacing: 0.15,
-      // ),
-      // subtitle2: TextStyle(
-      //   // color: onSurface,
-      //   fontSize: 14.0,
-      //   fontWeight: medium,
-      //   letterSpacing: 0.1,
-      // ),
-      bodyText1: TextStyle(
-        //* List Items
-        color: onSurface,
-        fontSize: 14.0, //default: 16
-        fontWeight: regular,
-        letterSpacing: 0.5,
-      ),
-      bodyText2: TextStyle(
-        //* Event Counter
-        color: onSurface,
-        fontSize: 14.0,
-        fontWeight: medium, //default: regular
-        letterSpacing: 0.25,
-      ),
-      button: TextStyle(
-        //* Calendar Buttons
-        color: onPrimary,
-        fontSize: 14.0,
-        fontWeight: medium,
-        letterSpacing: 0.25, //default: 1.25
-      ),
-      caption: TextStyle(
-        //* AppBar Subtitle
-        color: onSurface,
-        fontSize: 12.0,
-        fontWeight: regular,
-        letterSpacing: 0.4,
-      ),
-      overline: TextStyle(
-        //* Week days
-        //* Month
-        color: onBackground,
-        fontSize: 10.0,
-        fontWeight: regular,
-        letterSpacing: 1.5,
-      ),
-    );
+  static void _setNavigationBarColor(Color color, bool whiteForeground) {
+    FlutterStatusbarcolor.setNavigationBarColor(color);
+    FlutterStatusbarcolor.setNavigationBarWhiteForeground(whiteForeground);
   }
 }

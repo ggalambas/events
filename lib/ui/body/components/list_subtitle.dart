@@ -1,3 +1,4 @@
+import 'package:events/config/constants.dart';
 import 'package:flutter/material.dart';
 
 class ListSubtitle extends StatelessWidget {
@@ -9,9 +10,9 @@ class ListSubtitle extends StatelessWidget {
   Widget build(BuildContext context) {
     final TextTheme textTheme = Theme.of(context).textTheme;
     return Container(
-      height: 24,
+      height: kSubtitleHeight,
       alignment: Alignment.centerLeft,
-      padding: EdgeInsets.only(left: 16),
+      padding: EdgeInsets.only(left: kSubtitleLeftPadding),
       child: Text(
         subtitle.toUpperCase(),
         style: textTheme.overline,

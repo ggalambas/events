@@ -20,9 +20,8 @@ class SliverBar extends StatelessWidget {
         forceElevated: true,
         pinned: true,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-            bottomLeft: Radius.circular(kBorderRadiusBig),
-            bottomRight: Radius.circular(kBorderRadiusBig),
+          borderRadius: BorderRadius.vertical(
+            bottom: Radius.circular(kBorderRadiusBig),
           ),
         ),
         title: Column(
