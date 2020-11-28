@@ -28,8 +28,11 @@ class ARouter extends RouterBase {
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
   final _pagesMap = <Type, AutoRouteFactory>{
     RegionsView: (data) {
+      final args = data.getArgs<RegionsViewArguments>(
+        orElse: () => RegionsViewArguments(),
+      );
       return MaterialPageRoute<dynamic>(
-        builder: (context) => RegionsView(),
+        builder: (context) => RegionsView(category: args.category),
         settings: data,
       );
     },
@@ -41,5 +44,21 @@ class ARouter extends RouterBase {
 /// *************************************************************************
 
 extension ARouterExtendedNavigatorStateX on ExtendedNavigatorState {
-  Future<dynamic> pushRegionsView() => push<dynamic>(Routes.regionsView);
+  Future<dynamic> pushRegionsView({
+    String category,
+  }) =>
+      push<dynamic>(
+        Routes.regionsView,
+        arguments: RegionsViewArguments(category: category),
+      );
+}
+
+/// ************************************************************************
+/// Arguments holder classes
+/// *************************************************************************
+
+/// RegionsView arguments holder class
+class RegionsViewArguments {
+  final String category;
+  RegionsViewArguments({this.category});
 }
