@@ -4,6 +4,9 @@ const double kBorderRadiusSmall = 5.0;
 
 const double kPrimaryOpacity = 0.15;
 
+// Drawer
+const double kDrawerRightPadding = 8.0;
+
 // AppBar
 const double kAppBarHorizPadding = 13.0;
 const double kAppBarExpandedHeight = 120.0;
@@ -18,3 +21,4 @@ const double kCalendarItemSpace = 21.0;
 const double kSubtitleHeight = 24.0;
 const double kSubtitleLeftPadding = 16.0;
 const double kCounterSize = 24.0;
+const double kCounterHorizPadding = 3.0;

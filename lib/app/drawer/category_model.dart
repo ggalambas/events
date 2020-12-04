@@ -20,7 +20,8 @@ class CategoryModel extends BaseModel {
   EventFailure _failure;
   EventFailure get failure => _failure;
 
-  String _selected = 'Initial'; //!
+  // TODO: First category to be openned
+  String _selected = 'Initial';
   String get selected => _selected;
   set selected(String categoryName) {
     _selected = categoryName;

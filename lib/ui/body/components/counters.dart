@@ -33,7 +33,7 @@ class Counter extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
     return Container(
       margin: live ? EdgeInsets.only(right: 5.0) : EdgeInsets.zero,
-      padding: EdgeInsets.symmetric(horizontal: 3), //!
+      padding: EdgeInsets.symmetric(horizontal: kCounterHorizPadding),
       constraints: BoxConstraints(minWidth: kCounterSize),
       height: kCounterSize,
       decoration: BoxDecoration(

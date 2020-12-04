@@ -58,7 +58,7 @@ class FakeEventRepository implements IEventRepository {
           Event(
             id: UniqueId.fromUniqueString(i.toString()),
             name: EventName('Event $i'),
-            time: day,
+            date: day,
             link: EventLink('http://facebook.com'),
           ),
         );
