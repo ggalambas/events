@@ -1,4 +1,3 @@
-import 'package:events/config/theme/theme_config.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

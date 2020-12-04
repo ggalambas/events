@@ -1,4 +1,3 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:events/app/drawer/category_model.dart';
 import 'package:events/config/constants.dart';
 import 'package:events/domain/categories/category.dart';

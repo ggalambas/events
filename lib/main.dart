@@ -1,7 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:events/app/appbar/calendar_model.dart';
-import 'package:events/app/appbar/scroll_model.dart';
-import 'package:events/app/body/regions_model.dart';
 import 'package:events/app/drawer/category_model.dart';
 import 'package:events/config/injection.dart';
 import 'package:events/config/theme/theme_config.dart';
