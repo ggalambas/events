@@ -32,7 +32,7 @@ class SliverScaffold extends StatelessWidget {
               child: CustomScrollView(
                 //TODO: pull to refresh
                 //TODO: Scroll physics not working
-                physics: AlwaysScrollableScrollPhysics(),
+                // physics: AlwaysScrollableScrollPhysics(),
                 // physics: BouncingScrollPhysics(),
                 controller: scroll.controller,
                 slivers: <Widget>[
