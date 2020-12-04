@@ -5,6 +5,7 @@ import 'package:events/app/helpers/date_time_x.dart';
 class CalendarModel extends ChangeNotifier {
   DateTime _today = DateTime.now();
   DateTime _selected;
+  DateTime get selected => _selected;
 
   CalendarModel() {
     _selected = _today;

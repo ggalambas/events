@@ -5,10 +5,12 @@ class ListGroup extends StatelessWidget {
   final List<Widget> _itemsWithDivider = [];
 
   ListGroup({List<Widget> items}) {
-    for (final Widget item in items) {
-      _itemsWithDivider..add(item)..add(const Divider());
+    if (items.isNotEmpty) {
+      for (final Widget item in items) {
+        _itemsWithDivider..add(item)..add(const Divider());
+      }
+      _itemsWithDivider.removeLast();
     }
-    _itemsWithDivider.removeLast();
   }
 
   @override

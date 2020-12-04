@@ -14,14 +14,10 @@ class _$RegionTearOff {
   const _$RegionTearOff();
 
 // ignore: unused_element
-  _Region call(
-      {@required String name,
-      @required int liveEvents,
-      @required int totalEvents}) {
+  _Region call({@required String name, @required EventCounter eventCounter}) {
     return _Region(
       name: name,
-      liveEvents: liveEvents,
-      totalEvents: totalEvents,
+      eventCounter: eventCounter,
     );
   }
 }
@@ -32,9 +28,9 @@ const $Region = _$RegionTearOff();
 
 /// @nodoc
 mixin _$Region {
+// @required int id,
   String get name;
-  int get liveEvents;
-  int get totalEvents;
+  EventCounter get eventCounter;
 
   $RegionCopyWith<Region> get copyWith;
 }
@@ -43,7 +39,7 @@ mixin _$Region {
 abstract class $RegionCopyWith<$Res> {
   factory $RegionCopyWith(Region value, $Res Function(Region) then) =
       _$RegionCopyWithImpl<$Res>;
-  $Res call({String name, int liveEvents, int totalEvents});
+  $Res call({String name, EventCounter eventCounter});
 }
 
 /// @nodoc
@@ -57,14 +53,13 @@ class _$RegionCopyWithImpl<$Res> implements $RegionCopyWith<$Res> {
   @override
   $Res call({
     Object name = freezed,
-    Object liveEvents = freezed,
-    Object totalEvents = freezed,
+    Object eventCounter = freezed,
   }) {
     return _then(_value.copyWith(
       name: name == freezed ? _value.name : name as String,
-      liveEvents: liveEvents == freezed ? _value.liveEvents : liveEvents as int,
-      totalEvents:
-          totalEvents == freezed ? _value.totalEvents : totalEvents as int,
+      eventCounter: eventCounter == freezed
+          ? _value.eventCounter
+          : eventCounter as EventCounter,
     ));
   }
 }
@@ -74,7 +69,7 @@ abstract class _$RegionCopyWith<$Res> implements $RegionCopyWith<$Res> {
   factory _$RegionCopyWith(_Region value, $Res Function(_Region) then) =
       __$RegionCopyWithImpl<$Res>;
   @override
-  $Res call({String name, int liveEvents, int totalEvents});
+  $Res call({String name, EventCounter eventCounter});
 }
 
 /// @nodoc
@@ -89,38 +84,31 @@ class __$RegionCopyWithImpl<$Res> extends _$RegionCopyWithImpl<$Res>
   @override
   $Res call({
     Object name = freezed,
-    Object liveEvents = freezed,
-    Object totalEvents = freezed,
+    Object eventCounter = freezed,
   }) {
     return _then(_Region(
       name: name == freezed ? _value.name : name as String,
-      liveEvents: liveEvents == freezed ? _value.liveEvents : liveEvents as int,
-      totalEvents:
-          totalEvents == freezed ? _value.totalEvents : totalEvents as int,
+      eventCounter: eventCounter == freezed
+          ? _value.eventCounter
+          : eventCounter as EventCounter,
     ));
   }
 }
 
 /// @nodoc
 class _$_Region implements _Region {
-  const _$_Region(
-      {@required this.name,
-      @required this.liveEvents,
-      @required this.totalEvents})
+  const _$_Region({@required this.name, @required this.eventCounter})
       : assert(name != null),
-        assert(liveEvents != null),
-        assert(totalEvents != null);
+        assert(eventCounter != null);
 
-  @override
+  @override // @required int id,
   final String name;
   @override
-  final int liveEvents;
-  @override
-  final int totalEvents;
+  final EventCounter eventCounter;
 
   @override
   String toString() {
-    return 'Region(name: $name, liveEvents: $liveEvents, totalEvents: $totalEvents)';
+    return 'Region(name: $name, eventCounter: $eventCounter)';
   }
 
   @override
@@ -129,20 +117,16 @@ class _$_Region implements _Region {
         (other is _Region &&
             (identical(other.name, name) ||
                 const DeepCollectionEquality().equals(other.name, name)) &&
-            (identical(other.liveEvents, liveEvents) ||
+            (identical(other.eventCounter, eventCounter) ||
                 const DeepCollectionEquality()
-                    .equals(other.liveEvents, liveEvents)) &&
-            (identical(other.totalEvents, totalEvents) ||
-                const DeepCollectionEquality()
-                    .equals(other.totalEvents, totalEvents)));
+                    .equals(other.eventCounter, eventCounter)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(name) ^
-      const DeepCollectionEquality().hash(liveEvents) ^
-      const DeepCollectionEquality().hash(totalEvents);
+      const DeepCollectionEquality().hash(eventCounter);
 
   @override
   _$RegionCopyWith<_Region> get copyWith =>
@@ -151,16 +135,12 @@ class _$_Region implements _Region {
 
 abstract class _Region implements Region {
   const factory _Region(
-      {@required String name,
-      @required int liveEvents,
-      @required int totalEvents}) = _$_Region;
+      {@required String name, @required EventCounter eventCounter}) = _$_Region;
 
-  @override
+  @override // @required int id,
   String get name;
   @override
-  int get liveEvents;
-  @override
-  int get totalEvents;
+  EventCounter get eventCounter;
   @override
   _$RegionCopyWith<_Region> get copyWith;
 }

@@ -1,36 +1,40 @@
 import 'package:events/config/constants.dart';
+import 'package:events/domain/core/event_counter.dart';
 import 'package:flutter/material.dart';
 
-class EventCounters extends StatelessWidget {
-  final int live;
-  final int total;
+class Counters extends StatelessWidget {
+  final EventCounter counter;
 
-  const EventCounters({@required this.live, @required this.total});
+  const Counters(this.counter);
+
+  int get live => counter.live;
+  int get total => counter.total;
 
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        if (live != 0) EventCounter(live, live: true),
-        EventCounter(total),
+        if (live != 0) Counter(live, live: true),
+        Counter(total),
       ],
     );
   }
 }
 
-class EventCounter extends StatelessWidget {
+class Counter extends StatelessWidget {
   final int counter;
   final bool live;
 
-  const EventCounter(this.counter, {this.live = false});
+  const Counter(this.counter, {this.live = false});
 
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     return Container(
       margin: live ? EdgeInsets.only(right: 5.0) : EdgeInsets.zero,
-      width: kCounterSize,
+      padding: EdgeInsets.symmetric(horizontal: 3), //!
+      constraints: BoxConstraints(minWidth: kCounterSize),
       height: kCounterSize,
       decoration: BoxDecoration(
         color: live

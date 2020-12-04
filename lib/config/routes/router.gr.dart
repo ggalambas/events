@@ -9,30 +9,51 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
+import '../../ui/events_view.dart';
 import '../../ui/regions_view.dart';
+import '../../ui/splash_screen.dart';
 
 class Routes {
-  static const String regionsView = '/';
+  static const String splashScreen = '/';
+  static const String regionsView = '/regions-view';
+  static const String eventsView = '/events-view';
   static const all = <String>{
+    splashScreen,
     regionsView,
+    eventsView,
   };
 }
 
-class ARouter extends RouterBase {
+class Router extends RouterBase {
   @override
   List<RouteDef> get routes => _routes;
   final _routes = <RouteDef>[
+    RouteDef(Routes.splashScreen, page: SplashScreen),
     RouteDef(Routes.regionsView, page: RegionsView),
+    RouteDef(Routes.eventsView, page: EventsView),
   ];
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
   final _pagesMap = <Type, AutoRouteFactory>{
-    RegionsView: (data) {
-      final args = data.getArgs<RegionsViewArguments>(
-        orElse: () => RegionsViewArguments(),
-      );
+    SplashScreen: (data) {
       return MaterialPageRoute<dynamic>(
-        builder: (context) => RegionsView(category: args.category),
+        builder: (context) => SplashScreen(),
+        settings: data,
+      );
+    },
+    RegionsView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => RegionsView(),
+        settings: data,
+      );
+    },
+    EventsView: (data) {
+      final args = data.getArgs<EventsViewArguments>(nullOk: false);
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => EventsView(
+          categoryName: args.categoryName,
+          regionName: args.regionName,
+        ),
         settings: data,
       );
     },
@@ -43,13 +64,19 @@ class ARouter extends RouterBase {
 /// Navigation helper methods extension
 /// *************************************************************************
 
-extension ARouterExtendedNavigatorStateX on ExtendedNavigatorState {
-  Future<dynamic> pushRegionsView({
-    String category,
+extension RouterExtendedNavigatorStateX on ExtendedNavigatorState {
+  Future<dynamic> pushSplashScreen() => push<dynamic>(Routes.splashScreen);
+
+  Future<dynamic> pushRegionsView() => push<dynamic>(Routes.regionsView);
+
+  Future<dynamic> pushEventsView({
+    @required String categoryName,
+    @required String regionName,
   }) =>
       push<dynamic>(
-        Routes.regionsView,
-        arguments: RegionsViewArguments(category: category),
+        Routes.eventsView,
+        arguments: EventsViewArguments(
+            categoryName: categoryName, regionName: regionName),
       );
 }
 
@@ -57,8 +84,9 @@ extension ARouterExtendedNavigatorStateX on ExtendedNavigatorState {
 /// Arguments holder classes
 /// *************************************************************************
 
-/// RegionsView arguments holder class
-class RegionsViewArguments {
-  final String category;
-  RegionsViewArguments({this.category});
+/// EventsView arguments holder class
+class EventsViewArguments {
+  final String categoryName;
+  final String regionName;
+  EventsViewArguments({@required this.categoryName, @required this.regionName});
 }

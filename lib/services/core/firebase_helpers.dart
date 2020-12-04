@@ -8,29 +8,26 @@ extension FirestoreX on FirebaseFirestore {
   //       .collection('users')
   //       .doc(user.id.getOrCrash());
   // }
+  CollectionReference get categoriesCollection => collection('categories');
   DocumentReference categoryDoc(String category) =>
       collection('categories').doc(category);
 }
 
 extension DocumentReferenceX on DocumentReference {
-  //* regionEvents/{regionId}/subregionEvents/{subregionId}/events/{eventId}
-
   // CollectionReference get regionCollection => collection('regionEvents');
   // CollectionReference get subregionCollection => collection('subregionEvents');
   CollectionReference get eventCollection => collection('events');
 }
 
 extension CollectionReferenceX on CollectionReference {
-  //* regionEvents/{regionId}/subregionEvents/{subregionId}/events/{eventId}
-
   // CollectionReference get regionCollection => collection('regionEvents');
   // CollectionReference get subregionCollection => collection('subregionEvents');
-  Query onDay(DateTime day) {
-    final DateTime nextDay = day.add(Duration(days: 1));
-    return where(
-      'time',
-      isGreaterThanOrEqualTo: Timestamp.fromDate(day),
-      isLessThan: Timestamp.fromDate(nextDay),
-    );
-  }
+  // Query onDay(DateTime day) {
+  //   final DateTime nextDay = day.add(Duration(days: 1));
+  //   return where(
+  //     'time',
+  //     isGreaterThanOrEqualTo: Timestamp.fromDate(day),
+  //     isLessThan: Timestamp.fromDate(nextDay),
+  //   );
+  // }
 }

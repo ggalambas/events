@@ -1,8 +1,11 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:events/app/appbar/calendar_model.dart';
 import 'package:events/app/appbar/scroll_model.dart';
+import 'package:events/app/body/regions_model.dart';
+import 'package:events/app/drawer/category_model.dart';
 import 'package:events/config/injection.dart';
 import 'package:events/config/theme/theme_config.dart';
-import 'package:events/config/routes/router.gr.dart';
+import 'package:events/config/routes/router.gr.dart' as auto;
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
@@ -35,7 +38,9 @@ class _MyAppState extends State<MyApp> {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<ThemeConfig>(create: (_) => ThemeConfig()),
-        ChangeNotifierProvider<ScrollModel>(create: (_) => ScrollModel()),
+        ChangeNotifierProvider<CategoryModel>.value(
+            value: getIt<CategoryModel>()), //TODO: extract selected?
+        ChangeNotifierProvider<CalendarModel>(create: (_) => CalendarModel()),
       ],
       child: Consumer<ThemeConfig>(
         builder: (_, theme, __) {
@@ -44,8 +49,8 @@ class _MyAppState extends State<MyApp> {
             theme: theme.light,
             darkTheme: theme.dark,
             themeMode: theme.mode,
-            builder: ExtendedNavigator.builder<ARouter>(
-              router: ARouter(),
+            builder: ExtendedNavigator.builder<auto.Router>(
+              router: auto.Router(),
             ),
           );
         },

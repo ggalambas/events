@@ -25,7 +25,7 @@ class Calendar extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             itemCount: calendar.totalDays,
             separatorBuilder: (_, daysAfter) {
-              return daysAfter < calendar.totalDays - 1 &&
+              return daysAfter < calendar.totalDays - 1 && //!
                       calendar.isLastDayOfMonth(daysAfter)
                   ? Padding(
                       padding: EdgeInsets.only(
@@ -37,18 +37,21 @@ class Calendar extends StatelessWidget {
                         child: Text(
                           calendar.nextMonth(daysAfter).toUpperCase(),
                           textAlign: TextAlign.center,
-                          style: textTheme.overline.copyWith(fontSize: 12.0),
+                          style:
+                              textTheme.overline.copyWith(fontSize: 12.0), //!
                         ),
                       ),
                     )
                   : SizedBox(width: kCalendarItemSpace);
             },
-            itemBuilder: (_, daysAfter) => CalendarItem(
-              weekDay: calendar.weekDay(daysAfter)[0].toUpperCase(),
-              day: calendar.day(daysAfter),
-              isSelected: calendar.isSelected(daysAfter),
-              onPressed: () => calendar.select(daysAfter),
-            ),
+            itemBuilder: (_, daysAfter) {
+              return CalendarItem(
+                weekDay: calendar.weekDay(daysAfter)[0].toUpperCase(),
+                day: calendar.day(daysAfter),
+                isSelected: calendar.isSelected(daysAfter),
+                onPressed: () => calendar.select(daysAfter),
+              );
+            },
           ),
         ),
       ),

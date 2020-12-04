@@ -33,7 +33,15 @@ class ScrollModel extends ChangeNotifier {
   }
 
   void toggleFlexbar() {
-    !isFlexbarCollapsed ? _animate(_flexbarHeight) : _animate(0);
+    !isFlexbarCollapsed ? collapseFlexBar() : expandFlexBar();
+  }
+
+  void collapseFlexBar() {
+    _animate(_flexbarHeight);
+  }
+
+  void expandFlexBar() {
+    _animate(0);
   }
 
   void _animate(double snapOffset) {

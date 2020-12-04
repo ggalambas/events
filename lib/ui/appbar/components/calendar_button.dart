@@ -15,7 +15,7 @@ class CalendarButton extends StatelessWidget {
     return scroll.isFlexbarCollapsed
         ? Container(
             //TODO: onPressed: close even when not scrollable
-            //TODO: Too long to build
+            //* or remove button
             margin: EdgeInsets.only(right: kAppBarHorizPadding),
             width: kAppBarButtonWidth,
             padding: EdgeInsets.symmetric(
