@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route_annotations.dart';
-import 'package:events/ui/events_view.dart';
-import 'package:events/ui/regions_view.dart';
-import 'package:events/ui/splash_screen.dart';
+import 'package:events/ui/screens/events_view.dart';
+import 'package:events/ui/screens/regions_view.dart';
+import 'package:events/ui/screens/splash_screen.dart';
 
 //* ExtendedNavigator.root.pushHome
 //* flutter pub run build_runner watch --delete-conflicting-outputs

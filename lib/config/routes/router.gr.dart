@@ -9,9 +9,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
-import '../../ui/events_view.dart';
-import '../../ui/regions_view.dart';
-import '../../ui/splash_screen.dart';
+import '../../ui/screens/events_view.dart';
+import '../../ui/screens/regions_view.dart';
+import '../../ui/screens/splash_screen.dart';
 
 class Routes {
   static const String splashScreen = '/';
