@@ -11,7 +11,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    ExtendedNavigator.root.replace(Routes.regionsView);
+    ExtendedNavigator.root.replace(Routes.loginScreen);
   }
 
   @override

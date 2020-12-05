@@ -10,15 +10,21 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
 import '../../ui/screens/events_view.dart';
+import '../../ui/screens/login_screen.dart';
 import '../../ui/screens/regions_view.dart';
+import '../../ui/screens/register_screen.dart';
 import '../../ui/screens/splash_screen.dart';
 
 class Routes {
   static const String splashScreen = '/';
+  static const String loginScreen = '/login-screen';
+  static const String registerScreen = '/register-screen';
   static const String regionsView = '/regions-view';
   static const String eventsView = '/events-view';
   static const all = <String>{
     splashScreen,
+    loginScreen,
+    registerScreen,
     regionsView,
     eventsView,
   };
@@ -29,6 +35,8 @@ class Router extends RouterBase {
   List<RouteDef> get routes => _routes;
   final _routes = <RouteDef>[
     RouteDef(Routes.splashScreen, page: SplashScreen),
+    RouteDef(Routes.loginScreen, page: LoginScreen),
+    RouteDef(Routes.registerScreen, page: RegisterScreen),
     RouteDef(Routes.regionsView, page: RegionsView),
     RouteDef(Routes.eventsView, page: EventsView),
   ];
@@ -38,6 +46,18 @@ class Router extends RouterBase {
     SplashScreen: (data) {
       return MaterialPageRoute<dynamic>(
         builder: (context) => SplashScreen(),
+        settings: data,
+      );
+    },
+    LoginScreen: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => LoginScreen(),
+        settings: data,
+      );
+    },
+    RegisterScreen: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => RegisterScreen(),
         settings: data,
       );
     },
@@ -66,6 +86,10 @@ class Router extends RouterBase {
 
 extension RouterExtendedNavigatorStateX on ExtendedNavigatorState {
   Future<dynamic> pushSplashScreen() => push<dynamic>(Routes.splashScreen);
+
+  Future<dynamic> pushLoginScreen() => push<dynamic>(Routes.loginScreen);
+
+  Future<dynamic> pushRegisterScreen() => push<dynamic>(Routes.registerScreen);
 
   Future<dynamic> pushRegionsView() => push<dynamic>(Routes.regionsView);
 
