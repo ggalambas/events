@@ -91,7 +91,8 @@ class LoginScreen extends StatelessWidget {
                 FlatButton(
                   height: 40,
                   minWidth: 300,
-                  onPressed: () {},
+                  onPressed: () =>
+                      ExtendedNavigator.root.push(Routes.regionsView),
                   color: theme.colorScheme.primary,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(kBorderRadiusBig),

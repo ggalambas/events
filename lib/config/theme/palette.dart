@@ -2,32 +2,36 @@ import 'package:flutter/material.dart';
 
 // Light Mode
 
-const kLightPrimary = Colors.deepPurpleAccent;
-const kLightPrimaryVariant = Color(0xFF6200EA); // deepPurpleAccent[700]
-const kLightSecondary = Color(0xFF00E5FF);
-const kLightSecondaryVariant = Color(0xFF00B8D4);
-const kLightSurface = Colors.white;
-const kLightBackground = Color(0xFFE8EAED);
-const kLightError = Color(0xFFFF1744);
-
-const kLightOnPrimary = Colors.white;
-const kLightOnSecondary = Colors.black;
-const kLightOnSurface = Color(0xFF202124);
-const kLightOnBackground = Color(0xFF5F6368);
-const kLightOnError = Colors.white;
+ColorScheme lightPallete = ColorScheme(
+  primary: Colors.deepPurpleAccent,
+  primaryVariant: Color(0xFF6200EA), // deepPurpleAccent[700]
+  secondary: Color(0xFF00E5FF),
+  secondaryVariant: Color(0xFF00B8D4),
+  surface: Colors.white,
+  background: Color(0xFFE8EAED),
+  error: Color(0xFFFF1744),
+  onPrimary: Colors.white,
+  onSecondary: Colors.black,
+  onSurface: Color(0xFF202124),
+  onBackground: Color(0xFF5F6368),
+  onError: Colors.white,
+  brightness: Brightness.light,
+);
 
 // Dark Mode
 
-const kDarkPrimary = Color(0xFF7C4DFF); // deepPurpleAccent[200]
-const kDarkPrimaryVariant = kLightPrimaryVariant;
-const kDarkSecondary = Color(0xFF18FFFF);
-const kDarktSecondaryVariant = kDarkSecondary;
-const kDarkSurface = Color(0xFF202124);
-const kDarkBackground = Color(0xFF303134);
-const kDarkError = Color(0xFFFF5252);
-
-const kDarkOnPrimary = Colors.black;
-const kDarkOnSecondary = Colors.black;
-const kDarkOnSurface = Color(0xFFE8EAED);
-const kDarkOnBackground = Color(0xFF9AA0A6);
-const kDarkOnError = Colors.black;
+ColorScheme darkPallete = ColorScheme(
+  primary: Color(0xFF7C4DFF), // deepPurpleAccent[200]
+  primaryVariant: Color(0xFF6200EA), // deepPurpleAccent[700]
+  secondary: Color(0xFF18FFFF),
+  secondaryVariant: Color(0xFF18FFFF), // same as secondary
+  surface: Color(0xFF202124),
+  background: Color(0xFF303134),
+  error: Color(0xFFFF5252),
+  onPrimary: Colors.black,
+  onSecondary: Colors.black,
+  onSurface: Color(0xFFE8EAED),
+  onBackground: Color(0xFF9AA0A6),
+  onError: Colors.black,
+  brightness: Brightness.dark,
+);
