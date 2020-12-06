@@ -67,7 +67,7 @@ List<Widget> buildEvents(Map<String, List<Event>> subregions) {
   for (final String subregion in subregions.keys) {
     list.add(ListSubtitle(subregion));
     events = [];
-    for (Event event in subregions[subregion]) {
+    for (final Event event in subregions[subregion]) {
       events.add(EventItem(event));
     }
     list.add(ListGroup(items: events));

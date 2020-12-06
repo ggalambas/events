@@ -3,9 +3,23 @@ import 'package:events/config/routes/router.gr.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
+<<<<<<< HEAD
 class SplashScreen extends StatelessWidget {
   // Create the initialization Future outside of `build`:
   final Future<FirebaseApp> _initialization = Firebase.initializeApp();
+=======
+class SplashScreen extends StatefulWidget {
+  @override
+  _SplashScreenState createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+  @override
+  void initState() {
+    super.initState();
+    ExtendedNavigator.root.replace(Routes.loginScreen);
+  }
+>>>>>>> 5ba0cad89d9d676d87eb53139f048aa025baeea8
 
   @override
   Widget build(BuildContext context) {

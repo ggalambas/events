@@ -5,4 +5,5 @@ extension DateTimeX on DateTime {
   // Date Formats
   String get monthName => DateFormat.MMM('pt_PT').format(this);
   String get weekdayName => DateFormat.E('pt_PT').format(this);
+  String get time => DateFormat.Hm('pt-PT').format(this);
 }

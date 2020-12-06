@@ -1,4 +1,3 @@
-import 'package:events/config/theme/theme_config.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -33,7 +32,7 @@ class SliverScaffold extends StatelessWidget {
               child: CustomScrollView(
                 //TODO: pull to refresh
                 //TODO: Scroll physics not working
-                physics: AlwaysScrollableScrollPhysics(),
+                // physics: AlwaysScrollableScrollPhysics(),
                 // physics: BouncingScrollPhysics(),
                 controller: scroll.controller,
                 slivers: <Widget>[

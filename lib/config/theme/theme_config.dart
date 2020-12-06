@@ -1,6 +1,5 @@
 import 'dart:ui';
-import 'package:events/config/theme/dark_theme.dart';
-import 'package:events/config/theme/light_theme.dart';
+import 'package:events/config/theme/theme.dart';
 import 'package:events/config/theme/palette.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
@@ -13,8 +12,8 @@ class ThemeConfig with ChangeNotifier {
     notifyListeners();
   }
 
-  ThemeData get light => lightTheme;
-  ThemeData get dark => darkTheme;
+  ThemeData get light => theme(lightPallete);
+  ThemeData get dark => theme(darkPallete);
 
   /* to change this in the settings use
    * Provider.of<ThemeConfig>(context, listen: false).useDarkMode()
@@ -37,10 +36,10 @@ class ThemeConfig with ChangeNotifier {
   static void _setSystemBarsColors(Brightness brightness) {
     if (brightness == Brightness.light) {
       _setStatusBarColor(Colors.transparent, false);
-      _setNavigationBarColor(kLightSurface, false);
+      _setNavigationBarColor(lightPallete.surface, false);
     } else if (brightness == Brightness.dark) {
       _setStatusBarColor(Colors.transparent, true);
-      _setNavigationBarColor(kDarkSurface, true);
+      _setNavigationBarColor(darkPallete.surface, true);
     }
   }
 

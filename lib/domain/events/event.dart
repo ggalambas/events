@@ -9,7 +9,7 @@ abstract class Event with _$Event {
   const factory Event({
     @required UniqueId id,
     @required EventName name,
-    @required DateTime time,
+    @required DateTime date,
     @required EventLink link,
   }) = _Event;
 }

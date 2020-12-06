@@ -17,12 +17,12 @@ class _$EventTearOff {
   _Event call(
       {@required UniqueId id,
       @required EventName name,
-      @required DateTime time,
+      @required DateTime date,
       @required EventLink link}) {
     return _Event(
       id: id,
       name: name,
-      time: time,
+      date: date,
       link: link,
     );
   }
@@ -36,7 +36,7 @@ const $Event = _$EventTearOff();
 mixin _$Event {
   UniqueId get id;
   EventName get name;
-  DateTime get time;
+  DateTime get date;
   EventLink get link;
 
   $EventCopyWith<Event> get copyWith;
@@ -46,7 +46,7 @@ mixin _$Event {
 abstract class $EventCopyWith<$Res> {
   factory $EventCopyWith(Event value, $Res Function(Event) then) =
       _$EventCopyWithImpl<$Res>;
-  $Res call({UniqueId id, EventName name, DateTime time, EventLink link});
+  $Res call({UniqueId id, EventName name, DateTime date, EventLink link});
 }
 
 /// @nodoc
@@ -61,13 +61,13 @@ class _$EventCopyWithImpl<$Res> implements $EventCopyWith<$Res> {
   $Res call({
     Object id = freezed,
     Object name = freezed,
-    Object time = freezed,
+    Object date = freezed,
     Object link = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed ? _value.id : id as UniqueId,
       name: name == freezed ? _value.name : name as EventName,
-      time: time == freezed ? _value.time : time as DateTime,
+      date: date == freezed ? _value.date : date as DateTime,
       link: link == freezed ? _value.link : link as EventLink,
     ));
   }
@@ -78,7 +78,7 @@ abstract class _$EventCopyWith<$Res> implements $EventCopyWith<$Res> {
   factory _$EventCopyWith(_Event value, $Res Function(_Event) then) =
       __$EventCopyWithImpl<$Res>;
   @override
-  $Res call({UniqueId id, EventName name, DateTime time, EventLink link});
+  $Res call({UniqueId id, EventName name, DateTime date, EventLink link});
 }
 
 /// @nodoc
@@ -94,13 +94,13 @@ class __$EventCopyWithImpl<$Res> extends _$EventCopyWithImpl<$Res>
   $Res call({
     Object id = freezed,
     Object name = freezed,
-    Object time = freezed,
+    Object date = freezed,
     Object link = freezed,
   }) {
     return _then(_Event(
       id: id == freezed ? _value.id : id as UniqueId,
       name: name == freezed ? _value.name : name as EventName,
-      time: time == freezed ? _value.time : time as DateTime,
+      date: date == freezed ? _value.date : date as DateTime,
       link: link == freezed ? _value.link : link as EventLink,
     ));
   }
@@ -111,11 +111,11 @@ class _$_Event implements _Event {
   const _$_Event(
       {@required this.id,
       @required this.name,
-      @required this.time,
+      @required this.date,
       @required this.link})
       : assert(id != null),
         assert(name != null),
-        assert(time != null),
+        assert(date != null),
         assert(link != null);
 
   @override
@@ -123,13 +123,13 @@ class _$_Event implements _Event {
   @override
   final EventName name;
   @override
-  final DateTime time;
+  final DateTime date;
   @override
   final EventLink link;
 
   @override
   String toString() {
-    return 'Event(id: $id, name: $name, time: $time, link: $link)';
+    return 'Event(id: $id, name: $name, date: $date, link: $link)';
   }
 
   @override
@@ -140,8 +140,8 @@ class _$_Event implements _Event {
                 const DeepCollectionEquality().equals(other.id, id)) &&
             (identical(other.name, name) ||
                 const DeepCollectionEquality().equals(other.name, name)) &&
-            (identical(other.time, time) ||
-                const DeepCollectionEquality().equals(other.time, time)) &&
+            (identical(other.date, date) ||
+                const DeepCollectionEquality().equals(other.date, date)) &&
             (identical(other.link, link) ||
                 const DeepCollectionEquality().equals(other.link, link)));
   }
@@ -151,7 +151,7 @@ class _$_Event implements _Event {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(name) ^
-      const DeepCollectionEquality().hash(time) ^
+      const DeepCollectionEquality().hash(date) ^
       const DeepCollectionEquality().hash(link);
 
   @override
@@ -163,7 +163,7 @@ abstract class _Event implements Event {
   const factory _Event(
       {@required UniqueId id,
       @required EventName name,
-      @required DateTime time,
+      @required DateTime date,
       @required EventLink link}) = _$_Event;
 
   @override
@@ -171,7 +171,7 @@ abstract class _Event implements Event {
   @override
   EventName get name;
   @override
-  DateTime get time;
+  DateTime get date;
   @override
   EventLink get link;
   @override

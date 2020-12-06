@@ -1,4 +1,3 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:events/app/drawer/category_model.dart';
 import 'package:events/config/constants.dart';
 import 'package:events/domain/categories/category.dart';
@@ -22,7 +21,7 @@ class CategoryItem extends StatelessWidget {
     final CategoryModel model =
         Provider.of<CategoryModel>(context, listen: false);
     return Padding(
-      padding: EdgeInsets.only(right: 8), //!
+      padding: EdgeInsets.only(right: kDrawerRightPadding),
       child: ListTile(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.horizontal(

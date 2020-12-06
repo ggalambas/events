@@ -41,6 +41,7 @@ class CalendarModel extends ChangeNotifier {
 
   bool isSelected(int daysAfter) => today.after(daysAfter).day == _selected.day;
   bool isLastDayOfMonth(int daysAfter) => today.after(daysAfter + 1).day == 1;
+  bool isLastShownDay(int daysAfter) => daysAfter == totalDays - 1;
 
   String nextMonth(int daysAfter) => today.after(daysAfter + 1).monthName;
   String weekDay(int daysAfter) => today.after(daysAfter).weekdayName;

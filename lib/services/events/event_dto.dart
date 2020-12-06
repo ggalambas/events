@@ -23,7 +23,7 @@ abstract class EventDto implements _$EventDto {
     return EventDto(
       id: event.id.getOrCrash(),
       name: event.name.getOrCrash(),
-      time: Timestamp.fromDate(event.time),
+      time: Timestamp.fromDate(event.date),
       link: event.link.getOrCrash(),
     );
   }
@@ -32,7 +32,7 @@ abstract class EventDto implements _$EventDto {
     return Event(
       id: UniqueId.fromUniqueString(id),
       name: EventName(name),
-      time: time.toDate(),
+      date: time.toDate(),
       link: EventLink(link),
     );
   }

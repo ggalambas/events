@@ -25,7 +25,7 @@ class Calendar extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             itemCount: calendar.totalDays,
             separatorBuilder: (_, daysAfter) {
-              return daysAfter < calendar.totalDays - 1 && //!
+              return !calendar.isLastShownDay(daysAfter) &&
                       calendar.isLastDayOfMonth(daysAfter)
                   ? Padding(
                       padding: EdgeInsets.only(

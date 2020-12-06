@@ -32,18 +32,16 @@ class RegionsModel extends BaseModel {
 
   void _loadSuccess(List<Region> regions) {
     //TODO: regions location
-    List<Region> near = [];
-    List<Region> others = [];
-    // List<Region> near = regions;
-    // List<Region> others = regions;
+    final List<Region> near = [];
+    final List<Region> others = [];
     int live = 0;
     int total = 0;
 
-    regions.forEach((region) {
+    for (final Region region in regions) {
       _regionApi.isNear(region) ? near.add(region) : others.add(region);
       live += region.eventCounter.live;
       total += region.eventCounter.total;
-    });
+    }
 
     _all = Region(
       id: UniqueId(), //!
