@@ -32,10 +32,15 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<ThemeConfig>(create: (_) => ThemeConfig()),
+        ChangeNotifierProvider<ThemeConfig>(
+          create: (_) => ThemeConfig(),
+        ),
         ChangeNotifierProvider<CategoryModel>.value(
-            value: getIt<CategoryModel>()), //TODO: extract selected?
-        ChangeNotifierProvider<CalendarModel>(create: (_) => CalendarModel()),
+          value: getIt<CategoryModel>(),
+        ),
+        ChangeNotifierProvider<CalendarModel>(
+          create: (_) => CalendarModel(),
+        ),
       ],
       child: Consumer<ThemeConfig>(
         builder: (_, theme, __) {
