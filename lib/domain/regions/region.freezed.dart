@@ -14,8 +14,12 @@ class _$RegionTearOff {
   const _$RegionTearOff();
 
 // ignore: unused_element
-  _Region call({@required String name, @required EventCounter eventCounter}) {
+  _Region call(
+      {@required UniqueId id,
+      @required String name,
+      @required EventCounter eventCounter}) {
     return _Region(
+      id: id,
       name: name,
       eventCounter: eventCounter,
     );
@@ -28,7 +32,7 @@ const $Region = _$RegionTearOff();
 
 /// @nodoc
 mixin _$Region {
-// @required int id,
+  UniqueId get id;
   String get name;
   EventCounter get eventCounter;
 
@@ -39,7 +43,7 @@ mixin _$Region {
 abstract class $RegionCopyWith<$Res> {
   factory $RegionCopyWith(Region value, $Res Function(Region) then) =
       _$RegionCopyWithImpl<$Res>;
-  $Res call({String name, EventCounter eventCounter});
+  $Res call({UniqueId id, String name, EventCounter eventCounter});
 }
 
 /// @nodoc
@@ -52,10 +56,12 @@ class _$RegionCopyWithImpl<$Res> implements $RegionCopyWith<$Res> {
 
   @override
   $Res call({
+    Object id = freezed,
     Object name = freezed,
     Object eventCounter = freezed,
   }) {
     return _then(_value.copyWith(
+      id: id == freezed ? _value.id : id as UniqueId,
       name: name == freezed ? _value.name : name as String,
       eventCounter: eventCounter == freezed
           ? _value.eventCounter
@@ -69,7 +75,7 @@ abstract class _$RegionCopyWith<$Res> implements $RegionCopyWith<$Res> {
   factory _$RegionCopyWith(_Region value, $Res Function(_Region) then) =
       __$RegionCopyWithImpl<$Res>;
   @override
-  $Res call({String name, EventCounter eventCounter});
+  $Res call({UniqueId id, String name, EventCounter eventCounter});
 }
 
 /// @nodoc
@@ -83,10 +89,12 @@ class __$RegionCopyWithImpl<$Res> extends _$RegionCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object id = freezed,
     Object name = freezed,
     Object eventCounter = freezed,
   }) {
     return _then(_Region(
+      id: id == freezed ? _value.id : id as UniqueId,
       name: name == freezed ? _value.name : name as String,
       eventCounter: eventCounter == freezed
           ? _value.eventCounter
@@ -97,24 +105,30 @@ class __$RegionCopyWithImpl<$Res> extends _$RegionCopyWithImpl<$Res>
 
 /// @nodoc
 class _$_Region implements _Region {
-  const _$_Region({@required this.name, @required this.eventCounter})
-      : assert(name != null),
+  const _$_Region(
+      {@required this.id, @required this.name, @required this.eventCounter})
+      : assert(id != null),
+        assert(name != null),
         assert(eventCounter != null);
 
-  @override // @required int id,
+  @override
+  final UniqueId id;
+  @override
   final String name;
   @override
   final EventCounter eventCounter;
 
   @override
   String toString() {
-    return 'Region(name: $name, eventCounter: $eventCounter)';
+    return 'Region(id: $id, name: $name, eventCounter: $eventCounter)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _Region &&
+            (identical(other.id, id) ||
+                const DeepCollectionEquality().equals(other.id, id)) &&
             (identical(other.name, name) ||
                 const DeepCollectionEquality().equals(other.name, name)) &&
             (identical(other.eventCounter, eventCounter) ||
@@ -125,6 +139,7 @@ class _$_Region implements _Region {
   @override
   int get hashCode =>
       runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(name) ^
       const DeepCollectionEquality().hash(eventCounter);
 
@@ -135,9 +150,13 @@ class _$_Region implements _Region {
 
 abstract class _Region implements Region {
   const factory _Region(
-      {@required String name, @required EventCounter eventCounter}) = _$_Region;
+      {@required UniqueId id,
+      @required String name,
+      @required EventCounter eventCounter}) = _$_Region;
 
-  @override // @required int id,
+  @override
+  UniqueId get id;
+  @override
   String get name;
   @override
   EventCounter get eventCounter;

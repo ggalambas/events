@@ -1,5 +1,6 @@
 import 'package:events/app/core/base_model.dart';
 import 'package:events/domain/core/event_counter.dart';
+import 'package:events/domain/core/value_objects.dart';
 import 'package:events/domain/events/event_failure.dart';
 import 'package:events/domain/events/i_event_repository.dart';
 import 'package:events/domain/regions/i_region_api.dart';
@@ -45,13 +46,13 @@ class RegionsModel extends BaseModel {
     });
 
     _all = Region(
+      id: UniqueId(), //!
       name: 'Todos os Eventos',
       eventCounter: EventCounter(live: live, total: total),
     );
     _near = near;
     _others = others;
     loadSuccess();
-    print('success');
   }
 
   void _loadFailure(EventFailure f) {

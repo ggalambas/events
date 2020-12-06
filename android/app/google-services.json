@@ -8,17 +8,17 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:44304425536:android:78e96c7f4e799252f7f5a5",
+        "mobilesdk_app_id": "1:44304425536:android:b72aafc25af6d61ff7f5a5",
         "android_client_info": {
-          "package_name": "com.example.events"
+          "package_name": "com.galambas.events"
         }
       },
       "oauth_client": [
         {
-          "client_id": "44304425536-c62jngnq3laf235churcq0e4n9o9nn1f.apps.googleusercontent.com",
+          "client_id": "44304425536-7g7ldoono6j1anbrit3egk2iob6dfkgs.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.events",
+            "package_name": "com.galambas.events",
             "certificate_hash": "cbc7f34dd4bf6e944298a1c654c002918e2800f0"
           }
         },

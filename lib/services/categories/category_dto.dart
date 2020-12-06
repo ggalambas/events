@@ -14,7 +14,8 @@ abstract class CategoryDto implements _$CategoryDto {
   const CategoryDto._();
 
   const factory CategoryDto({
-    @JsonKey(ignore: true) String name,
+    @JsonKey(ignore: true) String id,
+    @required String name,
     @required int icon,
     @required int liveEvents,
     @required int totalEvents,
@@ -22,6 +23,7 @@ abstract class CategoryDto implements _$CategoryDto {
 
   factory CategoryDto.fromDomain(Category category) {
     return CategoryDto(
+      id: category.id.getOrCrash(),
       name: category.name,
       icon: category.icon.codePoint,
       liveEvents: category.eventCounter.live,
@@ -31,6 +33,7 @@ abstract class CategoryDto implements _$CategoryDto {
 
   Category toDomain() {
     return Category(
+      id: UniqueId.fromUniqueString(id),
       name: name,
       icon: IconData(icon, fontFamily: 'MaterialIcons'),
       eventCounter: EventCounter(live: liveEvents, total: totalEvents),
@@ -41,5 +44,5 @@ abstract class CategoryDto implements _$CategoryDto {
       _$CategoryDtoFromJson(json);
 
   factory CategoryDto.fromFirestore(DocumentSnapshot doc) =>
-      CategoryDto.fromJson(doc.data()).copyWith(name: doc.id);
+      CategoryDto.fromJson(doc.data()).copyWith(id: doc.id);
 }

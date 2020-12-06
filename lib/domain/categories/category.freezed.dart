@@ -15,10 +15,12 @@ class _$CategoryTearOff {
 
 // ignore: unused_element
   _Category call(
-      {@required String name,
+      {@required UniqueId id,
+      @required String name,
       @required IconData icon,
       @required EventCounter eventCounter}) {
     return _Category(
+      id: id,
       name: name,
       icon: icon,
       eventCounter: eventCounter,
@@ -32,6 +34,7 @@ const $Category = _$CategoryTearOff();
 
 /// @nodoc
 mixin _$Category {
+  UniqueId get id;
   String get name;
   IconData get icon;
   EventCounter get eventCounter;
@@ -43,7 +46,8 @@ mixin _$Category {
 abstract class $CategoryCopyWith<$Res> {
   factory $CategoryCopyWith(Category value, $Res Function(Category) then) =
       _$CategoryCopyWithImpl<$Res>;
-  $Res call({String name, IconData icon, EventCounter eventCounter});
+  $Res call(
+      {UniqueId id, String name, IconData icon, EventCounter eventCounter});
 }
 
 /// @nodoc
@@ -56,11 +60,13 @@ class _$CategoryCopyWithImpl<$Res> implements $CategoryCopyWith<$Res> {
 
   @override
   $Res call({
+    Object id = freezed,
     Object name = freezed,
     Object icon = freezed,
     Object eventCounter = freezed,
   }) {
     return _then(_value.copyWith(
+      id: id == freezed ? _value.id : id as UniqueId,
       name: name == freezed ? _value.name : name as String,
       icon: icon == freezed ? _value.icon : icon as IconData,
       eventCounter: eventCounter == freezed
@@ -75,7 +81,8 @@ abstract class _$CategoryCopyWith<$Res> implements $CategoryCopyWith<$Res> {
   factory _$CategoryCopyWith(_Category value, $Res Function(_Category) then) =
       __$CategoryCopyWithImpl<$Res>;
   @override
-  $Res call({String name, IconData icon, EventCounter eventCounter});
+  $Res call(
+      {UniqueId id, String name, IconData icon, EventCounter eventCounter});
 }
 
 /// @nodoc
@@ -89,11 +96,13 @@ class __$CategoryCopyWithImpl<$Res> extends _$CategoryCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object id = freezed,
     Object name = freezed,
     Object icon = freezed,
     Object eventCounter = freezed,
   }) {
     return _then(_Category(
+      id: id == freezed ? _value.id : id as UniqueId,
       name: name == freezed ? _value.name : name as String,
       icon: icon == freezed ? _value.icon : icon as IconData,
       eventCounter: eventCounter == freezed
@@ -106,11 +115,17 @@ class __$CategoryCopyWithImpl<$Res> extends _$CategoryCopyWithImpl<$Res>
 /// @nodoc
 class _$_Category implements _Category {
   const _$_Category(
-      {@required this.name, @required this.icon, @required this.eventCounter})
-      : assert(name != null),
+      {@required this.id,
+      @required this.name,
+      @required this.icon,
+      @required this.eventCounter})
+      : assert(id != null),
+        assert(name != null),
         assert(icon != null),
         assert(eventCounter != null);
 
+  @override
+  final UniqueId id;
   @override
   final String name;
   @override
@@ -120,13 +135,15 @@ class _$_Category implements _Category {
 
   @override
   String toString() {
-    return 'Category(name: $name, icon: $icon, eventCounter: $eventCounter)';
+    return 'Category(id: $id, name: $name, icon: $icon, eventCounter: $eventCounter)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _Category &&
+            (identical(other.id, id) ||
+                const DeepCollectionEquality().equals(other.id, id)) &&
             (identical(other.name, name) ||
                 const DeepCollectionEquality().equals(other.name, name)) &&
             (identical(other.icon, icon) ||
@@ -139,6 +156,7 @@ class _$_Category implements _Category {
   @override
   int get hashCode =>
       runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(name) ^
       const DeepCollectionEquality().hash(icon) ^
       const DeepCollectionEquality().hash(eventCounter);
@@ -150,10 +168,13 @@ class _$_Category implements _Category {
 
 abstract class _Category implements Category {
   const factory _Category(
-      {@required String name,
+      {@required UniqueId id,
+      @required String name,
       @required IconData icon,
       @required EventCounter eventCounter}) = _$_Category;
 
+  @override
+  UniqueId get id;
   @override
   String get name;
   @override

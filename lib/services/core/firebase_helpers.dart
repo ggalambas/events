@@ -8,26 +8,25 @@ extension FirestoreX on FirebaseFirestore {
   //       .collection('users')
   //       .doc(user.id.getOrCrash());
   // }
-  CollectionReference get categoriesCollection => collection('categories');
-  DocumentReference categoryDoc(String category) =>
-      collection('categories').doc(category);
+
+  CollectionReference get eventsCollection => collection('events');
 }
 
-extension DocumentReferenceX on DocumentReference {
-  // CollectionReference get regionCollection => collection('regionEvents');
-  // CollectionReference get subregionCollection => collection('subregionEvents');
-  CollectionReference get eventCollection => collection('events');
-}
-
-extension CollectionReferenceX on CollectionReference {
-  // CollectionReference get regionCollection => collection('regionEvents');
-  // CollectionReference get subregionCollection => collection('subregionEvents');
-  // Query onDay(DateTime day) {
-  //   final DateTime nextDay = day.add(Duration(days: 1));
-  //   return where(
-  //     'time',
-  //     isGreaterThanOrEqualTo: Timestamp.fromDate(day),
-  //     isLessThan: Timestamp.fromDate(nextDay),
-  //   );
-  // }
-}
+/*
+ ! DATABASE STRUCTURE 
+ * categories/{categoryId}/[name,
+ *                          icon,
+ *                          liveEvents,
+ *                          totalEvents]
+ * 
+ * categoryRegions/{categoryId}/days/{day}/regions/{regionId}/[name,
+ *                                                            liveEvents,
+ *                                                            totalEvents]
+ * 
+ * categoryRegionEvents/{categoryId}/days/{day}/regions/{regionId}/subregions/{subregionId}/[List<EventId>]
+ * 
+ * events/{eventId}/[name, time, link, posterUrl, ?categoryId, ?regionId, ?subregionId, ?ownerId]
+ * 
+ * userEvents/{userId}/[List<EventId>]
+ * user{userId}/[..userInfo]
+ */

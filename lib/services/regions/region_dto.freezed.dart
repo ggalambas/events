@@ -1,93 +1,86 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
 
-part of 'category_dto.dart';
+part of 'region_dto.dart';
 
 // **************************************************************************
 // FreezedGenerator
 // **************************************************************************
 
 T _$identity<T>(T value) => value;
-CategoryDto _$CategoryDtoFromJson(Map<String, dynamic> json) {
-  return _CategoryDto.fromJson(json);
+RegionDto _$RegionDtoFromJson(Map<String, dynamic> json) {
+  return _RegionDto.fromJson(json);
 }
 
 /// @nodoc
-class _$CategoryDtoTearOff {
-  const _$CategoryDtoTearOff();
+class _$RegionDtoTearOff {
+  const _$RegionDtoTearOff();
 
 // ignore: unused_element
-  _CategoryDto call(
+  _RegionDto call(
       {@JsonKey(ignore: true) String id,
       @required String name,
-      @required int icon,
       @required int liveEvents,
       @required int totalEvents}) {
-    return _CategoryDto(
+    return _RegionDto(
       id: id,
       name: name,
-      icon: icon,
       liveEvents: liveEvents,
       totalEvents: totalEvents,
     );
   }
 
 // ignore: unused_element
-  CategoryDto fromJson(Map<String, Object> json) {
-    return CategoryDto.fromJson(json);
+  RegionDto fromJson(Map<String, Object> json) {
+    return RegionDto.fromJson(json);
   }
 }
 
 /// @nodoc
 // ignore: unused_element
-const $CategoryDto = _$CategoryDtoTearOff();
+const $RegionDto = _$RegionDtoTearOff();
 
 /// @nodoc
-mixin _$CategoryDto {
+mixin _$RegionDto {
   @JsonKey(ignore: true)
   String get id;
   String get name;
-  int get icon;
   int get liveEvents;
   int get totalEvents;
 
   Map<String, dynamic> toJson();
-  $CategoryDtoCopyWith<CategoryDto> get copyWith;
+  $RegionDtoCopyWith<RegionDto> get copyWith;
 }
 
 /// @nodoc
-abstract class $CategoryDtoCopyWith<$Res> {
-  factory $CategoryDtoCopyWith(
-          CategoryDto value, $Res Function(CategoryDto) then) =
-      _$CategoryDtoCopyWithImpl<$Res>;
+abstract class $RegionDtoCopyWith<$Res> {
+  factory $RegionDtoCopyWith(RegionDto value, $Res Function(RegionDto) then) =
+      _$RegionDtoCopyWithImpl<$Res>;
   $Res call(
       {@JsonKey(ignore: true) String id,
       String name,
-      int icon,
       int liveEvents,
       int totalEvents});
 }
 
 /// @nodoc
-class _$CategoryDtoCopyWithImpl<$Res> implements $CategoryDtoCopyWith<$Res> {
-  _$CategoryDtoCopyWithImpl(this._value, this._then);
+class _$RegionDtoCopyWithImpl<$Res> implements $RegionDtoCopyWith<$Res> {
+  _$RegionDtoCopyWithImpl(this._value, this._then);
 
-  final CategoryDto _value;
+  final RegionDto _value;
   // ignore: unused_field
-  final $Res Function(CategoryDto) _then;
+  final $Res Function(RegionDto) _then;
 
   @override
   $Res call({
     Object id = freezed,
     Object name = freezed,
-    Object icon = freezed,
     Object liveEvents = freezed,
     Object totalEvents = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed ? _value.id : id as String,
       name: name == freezed ? _value.name : name as String,
-      icon: icon == freezed ? _value.icon : icon as int,
       liveEvents: liveEvents == freezed ? _value.liveEvents : liveEvents as int,
       totalEvents:
           totalEvents == freezed ? _value.totalEvents : totalEvents as int,
@@ -96,42 +89,37 @@ class _$CategoryDtoCopyWithImpl<$Res> implements $CategoryDtoCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$CategoryDtoCopyWith<$Res>
-    implements $CategoryDtoCopyWith<$Res> {
-  factory _$CategoryDtoCopyWith(
-          _CategoryDto value, $Res Function(_CategoryDto) then) =
-      __$CategoryDtoCopyWithImpl<$Res>;
+abstract class _$RegionDtoCopyWith<$Res> implements $RegionDtoCopyWith<$Res> {
+  factory _$RegionDtoCopyWith(
+          _RegionDto value, $Res Function(_RegionDto) then) =
+      __$RegionDtoCopyWithImpl<$Res>;
   @override
   $Res call(
       {@JsonKey(ignore: true) String id,
       String name,
-      int icon,
       int liveEvents,
       int totalEvents});
 }
 
 /// @nodoc
-class __$CategoryDtoCopyWithImpl<$Res> extends _$CategoryDtoCopyWithImpl<$Res>
-    implements _$CategoryDtoCopyWith<$Res> {
-  __$CategoryDtoCopyWithImpl(
-      _CategoryDto _value, $Res Function(_CategoryDto) _then)
-      : super(_value, (v) => _then(v as _CategoryDto));
+class __$RegionDtoCopyWithImpl<$Res> extends _$RegionDtoCopyWithImpl<$Res>
+    implements _$RegionDtoCopyWith<$Res> {
+  __$RegionDtoCopyWithImpl(_RegionDto _value, $Res Function(_RegionDto) _then)
+      : super(_value, (v) => _then(v as _RegionDto));
 
   @override
-  _CategoryDto get _value => super._value as _CategoryDto;
+  _RegionDto get _value => super._value as _RegionDto;
 
   @override
   $Res call({
     Object id = freezed,
     Object name = freezed,
-    Object icon = freezed,
     Object liveEvents = freezed,
     Object totalEvents = freezed,
   }) {
-    return _then(_CategoryDto(
+    return _then(_RegionDto(
       id: id == freezed ? _value.id : id as String,
       name: name == freezed ? _value.name : name as String,
-      icon: icon == freezed ? _value.icon : icon as int,
       liveEvents: liveEvents == freezed ? _value.liveEvents : liveEvents as int,
       totalEvents:
           totalEvents == freezed ? _value.totalEvents : totalEvents as int,
@@ -142,21 +130,19 @@ class __$CategoryDtoCopyWithImpl<$Res> extends _$CategoryDtoCopyWithImpl<$Res>
 @JsonSerializable()
 
 /// @nodoc
-class _$_CategoryDto extends _CategoryDto {
-  const _$_CategoryDto(
+class _$_RegionDto extends _RegionDto {
+  const _$_RegionDto(
       {@JsonKey(ignore: true) this.id,
       @required this.name,
-      @required this.icon,
       @required this.liveEvents,
       @required this.totalEvents})
       : assert(name != null),
-        assert(icon != null),
         assert(liveEvents != null),
         assert(totalEvents != null),
         super._();
 
-  factory _$_CategoryDto.fromJson(Map<String, dynamic> json) =>
-      _$_$_CategoryDtoFromJson(json);
+  factory _$_RegionDto.fromJson(Map<String, dynamic> json) =>
+      _$_$_RegionDtoFromJson(json);
 
   @override
   @JsonKey(ignore: true)
@@ -164,27 +150,23 @@ class _$_CategoryDto extends _CategoryDto {
   @override
   final String name;
   @override
-  final int icon;
-  @override
   final int liveEvents;
   @override
   final int totalEvents;
 
   @override
   String toString() {
-    return 'CategoryDto(id: $id, name: $name, icon: $icon, liveEvents: $liveEvents, totalEvents: $totalEvents)';
+    return 'RegionDto(id: $id, name: $name, liveEvents: $liveEvents, totalEvents: $totalEvents)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _CategoryDto &&
+        (other is _RegionDto &&
             (identical(other.id, id) ||
                 const DeepCollectionEquality().equals(other.id, id)) &&
             (identical(other.name, name) ||
                 const DeepCollectionEquality().equals(other.name, name)) &&
-            (identical(other.icon, icon) ||
-                const DeepCollectionEquality().equals(other.icon, icon)) &&
             (identical(other.liveEvents, liveEvents) ||
                 const DeepCollectionEquality()
                     .equals(other.liveEvents, liveEvents)) &&
@@ -198,31 +180,29 @@ class _$_CategoryDto extends _CategoryDto {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(name) ^
-      const DeepCollectionEquality().hash(icon) ^
       const DeepCollectionEquality().hash(liveEvents) ^
       const DeepCollectionEquality().hash(totalEvents);
 
   @override
-  _$CategoryDtoCopyWith<_CategoryDto> get copyWith =>
-      __$CategoryDtoCopyWithImpl<_CategoryDto>(this, _$identity);
+  _$RegionDtoCopyWith<_RegionDto> get copyWith =>
+      __$RegionDtoCopyWithImpl<_RegionDto>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$_$_CategoryDtoToJson(this);
+    return _$_$_RegionDtoToJson(this);
   }
 }
 
-abstract class _CategoryDto extends CategoryDto {
-  const _CategoryDto._() : super._();
-  const factory _CategoryDto(
+abstract class _RegionDto extends RegionDto {
+  const _RegionDto._() : super._();
+  const factory _RegionDto(
       {@JsonKey(ignore: true) String id,
       @required String name,
-      @required int icon,
       @required int liveEvents,
-      @required int totalEvents}) = _$_CategoryDto;
+      @required int totalEvents}) = _$_RegionDto;
 
-  factory _CategoryDto.fromJson(Map<String, dynamic> json) =
-      _$_CategoryDto.fromJson;
+  factory _RegionDto.fromJson(Map<String, dynamic> json) =
+      _$_RegionDto.fromJson;
 
   @override
   @JsonKey(ignore: true)
@@ -230,11 +210,9 @@ abstract class _CategoryDto extends CategoryDto {
   @override
   String get name;
   @override
-  int get icon;
-  @override
   int get liveEvents;
   @override
   int get totalEvents;
   @override
-  _$CategoryDtoCopyWith<_CategoryDto> get copyWith;
+  _$RegionDtoCopyWith<_RegionDto> get copyWith;
 }

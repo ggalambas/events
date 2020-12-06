@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
 
 import 'package:dartz/dartz.dart';
 import 'package:events/domain/categories/category.dart';
@@ -21,6 +20,7 @@ class FakeEventRepository implements IEventRepository {
     for (int i = 0; i < 10; i++) {
       categories.add(
         Category(
+          id: UniqueId(),
           name: 'Categoria $i',
           icon: Icons.sports,
           eventCounter: EventCounter(live: i, total: i + 10),
@@ -37,6 +37,7 @@ class FakeEventRepository implements IEventRepository {
     for (int i = 0; i < 30; i++) {
       regions.add(
         Region(
+          id: UniqueId.fromUniqueString('$i'),
           name: 'Region $i',
           eventCounter: EventCounter(live: i, total: i + 7),
         ),

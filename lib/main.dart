@@ -1,22 +1,17 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:events/app/appbar/calendar_model.dart';
-import 'package:events/app/appbar/scroll_model.dart';
-import 'package:events/app/body/regions_model.dart';
 import 'package:events/app/drawer/category_model.dart';
 import 'package:events/config/injection.dart';
 import 'package:events/config/theme/theme_config.dart';
 import 'package:events/config/routes/router.gr.dart' as auto;
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:provider/provider.dart';
 
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  configureInjection(Environment.prod);
-  await Firebase.initializeApp(); // TODO firebase init
-  // https://firebase.flutter.dev/docs/overview#initializing-flutterfire
+  WidgetsFlutterBinding.ensureInitialized(); //?
+  configureInjection(Environment.prod); //!
   runApp(MyApp());
 }
 
