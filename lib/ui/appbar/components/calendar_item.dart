@@ -18,8 +18,7 @@ class CalendarItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final TextStyle weekDayStyle = theme.textTheme.overline;
-    final TextStyle dayStyle =
-        theme.textTheme.button.copyWith(fontSize: 16.0); //!
+    final TextStyle dayStyle = theme.textTheme.button;
     return SizedBox(
       width: kCalendarItemWidth,
       child: FlatButton(

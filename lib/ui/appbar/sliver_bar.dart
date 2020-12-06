@@ -25,7 +25,7 @@ class SliverBar extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(title, style: textTheme.headline6),
-          if (subtitle != null) Text(subtitle, style: textTheme.caption),
+          if (subtitle != null) Text(subtitle, style: textTheme.subtitle1),
         ],
       ),
       actions: [

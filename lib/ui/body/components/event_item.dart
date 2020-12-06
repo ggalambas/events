@@ -17,7 +17,7 @@ class EventItem extends StatelessWidget {
       dense: true,
       leading: Text(
         date.time,
-        style: theme.textTheme.bodyText1.copyWith(fontWeight: FontWeight.w500),
+        style: theme.textTheme.bodyText2,
       ),
       title: Text(name, style: theme.textTheme.bodyText1),
       trailing: IconButton(

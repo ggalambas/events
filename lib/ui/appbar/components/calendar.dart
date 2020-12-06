@@ -37,8 +37,7 @@ class Calendar extends StatelessWidget {
                         child: Text(
                           calendar.nextMonth(daysAfter).toUpperCase(),
                           textAlign: TextAlign.center,
-                          style:
-                              textTheme.overline.copyWith(fontSize: 12.0), //!
+                          style: textTheme.overline.copyWith(fontSize: 12.0),
                         ),
                       ),
                     )

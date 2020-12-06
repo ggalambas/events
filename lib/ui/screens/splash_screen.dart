@@ -21,7 +21,7 @@ class SplashScreen extends StatelessWidget {
 
         // Once complete, show your application
         if (snapshot.connectionState == ConnectionState.done) {
-          // ExtendedNavigator.root.replace(Routes.regionsView);
+          ExtendedNavigator.root.replace(Routes.regionsView);
         }
 
         // Otherwise, show something whilst waiting for initialization to complete
@@ -51,9 +51,7 @@ class SplashScreen extends StatelessWidget {
               ),
               Text(
                 'App Name'.toUpperCase(),
-                style: theme.textTheme.overline.copyWith(
-                  fontSize: 14, //!
-                ),
+                style: theme.textTheme.headline1,
               ),
             ],
           ),

@@ -15,7 +15,7 @@ class ListSubtitle extends StatelessWidget {
       padding: EdgeInsets.only(left: kSubtitleLeftPadding),
       child: Text(
         subtitle.toUpperCase(),
-        style: textTheme.overline,
+        style: textTheme.subtitle2,
       ),
     );
   }
