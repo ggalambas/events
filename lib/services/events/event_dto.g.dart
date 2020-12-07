@@ -9,14 +9,20 @@ part of 'event_dto.dart';
 _$_EventDto _$_$_EventDtoFromJson(Map<String, dynamic> json) {
   return _$_EventDto(
     name: json['name'] as String,
-    time: const ServerTimeStampConverter().fromJson(json['time'] as int),
+    date: const ServerTimeStampConverter().fromJson(json['date'] as int),
     link: json['link'] as String,
+    subregionId: json['subregionId'] as String,
+    categoryId: json['categoryId'] as String,
+    poster: json['poster'] as String,
   );
 }
 
 Map<String, dynamic> _$_$_EventDtoToJson(_$_EventDto instance) =>
     <String, dynamic>{
       'name': instance.name,
-      'time': const ServerTimeStampConverter().toJson(instance.time),
+      'date': const ServerTimeStampConverter().toJson(instance.date),
       'link': instance.link,
+      'subregionId': instance.subregionId,
+      'categoryId': instance.categoryId,
+      'poster': instance.poster,
     };

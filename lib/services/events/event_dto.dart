@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:events/domain/core/value_objects.dart';
 import 'package:events/domain/events/event.dart';
 import 'package:events/domain/events/value_objects.dart';
@@ -15,16 +17,22 @@ abstract class EventDto implements _$EventDto {
   const factory EventDto({
     @JsonKey(ignore: true) String id,
     @required String name,
-    @required @ServerTimeStampConverter() Timestamp time,
+    @required @ServerTimeStampConverter() Timestamp date,
     @required String link,
+    @required String subregionId,
+    @required String categoryId,
+    @required String poster,
   }) = _EventDto;
 
   factory EventDto.fromDomain(Event event) {
     return EventDto(
       id: event.id.getOrCrash(),
       name: event.name.getOrCrash(),
-      time: Timestamp.fromDate(event.date),
+      date: Timestamp.fromDate(event.date),
       link: event.link.getOrCrash(),
+      subregionId: event.subregionId.getOrCrash(),
+      categoryId: event.categoryId.getOrCrash(),
+      poster: event.poster.getOrCrash().path, //TODO: store image on cloud
     );
   }
 
@@ -32,8 +40,11 @@ abstract class EventDto implements _$EventDto {
     return Event(
       id: UniqueId.fromUniqueString(id),
       name: EventName(name),
-      date: time.toDate(),
+      date: date.toDate(),
       link: EventLink(link),
+      subregionId: UniqueId.fromUniqueString(subregionId),
+      categoryId: UniqueId.fromUniqueString(categoryId),
+      poster: Poster(File(poster)),
     );
   }
 
@@ -51,5 +62,5 @@ class ServerTimeStampConverter implements JsonConverter<Timestamp, int> {
   Timestamp fromJson(int json) => Timestamp.fromMicrosecondsSinceEpoch(json);
 
   @override
-  int toJson(Timestamp time) => time.microsecondsSinceEpoch;
+  int toJson(Timestamp date) => date.microsecondsSinceEpoch;
 }

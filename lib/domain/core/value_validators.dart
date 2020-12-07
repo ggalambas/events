@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dartz/dartz.dart';
 import 'package:events/domain/core/failures.dart';
 import 'package:string_validator/string_validator.dart';
@@ -37,6 +39,24 @@ Either<ValueFailure<String>, String> validateUrl(String input) {
     return right(input);
   } else {
     return left(ValueFailure.invalidUrl(failedValue: input));
+  }
+}
+
+Either<ValueFailure<File>, File> validateImage(File input) {
+  //TODO ImageValidation
+  if (true) {
+    return right(input);
+  } else {
+    return left(ValueFailure.wrongFileFormat(failedValue: input));
+  }
+}
+
+Either<ValueFailure<File>, File> validateDimensions(File input) {
+  //TODO Image Dimensions validation
+  if (true) {
+    return right(input);
+  } else {
+    return left(ValueFailure.wrongImageDimensions(failedValue: input));
   }
 }
 

@@ -10,10 +10,17 @@ extension FirestoreX on FirebaseFirestore {
   // }
 
   CollectionReference get eventsCollection => collection('events');
+  CollectionReference get categoriesCollection => collection('categories');
+  CollectionReference get categoryRegionsCollection =>
+      collection('categoryRegions');
+  CollectionReference get categoryRegionEventsCollection =>
+      collection('categoryRegionEvents');
 }
 
 /*
  ! DATABASE STRUCTURE 
+ * events/{eventId}/[name, date, link, posterUrl, categoryId, subregionId, ownerId]
+ * 
  * categories/{categoryId}/[name,
  *                          icon,
  *                          liveEvents,
@@ -24,8 +31,6 @@ extension FirestoreX on FirebaseFirestore {
  *                                                            totalEvents]
  * 
  * categoryRegionEvents/{categoryId}/days/{day}/regions/{regionId}/subregions/{subregionId}/[List<EventId>]
- * 
- * events/{eventId}/[name, time, link, posterUrl, ?categoryId, ?regionId, ?subregionId, ?ownerId]
  * 
  * userEvents/{userId}/[List<EventId>]
  * user{userId}/[..userInfo]

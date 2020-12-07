@@ -42,6 +42,20 @@ class _$ValueFailureTearOff {
       failedValue: failedValue,
     );
   }
+
+// ignore: unused_element
+  WrongFileFormat<T> wrongFileFormat<T>({@required T failedValue}) {
+    return WrongFileFormat<T>(
+      failedValue: failedValue,
+    );
+  }
+
+// ignore: unused_element
+  WrongImageDimensions<T> wrongImageDimensions<T>({@required T failedValue}) {
+    return WrongImageDimensions<T>(
+      failedValue: failedValue,
+    );
+  }
 }
 
 /// @nodoc
@@ -58,6 +72,8 @@ mixin _$ValueFailure<T> {
     @required TResult empty(T failedValue),
     @required TResult multiline(T failedValue),
     @required TResult invalidUrl(T failedValue),
+    @required TResult wrongFileFormat(T failedValue),
+    @required TResult wrongImageDimensions(T failedValue),
   });
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
@@ -65,6 +81,8 @@ mixin _$ValueFailure<T> {
     TResult empty(T failedValue),
     TResult multiline(T failedValue),
     TResult invalidUrl(T failedValue),
+    TResult wrongFileFormat(T failedValue),
+    TResult wrongImageDimensions(T failedValue),
     @required TResult orElse(),
   });
   @optionalTypeArgs
@@ -73,6 +91,8 @@ mixin _$ValueFailure<T> {
     @required TResult empty(Empty<T> value),
     @required TResult multiline(Multiline<T> value),
     @required TResult invalidUrl(InvalidUrl<T> value),
+    @required TResult wrongFileFormat(WrongFileFormat<T> value),
+    @required TResult wrongImageDimensions(WrongImageDimensions<T> value),
   });
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object>({
@@ -80,6 +100,8 @@ mixin _$ValueFailure<T> {
     TResult empty(Empty<T> value),
     TResult multiline(Multiline<T> value),
     TResult invalidUrl(InvalidUrl<T> value),
+    TResult wrongFileFormat(WrongFileFormat<T> value),
+    TResult wrongImageDimensions(WrongImageDimensions<T> value),
     @required TResult orElse(),
   });
 
@@ -192,11 +214,15 @@ class _$ExceedingLength<T> implements ExceedingLength<T> {
     @required TResult empty(T failedValue),
     @required TResult multiline(T failedValue),
     @required TResult invalidUrl(T failedValue),
+    @required TResult wrongFileFormat(T failedValue),
+    @required TResult wrongImageDimensions(T failedValue),
   }) {
     assert(exceedingLength != null);
     assert(empty != null);
     assert(multiline != null);
     assert(invalidUrl != null);
+    assert(wrongFileFormat != null);
+    assert(wrongImageDimensions != null);
     return exceedingLength(failedValue, max);
   }
 
@@ -207,6 +233,8 @@ class _$ExceedingLength<T> implements ExceedingLength<T> {
     TResult empty(T failedValue),
     TResult multiline(T failedValue),
     TResult invalidUrl(T failedValue),
+    TResult wrongFileFormat(T failedValue),
+    TResult wrongImageDimensions(T failedValue),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -223,11 +251,15 @@ class _$ExceedingLength<T> implements ExceedingLength<T> {
     @required TResult empty(Empty<T> value),
     @required TResult multiline(Multiline<T> value),
     @required TResult invalidUrl(InvalidUrl<T> value),
+    @required TResult wrongFileFormat(WrongFileFormat<T> value),
+    @required TResult wrongImageDimensions(WrongImageDimensions<T> value),
   }) {
     assert(exceedingLength != null);
     assert(empty != null);
     assert(multiline != null);
     assert(invalidUrl != null);
+    assert(wrongFileFormat != null);
+    assert(wrongImageDimensions != null);
     return exceedingLength(this);
   }
 
@@ -238,6 +270,8 @@ class _$ExceedingLength<T> implements ExceedingLength<T> {
     TResult empty(Empty<T> value),
     TResult multiline(Multiline<T> value),
     TResult invalidUrl(InvalidUrl<T> value),
+    TResult wrongFileFormat(WrongFileFormat<T> value),
+    TResult wrongImageDimensions(WrongImageDimensions<T> value),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -324,11 +358,15 @@ class _$Empty<T> implements Empty<T> {
     @required TResult empty(T failedValue),
     @required TResult multiline(T failedValue),
     @required TResult invalidUrl(T failedValue),
+    @required TResult wrongFileFormat(T failedValue),
+    @required TResult wrongImageDimensions(T failedValue),
   }) {
     assert(exceedingLength != null);
     assert(empty != null);
     assert(multiline != null);
     assert(invalidUrl != null);
+    assert(wrongFileFormat != null);
+    assert(wrongImageDimensions != null);
     return empty(failedValue);
   }
 
@@ -339,6 +377,8 @@ class _$Empty<T> implements Empty<T> {
     TResult empty(T failedValue),
     TResult multiline(T failedValue),
     TResult invalidUrl(T failedValue),
+    TResult wrongFileFormat(T failedValue),
+    TResult wrongImageDimensions(T failedValue),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -355,11 +395,15 @@ class _$Empty<T> implements Empty<T> {
     @required TResult empty(Empty<T> value),
     @required TResult multiline(Multiline<T> value),
     @required TResult invalidUrl(InvalidUrl<T> value),
+    @required TResult wrongFileFormat(WrongFileFormat<T> value),
+    @required TResult wrongImageDimensions(WrongImageDimensions<T> value),
   }) {
     assert(exceedingLength != null);
     assert(empty != null);
     assert(multiline != null);
     assert(invalidUrl != null);
+    assert(wrongFileFormat != null);
+    assert(wrongImageDimensions != null);
     return empty(this);
   }
 
@@ -370,6 +414,8 @@ class _$Empty<T> implements Empty<T> {
     TResult empty(Empty<T> value),
     TResult multiline(Multiline<T> value),
     TResult invalidUrl(InvalidUrl<T> value),
+    TResult wrongFileFormat(WrongFileFormat<T> value),
+    TResult wrongImageDimensions(WrongImageDimensions<T> value),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -457,11 +503,15 @@ class _$Multiline<T> implements Multiline<T> {
     @required TResult empty(T failedValue),
     @required TResult multiline(T failedValue),
     @required TResult invalidUrl(T failedValue),
+    @required TResult wrongFileFormat(T failedValue),
+    @required TResult wrongImageDimensions(T failedValue),
   }) {
     assert(exceedingLength != null);
     assert(empty != null);
     assert(multiline != null);
     assert(invalidUrl != null);
+    assert(wrongFileFormat != null);
+    assert(wrongImageDimensions != null);
     return multiline(failedValue);
   }
 
@@ -472,6 +522,8 @@ class _$Multiline<T> implements Multiline<T> {
     TResult empty(T failedValue),
     TResult multiline(T failedValue),
     TResult invalidUrl(T failedValue),
+    TResult wrongFileFormat(T failedValue),
+    TResult wrongImageDimensions(T failedValue),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -488,11 +540,15 @@ class _$Multiline<T> implements Multiline<T> {
     @required TResult empty(Empty<T> value),
     @required TResult multiline(Multiline<T> value),
     @required TResult invalidUrl(InvalidUrl<T> value),
+    @required TResult wrongFileFormat(WrongFileFormat<T> value),
+    @required TResult wrongImageDimensions(WrongImageDimensions<T> value),
   }) {
     assert(exceedingLength != null);
     assert(empty != null);
     assert(multiline != null);
     assert(invalidUrl != null);
+    assert(wrongFileFormat != null);
+    assert(wrongImageDimensions != null);
     return multiline(this);
   }
 
@@ -503,6 +559,8 @@ class _$Multiline<T> implements Multiline<T> {
     TResult empty(Empty<T> value),
     TResult multiline(Multiline<T> value),
     TResult invalidUrl(InvalidUrl<T> value),
+    TResult wrongFileFormat(WrongFileFormat<T> value),
+    TResult wrongImageDimensions(WrongImageDimensions<T> value),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -591,11 +649,15 @@ class _$InvalidUrl<T> implements InvalidUrl<T> {
     @required TResult empty(T failedValue),
     @required TResult multiline(T failedValue),
     @required TResult invalidUrl(T failedValue),
+    @required TResult wrongFileFormat(T failedValue),
+    @required TResult wrongImageDimensions(T failedValue),
   }) {
     assert(exceedingLength != null);
     assert(empty != null);
     assert(multiline != null);
     assert(invalidUrl != null);
+    assert(wrongFileFormat != null);
+    assert(wrongImageDimensions != null);
     return invalidUrl(failedValue);
   }
 
@@ -606,6 +668,8 @@ class _$InvalidUrl<T> implements InvalidUrl<T> {
     TResult empty(T failedValue),
     TResult multiline(T failedValue),
     TResult invalidUrl(T failedValue),
+    TResult wrongFileFormat(T failedValue),
+    TResult wrongImageDimensions(T failedValue),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -622,11 +686,15 @@ class _$InvalidUrl<T> implements InvalidUrl<T> {
     @required TResult empty(Empty<T> value),
     @required TResult multiline(Multiline<T> value),
     @required TResult invalidUrl(InvalidUrl<T> value),
+    @required TResult wrongFileFormat(WrongFileFormat<T> value),
+    @required TResult wrongImageDimensions(WrongImageDimensions<T> value),
   }) {
     assert(exceedingLength != null);
     assert(empty != null);
     assert(multiline != null);
     assert(invalidUrl != null);
+    assert(wrongFileFormat != null);
+    assert(wrongImageDimensions != null);
     return invalidUrl(this);
   }
 
@@ -637,6 +705,8 @@ class _$InvalidUrl<T> implements InvalidUrl<T> {
     TResult empty(Empty<T> value),
     TResult multiline(Multiline<T> value),
     TResult invalidUrl(InvalidUrl<T> value),
+    TResult wrongFileFormat(WrongFileFormat<T> value),
+    TResult wrongImageDimensions(WrongImageDimensions<T> value),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -654,4 +724,299 @@ abstract class InvalidUrl<T> implements ValueFailure<T> {
   T get failedValue;
   @override
   $InvalidUrlCopyWith<T, InvalidUrl<T>> get copyWith;
+}
+
+/// @nodoc
+abstract class $WrongFileFormatCopyWith<T, $Res>
+    implements $ValueFailureCopyWith<T, $Res> {
+  factory $WrongFileFormatCopyWith(
+          WrongFileFormat<T> value, $Res Function(WrongFileFormat<T>) then) =
+      _$WrongFileFormatCopyWithImpl<T, $Res>;
+  @override
+  $Res call({T failedValue});
+}
+
+/// @nodoc
+class _$WrongFileFormatCopyWithImpl<T, $Res>
+    extends _$ValueFailureCopyWithImpl<T, $Res>
+    implements $WrongFileFormatCopyWith<T, $Res> {
+  _$WrongFileFormatCopyWithImpl(
+      WrongFileFormat<T> _value, $Res Function(WrongFileFormat<T>) _then)
+      : super(_value, (v) => _then(v as WrongFileFormat<T>));
+
+  @override
+  WrongFileFormat<T> get _value => super._value as WrongFileFormat<T>;
+
+  @override
+  $Res call({
+    Object failedValue = freezed,
+  }) {
+    return _then(WrongFileFormat<T>(
+      failedValue:
+          failedValue == freezed ? _value.failedValue : failedValue as T,
+    ));
+  }
+}
+
+/// @nodoc
+class _$WrongFileFormat<T> implements WrongFileFormat<T> {
+  const _$WrongFileFormat({@required this.failedValue})
+      : assert(failedValue != null);
+
+  @override
+  final T failedValue;
+
+  @override
+  String toString() {
+    return 'ValueFailure<$T>.wrongFileFormat(failedValue: $failedValue)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is WrongFileFormat<T> &&
+            (identical(other.failedValue, failedValue) ||
+                const DeepCollectionEquality()
+                    .equals(other.failedValue, failedValue)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(failedValue);
+
+  @override
+  $WrongFileFormatCopyWith<T, WrongFileFormat<T>> get copyWith =>
+      _$WrongFileFormatCopyWithImpl<T, WrongFileFormat<T>>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object>({
+    @required TResult exceedingLength(T failedValue, int max),
+    @required TResult empty(T failedValue),
+    @required TResult multiline(T failedValue),
+    @required TResult invalidUrl(T failedValue),
+    @required TResult wrongFileFormat(T failedValue),
+    @required TResult wrongImageDimensions(T failedValue),
+  }) {
+    assert(exceedingLength != null);
+    assert(empty != null);
+    assert(multiline != null);
+    assert(invalidUrl != null);
+    assert(wrongFileFormat != null);
+    assert(wrongImageDimensions != null);
+    return wrongFileFormat(failedValue);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object>({
+    TResult exceedingLength(T failedValue, int max),
+    TResult empty(T failedValue),
+    TResult multiline(T failedValue),
+    TResult invalidUrl(T failedValue),
+    TResult wrongFileFormat(T failedValue),
+    TResult wrongImageDimensions(T failedValue),
+    @required TResult orElse(),
+  }) {
+    assert(orElse != null);
+    if (wrongFileFormat != null) {
+      return wrongFileFormat(failedValue);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object>({
+    @required TResult exceedingLength(ExceedingLength<T> value),
+    @required TResult empty(Empty<T> value),
+    @required TResult multiline(Multiline<T> value),
+    @required TResult invalidUrl(InvalidUrl<T> value),
+    @required TResult wrongFileFormat(WrongFileFormat<T> value),
+    @required TResult wrongImageDimensions(WrongImageDimensions<T> value),
+  }) {
+    assert(exceedingLength != null);
+    assert(empty != null);
+    assert(multiline != null);
+    assert(invalidUrl != null);
+    assert(wrongFileFormat != null);
+    assert(wrongImageDimensions != null);
+    return wrongFileFormat(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object>({
+    TResult exceedingLength(ExceedingLength<T> value),
+    TResult empty(Empty<T> value),
+    TResult multiline(Multiline<T> value),
+    TResult invalidUrl(InvalidUrl<T> value),
+    TResult wrongFileFormat(WrongFileFormat<T> value),
+    TResult wrongImageDimensions(WrongImageDimensions<T> value),
+    @required TResult orElse(),
+  }) {
+    assert(orElse != null);
+    if (wrongFileFormat != null) {
+      return wrongFileFormat(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class WrongFileFormat<T> implements ValueFailure<T> {
+  const factory WrongFileFormat({@required T failedValue}) =
+      _$WrongFileFormat<T>;
+
+  @override
+  T get failedValue;
+  @override
+  $WrongFileFormatCopyWith<T, WrongFileFormat<T>> get copyWith;
+}
+
+/// @nodoc
+abstract class $WrongImageDimensionsCopyWith<T, $Res>
+    implements $ValueFailureCopyWith<T, $Res> {
+  factory $WrongImageDimensionsCopyWith(WrongImageDimensions<T> value,
+          $Res Function(WrongImageDimensions<T>) then) =
+      _$WrongImageDimensionsCopyWithImpl<T, $Res>;
+  @override
+  $Res call({T failedValue});
+}
+
+/// @nodoc
+class _$WrongImageDimensionsCopyWithImpl<T, $Res>
+    extends _$ValueFailureCopyWithImpl<T, $Res>
+    implements $WrongImageDimensionsCopyWith<T, $Res> {
+  _$WrongImageDimensionsCopyWithImpl(WrongImageDimensions<T> _value,
+      $Res Function(WrongImageDimensions<T>) _then)
+      : super(_value, (v) => _then(v as WrongImageDimensions<T>));
+
+  @override
+  WrongImageDimensions<T> get _value => super._value as WrongImageDimensions<T>;
+
+  @override
+  $Res call({
+    Object failedValue = freezed,
+  }) {
+    return _then(WrongImageDimensions<T>(
+      failedValue:
+          failedValue == freezed ? _value.failedValue : failedValue as T,
+    ));
+  }
+}
+
+/// @nodoc
+class _$WrongImageDimensions<T> implements WrongImageDimensions<T> {
+  const _$WrongImageDimensions({@required this.failedValue})
+      : assert(failedValue != null);
+
+  @override
+  final T failedValue;
+
+  @override
+  String toString() {
+    return 'ValueFailure<$T>.wrongImageDimensions(failedValue: $failedValue)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is WrongImageDimensions<T> &&
+            (identical(other.failedValue, failedValue) ||
+                const DeepCollectionEquality()
+                    .equals(other.failedValue, failedValue)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(failedValue);
+
+  @override
+  $WrongImageDimensionsCopyWith<T, WrongImageDimensions<T>> get copyWith =>
+      _$WrongImageDimensionsCopyWithImpl<T, WrongImageDimensions<T>>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object>({
+    @required TResult exceedingLength(T failedValue, int max),
+    @required TResult empty(T failedValue),
+    @required TResult multiline(T failedValue),
+    @required TResult invalidUrl(T failedValue),
+    @required TResult wrongFileFormat(T failedValue),
+    @required TResult wrongImageDimensions(T failedValue),
+  }) {
+    assert(exceedingLength != null);
+    assert(empty != null);
+    assert(multiline != null);
+    assert(invalidUrl != null);
+    assert(wrongFileFormat != null);
+    assert(wrongImageDimensions != null);
+    return wrongImageDimensions(failedValue);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object>({
+    TResult exceedingLength(T failedValue, int max),
+    TResult empty(T failedValue),
+    TResult multiline(T failedValue),
+    TResult invalidUrl(T failedValue),
+    TResult wrongFileFormat(T failedValue),
+    TResult wrongImageDimensions(T failedValue),
+    @required TResult orElse(),
+  }) {
+    assert(orElse != null);
+    if (wrongImageDimensions != null) {
+      return wrongImageDimensions(failedValue);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object>({
+    @required TResult exceedingLength(ExceedingLength<T> value),
+    @required TResult empty(Empty<T> value),
+    @required TResult multiline(Multiline<T> value),
+    @required TResult invalidUrl(InvalidUrl<T> value),
+    @required TResult wrongFileFormat(WrongFileFormat<T> value),
+    @required TResult wrongImageDimensions(WrongImageDimensions<T> value),
+  }) {
+    assert(exceedingLength != null);
+    assert(empty != null);
+    assert(multiline != null);
+    assert(invalidUrl != null);
+    assert(wrongFileFormat != null);
+    assert(wrongImageDimensions != null);
+    return wrongImageDimensions(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object>({
+    TResult exceedingLength(ExceedingLength<T> value),
+    TResult empty(Empty<T> value),
+    TResult multiline(Multiline<T> value),
+    TResult invalidUrl(InvalidUrl<T> value),
+    TResult wrongFileFormat(WrongFileFormat<T> value),
+    TResult wrongImageDimensions(WrongImageDimensions<T> value),
+    @required TResult orElse(),
+  }) {
+    assert(orElse != null);
+    if (wrongImageDimensions != null) {
+      return wrongImageDimensions(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class WrongImageDimensions<T> implements ValueFailure<T> {
+  const factory WrongImageDimensions({@required T failedValue}) =
+      _$WrongImageDimensions<T>;
+
+  @override
+  T get failedValue;
+  @override
+  $WrongImageDimensionsCopyWith<T, WrongImageDimensions<T>> get copyWith;
 }

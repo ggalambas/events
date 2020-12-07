@@ -1,7 +1,9 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:events/config/injection.dart';
 import 'package:events/config/routes/router.gr.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:injectable/injectable.dart';
 
 class SplashScreen extends StatelessWidget {
   // Create the initialization Future outside of `build`:
@@ -21,6 +23,7 @@ class SplashScreen extends StatelessWidget {
 
         // Once complete, show your application
         if (snapshot.connectionState == ConnectionState.done) {
+          configureInjection(Environment.prod); //!
           ExtendedNavigator.root.replace(Routes.regionsView);
         }
 

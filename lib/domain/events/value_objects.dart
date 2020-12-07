@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dartz/dartz.dart';
 import 'package:events/domain/core/failures.dart';
 import 'package:events/domain/core/value_objects.dart';
@@ -32,4 +34,16 @@ class EventLink extends ValueObject<String> {
   }
 
   const EventLink._(this.value);
+}
+
+class Poster extends ValueObject<File> {
+  @override
+  final Either<ValueFailure<File>, File> value;
+
+  factory Poster(File input) {
+    assert(input != null);
+    return Poster._(validateImage(input).flatMap(validateDimensions));
+  }
+
+  const Poster._(this.value);
 }

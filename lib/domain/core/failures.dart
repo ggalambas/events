@@ -17,6 +17,12 @@ abstract class ValueFailure<T> with _$ValueFailure<T> {
   const factory ValueFailure.invalidUrl({
     @required T failedValue,
   }) = InvalidUrl<T>;
+  const factory ValueFailure.wrongFileFormat({
+    @required T failedValue,
+  }) = WrongFileFormat<T>;
+  const factory ValueFailure.wrongImageDimensions({
+    @required T failedValue,
+  }) = WrongImageDimensions<T>;
   //TODO Auth value failure
 //   const factory ValueFailure.invalidEmail({
 //     @required T failedValue,

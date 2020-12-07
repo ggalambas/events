@@ -19,4 +19,5 @@ abstract class IEventRepository {
   //   DateTime day,
   //   String region,
   // );
+  Future<Either<EventFailure, Unit>> createEvent(Event event);
 }
