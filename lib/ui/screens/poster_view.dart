@@ -1,9 +1,12 @@
+import 'dart:ui';
+
 import 'package:events/config/constants.dart';
 import 'package:events/domain/events/event.dart';
 import 'package:flutter/material.dart';
 import 'package:events/app/helpers/date_time_x.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_custom_tabs/flutter_custom_tabs.dart';
+import 'package:flutter_system_bars/flutter_system_bars.dart';
 
 class PosterView extends StatefulWidget {
   final Event event;
@@ -37,10 +40,8 @@ class _PosterViewState extends State<PosterView> {
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: NetworkImage(
-            // TODO: Loading time
-            posterURL,
-          ),
+          // TODO: Loading time (save on cache? or whatever)
+          image: NetworkImage(posterURL),
           fit: BoxFit.cover,
         ),
       ),
@@ -79,8 +80,8 @@ class _PosterViewState extends State<PosterView> {
           body: GestureDetector(
             // TODO: make LongPress properly remove systemUIOverlays
             onLongPressStart: (_) {
-              longPressing = true;
               // SystemChrome.setEnabledSystemUIOverlays([]);
+              longPressing = true;
             },
             onLongPressEnd: (_) {
               longPressing = false;
