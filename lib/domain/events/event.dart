@@ -11,5 +11,9 @@ abstract class Event with _$Event {
     @required EventName name,
     @required DateTime date,
     @required EventLink link,
+    @required UniqueId subregionId,
+    @required UniqueId categoryId,
+    @required Poster poster,
+    // @required UniqueId ownerId,
   }) = _Event;
 }

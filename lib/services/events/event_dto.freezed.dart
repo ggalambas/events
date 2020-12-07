@@ -20,13 +20,19 @@ class _$EventDtoTearOff {
   _EventDto call(
       {@JsonKey(ignore: true) String id,
       @required String name,
-      @required @ServerTimeStampConverter() Timestamp time,
-      @required String link}) {
+      @required @ServerTimeStampConverter() Timestamp date,
+      @required String link,
+      @required String subregionId,
+      @required String categoryId,
+      @required String poster}) {
     return _EventDto(
       id: id,
       name: name,
-      time: time,
+      date: date,
       link: link,
+      subregionId: subregionId,
+      categoryId: categoryId,
+      poster: poster,
     );
   }
 
@@ -46,8 +52,11 @@ mixin _$EventDto {
   String get id;
   String get name;
   @ServerTimeStampConverter()
-  Timestamp get time;
+  Timestamp get date;
   String get link;
+  String get subregionId;
+  String get categoryId;
+  String get poster;
 
   Map<String, dynamic> toJson();
   $EventDtoCopyWith<EventDto> get copyWith;
@@ -60,8 +69,11 @@ abstract class $EventDtoCopyWith<$Res> {
   $Res call(
       {@JsonKey(ignore: true) String id,
       String name,
-      @ServerTimeStampConverter() Timestamp time,
-      String link});
+      @ServerTimeStampConverter() Timestamp date,
+      String link,
+      String subregionId,
+      String categoryId,
+      String poster});
 }
 
 /// @nodoc
@@ -76,14 +88,22 @@ class _$EventDtoCopyWithImpl<$Res> implements $EventDtoCopyWith<$Res> {
   $Res call({
     Object id = freezed,
     Object name = freezed,
-    Object time = freezed,
+    Object date = freezed,
     Object link = freezed,
+    Object subregionId = freezed,
+    Object categoryId = freezed,
+    Object poster = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed ? _value.id : id as String,
       name: name == freezed ? _value.name : name as String,
-      time: time == freezed ? _value.time : time as Timestamp,
+      date: date == freezed ? _value.date : date as Timestamp,
       link: link == freezed ? _value.link : link as String,
+      subregionId:
+          subregionId == freezed ? _value.subregionId : subregionId as String,
+      categoryId:
+          categoryId == freezed ? _value.categoryId : categoryId as String,
+      poster: poster == freezed ? _value.poster : poster as String,
     ));
   }
 }
@@ -96,8 +116,11 @@ abstract class _$EventDtoCopyWith<$Res> implements $EventDtoCopyWith<$Res> {
   $Res call(
       {@JsonKey(ignore: true) String id,
       String name,
-      @ServerTimeStampConverter() Timestamp time,
-      String link});
+      @ServerTimeStampConverter() Timestamp date,
+      String link,
+      String subregionId,
+      String categoryId,
+      String poster});
 }
 
 /// @nodoc
@@ -113,14 +136,22 @@ class __$EventDtoCopyWithImpl<$Res> extends _$EventDtoCopyWithImpl<$Res>
   $Res call({
     Object id = freezed,
     Object name = freezed,
-    Object time = freezed,
+    Object date = freezed,
     Object link = freezed,
+    Object subregionId = freezed,
+    Object categoryId = freezed,
+    Object poster = freezed,
   }) {
     return _then(_EventDto(
       id: id == freezed ? _value.id : id as String,
       name: name == freezed ? _value.name : name as String,
-      time: time == freezed ? _value.time : time as Timestamp,
+      date: date == freezed ? _value.date : date as Timestamp,
       link: link == freezed ? _value.link : link as String,
+      subregionId:
+          subregionId == freezed ? _value.subregionId : subregionId as String,
+      categoryId:
+          categoryId == freezed ? _value.categoryId : categoryId as String,
+      poster: poster == freezed ? _value.poster : poster as String,
     ));
   }
 }
@@ -132,11 +163,17 @@ class _$_EventDto extends _EventDto {
   const _$_EventDto(
       {@JsonKey(ignore: true) this.id,
       @required this.name,
-      @required @ServerTimeStampConverter() this.time,
-      @required this.link})
+      @required @ServerTimeStampConverter() this.date,
+      @required this.link,
+      @required this.subregionId,
+      @required this.categoryId,
+      @required this.poster})
       : assert(name != null),
-        assert(time != null),
+        assert(date != null),
         assert(link != null),
+        assert(subregionId != null),
+        assert(categoryId != null),
+        assert(poster != null),
         super._();
 
   factory _$_EventDto.fromJson(Map<String, dynamic> json) =>
@@ -149,13 +186,19 @@ class _$_EventDto extends _EventDto {
   final String name;
   @override
   @ServerTimeStampConverter()
-  final Timestamp time;
+  final Timestamp date;
   @override
   final String link;
+  @override
+  final String subregionId;
+  @override
+  final String categoryId;
+  @override
+  final String poster;
 
   @override
   String toString() {
-    return 'EventDto(id: $id, name: $name, time: $time, link: $link)';
+    return 'EventDto(id: $id, name: $name, date: $date, link: $link, subregionId: $subregionId, categoryId: $categoryId, poster: $poster)';
   }
 
   @override
@@ -166,10 +209,18 @@ class _$_EventDto extends _EventDto {
                 const DeepCollectionEquality().equals(other.id, id)) &&
             (identical(other.name, name) ||
                 const DeepCollectionEquality().equals(other.name, name)) &&
-            (identical(other.time, time) ||
-                const DeepCollectionEquality().equals(other.time, time)) &&
+            (identical(other.date, date) ||
+                const DeepCollectionEquality().equals(other.date, date)) &&
             (identical(other.link, link) ||
-                const DeepCollectionEquality().equals(other.link, link)));
+                const DeepCollectionEquality().equals(other.link, link)) &&
+            (identical(other.subregionId, subregionId) ||
+                const DeepCollectionEquality()
+                    .equals(other.subregionId, subregionId)) &&
+            (identical(other.categoryId, categoryId) ||
+                const DeepCollectionEquality()
+                    .equals(other.categoryId, categoryId)) &&
+            (identical(other.poster, poster) ||
+                const DeepCollectionEquality().equals(other.poster, poster)));
   }
 
   @override
@@ -177,8 +228,11 @@ class _$_EventDto extends _EventDto {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(name) ^
-      const DeepCollectionEquality().hash(time) ^
-      const DeepCollectionEquality().hash(link);
+      const DeepCollectionEquality().hash(date) ^
+      const DeepCollectionEquality().hash(link) ^
+      const DeepCollectionEquality().hash(subregionId) ^
+      const DeepCollectionEquality().hash(categoryId) ^
+      const DeepCollectionEquality().hash(poster);
 
   @override
   _$EventDtoCopyWith<_EventDto> get copyWith =>
@@ -195,8 +249,11 @@ abstract class _EventDto extends EventDto {
   const factory _EventDto(
       {@JsonKey(ignore: true) String id,
       @required String name,
-      @required @ServerTimeStampConverter() Timestamp time,
-      @required String link}) = _$_EventDto;
+      @required @ServerTimeStampConverter() Timestamp date,
+      @required String link,
+      @required String subregionId,
+      @required String categoryId,
+      @required String poster}) = _$_EventDto;
 
   factory _EventDto.fromJson(Map<String, dynamic> json) = _$_EventDto.fromJson;
 
@@ -207,9 +264,15 @@ abstract class _EventDto extends EventDto {
   String get name;
   @override
   @ServerTimeStampConverter()
-  Timestamp get time;
+  Timestamp get date;
   @override
   String get link;
+  @override
+  String get subregionId;
+  @override
+  String get categoryId;
+  @override
+  String get poster;
   @override
   _$EventDtoCopyWith<_EventDto> get copyWith;
 }

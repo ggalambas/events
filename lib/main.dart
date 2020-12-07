@@ -10,8 +10,8 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:provider/provider.dart';
 
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized(); //?
-  configureInjection(Environment.prod); //!
+  // WidgetsFlutterBinding.ensureInitialized(); //?
+  // configureInjection(Environment.prod); //!
   runApp(MyApp());
 }
 
@@ -34,9 +34,6 @@ class _MyAppState extends State<MyApp> {
       providers: [
         ChangeNotifierProvider<ThemeConfig>(
           create: (_) => ThemeConfig(),
-        ),
-        ChangeNotifierProvider<CategoryModel>.value(
-          value: getIt<CategoryModel>(),
         ),
         ChangeNotifierProvider<CalendarModel>(
           create: (_) => CalendarModel(),
