@@ -1,12 +1,8 @@
 import 'dart:ui';
-
 import 'package:events/config/constants.dart';
 import 'package:events/domain/events/event.dart';
 import 'package:flutter/material.dart';
-import 'package:events/app/helpers/date_time_x.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_custom_tabs/flutter_custom_tabs.dart';
-import 'package:flutter_system_bars/flutter_system_bars.dart';
 
 class PosterView extends StatefulWidget {
   final Event event;

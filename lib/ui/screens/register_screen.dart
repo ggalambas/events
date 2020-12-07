@@ -1,6 +1,3 @@
-import 'package:auto_route/auto_route.dart';
-import 'package:events/config/constants.dart';
-import 'package:events/config/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 
 class RegisterScreen extends StatelessWidget {
