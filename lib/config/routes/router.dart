@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route_annotations.dart';
 import 'package:events/ui/screens/events_view.dart';
 import 'package:events/ui/screens/login_screen.dart';
+import 'package:events/ui/screens/poster_view.dart';
 import 'package:events/ui/screens/regions_view.dart';
 import 'package:events/ui/screens/register_screen.dart';
 import 'package:events/ui/screens/splash_screen.dart';
@@ -16,6 +17,7 @@ import 'package:events/ui/screens/splash_screen.dart';
     MaterialRoute(page: RegisterScreen),
     MaterialRoute(page: RegionsView),
     MaterialRoute(page: EventsView),
+    MaterialRoute(page: PosterView),
   ],
 )
 class $Router {}

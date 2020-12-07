@@ -1,3 +1,5 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:events/config/routes/router.gr.dart';
 import 'package:events/domain/events/event.dart';
 import 'package:flutter/material.dart';
 import 'package:events/app/helpers/date_time_x.dart';
@@ -15,6 +17,7 @@ class EventItem extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
     return ListTile(
       dense: true,
+      onTap: () => ExtendedNavigator.root.pushPosterView(event: event),
       leading: Text(
         date.time,
         style: theme.textTheme.bodyText2,
