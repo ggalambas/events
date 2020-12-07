@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 
 class ListGroup extends StatelessWidget {
   final List<Widget> _itemsWithDivider = [];
+  final bool first;
 
-  ListGroup({List<Widget> items}) {
+  ListGroup({List<Widget> items, this.first = false}) {
     if (items.isNotEmpty) {
       for (final Widget item in items) {
         _itemsWithDivider..add(item)..add(const Divider());
@@ -19,7 +20,9 @@ class ListGroup extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: theme.colorScheme.surface,
-        borderRadius: BorderRadius.circular(kBorderRadiusBig),
+        borderRadius: first
+            ? BorderRadius.vertical(bottom: Radius.circular(kBorderRadiusBig))
+            : BorderRadius.circular(kBorderRadiusBig),
       ),
       child: Column(
         children: _itemsWithDivider,

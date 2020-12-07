@@ -1,6 +1,7 @@
 import 'package:events/config/constants.dart';
 import 'package:events/ui/appbar/components/calendar_button.dart';
 import 'package:events/ui/appbar/components/calendar.dart';
+import 'package:events/ui/appbar/components/search.dart';
 import 'package:flutter/material.dart';
 
 class SliverBar extends StatelessWidget {
@@ -13,7 +14,7 @@ class SliverBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final TextTheme textTheme = Theme.of(context).textTheme;
     return SliverAppBar(
-      // forceElevated: true,
+      forceElevated: true,
       pinned: true,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(
@@ -31,7 +32,12 @@ class SliverBar extends StatelessWidget {
       actions: [
         IconButton(
           icon: Icon(Icons.search),
-          onPressed: () {}, // TODO: Search Screen
+          onPressed: () {
+            showSearch(
+              context: context,
+              delegate: EventSearch(context: context),
+            );
+          },
         ),
         CalendarButton(),
       ],

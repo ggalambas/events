@@ -1,13 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:events/app/appbar/calendar_model.dart';
-import 'package:events/app/drawer/category_model.dart';
-import 'package:events/config/injection.dart';
 import 'package:events/config/theme/theme_config.dart';
 import 'package:events/config/routes/router.gr.dart' as auto;
 import 'package:events/ui/screens/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:injectable/injectable.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';

@@ -10,9 +10,11 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
 import '../../domain/categories/category.dart';
+import '../../domain/events/event.dart';
 import '../../domain/regions/region.dart';
 import '../../ui/screens/events_view.dart';
 import '../../ui/screens/login_screen.dart';
+import '../../ui/screens/poster_view.dart';
 import '../../ui/screens/regions_view.dart';
 import '../../ui/screens/register_screen.dart';
 
@@ -21,11 +23,13 @@ class Routes {
   static const String registerScreen = '/register-screen';
   static const String regionsView = '/';
   static const String eventsView = '/events-view';
+  static const String posterView = '/poster-view';
   static const all = <String>{
     loginScreen,
     registerScreen,
     regionsView,
     eventsView,
+    posterView,
   };
 }
 
@@ -37,6 +41,7 @@ class Router extends RouterBase {
     RouteDef(Routes.registerScreen, page: RegisterScreen),
     RouteDef(Routes.regionsView, page: RegionsView),
     RouteDef(Routes.eventsView, page: EventsView),
+    RouteDef(Routes.posterView, page: PosterView),
   ];
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
@@ -69,6 +74,15 @@ class Router extends RouterBase {
         settings: data,
       );
     },
+    PosterView: (data) {
+      final args = data.getArgs<PosterViewArguments>(
+        orElse: () => PosterViewArguments(),
+      );
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => PosterView(event: args.event),
+        settings: data,
+      );
+    },
   };
 }
 
@@ -91,6 +105,14 @@ extension RouterExtendedNavigatorStateX on ExtendedNavigatorState {
         Routes.eventsView,
         arguments: EventsViewArguments(category: category, region: region),
       );
+
+  Future<dynamic> pushPosterView({
+    Event event,
+  }) =>
+      push<dynamic>(
+        Routes.posterView,
+        arguments: PosterViewArguments(event: event),
+      );
 }
 
 /// ************************************************************************
@@ -102,4 +124,10 @@ class EventsViewArguments {
   final Category category;
   final Region region;
   EventsViewArguments({@required this.category, @required this.region});
+}
+
+/// PosterView arguments holder class
+class PosterViewArguments {
+  final Event event;
+  PosterViewArguments({this.event});
 }

@@ -35,61 +35,69 @@ class LoginScreen extends StatelessWidget {
             // TODO: Swap with logo or app name
             Container(
               height: 200,
-              color: theme.colorScheme.primary,
               child: Center(
-                  child: Text('Eventos', style: theme.textTheme.headline3)),
+                child: Text(
+                  'Name/Logo',
+                  style:
+                      theme.textTheme.headline4.copyWith(color: Colors.white),
+                ),
+              ),
             ),
             Spacer(flex: 3),
             Column(
               // mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
-                  height: 40,
+                  height: 45,
                   width: 300,
                   decoration: BoxDecoration(
                     color: theme.colorScheme.surface,
                     borderRadius: BorderRadius.circular(kBorderRadiusBig),
                   ),
                   padding: EdgeInsets.symmetric(horizontal: 20),
-                  child: TextField(
-                    style: TextStyle(color: theme.colorScheme.onSurface),
-                    cursorColor: theme.colorScheme.primary,
-                    keyboardType: TextInputType.emailAddress,
-                    decoration: InputDecoration(
-                      hintText: 'email',
-                      hintStyle: TextStyle(
-                        color: theme.colorScheme.onBackground,
+                  child: Center(
+                    child: TextField(
+                      style: TextStyle(color: theme.colorScheme.onSurface),
+                      cursorColor: theme.colorScheme.primary,
+                      keyboardType: TextInputType.emailAddress,
+                      decoration: InputDecoration(
+                        hintText: 'email',
+                        hintStyle: TextStyle(
+                          color: theme.colorScheme.onBackground,
+                        ),
+                        border: InputBorder.none,
                       ),
-                      border: InputBorder.none,
                     ),
                   ),
                 ),
                 SizedBox(height: 10),
                 Container(
-                  height: 40,
+                  height: 45,
                   width: 300,
                   decoration: BoxDecoration(
                     color: theme.colorScheme.surface,
                     borderRadius: BorderRadius.circular(kBorderRadiusBig),
                   ),
                   padding: EdgeInsets.symmetric(horizontal: 20),
-                  child: TextField(
-                    obscureText: true, //!
-                    style: TextStyle(color: theme.colorScheme.onSurface),
-                    cursorColor: theme.colorScheme.primary,
-                    keyboardType: TextInputType.text, //!
-                    decoration: InputDecoration(
-                      hintText: 'password', //!
-                      hintStyle: TextStyle(
-                        color: theme.colorScheme.onBackground,
+                  child: Center(
+                    child: TextField(
+                      obscureText: true, //!
+                      style: TextStyle(color: theme.colorScheme.onSurface),
+                      cursorColor: theme.colorScheme.primary,
+                      keyboardType: TextInputType.text, //!
+                      decoration: InputDecoration(
+                        hintText: 'password', //!
+                        hintStyle: TextStyle(
+                          color: theme.colorScheme.onBackground,
+                        ),
+                        border: InputBorder.none,
                       ),
-                      border: InputBorder.none,
                     ),
                   ),
                 ),
                 SizedBox(height: 15),
                 FlatButton(
-                  height: 40,
+                  height: 45,
                   minWidth: 300,
                   onPressed: () =>
                       ExtendedNavigator.root.push(Routes.regionsView),

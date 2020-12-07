@@ -24,4 +24,5 @@ ThemeData theme(ColorScheme colorScheme) => ThemeData(
         indent: 12.0,
         endIndent: 12.0,
       ),
+      cursorColor: colorScheme.primary,
     );

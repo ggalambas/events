@@ -1,6 +1,5 @@
 import 'package:events/domain/core/event_counter.dart';
 import 'package:events/domain/core/value_objects.dart';
-import 'package:events/domain/events/event.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 

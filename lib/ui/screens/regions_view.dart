@@ -12,16 +12,24 @@ import 'package:events/ui/body/sliver_scaffold.dart';
 import 'package:events/ui/drawer/category_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sliver_tools/sliver_tools.dart';
 import 'package:tuple/tuple.dart';
 
 class RegionsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return SliverScaffold(
       drawer: CategoryDrawer(),
-      appbar: Selector<CategoryModel, Category>(
-        selector: (_, category) => category.selected,
-        builder: (_, category, __) => SliverBar(title: category.name),
+      appbar: SliverStack(
+        positionedAlignment: Alignment.topCenter,
+        children: [
+          SliverPositioned.fill(child: Container(color: colorScheme.surface)),
+          Selector<CategoryModel, Category>(
+            selector: (_, category) => category.selected,
+            builder: (_, category, __) => SliverBar(title: category.name),
+          ),
+        ],
       ),
       body: Selector2<CategoryModel, CalendarModel, Tuple2<Category, DateTime>>(
         selector: (_, category, calendar) =>
@@ -46,7 +54,7 @@ class RegionsView extends StatelessWidget {
                           delegate: SliverChildListDelegate(
                             [
                               ListGroup(
-                                // TODO: Extend first group height to start of screen
+                                first: true,
                                 items: [
                                   RegionItem(regions.all),
                                 ],
