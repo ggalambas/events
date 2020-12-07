@@ -33,7 +33,10 @@ class SliverBar extends StatelessWidget {
         IconButton(
           icon: Icon(Icons.search),
           onPressed: () {
-            showSearch(context: context, delegate: EventSearch());
+            showSearch(
+              context: context,
+              delegate: EventSearch(context: context),
+            );
           },
         ),
         CalendarButton(),
