@@ -16,7 +16,7 @@ class Counters extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         if (live != 0) Counter(live, live: true),
-        Counter(total),
+        if (total != 0) Counter(total),
       ],
     );
   }

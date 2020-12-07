@@ -1,5 +1,7 @@
+import 'package:events/config/injection.dart';
 import 'package:events/domain/core/event_counter.dart';
 import 'package:events/domain/core/value_objects.dart';
+import 'package:events/domain/regions/i_region_api.dart';
 import 'package:events/domain/regions/region.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -16,7 +18,7 @@ abstract class RegionDto implements _$RegionDto {
   const factory RegionDto({
     @JsonKey(ignore: true) String id,
     @required String name,
-    @required int liveEvents,
+    @Default(0) int liveEvents,
     @required int totalEvents,
   }) = _RegionDto;
 

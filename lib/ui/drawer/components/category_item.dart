@@ -30,10 +30,10 @@ class CategoryItem extends StatelessWidget {
         ),
         dense: true,
         onTap: () {
-          model.selected = name;
+          model.selected = category;
           Navigator.pop(context);
         },
-        selected: model.isSelected(name),
+        selected: model.isSelected(category), //TODO: selected color
         leading: Icon(icon, color: theme.colorScheme.onBackground),
         title: Text(name, style: theme.textTheme.bodyText1),
         trailing: Counters(counter),

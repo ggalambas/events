@@ -9,7 +9,7 @@ part of 'region_dto.dart';
 _$_RegionDto _$_$_RegionDtoFromJson(Map<String, dynamic> json) {
   return _$_RegionDto(
     name: json['name'] as String,
-    liveEvents: json['liveEvents'] as int,
+    liveEvents: json['liveEvents'] as int ?? 0,
     totalEvents: json['totalEvents'] as int,
   );
 }

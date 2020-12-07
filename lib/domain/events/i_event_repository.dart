@@ -5,11 +5,15 @@ import 'package:events/domain/events/event_failure.dart';
 import 'package:events/domain/regions/region.dart';
 
 abstract class IEventRepository {
+  //?
+  Category selectedCategory;
+  DateTime selectedDate;
+  Region selectedRegion;
+
   Stream<Either<EventFailure, List<Category>>> categoryCounters();
-  Stream<Either<EventFailure, List<Region>>> regionCounters(
-      String categoryName, DateTime day);
+  Stream<Either<EventFailure, List<Region>>> regionCounters();
   Stream<Either<EventFailure, Map<String, List<Event>>>> regionEvents(
-      String categoryName, DateTime day, String regionName);
+      String regionName);
   // Stream<Either<EventFailure, List<Event>>> dayEvents(
   //   String category,
   //   DateTime day,

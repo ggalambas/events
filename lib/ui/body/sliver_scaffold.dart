@@ -19,33 +19,31 @@ class SliverScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<ScrollModel>(
       create: (_) => ScrollModel(),
-      child: Builder(
-        builder: (context) {
-          final ScrollModel scroll =
-              Provider.of<ScrollModel>(context, listen: false);
-          return Scaffold(
-            drawer: drawer,
-            body: NotificationListener<ScrollEndNotification>(
-              onNotification: (_) {
-                scroll.snapFlexbar();
-                return false;
-              },
-              child: CustomScrollView(
-                //TODO: pull to refresh
-                //TODO: Scroll physics not working
-                // physics: AlwaysScrollableScrollPhysics(),
-                // physics: BouncingScrollPhysics(),
-                controller: scroll.controller,
-                slivers: <Widget>[
-                  appbar,
-                  body,
-                ],
-              ),
+      builder: (context, _) {
+        final ScrollModel scroll =
+            Provider.of<ScrollModel>(context, listen: false);
+        return Scaffold(
+          drawer: drawer,
+          body: NotificationListener<ScrollEndNotification>(
+            onNotification: (_) {
+              scroll.snapFlexbar();
+              return false;
+            },
+            child: CustomScrollView(
+              //TODO: pull to refresh
+              //TODO: Scroll physics not working
+              // physics: AlwaysScrollableScrollPhysics(),
+              // physics: BouncingScrollPhysics(),
+              controller: scroll.controller,
+              slivers: <Widget>[
+                appbar,
+                body,
+              ],
             ),
-            floatingActionButton: FloatingActionButton(onPressed: populate),
-          );
-        },
-      ),
+          ),
+          // floatingActionButton: FloatingActionButton(onPressed: populate), //! button to populate
+        );
+      },
     );
   }
 }

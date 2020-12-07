@@ -20,7 +20,7 @@ class _$RegionDtoTearOff {
   _RegionDto call(
       {@JsonKey(ignore: true) String id,
       @required String name,
-      @required int liveEvents,
+      int liveEvents = 0,
       @required int totalEvents}) {
     return _RegionDto(
       id: id,
@@ -134,7 +134,7 @@ class _$_RegionDto extends _RegionDto {
   const _$_RegionDto(
       {@JsonKey(ignore: true) this.id,
       @required this.name,
-      @required this.liveEvents,
+      this.liveEvents = 0,
       @required this.totalEvents})
       : assert(name != null),
         assert(liveEvents != null),
@@ -149,6 +149,7 @@ class _$_RegionDto extends _RegionDto {
   final String id;
   @override
   final String name;
+  @JsonKey(defaultValue: 0)
   @override
   final int liveEvents;
   @override
@@ -198,7 +199,7 @@ abstract class _RegionDto extends RegionDto {
   const factory _RegionDto(
       {@JsonKey(ignore: true) String id,
       @required String name,
-      @required int liveEvents,
+      int liveEvents,
       @required int totalEvents}) = _$_RegionDto;
 
   factory _RegionDto.fromJson(Map<String, dynamic> json) =

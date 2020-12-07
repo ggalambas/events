@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:dartz/dartz.dart';
+import 'package:events/config/injection.dart';
 import 'package:events/domain/categories/category.dart';
 import 'package:events/domain/core/event_counter.dart';
 import 'package:events/domain/core/value_objects.dart';
@@ -9,8 +10,11 @@ import 'package:events/domain/events/event_failure.dart';
 import 'package:events/domain/events/i_event_repository.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:events/domain/events/value_objects.dart';
+import 'package:events/domain/regions/i_region_api.dart';
 import 'package:events/domain/regions/region.dart';
+import 'package:events/services/categories/category_dto.dart';
 import 'package:events/services/events/event_dto.dart';
+import 'package:events/services/regions/region_dto.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:events/services/core/firebase_helpers.dart';
@@ -20,7 +24,21 @@ class EventRepository implements IEventRepository {
   final FirebaseFirestore _firestore;
 
   EventRepository(this._firestore);
-  //TODO exceptions
+  //TODO Repository Exceptions
+  //TODO create more/better helpers
+
+  @override
+  Category selectedCategory = Category(
+      id: UniqueId.fromUniqueString('MqwY5zioIvOI7p6CCPT4'),
+      name: 'Categoria 01',
+      icon: IconData(58947),
+      eventCounter: EventCounter(live: 0, total: 0));
+
+  @override
+  DateTime selectedDate = DateTime.now();
+
+  @override
+  Region selectedRegion;
 
   @override
   Future<Either<EventFailure, Unit>> createEvent(Event event) async {
@@ -36,6 +54,11 @@ class EventRepository implements IEventRepository {
           .doc(eventDto.categoryId)
           .update({'totalEvents': FieldValue.increment(1)});
 
+      //!
+      String regionId = eventDto.subregionId.substring(0, 4);
+      final Map<String, String> names =
+          await getIt<IRegionApi>().names(eventDto.subregionId);
+
       //* update Regions counter
       //! change day to yearmonthday
       await _firestore.categoryRegionsCollection
@@ -43,8 +66,11 @@ class EventRepository implements IEventRepository {
           .collection('days')
           .doc('${event.date.day}')
           .collection('regions')
-          .doc(eventDto.subregionId.substring(0, 4))
-          .update({'totalEvents': FieldValue.increment(1)});
+          .doc(regionId)
+          .set({
+        'totalEvents': FieldValue.increment(1),
+        'name': names['regionName']
+      }, SetOptions(merge: true));
 
       //* update subregions list
       await _firestore.categoryRegionEventsCollection
@@ -52,12 +78,13 @@ class EventRepository implements IEventRepository {
           .collection('days')
           .doc('${event.date.day}')
           .collection('regions')
-          .doc(eventDto.subregionId.substring(0, 4))
+          .doc(regionId)
           .collection('subregions')
           .doc(eventDto.subregionId)
-          .update({
-        'events': FieldValue.arrayUnion([eventDto.id])
-      });
+          .set({
+        'events': FieldValue.arrayUnion([eventDto.id]),
+        'name': names['subregionName']
+      }, SetOptions(merge: true));
 
       return right(unit);
     } on FirebaseException catch (e) {
@@ -71,39 +98,50 @@ class EventRepository implements IEventRepository {
 
   @override
   Stream<Either<EventFailure, List<Category>>> categoryCounters() async* {
-    final List<Category> categories = [];
-    for (int i = 0; i < 10; i++) {
-      categories.add(
-        Category(
-          id: UniqueId(),
-          name: 'Categoria $i',
-          icon: Icons.sports,
-          eventCounter: EventCounter(live: i, total: i + 10),
-        ),
-      );
-    }
-    yield right(categories);
+    final categories = _firestore.categoriesCollection;
+    yield* categories
+        .orderBy('name')
+        .snapshots()
+        .map((snapshot) => right<EventFailure, List<Category>>(
+              snapshot.docs
+                  .map((doc) => CategoryDto.fromFirestore(doc).toDomain())
+                  .toList(),
+            ))
+        .handleError((e) {
+      if (e is FirebaseException && e.message.contains('PERMISSION_DENIED')) {
+        return left(const EventFailure.insufficientPermission());
+      } else {
+        return left(const EventFailure.unexpected());
+      }
+    });
   }
 
   @override
-  Stream<Either<EventFailure, List<Region>>> regionCounters(
-      String categoryName, DateTime day) async* {
-    final List<Region> regions = [];
-    for (int i = 0; i < 30; i++) {
-      regions.add(
-        Region(
-          id: UniqueId.fromUniqueString('$i'),
-          name: 'Region $i',
-          eventCounter: EventCounter(live: i, total: i + 7),
-        ),
-      );
-    }
-    yield right(regions);
+  Stream<Either<EventFailure, List<Region>>> regionCounters() async* {
+    final regions = _firestore.categoryRegionsCollection;
+    yield* regions
+        .doc(selectedCategory.id.getOrCrash())
+        .collection('days')
+        .doc(selectedDate.day.toString()) //! change day to datetime/timestamp
+        .collection('regions')
+        .snapshots()
+        .map((snapshot) => right<EventFailure, List<Region>>(
+              snapshot.docs
+                  .map((doc) => RegionDto.fromFirestore(doc).toDomain())
+                  .toList(),
+            ))
+        .handleError((e) {
+      if (e is FirebaseException && e.message.contains('PERMISSION_DENIED')) {
+        return left(const EventFailure.insufficientPermission());
+      } else {
+        return left(const EventFailure.unexpected());
+      }
+    });
   }
 
   @override
   Stream<Either<EventFailure, Map<String, List<Event>>>> regionEvents(
-      String categoryName, DateTime day, String regionName) async* {
+      String regionName) async* {
     final Map<String, List<Event>> subregions = {};
     List<Event> events;
     String subregion;
@@ -114,7 +152,7 @@ class EventRepository implements IEventRepository {
           Event(
             id: UniqueId.fromUniqueString(i.toString()),
             name: EventName('Event $i'),
-            date: day,
+            date: selectedDate,
             link: EventLink('http://facebook.com'),
             categoryId: null,
             poster: null,
@@ -128,25 +166,6 @@ class EventRepository implements IEventRepository {
     yield right(subregions);
   }
 }
-//   @override
-//   Stream<Either<EventFailure, List<Category>>> categoryCounters() async* {
-//     final categories = _firestore.categoriesCollection;
-//     yield* categories
-//         .orderBy('name')
-//         .snapshots()
-//         .map((snapshot) => right<EventFailure, List<Category>>(
-//               snapshot.docs
-//                   .map((doc) => CategoryDto.fromFirestore(doc).toDomain())
-//                   .toList(),
-//             ))
-//         .handleError((e) {
-//       if (e is FirebaseException && e.message.contains('PERMISSION_DENIED')) {
-//         return left(const EventFailure.insufficientPermission());
-//       } else {
-//         return left(const EventFailure.unexpected());
-//       }
-//     });
-//   }
 
 // @override
 // Stream<Either<EventFailure, List<Event>>> watchAll(

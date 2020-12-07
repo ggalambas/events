@@ -8,6 +8,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 
+import '../app/appbar/calendar_model.dart';
 import '../app/drawer/category_model.dart';
 import '../services/events/event_repository.dart';
 import '../app/body/events_model.dart';
@@ -33,6 +34,7 @@ GetIt $initGetIt(
   gh.lazySingleton<IRegionApi>(() => FakeRegionApi());
   gh.factory<RegionsModel>(
       () => RegionsModel(get<IEventRepository>(), get<IRegionApi>()));
+  gh.factory<CalendarModel>(() => CalendarModel(get<IEventRepository>()));
   gh.factory<CategoryModel>(() => CategoryModel(get<IEventRepository>()));
   gh.factory<EventsModel>(() => EventsModel(get<IEventRepository>()));
   return get;

@@ -58,13 +58,17 @@ class RegionsModel extends BaseModel {
     loadFailure();
   }
 
-  void listen(String categoryName, DateTime day) {
+  void listen() {
     loadInProgress();
     _eventRepository
-        .regionCounters(categoryName, day)
+        .regionCounters()
         .listen((failureOrRegions) => failureOrRegions.fold(
               (f) => _loadFailure(f),
               (regions) => _loadSuccess(regions),
             ));
+  }
+
+  Stream regions() {
+    return _eventRepository.regionCounters();
   }
 }

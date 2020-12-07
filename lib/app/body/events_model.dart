@@ -30,10 +30,10 @@ class EventsModel extends BaseModel {
     loadFailure();
   }
 
-  void listen(String categoryName, DateTime day, String regionName) {
+  void listen(String regionId) {
     loadInProgress();
     _eventRepository
-        .regionEvents(categoryName, day, regionName)
+        .regionEvents(regionId)
         .listen((failureOrEvents) => failureOrEvents.fold(
               (f) => _loadFailure(f),
               (subregions) => _loadSuccess(subregions),

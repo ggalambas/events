@@ -21,7 +21,7 @@ Future populate() async {
   categoriesSnapshot.docs.forEach((doc) => categories.add(doc.id));
 
   final FakeRegionApi regionApi = FakeRegionApi();
-  final List<String> subregions = await regionApi.subregions();
+  final List<String> subregions = await regionApi.subregionsIds();
 
   final IEventRepository eventRepository = EventRepository(firestore);
 

@@ -11,7 +11,7 @@ class CategoryModel extends BaseModel {
   final IEventRepository _eventRepository;
 
   CategoryModel(this._eventRepository) {
-    listenToCategories();
+    listen();
   }
 
   List<Category> _categories = [];
@@ -19,16 +19,6 @@ class CategoryModel extends BaseModel {
 
   EventFailure _failure;
   EventFailure get failure => _failure;
-
-  // TODO: First category to be openned
-  String _selected = 'Initial';
-  String get selected => _selected;
-  set selected(String categoryName) {
-    _selected = categoryName;
-    notifyListeners();
-  }
-
-  bool isSelected(String categoryName) => _selected == categoryName;
 
   void _loadSuccess(List<Category> categories) {
     _categories = categories;
@@ -40,7 +30,7 @@ class CategoryModel extends BaseModel {
     loadFailure();
   }
 
-  void listenToCategories() {
+  void listen() {
     loadInProgress();
     _eventRepository
         .categoryCounters()
@@ -49,4 +39,13 @@ class CategoryModel extends BaseModel {
               (categories) => _loadSuccess(categories),
             ));
   }
+
+  //TODO: initial category
+  Category get selected => _eventRepository.selectedCategory;
+  set selected(Category category) {
+    _eventRepository.selectedCategory = category;
+    notifyListeners();
+  }
+
+  bool isSelected(Category category) => selected == category;
 }

@@ -2,43 +2,49 @@ import 'dart:convert';
 
 import 'package:events/domain/regions/i_region_api.dart';
 import 'package:events/domain/regions/region.dart';
-import 'package:events/services/regions/region_dto.dart';
-import 'package:events/services/regions/subregion_dto.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:injectable/injectable.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:events/services/core/firebase_helpers.dart';
 
 @LazySingleton(as: IRegionApi)
 class FakeRegionApi implements IRegionApi {
   final String regionsPath = 'assets/concelhos-metadata.json';
   final String subregionsPath = 'assets/freguesias-metadata.json';
 
-  //! REFACTORATE EVERYTHING
-
+  //TODO: near regions
   @override
   bool isNear(Region region) {
-    return region.name.length == 8 &&
-        int.parse(region.name[region.name.length - 1]) >= 1 &&
-        int.parse(region.name[region.name.length - 1]) < 5;
+    return false;
   }
 
-  Future<String> _loadFromAsset(String path) async =>
-      rootBundle.loadString(path);
-
-  Future<dynamic> parseJson(String path) async {
-    final String jsonString = await _loadFromAsset(path);
-    return jsonDecode(jsonString);
+  //TODO: failure
+  @override
+  Future<Map<String, String>> names(String subregionId) async {
+    final subregions = await _getListFromAsset(subregionsPath);
+    for (final subregion in subregions) {
+      if (subregion['dicofre'] == subregionId) {
+        return {
+          'regionName': subregion['concelho'].toString(),
+          'subregionName': subregion['freguesia'].toString(),
+        };
+      }
+    }
+    return {'regionName': 'ERROR', 'subregionName': 'ERROR'};
   }
 
-  Future<List<String>> subregions() async {
-    final jsonResponse = await parseJson(subregionsPath);
-    final List<String> subregions = [];
-    jsonResponse['d'].forEach(
-      (subregion) => subregions.add(
+  Future<dynamic> _getListFromAsset(String path) async {
+    final String jsonString = await rootBundle.loadString(path);
+    return jsonDecode(jsonString)['d'];
+  }
+
+  //! used only to populate
+  Future<List<String>> subregionsIds() async {
+    final subregions = await _getListFromAsset(subregionsPath);
+    final List<String> subregionsIds = [];
+    subregions.forEach(
+      (subregion) => subregionsIds.add(
         subregion['dicofre'].toString(),
       ),
     );
-    return subregions;
+    return subregionsIds;
   }
 }

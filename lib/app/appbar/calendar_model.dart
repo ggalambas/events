@@ -1,14 +1,22 @@
 import 'dart:async';
+import 'package:events/domain/events/i_event_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:events/app/helpers/date_time_x.dart';
+import 'package:injectable/injectable.dart';
 
+@Injectable()
 class CalendarModel extends ChangeNotifier {
-  DateTime _today = DateTime.now();
-  DateTime _selected;
-  DateTime get selected => _selected;
+  final IEventRepository _eventRepository;
 
-  CalendarModel() {
-    _selected = _today;
+  DateTime _today = DateTime.now();
+
+  DateTime get selected => _eventRepository.selectedDate;
+  set selected(DateTime date) {
+    _eventRepository.selectedDate = date;
+    notifyListeners();
+  }
+
+  CalendarModel(this._eventRepository) {
     _refreshAtMidnight();
   }
 
@@ -25,9 +33,8 @@ class CalendarModel extends ChangeNotifier {
 
   DateTime get today => _today;
   set today(DateTime day) {
-    if (_selected.day == _today.day) _selected = day;
     _today = day;
-    notifyListeners();
+    selected.day == _today.day ? selected = day : notifyListeners();
   }
 
   // Calendar
@@ -35,11 +42,11 @@ class CalendarModel extends ChangeNotifier {
   int get totalDays => 14;
 
   void select(int daysAfter) {
-    _selected = today.after(daysAfter);
-    notifyListeners();
+    selected = today.after(daysAfter);
+    // notifyListeners();
   }
 
-  bool isSelected(int daysAfter) => today.after(daysAfter).day == _selected.day;
+  bool isSelected(int daysAfter) => today.after(daysAfter).day == selected.day;
   bool isLastDayOfMonth(int daysAfter) => today.after(daysAfter + 1).day == 1;
   bool isLastShownDay(int daysAfter) => daysAfter == totalDays - 1;
 
@@ -49,6 +56,6 @@ class CalendarModel extends ChangeNotifier {
 
   // Calendar Button
 
-  String get selectedDay => _selected.day.toString();
-  String get selectedMonth => _selected.monthName;
+  String get selectedDay => selected.day.toString();
+  String get selectedMonth => selected.monthName;
 }
