@@ -13,7 +13,7 @@ class SliverBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final TextTheme textTheme = Theme.of(context).textTheme;
     return SliverAppBar(
-      // forceElevated: true,
+      forceElevated: true,
       pinned: true,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(
