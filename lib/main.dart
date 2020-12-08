@@ -19,7 +19,9 @@ Future<void> main() async {
   runApp(MyApp());
 }
 
-//TODO: splash screen
+//TODO:
+//* 1. splash screen
+//* 2. getOrCrash();
 
 class MyApp extends StatefulWidget {
   @override

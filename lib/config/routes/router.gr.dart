@@ -9,27 +9,25 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
-import '../../domain/categories/category.dart';
 import '../../domain/events/event.dart';
-import '../../domain/regions/region.dart';
-import '../../ui/screens/events_view.dart';
+import '../../ui/screens/events_screen.dart';
 import '../../ui/screens/login_screen.dart';
-import '../../ui/screens/poster_view.dart';
-import '../../ui/screens/regions_view.dart';
+import '../../ui/screens/poster_screen.dart';
+import '../../ui/screens/regions_screen.dart';
 import '../../ui/screens/register_screen.dart';
 
 class Routes {
   static const String loginScreen = '/login-screen';
   static const String registerScreen = '/register-screen';
-  static const String regionsView = '/';
-  static const String eventsView = '/events-view';
-  static const String posterView = '/poster-view';
+  static const String regionsScreen = '/';
+  static const String eventsScreen = '/events-screen';
+  static const String posterScreen = '/poster-screen';
   static const all = <String>{
     loginScreen,
     registerScreen,
-    regionsView,
-    eventsView,
-    posterView,
+    regionsScreen,
+    eventsScreen,
+    posterScreen,
   };
 }
 
@@ -39,9 +37,9 @@ class Router extends RouterBase {
   final _routes = <RouteDef>[
     RouteDef(Routes.loginScreen, page: LoginScreen),
     RouteDef(Routes.registerScreen, page: RegisterScreen),
-    RouteDef(Routes.regionsView, page: RegionsView),
-    RouteDef(Routes.eventsView, page: EventsView),
-    RouteDef(Routes.posterView, page: PosterView),
+    RouteDef(Routes.regionsScreen, page: RegionsScreen),
+    RouteDef(Routes.eventsScreen, page: EventsScreen),
+    RouteDef(Routes.posterScreen, page: PosterScreen),
   ];
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
@@ -58,28 +56,24 @@ class Router extends RouterBase {
         settings: data,
       );
     },
-    RegionsView: (data) {
+    RegionsScreen: (data) {
       return MaterialPageRoute<dynamic>(
-        builder: (context) => RegionsView(),
+        builder: (context) => RegionsScreen(),
         settings: data,
       );
     },
-    EventsView: (data) {
-      final args = data.getArgs<EventsViewArguments>(nullOk: false);
+    EventsScreen: (data) {
       return MaterialPageRoute<dynamic>(
-        builder: (context) => EventsView(
-          category: args.category,
-          region: args.region,
-        ),
+        builder: (context) => EventsScreen(),
         settings: data,
       );
     },
-    PosterView: (data) {
-      final args = data.getArgs<PosterViewArguments>(
-        orElse: () => PosterViewArguments(),
+    PosterScreen: (data) {
+      final args = data.getArgs<PosterScreenArguments>(
+        orElse: () => PosterScreenArguments(),
       );
       return MaterialPageRoute<dynamic>(
-        builder: (context) => PosterView(event: args.event),
+        builder: (context) => PosterScreen(event: args.event),
         settings: data,
       );
     },
@@ -95,23 +89,16 @@ extension RouterExtendedNavigatorStateX on ExtendedNavigatorState {
 
   Future<dynamic> pushRegisterScreen() => push<dynamic>(Routes.registerScreen);
 
-  Future<dynamic> pushRegionsView() => push<dynamic>(Routes.regionsView);
+  Future<dynamic> pushRegionsScreen() => push<dynamic>(Routes.regionsScreen);
 
-  Future<dynamic> pushEventsView({
-    @required Category category,
-    @required Region region,
-  }) =>
-      push<dynamic>(
-        Routes.eventsView,
-        arguments: EventsViewArguments(category: category, region: region),
-      );
+  Future<dynamic> pushEventsScreen() => push<dynamic>(Routes.eventsScreen);
 
-  Future<dynamic> pushPosterView({
+  Future<dynamic> pushPosterScreen({
     Event event,
   }) =>
       push<dynamic>(
-        Routes.posterView,
-        arguments: PosterViewArguments(event: event),
+        Routes.posterScreen,
+        arguments: PosterScreenArguments(event: event),
       );
 }
 
@@ -119,15 +106,8 @@ extension RouterExtendedNavigatorStateX on ExtendedNavigatorState {
 /// Arguments holder classes
 /// *************************************************************************
 
-/// EventsView arguments holder class
-class EventsViewArguments {
-  final Category category;
-  final Region region;
-  EventsViewArguments({@required this.category, @required this.region});
-}
-
-/// PosterView arguments holder class
-class PosterViewArguments {
+/// PosterScreen arguments holder class
+class PosterScreenArguments {
   final Event event;
-  PosterViewArguments({this.event});
+  PosterScreenArguments({this.event});
 }

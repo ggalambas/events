@@ -33,7 +33,7 @@ class CategoryItem extends StatelessWidget {
           model.selected = category;
           Navigator.pop(context);
         },
-        selected: model.isSelected(category), //TODO: selected color
+        selected: model.isSelected(category), //! 4
         leading: Icon(icon, color: theme.colorScheme.onBackground),
         title: Text(name, style: theme.textTheme.bodyText1),
         trailing: Counters(counter),

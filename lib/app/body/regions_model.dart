@@ -14,7 +14,9 @@ class RegionsModel extends BaseModel {
   final IEventRepository _eventRepository;
   final IRegionApi _regionApi;
 
-  RegionsModel(this._eventRepository, this._regionApi);
+  RegionsModel(this._eventRepository, this._regionApi) {
+    listen();
+  }
 
   Region _all = Region.empty();
   Region get all => _all;
@@ -31,7 +33,7 @@ class RegionsModel extends BaseModel {
   bool isEmpty() => _all.eventCounter.total == 0;
 
   void _loadSuccess(List<Region> regions) {
-    //TODO: regions location
+    //! regions location
     final List<Region> near = [];
     final List<Region> others = [];
     int live = 0;
@@ -68,7 +70,9 @@ class RegionsModel extends BaseModel {
             ));
   }
 
-  Stream regions() {
-    return _eventRepository.regionCounters();
+  Region get selected => _eventRepository.selectedRegion;
+  set selected(Region region) {
+    _eventRepository.selectedRegion = region;
+    notifyListeners();
   }
 }

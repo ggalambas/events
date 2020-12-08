@@ -12,8 +12,7 @@ abstract class IEventRepository {
 
   Stream<Either<EventFailure, List<Category>>> categoryCounters();
   Stream<Either<EventFailure, List<Region>>> regionCounters();
-  Stream<Either<EventFailure, Map<String, List<Event>>>> regionEvents(
-      String regionName);
+  Stream<Either<EventFailure, Map<String, List<Event>>>> regionEvents();
   // Stream<Either<EventFailure, List<Event>>> dayEvents(
   //   String category,
   //   DateTime day,

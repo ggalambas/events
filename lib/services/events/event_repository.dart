@@ -140,8 +140,7 @@ class EventRepository implements IEventRepository {
   }
 
   @override
-  Stream<Either<EventFailure, Map<String, List<Event>>>> regionEvents(
-      String regionName) async* {
+  Stream<Either<EventFailure, Map<String, List<Event>>>> regionEvents() async* {
     final Map<String, List<Event>> subregions = {};
     List<Event> events;
     String subregion;

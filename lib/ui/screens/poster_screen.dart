@@ -4,16 +4,16 @@ import 'package:events/domain/events/event.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_tabs/flutter_custom_tabs.dart';
 
-class PosterView extends StatefulWidget {
+class PosterScreen extends StatefulWidget {
   final Event event;
 
-  const PosterView({this.event});
+  const PosterScreen({this.event});
 
   @override
-  _PosterViewState createState() => _PosterViewState();
+  _PosterScreenState createState() => _PosterScreenState();
 }
 
-class _PosterViewState extends State<PosterView> {
+class _PosterScreenState extends State<PosterScreen> {
   // String get name => widget.event.name.getOrCrash();
   // String get posterURL => widget.event.poster.getOrCrash().path;
   // String get url => widget.event.link.getOrCrash();

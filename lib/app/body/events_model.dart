@@ -10,7 +10,9 @@ export 'package:events/app/core/base_model.dart';
 class EventsModel extends BaseModel {
   final IEventRepository _eventRepository;
 
-  EventsModel(this._eventRepository);
+  EventsModel(this._eventRepository) {
+    listen();
+  }
 
   Map<String, List<Event>> _subregions = {};
   Map<String, List<Event>> get subregions => _subregions;
@@ -30,10 +32,10 @@ class EventsModel extends BaseModel {
     loadFailure();
   }
 
-  void listen(String regionId) {
+  void listen() {
     loadInProgress();
     _eventRepository
-        .regionEvents(regionId)
+        .regionEvents()
         .listen((failureOrEvents) => failureOrEvents.fold(
               (f) => _loadFailure(f),
               (subregions) => _loadSuccess(subregions),

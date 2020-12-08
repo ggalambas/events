@@ -1,4 +1,4 @@
-import 'package:events/fake_data.dart';
+import 'package:events/populate.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -20,7 +20,6 @@ class SliverScaffold extends StatelessWidget {
     return ChangeNotifierProvider<ScrollModel>(
       create: (_) => ScrollModel(),
       builder: (context, _) {
-        //TODO: auto scroll calendar to selected day
         final ScrollModel scroll =
             Provider.of<ScrollModel>(context, listen: false);
         return Scaffold(
@@ -31,10 +30,7 @@ class SliverScaffold extends StatelessWidget {
               return false;
             },
             child: CustomScrollView(
-              //TODO: pull to refresh
-              //TODO: Scroll physics not working
               // physics: AlwaysScrollableScrollPhysics(),
-              // physics: BouncingScrollPhysics(),
               controller: scroll.controller,
               slivers: <Widget>[
                 appbar,

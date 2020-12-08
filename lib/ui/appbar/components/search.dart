@@ -10,7 +10,7 @@ import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
 
 class EventSearch extends SearchDelegate {
-  final BuildContext context;
+  final BuildContext context; //!
   EventSearch({this.context});
 
   List<Event> events = List.generate(

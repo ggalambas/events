@@ -6,19 +6,21 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class CategoryDrawer extends StatelessWidget {
+  //TODO: Give categories a name and icon
   //TODO: CategoryDrawer
   //* 1. Header
   //* 2. Saved Events
   //* 3. Favorite Categories
   //* If theres no favorites, change 'other categories' to 'categories'
-  //* 4. Give categories a name and icon
+  //* 4. CategoryItem > selected color
   @override
   Widget build(BuildContext context) {
+    print('category drawer');
     final ThemeData theme = Theme.of(context);
     final CategoryModel model = Provider.of<CategoryModel>(context);
     return Drawer(
       child: ListView(
-        padding: EdgeInsets.only(), // To appear under the status bar
+        padding: EdgeInsets.zero,
         children: [
           UserAccountsDrawerHeader(
             //! 1

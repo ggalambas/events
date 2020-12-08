@@ -17,7 +17,7 @@ class EventItem extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
     return ListTile(
       dense: true,
-      onTap: () => ExtendedNavigator.root.pushPosterView(event: event),
+      onTap: () => ExtendedNavigator.root.pushPosterScreen(event: event),
       leading: Text(
         date.time,
         style: theme.textTheme.bodyText2,
