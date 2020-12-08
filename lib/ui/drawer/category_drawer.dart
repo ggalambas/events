@@ -6,6 +6,12 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class CategoryDrawer extends StatelessWidget {
+  //TODO: CategoryDrawer
+  //* 1. Header
+  //* 2. Saved Events
+  //* 3. Favorite Categories
+  //* If theres no favorites, change 'other categories' to 'categories'
+  //* 4. Give categories a name and icon
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
@@ -15,34 +21,31 @@ class CategoryDrawer extends StatelessWidget {
         padding: EdgeInsets.only(), // To appear under the status bar
         children: [
           UserAccountsDrawerHeader(
-            //TODO: Auth
+            //! 1
             accountEmail: Text('galambas@gmail.com'),
             accountName: Text('galambas'),
             decoration: BoxDecoration(
               color: theme.colorScheme.primaryVariant,
             ),
           ),
-          // TODO: Selected category color
           model.load.map(
-            // TODO: data loading
-            inProgress: Text('Loading'),
+            inProgress: Text('Loading'), //TODO: loading
             success: Column(
               children: [
-                // TODO: Auth: bookmark tab
+                //! 2
                 // CategoryItem(
                 //   'Guardados',
                 //   liveEvents: 17,
                 //   totalEvents: 58,
                 // ),
-                // TODO: Location: favorites
+                //! 3
                 // ListSubtitle('Favoritos'),
-                ListSubtitle('Outras Categorias'),
+                ListSubtitle('Categorias'),
                 for (Category category in model.categories)
                   CategoryItem(category),
               ],
             ),
-            // TODO: data failure
-            failure: Text('Failure'),
+            failure: Text('Failure'), //TODO: failure
           ),
         ],
       ),

@@ -27,7 +27,7 @@ class EventsView extends StatelessWidget {
       appbar: SliverBar(title: category.name, subtitle: region.name),
       body: Selector<CalendarModel, DateTime>(
         selector: (_, calendar) => calendar.selected,
-        builder: (context, date, _) {
+        builder: (_, date, __) {
           return ChangeNotifierProvider<EventsModel>.value(
             value: getIt<EventsModel>()..listen(region.id.getOrCrash()),
             builder: (context, _) {
@@ -49,7 +49,7 @@ class EventsView extends StatelessWidget {
                     : SliverFillRemaining(
                         hasScrollBody: false,
                         child: Text(
-                          'No events today for this category',
+                          'No events today for this category and regions',
                         ), // TODO: Regions no events
                       ),
               );

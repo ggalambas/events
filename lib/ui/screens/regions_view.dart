@@ -39,50 +39,48 @@ class RegionsView extends StatelessWidget {
             value: getIt<RegionsModel>()..listen(),
             builder: (context, _) {
               final RegionsModel regions = Provider.of<RegionsModel>(context);
-              return Consumer<RegionsModel>(
-                builder: (_, regions, __) => regions.load.map(
-                  inProgress: SliverFillRemaining(
-                    hasScrollBody: false,
-                    child: Text('Loading'), // TODO: Regions loading
-                  ),
-                  failure: SliverFillRemaining(
-                    hasScrollBody: false,
-                    child: Text('Failure'), // TODO: Regions failure
-                  ),
-                  success: !regions.isEmpty()
-                      ? SliverList(
-                          delegate: SliverChildListDelegate(
-                            [
-                              ListGroup(
-                                first: true,
-                                items: [
-                                  RegionItem(regions.all),
-                                ],
-                              ),
-                              ListSubtitle('Concelhos mais próximos'),
-                              ListGroup(
-                                items: [
-                                  for (Region region in regions.near)
-                                    RegionItem(region),
-                                ],
-                              ),
-                              ListSubtitle('Outros concelhos'),
-                              ListGroup(
-                                items: [
-                                  for (Region region in regions.others)
-                                    RegionItem(region),
-                                ],
-                              ),
-                            ],
-                          ),
-                        )
-                      : SliverFillRemaining(
-                          hasScrollBody: false,
-                          child: Text(
-                            'No events today for this category',
-                          ), // TODO: Regions no events
-                        ),
+              return regions.load.map(
+                inProgress: SliverFillRemaining(
+                  hasScrollBody: false,
+                  child: Text('Loading'), // TODO: Regions loading
                 ),
+                failure: SliverFillRemaining(
+                  hasScrollBody: false,
+                  child: Text('Failure'), // TODO: Regions failure
+                ),
+                success: !regions.isEmpty()
+                    ? SliverList(
+                        delegate: SliverChildListDelegate(
+                          [
+                            ListGroup(
+                              first: true,
+                              items: [
+                                RegionItem(regions.all),
+                              ],
+                            ),
+                            ListSubtitle('Concelhos mais próximos'),
+                            ListGroup(
+                              items: [
+                                for (Region region in regions.near)
+                                  RegionItem(region),
+                              ],
+                            ),
+                            ListSubtitle('Outros concelhos'),
+                            ListGroup(
+                              items: [
+                                for (Region region in regions.others)
+                                  RegionItem(region),
+                              ],
+                            ),
+                          ],
+                        ),
+                      )
+                    : SliverFillRemaining(
+                        hasScrollBody: false,
+                        child: Text(
+                          'No events today for this category',
+                        ), // TODO: Regions no events
+                      ),
               );
             },
           );

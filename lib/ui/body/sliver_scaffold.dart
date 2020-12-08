@@ -20,6 +20,7 @@ class SliverScaffold extends StatelessWidget {
     return ChangeNotifierProvider<ScrollModel>(
       create: (_) => ScrollModel(),
       builder: (context, _) {
+        //TODO: auto scroll calendar to selected day
         final ScrollModel scroll =
             Provider.of<ScrollModel>(context, listen: false);
         return Scaffold(
