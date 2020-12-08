@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 
 class Counters extends StatelessWidget {
   final EventCounter counter;
+  final bool selected;
 
-  const Counters(this.counter);
+  const Counters(this.counter, {this.selected = false});
 
   int get live => counter.live;
   int get total => counter.total;
@@ -15,8 +16,8 @@ class Counters extends StatelessWidget {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        if (live != 0) Counter(live, live: true),
-        if (total != 0) Counter(total),
+        if (live != 0) Counter(live, live: true, selected: selected),
+        if (total != 0) Counter(total, selected: selected),
       ],
     );
   }
@@ -25,8 +26,9 @@ class Counters extends StatelessWidget {
 class Counter extends StatelessWidget {
   final int counter;
   final bool live;
+  final bool selected;
 
-  const Counter(this.counter, {this.live = false});
+  const Counter(this.counter, {this.live = false, this.selected});
 
   @override
   Widget build(BuildContext context) {
@@ -37,9 +39,11 @@ class Counter extends StatelessWidget {
       constraints: BoxConstraints(minWidth: kCounterSize),
       height: kCounterSize,
       decoration: BoxDecoration(
-        color: live
-            ? theme.colorScheme.primary.withOpacity(kPrimaryOpacity)
-            : theme.colorScheme.background,
+        color: selected
+            ? Colors.transparent
+            : live
+                ? theme.colorScheme.primary.withOpacity(kPrimaryOpacity)
+                : theme.colorScheme.background,
         borderRadius: BorderRadius.circular(kBorderRadiusSmall),
       ),
       child: Center(
