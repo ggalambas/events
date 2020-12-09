@@ -12,11 +12,10 @@ class SliverBar extends StatelessWidget {
 
   //TODO: SliverBar
   //* 1. Calendar button hidden when page not scrollable or make it work
-  //* 2. Scroll calendar to selected day
+  //* 2. Snap items
 
   @override
   Widget build(BuildContext context) {
-    print('sliverbar build');
     final TextTheme textTheme = Theme.of(context).textTheme;
     return SliverAppBar(
       forceElevated: true,

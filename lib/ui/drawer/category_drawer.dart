@@ -12,11 +12,9 @@ class CategoryDrawer extends StatelessWidget {
   //* 1. Header
   //* 2. Saved Events
   //* 3. Favorite Categories
-  //* If theres no favorites, change 'other categories' to 'categories'
-  //* 5. Categories scroling through status bar
+  //*    If theres no favorites, change 'other categories' to 'categories'
   @override
   Widget build(BuildContext context) {
-    print('category drawer');
     final ThemeData theme = Theme.of(context);
     final CategoryModel model = Provider.of<CategoryModel>(context);
     return Drawer(
