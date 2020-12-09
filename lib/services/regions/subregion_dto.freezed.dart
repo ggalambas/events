@@ -21,12 +21,12 @@ class _$SubregionDtoTearOff {
       {@JsonKey(ignore: true) String id,
       @JsonKey(ignore: true) String regionId,
       @required String name,
-      @required List<String> events}) {
+      @required List<String> eventIds}) {
     return _SubregionDto(
       id: id,
       regionId: regionId,
       name: name,
-      events: events,
+      eventIds: eventIds,
     );
   }
 
@@ -47,7 +47,7 @@ mixin _$SubregionDto {
   @JsonKey(ignore: true)
   String get regionId;
   String get name;
-  List<String> get events;
+  List<String> get eventIds;
 
   Map<String, dynamic> toJson();
   $SubregionDtoCopyWith<SubregionDto> get copyWith;
@@ -62,7 +62,7 @@ abstract class $SubregionDtoCopyWith<$Res> {
       {@JsonKey(ignore: true) String id,
       @JsonKey(ignore: true) String regionId,
       String name,
-      List<String> events});
+      List<String> eventIds});
 }
 
 /// @nodoc
@@ -78,13 +78,14 @@ class _$SubregionDtoCopyWithImpl<$Res> implements $SubregionDtoCopyWith<$Res> {
     Object id = freezed,
     Object regionId = freezed,
     Object name = freezed,
-    Object events = freezed,
+    Object eventIds = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed ? _value.id : id as String,
       regionId: regionId == freezed ? _value.regionId : regionId as String,
       name: name == freezed ? _value.name : name as String,
-      events: events == freezed ? _value.events : events as List<String>,
+      eventIds:
+          eventIds == freezed ? _value.eventIds : eventIds as List<String>,
     ));
   }
 }
@@ -100,7 +101,7 @@ abstract class _$SubregionDtoCopyWith<$Res>
       {@JsonKey(ignore: true) String id,
       @JsonKey(ignore: true) String regionId,
       String name,
-      List<String> events});
+      List<String> eventIds});
 }
 
 /// @nodoc
@@ -118,13 +119,14 @@ class __$SubregionDtoCopyWithImpl<$Res> extends _$SubregionDtoCopyWithImpl<$Res>
     Object id = freezed,
     Object regionId = freezed,
     Object name = freezed,
-    Object events = freezed,
+    Object eventIds = freezed,
   }) {
     return _then(_SubregionDto(
       id: id == freezed ? _value.id : id as String,
       regionId: regionId == freezed ? _value.regionId : regionId as String,
       name: name == freezed ? _value.name : name as String,
-      events: events == freezed ? _value.events : events as List<String>,
+      eventIds:
+          eventIds == freezed ? _value.eventIds : eventIds as List<String>,
     ));
   }
 }
@@ -137,9 +139,9 @@ class _$_SubregionDto extends _SubregionDto {
       {@JsonKey(ignore: true) this.id,
       @JsonKey(ignore: true) this.regionId,
       @required this.name,
-      @required this.events})
+      @required this.eventIds})
       : assert(name != null),
-        assert(events != null),
+        assert(eventIds != null),
         super._();
 
   factory _$_SubregionDto.fromJson(Map<String, dynamic> json) =>
@@ -154,11 +156,11 @@ class _$_SubregionDto extends _SubregionDto {
   @override
   final String name;
   @override
-  final List<String> events;
+  final List<String> eventIds;
 
   @override
   String toString() {
-    return 'SubregionDto(id: $id, regionId: $regionId, name: $name, events: $events)';
+    return 'SubregionDto(id: $id, regionId: $regionId, name: $name, eventIds: $eventIds)';
   }
 
   @override
@@ -172,8 +174,9 @@ class _$_SubregionDto extends _SubregionDto {
                     .equals(other.regionId, regionId)) &&
             (identical(other.name, name) ||
                 const DeepCollectionEquality().equals(other.name, name)) &&
-            (identical(other.events, events) ||
-                const DeepCollectionEquality().equals(other.events, events)));
+            (identical(other.eventIds, eventIds) ||
+                const DeepCollectionEquality()
+                    .equals(other.eventIds, eventIds)));
   }
 
   @override
@@ -182,7 +185,7 @@ class _$_SubregionDto extends _SubregionDto {
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(regionId) ^
       const DeepCollectionEquality().hash(name) ^
-      const DeepCollectionEquality().hash(events);
+      const DeepCollectionEquality().hash(eventIds);
 
   @override
   _$SubregionDtoCopyWith<_SubregionDto> get copyWith =>
@@ -200,7 +203,7 @@ abstract class _SubregionDto extends SubregionDto {
       {@JsonKey(ignore: true) String id,
       @JsonKey(ignore: true) String regionId,
       @required String name,
-      @required List<String> events}) = _$_SubregionDto;
+      @required List<String> eventIds}) = _$_SubregionDto;
 
   factory _SubregionDto.fromJson(Map<String, dynamic> json) =
       _$_SubregionDto.fromJson;
@@ -214,7 +217,7 @@ abstract class _SubregionDto extends SubregionDto {
   @override
   String get name;
   @override
-  List<String> get events;
+  List<String> get eventIds;
   @override
   _$SubregionDtoCopyWith<_SubregionDto> get copyWith;
 }

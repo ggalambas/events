@@ -15,15 +15,15 @@ class _$SubregionTearOff {
 
 // ignore: unused_element
   _Subregion call(
-      {@required UniqueId id,
-      @required UniqueId regionId,
+      {@required String id,
+      @required String regionId,
       @required String name,
-      @required List<Event> events}) {
+      @required List<String> eventIds}) {
     return _Subregion(
       id: id,
       regionId: regionId,
       name: name,
-      events: events,
+      eventIds: eventIds,
     );
   }
 }
@@ -34,10 +34,10 @@ const $Subregion = _$SubregionTearOff();
 
 /// @nodoc
 mixin _$Subregion {
-  UniqueId get id;
-  UniqueId get regionId;
+  String get id;
+  String get regionId; //?
   String get name;
-  List<Event> get events;
+  List<String> get eventIds;
 
   $SubregionCopyWith<Subregion> get copyWith;
 }
@@ -46,7 +46,7 @@ mixin _$Subregion {
 abstract class $SubregionCopyWith<$Res> {
   factory $SubregionCopyWith(Subregion value, $Res Function(Subregion) then) =
       _$SubregionCopyWithImpl<$Res>;
-  $Res call({UniqueId id, UniqueId regionId, String name, List<Event> events});
+  $Res call({String id, String regionId, String name, List<String> eventIds});
 }
 
 /// @nodoc
@@ -62,13 +62,14 @@ class _$SubregionCopyWithImpl<$Res> implements $SubregionCopyWith<$Res> {
     Object id = freezed,
     Object regionId = freezed,
     Object name = freezed,
-    Object events = freezed,
+    Object eventIds = freezed,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed ? _value.id : id as UniqueId,
-      regionId: regionId == freezed ? _value.regionId : regionId as UniqueId,
+      id: id == freezed ? _value.id : id as String,
+      regionId: regionId == freezed ? _value.regionId : regionId as String,
       name: name == freezed ? _value.name : name as String,
-      events: events == freezed ? _value.events : events as List<Event>,
+      eventIds:
+          eventIds == freezed ? _value.eventIds : eventIds as List<String>,
     ));
   }
 }
@@ -79,7 +80,7 @@ abstract class _$SubregionCopyWith<$Res> implements $SubregionCopyWith<$Res> {
           _Subregion value, $Res Function(_Subregion) then) =
       __$SubregionCopyWithImpl<$Res>;
   @override
-  $Res call({UniqueId id, UniqueId regionId, String name, List<Event> events});
+  $Res call({String id, String regionId, String name, List<String> eventIds});
 }
 
 /// @nodoc
@@ -96,13 +97,14 @@ class __$SubregionCopyWithImpl<$Res> extends _$SubregionCopyWithImpl<$Res>
     Object id = freezed,
     Object regionId = freezed,
     Object name = freezed,
-    Object events = freezed,
+    Object eventIds = freezed,
   }) {
     return _then(_Subregion(
-      id: id == freezed ? _value.id : id as UniqueId,
-      regionId: regionId == freezed ? _value.regionId : regionId as UniqueId,
+      id: id == freezed ? _value.id : id as String,
+      regionId: regionId == freezed ? _value.regionId : regionId as String,
       name: name == freezed ? _value.name : name as String,
-      events: events == freezed ? _value.events : events as List<Event>,
+      eventIds:
+          eventIds == freezed ? _value.eventIds : eventIds as List<String>,
     ));
   }
 }
@@ -113,24 +115,24 @@ class _$_Subregion implements _Subregion {
       {@required this.id,
       @required this.regionId,
       @required this.name,
-      @required this.events})
+      @required this.eventIds})
       : assert(id != null),
         assert(regionId != null),
         assert(name != null),
-        assert(events != null);
+        assert(eventIds != null);
 
   @override
-  final UniqueId id;
+  final String id;
   @override
-  final UniqueId regionId;
-  @override
+  final String regionId;
+  @override //?
   final String name;
   @override
-  final List<Event> events;
+  final List<String> eventIds;
 
   @override
   String toString() {
-    return 'Subregion(id: $id, regionId: $regionId, name: $name, events: $events)';
+    return 'Subregion(id: $id, regionId: $regionId, name: $name, eventIds: $eventIds)';
   }
 
   @override
@@ -144,8 +146,9 @@ class _$_Subregion implements _Subregion {
                     .equals(other.regionId, regionId)) &&
             (identical(other.name, name) ||
                 const DeepCollectionEquality().equals(other.name, name)) &&
-            (identical(other.events, events) ||
-                const DeepCollectionEquality().equals(other.events, events)));
+            (identical(other.eventIds, eventIds) ||
+                const DeepCollectionEquality()
+                    .equals(other.eventIds, eventIds)));
   }
 
   @override
@@ -154,7 +157,7 @@ class _$_Subregion implements _Subregion {
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(regionId) ^
       const DeepCollectionEquality().hash(name) ^
-      const DeepCollectionEquality().hash(events);
+      const DeepCollectionEquality().hash(eventIds);
 
   @override
   _$SubregionCopyWith<_Subregion> get copyWith =>
@@ -163,19 +166,19 @@ class _$_Subregion implements _Subregion {
 
 abstract class _Subregion implements Subregion {
   const factory _Subregion(
-      {@required UniqueId id,
-      @required UniqueId regionId,
+      {@required String id,
+      @required String regionId,
       @required String name,
-      @required List<Event> events}) = _$_Subregion;
+      @required List<String> eventIds}) = _$_Subregion;
 
   @override
-  UniqueId get id;
+  String get id;
   @override
-  UniqueId get regionId;
-  @override
+  String get regionId;
+  @override //?
   String get name;
   @override
-  List<Event> get events;
+  List<String> get eventIds;
   @override
   _$SubregionCopyWith<_Subregion> get copyWith;
 }

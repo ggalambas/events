@@ -12,7 +12,7 @@ class RegionItem extends StatelessWidget {
 
   const RegionItem(this.region);
 
-  String get id => region.id.getOrCrash();
+  String get id => region.id;
   String get name => region.name;
   EventCounter get counter => region.eventCounter;
 
@@ -23,7 +23,7 @@ class RegionItem extends StatelessWidget {
       dense: true,
       onTap: () {
         Provider.of<RegionsModel>(context, listen: false).selected = region;
-        ExtendedNavigator.root.pushEventsScreen();
+        ExtendedNavigator.root.pushEventsScreen(regionName: name);
       },
       title: Text(name, style: textTheme.bodyText1),
       trailing: Counters(counter),

@@ -63,8 +63,9 @@ class Router extends RouterBase {
       );
     },
     EventsScreen: (data) {
+      final args = data.getArgs<EventsScreenArguments>(nullOk: false);
       return MaterialPageRoute<dynamic>(
-        builder: (context) => EventsScreen(),
+        builder: (context) => EventsScreen(args.regionName),
         settings: data,
       );
     },
@@ -91,7 +92,13 @@ extension RouterExtendedNavigatorStateX on ExtendedNavigatorState {
 
   Future<dynamic> pushRegionsScreen() => push<dynamic>(Routes.regionsScreen);
 
-  Future<dynamic> pushEventsScreen() => push<dynamic>(Routes.eventsScreen);
+  Future<dynamic> pushEventsScreen({
+    @required String regionName,
+  }) =>
+      push<dynamic>(
+        Routes.eventsScreen,
+        arguments: EventsScreenArguments(regionName: regionName),
+      );
 
   Future<dynamic> pushPosterScreen({
     Event event,
@@ -105,6 +112,12 @@ extension RouterExtendedNavigatorStateX on ExtendedNavigatorState {
 /// ************************************************************************
 /// Arguments holder classes
 /// *************************************************************************
+
+/// EventsScreen arguments holder class
+class EventsScreenArguments {
+  final String regionName;
+  EventsScreenArguments({@required this.regionName});
+}
 
 /// PosterScreen arguments holder class
 class PosterScreenArguments {

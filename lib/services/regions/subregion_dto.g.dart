@@ -9,12 +9,12 @@ part of 'subregion_dto.dart';
 _$_SubregionDto _$_$_SubregionDtoFromJson(Map<String, dynamic> json) {
   return _$_SubregionDto(
     name: json['name'] as String,
-    events: (json['events'] as List)?.map((e) => e as String)?.toList(),
+    eventIds: (json['eventIds'] as List)?.map((e) => e as String)?.toList(),
   );
 }
 
 Map<String, dynamic> _$_$_SubregionDtoToJson(_$_SubregionDto instance) =>
     <String, dynamic>{
       'name': instance.name,
-      'events': instance.events,
+      'eventIds': instance.eventIds,
     };

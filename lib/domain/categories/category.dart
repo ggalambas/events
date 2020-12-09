@@ -14,3 +14,10 @@ abstract class Category with _$Category {
     @required EventCounter eventCounter,
   }) = _Category;
 }
+
+//TODO == only equals id
+// @override
+// bool operator ==(dynamic other) => other is Category && other.id == id;
+
+// @override
+// external int get hashCode;

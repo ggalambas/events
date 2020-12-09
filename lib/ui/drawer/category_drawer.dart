@@ -15,7 +15,6 @@ class CategoryDrawer extends StatelessWidget {
   //* 4. CategoryItem > selected color
   @override
   Widget build(BuildContext context) {
-    print('category drawer');
     final ThemeData theme = Theme.of(context);
     final CategoryModel model = Provider.of<CategoryModel>(context);
     return Drawer(

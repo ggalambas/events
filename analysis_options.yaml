@@ -10,3 +10,6 @@ analyzer:
     todo: info
     prefer_if_elements_to_conditional_expressions: ignore
     prefer_conditional_assignment: info
+  exclude:
+    - "**/*.g.dart"
+    - "**/*.freezed.dart"

@@ -1,7 +1,5 @@
-import 'package:events/config/injection.dart';
 import 'package:events/domain/core/event_counter.dart';
 import 'package:events/domain/core/value_objects.dart';
-import 'package:events/domain/regions/i_region_api.dart';
 import 'package:events/domain/regions/region.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -24,7 +22,7 @@ abstract class RegionDto implements _$RegionDto {
 
   factory RegionDto.fromDomain(Region region) {
     return RegionDto(
-      id: region.id.getOrCrash(),
+      id: region.id,
       name: region.name,
       liveEvents: region.eventCounter.live,
       totalEvents: region.eventCounter.total,
@@ -33,7 +31,7 @@ abstract class RegionDto implements _$RegionDto {
 
   Region toDomain() {
     return Region(
-      id: UniqueId.fromUniqueString(id),
+      id: id,
       name: name,
       eventCounter: EventCounter(live: liveEvents, total: totalEvents),
     );

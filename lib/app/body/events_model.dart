@@ -1,7 +1,7 @@
 import 'package:events/app/core/base_model.dart';
-import 'package:events/domain/events/event.dart';
 import 'package:events/domain/events/event_failure.dart';
 import 'package:events/domain/events/i_event_repository.dart';
+import 'package:events/domain/regions/subregion.dart';
 import 'package:injectable/injectable.dart';
 
 export 'package:events/app/core/base_model.dart';
@@ -11,18 +11,18 @@ class EventsModel extends BaseModel {
   final IEventRepository _eventRepository;
 
   EventsModel(this._eventRepository) {
-    listen();
+    listenToSubregions();
   }
 
-  Map<String, List<Event>> _subregions = {};
-  Map<String, List<Event>> get subregions => _subregions;
+  List<Subregion> _subregions = [];
+  List<Subregion> get subregions => _subregions;
 
   bool isEmpty() => _subregions.isEmpty;
 
   EventFailure _failure;
   EventFailure get failure => _failure;
 
-  void _loadSuccess(Map<String, List<Event>> subregions) {
+  void _loadSuccess(List<Subregion> subregions) {
     _subregions = subregions;
     loadSuccess();
   }
@@ -32,7 +32,7 @@ class EventsModel extends BaseModel {
     loadFailure();
   }
 
-  void listen() {
+  void listenToSubregions() {
     loadInProgress();
     _eventRepository
         .regionEvents()

@@ -5,7 +5,7 @@ import 'package:events/app/drawer/category_model.dart';
 import 'package:events/config/injection.dart';
 import 'package:events/domain/categories/category.dart';
 import 'package:events/domain/events/event.dart';
-import 'package:events/domain/regions/region.dart';
+import 'package:events/domain/regions/subregion.dart';
 import 'package:events/ui/appbar/sliver_bar.dart';
 import 'package:events/ui/body/components/event_item.dart';
 import 'package:events/ui/body/components/list_group.dart';
@@ -15,6 +15,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class EventsScreen extends StatelessWidget {
+  final String regionName;
+
+  EventsScreen(this.regionName);
+
   // TODO: EventsScreen
   //* 1. collapse appbar when openned
   // final ScrollModel scroll = Provider.of<ScrollModel>(context);
@@ -23,12 +27,10 @@ class EventsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Region region =
-        Provider.of<RegionsModel>(context, listen: false).selected;
     final Category category =
         Provider.of<CategoryModel>(context, listen: false).selected;
     return SliverScaffold(
-      appbar: SliverBar(title: category.name, subtitle: region.name),
+      appbar: SliverBar(title: category.name, subtitle: regionName),
       body: Selector<CalendarModel, DateTime>(
         selector: (_, calendar) => calendar.selected,
         builder: (_, ___, __) {
@@ -44,7 +46,7 @@ class EventsScreen extends StatelessWidget {
                 success: !events.isEmpty()
                     ? SliverList(
                         delegate: SliverChildListDelegate(
-                          eventsList(events.subregions),
+                          eventsList(events),
                         ),
                       )
                     //! 2
@@ -67,16 +69,20 @@ class EventsScreen extends StatelessWidget {
   }
 }
 
-List<Widget> eventsList(Map<String, List<Event>> subregions) {
+List<Widget> eventsList(EventsModel events) {
   final List<Widget> list = [];
-  List<Widget> events;
-  for (final String subregion in subregions.keys) {
-    list.add(ListSubtitle(subregion));
-    events = [];
-    for (final Event event in subregions[subregion]) {
-      events.add(EventItem(event));
-    }
-    list.add(ListGroup(items: events));
+
+  List<EventItem> eventItems;
+
+  for (final subregion in events.subregions) {
+    list.add(ListSubtitle(subregion.name));
+
+    // eventItems = [];
+    // for (final eventId in subregion.eventIds) {
+    //   // eventItems.add(EventItem(events.getEvents(event));
+    // }
+
+    // list.add(ListGroup(items: eventItems));
   }
   return list;
 }

@@ -15,7 +15,7 @@ class _$RegionTearOff {
 
 // ignore: unused_element
   _Region call(
-      {@required UniqueId id,
+      {@required String id,
       @required String name,
       @required EventCounter eventCounter}) {
     return _Region(
@@ -32,7 +32,7 @@ const $Region = _$RegionTearOff();
 
 /// @nodoc
 mixin _$Region {
-  UniqueId get id;
+  String get id;
   String get name;
   EventCounter get eventCounter;
 
@@ -43,7 +43,7 @@ mixin _$Region {
 abstract class $RegionCopyWith<$Res> {
   factory $RegionCopyWith(Region value, $Res Function(Region) then) =
       _$RegionCopyWithImpl<$Res>;
-  $Res call({UniqueId id, String name, EventCounter eventCounter});
+  $Res call({String id, String name, EventCounter eventCounter});
 }
 
 /// @nodoc
@@ -61,7 +61,7 @@ class _$RegionCopyWithImpl<$Res> implements $RegionCopyWith<$Res> {
     Object eventCounter = freezed,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed ? _value.id : id as UniqueId,
+      id: id == freezed ? _value.id : id as String,
       name: name == freezed ? _value.name : name as String,
       eventCounter: eventCounter == freezed
           ? _value.eventCounter
@@ -75,7 +75,7 @@ abstract class _$RegionCopyWith<$Res> implements $RegionCopyWith<$Res> {
   factory _$RegionCopyWith(_Region value, $Res Function(_Region) then) =
       __$RegionCopyWithImpl<$Res>;
   @override
-  $Res call({UniqueId id, String name, EventCounter eventCounter});
+  $Res call({String id, String name, EventCounter eventCounter});
 }
 
 /// @nodoc
@@ -94,7 +94,7 @@ class __$RegionCopyWithImpl<$Res> extends _$RegionCopyWithImpl<$Res>
     Object eventCounter = freezed,
   }) {
     return _then(_Region(
-      id: id == freezed ? _value.id : id as UniqueId,
+      id: id == freezed ? _value.id : id as String,
       name: name == freezed ? _value.name : name as String,
       eventCounter: eventCounter == freezed
           ? _value.eventCounter
@@ -112,7 +112,7 @@ class _$_Region implements _Region {
         assert(eventCounter != null);
 
   @override
-  final UniqueId id;
+  final String id;
   @override
   final String name;
   @override
@@ -150,12 +150,12 @@ class _$_Region implements _Region {
 
 abstract class _Region implements Region {
   const factory _Region(
-      {@required UniqueId id,
+      {@required String id,
       @required String name,
       @required EventCounter eventCounter}) = _$_Region;
 
   @override
-  UniqueId get id;
+  String get id;
   @override
   String get name;
   @override
