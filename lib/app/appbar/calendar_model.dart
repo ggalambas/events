@@ -8,6 +8,7 @@ import 'package:injectable/injectable.dart';
 class CalendarModel extends ChangeNotifier {
   final IEventRepository _eventRepository;
 
+  //TODO: DateTime to just Date
   DateTime _today = DateTime.now();
 
   DateTime get selected => _eventRepository.selectedDate;

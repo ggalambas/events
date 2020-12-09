@@ -20,23 +20,41 @@ class CategoryItem extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
     final CategoryModel model =
         Provider.of<CategoryModel>(context, listen: false);
+    final bool isSelected = model.isSelected(category);
+    final BorderRadius borderRadius = BorderRadius.horizontal(
+      right: Radius.circular(kBorderRadiusMedium),
+    );
     return Padding(
-      padding: EdgeInsets.only(right: kDrawerRightPadding),
-      child: ListTile(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.horizontal(
-            right: Radius.circular(kBorderRadiusMedium),
+      padding: EdgeInsets.only(right: kDrawerPadding),
+      child: ClipRRect(
+        borderRadius: borderRadius,
+        child: ListTile(
+          shape: RoundedRectangleBorder(borderRadius: borderRadius),
+          dense: true,
+          onTap: () {
+            model.selected = category;
+            Navigator.pop(context);
+          },
+          selected: isSelected,
+          leading: Icon(
+            icon,
+            color: !isSelected
+                ? theme.colorScheme.onBackground
+                : theme.colorScheme.primary,
           ),
+          title: Text(
+            name,
+            style: !isSelected
+                ? theme.textTheme.bodyText1
+                : theme.textTheme.bodyText2.copyWith(
+                    color: theme.colorScheme.primary,
+                    fontWeight: FontWeight.w500,
+                  ),
+          ),
+          trailing: Counters(counter, selected: isSelected),
+          selectedTileColor:
+              theme.colorScheme.primary.withOpacity(kPrimaryOpacity),
         ),
-        dense: true,
-        onTap: () {
-          model.selected = category;
-          Navigator.pop(context);
-        },
-        selected: model.isSelected(category), //! 4
-        leading: Icon(icon, color: theme.colorScheme.onBackground),
-        title: Text(name, style: theme.textTheme.bodyText1),
-        trailing: Counters(counter),
       ),
     );
   }

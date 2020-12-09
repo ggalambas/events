@@ -1,4 +1,5 @@
 import 'package:events/app/drawer/category_model.dart';
+import 'package:events/config/constants.dart';
 import 'package:events/domain/categories/category.dart';
 import 'package:events/ui/body/components/list_subtitle.dart';
 import 'package:events/ui/drawer/components/category_item.dart';
@@ -11,15 +12,13 @@ class CategoryDrawer extends StatelessWidget {
   //* 1. Header
   //* 2. Saved Events
   //* 3. Favorite Categories
-  //* If theres no favorites, change 'other categories' to 'categories'
-  //* 4. CategoryItem > selected color
+  //*    If theres no favorites, change 'other categories' to 'categories'
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final CategoryModel model = Provider.of<CategoryModel>(context);
     return Drawer(
-      child: ListView(
-        padding: EdgeInsets.zero,
+      child: Column(
         children: [
           UserAccountsDrawerHeader(
             //! 1
@@ -28,25 +27,33 @@ class CategoryDrawer extends StatelessWidget {
             decoration: BoxDecoration(
               color: theme.colorScheme.primaryVariant,
             ),
+            margin: EdgeInsets.zero,
           ),
-          model.load.map(
-            inProgress: Text('Loading'), //TODO: loading
-            success: Column(
+          Expanded(
+            child: ListView(
+              padding: EdgeInsets.only(top: kDrawerPadding),
               children: [
-                //! 2
-                // CategoryItem(
-                //   'Guardados',
-                //   liveEvents: 17,
-                //   totalEvents: 58,
-                // ),
-                //! 3
-                // ListSubtitle('Favoritos'),
-                ListSubtitle('Categorias'),
-                for (Category category in model.categories)
-                  CategoryItem(category),
+                model.load.map(
+                  inProgress: Text('Loading'), //TODO: loading
+                  success: Column(
+                    children: [
+                      //! 2
+                      // CategoryItem(
+                      //   'Guardados',
+                      //   liveEvents: 17,
+                      //   totalEvents: 58,
+                      // ),
+                      //! 3
+                      // ListSubtitle('Favoritos'),
+                      ListSubtitle('Categorias'),
+                      for (Category category in model.categories)
+                        CategoryItem(category),
+                    ],
+                  ),
+                  failure: Text('Failure'), //TODO: failure
+                ),
               ],
             ),
-            failure: Text('Failure'), //TODO: failure
           ),
         ],
       ),

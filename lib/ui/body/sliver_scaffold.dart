@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'package:events/app/appbar/scroll_model.dart';
+import 'package:sliver_tools/sliver_tools.dart';
 
 class SliverScaffold extends StatelessWidget {
   final Widget drawer;
@@ -22,6 +23,8 @@ class SliverScaffold extends StatelessWidget {
       builder: (context, _) {
         final ScrollModel scroll =
             Provider.of<ScrollModel>(context, listen: false);
+        final double screenSize = MediaQuery.of(context).size.height;
+        final double statusBarHeight = MediaQuery.of(context).padding.top;
         return Scaffold(
           drawer: drawer,
           body: NotificationListener<ScrollEndNotification>(
@@ -30,11 +33,19 @@ class SliverScaffold extends StatelessWidget {
               return false;
             },
             child: CustomScrollView(
-              // physics: AlwaysScrollableScrollPhysics(),
               controller: scroll.controller,
               slivers: <Widget>[
                 appbar,
-                body,
+                SliverStack(
+                  children: [
+                    SliverToBoxAdapter(
+                      child: SizedBox(
+                        height: screenSize - kToolbarHeight - statusBarHeight,
+                      ),
+                    ),
+                    body,
+                  ],
+                ),
               ],
             ),
           ),
