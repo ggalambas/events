@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 
 class RegisterScreen extends StatelessWidget {
-  // TODO: Change notification bar text color (and navbar icon theme)
-  //? to match the onPrimary color in this page
-
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
@@ -27,7 +24,6 @@ class RegisterScreen extends StatelessWidget {
         body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            // TODO: Swap with logo or app name
             Text('Register', style: theme.textTheme.headline3),
           ],
         ),

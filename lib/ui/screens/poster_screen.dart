@@ -13,6 +13,12 @@ class PosterScreen extends StatefulWidget {
   _PosterScreenState createState() => _PosterScreenState();
 }
 
+//TODO: PosterScreen
+//* 1. Loading time (save on cache? or whatever)
+//* 2. Bookmark, save and change icon
+//* 3. Make LongPress properly remove systemUIOverlays
+//* 4. Know more can't be clicked multiple times
+
 class _PosterScreenState extends State<PosterScreen> {
   // String get name => widget.event.name.getOrCrash();
   // String get posterURL => widget.event.poster.getOrCrash().path;
@@ -36,15 +42,14 @@ class _PosterScreenState extends State<PosterScreen> {
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
-          // TODO: Loading time (save on cache? or whatever)
+          //! 1
           image: NetworkImage(posterURL),
           fit: BoxFit.cover,
         ),
       ),
       child: AnimatedOpacity(
         opacity: longPressing ? 0 : 1,
-        // TODO: Create variable for default animation duration
-        duration: Duration(milliseconds: 200),
+        duration: kAnimationDuration,
         child: Scaffold(
           appBar: AppBar(
             shape: RoundedRectangleBorder(
@@ -66,7 +71,7 @@ class _PosterScreenState extends State<PosterScreen> {
                       Icons.bookmark_border,
                       color: theme.colorScheme.onBackground,
                     ),
-                    onPressed: () {}, // TODO: Bookmark, save and change icon
+                    onPressed: () {}, //! 2
                   ),
                 ),
               ),
@@ -74,7 +79,7 @@ class _PosterScreenState extends State<PosterScreen> {
           ),
           backgroundColor: Colors.transparent,
           body: GestureDetector(
-            // TODO: make LongPress properly remove systemUIOverlays
+            //! 3
             onLongPressStart: (_) {
               // SystemChrome.setEnabledSystemUIOverlays([]);
               longPressing = true;
@@ -87,7 +92,7 @@ class _PosterScreenState extends State<PosterScreen> {
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerFloat,
           floatingActionButton: RaisedButton(
-            // TODO: Know more can't be clicked multiple times
+            //! 4
             onPressed: () async {
               try {
                 await launch(
@@ -105,7 +110,7 @@ class _PosterScreenState extends State<PosterScreen> {
                 );
               } catch (e) {
                 // An exception is thrown if browser app is not installed on Android device.
-                debugPrint(e.toString()); //!
+                debugPrint(e.toString()); //! review this
               }
             },
             color: theme.colorScheme.surface,

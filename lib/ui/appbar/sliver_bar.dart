@@ -10,9 +10,6 @@ class SliverBar extends StatelessWidget {
 
   const SliverBar({this.title, this.subtitle});
 
-  //TODO: SliverBar
-  //* 1. Snap items
-
   @override
   Widget build(BuildContext context) {
     final TextTheme textTheme = Theme.of(context).textTheme;

@@ -7,8 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class CategoryDrawer extends StatelessWidget {
-  //TODO: Give categories a name and icon
   //TODO: CategoryDrawer
+  //* 0. Give categories a name and icon
   //* 1. Header
   //* 2. Saved Events
   //* 3. Favorite Categories

@@ -96,7 +96,7 @@ class CalendarModel extends ChangeNotifier {
     double offset = snapWidth;
     double separator;
 
-    if (controller.offset != controller.position.maxScrollExtent)
+    if (controller.offset != controller.position.maxScrollExtent) {
       for (int i = 0; i < totalDays - 1; i++) {
         separator = isLastDayOfMonth(i)
             ? kCalendarItemSpace * 7 / 3 + 12
@@ -107,12 +107,13 @@ class CalendarModel extends ChangeNotifier {
         }
         offset += separator + kCalendarItemWidth;
       }
+    }
   }
 
   void _animate(double snapOffset) {
     controller.animateTo(
       snapOffset,
-      duration: Duration(milliseconds: 200),
+      duration: kAnimationDuration,
       curve: Curves.easeOut,
     );
   }

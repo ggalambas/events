@@ -48,7 +48,7 @@ class ScrollModel extends ChangeNotifier {
   void _animate(double snapOffset) {
     _controller.animateTo(
       snapOffset,
-      duration: Duration(milliseconds: 200),
+      duration: kAnimationDuration,
       curve: Curves.easeOut,
     );
   }

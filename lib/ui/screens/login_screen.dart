@@ -5,9 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
 
 class LoginScreen extends StatelessWidget {
-  // TODO: Change notification bar text color
-  //? to match the onPrimary color in this page
-
   @override
   Widget build(BuildContext context) {
     FlutterStatusbarcolor.setStatusBarWhiteForeground(false);
@@ -32,8 +29,7 @@ class LoginScreen extends StatelessWidget {
         backgroundColor: Colors.transparent,
         body: Column(
           children: [
-            // TODO: Swap with logo or app name
-            Container(
+            SizedBox(
               height: 200,
               child: Center(
                 child: Text(

@@ -2,7 +2,8 @@ const double kBorderRadiusBig = 15.0;
 const double kBorderRadiusMedium = 10.0;
 const double kBorderRadiusSmall = 5.0;
 
-// Color with opacity
+const Duration kAnimationDuration = Duration(milliseconds: 200);
+
 const double kPrimaryOpacity = 0.15;
 
 // Drawer
