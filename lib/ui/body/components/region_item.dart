@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:events/app/body/regions_model.dart';
+import 'package:events/config/constants.dart';
 import 'package:events/config/routes/router.gr.dart';
 import 'package:events/domain/core/event_counter.dart';
 import 'package:events/domain/regions/region.dart';
@@ -20,6 +21,9 @@ class RegionItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final TextTheme textTheme = Theme.of(context).textTheme;
     return ListTile(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(kBorderRadiusBig),
+      ),
       dense: true,
       onTap: () {
         Provider.of<RegionsModel>(context, listen: false).selected = region;

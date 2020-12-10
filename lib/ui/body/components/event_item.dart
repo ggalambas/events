@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:events/config/constants.dart';
 import 'package:events/config/routes/router.gr.dart';
 import 'package:events/domain/events/event.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +17,9 @@ class EventItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     return ListTile(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(kBorderRadiusBig),
+      ),
       dense: true,
       onTap: () => ExtendedNavigator.root.pushPosterScreen(event: event),
       leading: Text(

@@ -1,3 +1,4 @@
+import 'package:events/app/appbar/calendar_model.dart';
 import 'package:events/populate.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -18,18 +19,26 @@ class SliverScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final CalendarModel calendar =
+        Provider.of<CalendarModel>(context, listen: false);
+    final double screenSize = MediaQuery.of(context).size.height;
+    final double statusBarHeight = MediaQuery.of(context).padding.top;
+
+    calendar.snapSelected();
+
     return ChangeNotifierProvider<ScrollModel>(
       create: (_) => ScrollModel(),
       builder: (context, _) {
         final ScrollModel scroll =
             Provider.of<ScrollModel>(context, listen: false);
-        final double screenSize = MediaQuery.of(context).size.height;
-        final double statusBarHeight = MediaQuery.of(context).padding.top;
         return Scaffold(
           drawer: drawer,
           body: NotificationListener<ScrollEndNotification>(
             onNotification: (_) {
               scroll.snapFlexbar();
+              if (scroll.isFlexbarCollapsed) {
+                calendar.snapSelected();
+              }
               return false;
             },
             child: CustomScrollView(
@@ -49,7 +58,8 @@ class SliverScaffold extends StatelessWidget {
               ],
             ),
           ),
-          // floatingActionButton: FloatingActionButton(onPressed: populate), //! button to populate
+          //! button to populate
+          // floatingActionButton: FloatingActionButton(onPressed: populate),
         );
       },
     );

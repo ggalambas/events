@@ -25,10 +25,11 @@ class ScrollModel extends ChangeNotifier {
 
   void snapFlexbar() {
     if (_controller.offset > 0 && _controller.offset < _flexbarHeight) {
-      final double snapOffset =
-          _controller.offset / _flexbarHeight > 0.5 ? _flexbarHeight : 0;
-
-      Future.microtask(() => _animate(snapOffset));
+      Future.microtask(
+        () => _controller.offset / _flexbarHeight > 0.5
+            ? collapseFlexBar()
+            : expandFlexBar(),
+      );
     }
   }
 
@@ -47,7 +48,7 @@ class ScrollModel extends ChangeNotifier {
   void _animate(double snapOffset) {
     _controller.animateTo(
       snapOffset,
-      duration: Duration(milliseconds: 200),
+      duration: kAnimationDuration,
       curve: Curves.easeOut,
     );
   }
