@@ -31,7 +31,7 @@ class RegionsModel extends BaseModel {
   bool isEmpty() => _near.isEmpty && _others.isEmpty;
 
   void _loadSuccess(List<Region> regions) {
-    _near = regions;
+    _others = regions;
     loadSuccess();
   }
 
