@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:events/config/injection.dart';
+import 'package:events/domain/events/i_event_repository.dart';
 
 extension FirestoreX on FirebaseFirestore {
   // Future<DocumentReference> userDocument() async {
@@ -9,12 +11,52 @@ extension FirestoreX on FirebaseFirestore {
   //       .doc(user.id.getOrCrash());
   // }
 
-  CollectionReference get eventsCollection => collection('events');
-  CollectionReference get categoriesCollection => collection('categories');
-  CollectionReference get categoryRegionsCollection =>
-      collection('categoryRegions');
-  CollectionReference get categoryRegionEventsCollection =>
-      collection('categoryRegionEvents');
+  CollectionReference eventsCollection() {
+    return collection('events');
+  }
+
+  CollectionReference categoriesCollection() {
+    return collection('categories');
+  }
+
+  CollectionReference regionsCollection([
+    String categoryId,
+    String day,
+  ]) {
+    final repo = getIt<IEventRepository>();
+    return collection('categoryRegions')
+        .doc(categoryId ?? repo.selectedCategory.id)
+        .collection('days')
+        .doc(day ?? repo.selectedDate.day.toString())
+        .collection('regions');
+  }
+
+  CollectionReference subregionsCollection([
+    String categoryId,
+    String day,
+    String regionId,
+  ]) {
+    final repo = getIt<IEventRepository>();
+    return collection('categoryRegionEvents')
+        .doc(categoryId ?? repo.selectedCategory.id)
+        .collection('days')
+        .doc(day ?? repo.selectedDate.day.toString())
+        .collection('regions')
+        .doc(regionId ?? repo.selectedRegion.id)
+        .collection('subregions');
+  }
+}
+
+extension DocumentReferenceX on DocumentReference {
+  Future<void> incrementTotalEvents() =>
+      update({'totalEvents': FieldValue.increment(1)});
+
+  Future<void> setOrIncrementTotalEvents() =>
+      set({'totalEvents': FieldValue.increment(1)}, SetOptions(merge: true));
+
+  Future<void> addToEventsList(String eventId) => set({
+        'events': FieldValue.arrayUnion([eventId])
+      }, SetOptions(merge: true));
 }
 
 /*

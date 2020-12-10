@@ -29,8 +29,9 @@ class EventSearch extends SearchDelegate {
       link: EventLink(
         'https://pt.wikipedia.org/wiki/Aladdin_(filme_de_2019)',
       ),
-      subregionId: UniqueId.fromUniqueString('$i'),
-      categoryId: UniqueId.fromUniqueString('$i'),
+      regionId: '$i',
+      subregionId: '$i',
+      categoryId: '$i',
       poster: Poster(
         File(
           'https://br.web.img3.acsta.net/pictures/18/10/11/11/47/0874456.jpg',

@@ -19,14 +19,16 @@ class _$EventTearOff {
       @required EventName name,
       @required DateTime date,
       @required EventLink link,
-      @required UniqueId subregionId,
-      @required UniqueId categoryId,
+      @required String regionId,
+      @required String subregionId,
+      @required String categoryId,
       @required Poster poster}) {
     return _Event(
       id: id,
       name: name,
       date: date,
       link: link,
+      regionId: regionId,
       subregionId: subregionId,
       categoryId: categoryId,
       poster: poster,
@@ -44,8 +46,9 @@ mixin _$Event {
   EventName get name;
   DateTime get date;
   EventLink get link;
-  UniqueId get subregionId;
-  UniqueId get categoryId;
+  String get regionId;
+  String get subregionId;
+  String get categoryId;
   Poster get poster;
 
   $EventCopyWith<Event> get copyWith;
@@ -60,8 +63,9 @@ abstract class $EventCopyWith<$Res> {
       EventName name,
       DateTime date,
       EventLink link,
-      UniqueId subregionId,
-      UniqueId categoryId,
+      String regionId,
+      String subregionId,
+      String categoryId,
       Poster poster});
 }
 
@@ -79,6 +83,7 @@ class _$EventCopyWithImpl<$Res> implements $EventCopyWith<$Res> {
     Object name = freezed,
     Object date = freezed,
     Object link = freezed,
+    Object regionId = freezed,
     Object subregionId = freezed,
     Object categoryId = freezed,
     Object poster = freezed,
@@ -88,10 +93,11 @@ class _$EventCopyWithImpl<$Res> implements $EventCopyWith<$Res> {
       name: name == freezed ? _value.name : name as EventName,
       date: date == freezed ? _value.date : date as DateTime,
       link: link == freezed ? _value.link : link as EventLink,
+      regionId: regionId == freezed ? _value.regionId : regionId as String,
       subregionId:
-          subregionId == freezed ? _value.subregionId : subregionId as UniqueId,
+          subregionId == freezed ? _value.subregionId : subregionId as String,
       categoryId:
-          categoryId == freezed ? _value.categoryId : categoryId as UniqueId,
+          categoryId == freezed ? _value.categoryId : categoryId as String,
       poster: poster == freezed ? _value.poster : poster as Poster,
     ));
   }
@@ -107,8 +113,9 @@ abstract class _$EventCopyWith<$Res> implements $EventCopyWith<$Res> {
       EventName name,
       DateTime date,
       EventLink link,
-      UniqueId subregionId,
-      UniqueId categoryId,
+      String regionId,
+      String subregionId,
+      String categoryId,
       Poster poster});
 }
 
@@ -127,6 +134,7 @@ class __$EventCopyWithImpl<$Res> extends _$EventCopyWithImpl<$Res>
     Object name = freezed,
     Object date = freezed,
     Object link = freezed,
+    Object regionId = freezed,
     Object subregionId = freezed,
     Object categoryId = freezed,
     Object poster = freezed,
@@ -136,10 +144,11 @@ class __$EventCopyWithImpl<$Res> extends _$EventCopyWithImpl<$Res>
       name: name == freezed ? _value.name : name as EventName,
       date: date == freezed ? _value.date : date as DateTime,
       link: link == freezed ? _value.link : link as EventLink,
+      regionId: regionId == freezed ? _value.regionId : regionId as String,
       subregionId:
-          subregionId == freezed ? _value.subregionId : subregionId as UniqueId,
+          subregionId == freezed ? _value.subregionId : subregionId as String,
       categoryId:
-          categoryId == freezed ? _value.categoryId : categoryId as UniqueId,
+          categoryId == freezed ? _value.categoryId : categoryId as String,
       poster: poster == freezed ? _value.poster : poster as Poster,
     ));
   }
@@ -152,6 +161,7 @@ class _$_Event implements _Event {
       @required this.name,
       @required this.date,
       @required this.link,
+      @required this.regionId,
       @required this.subregionId,
       @required this.categoryId,
       @required this.poster})
@@ -159,6 +169,7 @@ class _$_Event implements _Event {
         assert(name != null),
         assert(date != null),
         assert(link != null),
+        assert(regionId != null),
         assert(subregionId != null),
         assert(categoryId != null),
         assert(poster != null);
@@ -172,15 +183,17 @@ class _$_Event implements _Event {
   @override
   final EventLink link;
   @override
-  final UniqueId subregionId;
+  final String regionId;
   @override
-  final UniqueId categoryId;
+  final String subregionId;
+  @override
+  final String categoryId;
   @override
   final Poster poster;
 
   @override
   String toString() {
-    return 'Event(id: $id, name: $name, date: $date, link: $link, subregionId: $subregionId, categoryId: $categoryId, poster: $poster)';
+    return 'Event(id: $id, name: $name, date: $date, link: $link, regionId: $regionId, subregionId: $subregionId, categoryId: $categoryId, poster: $poster)';
   }
 
   @override
@@ -195,6 +208,9 @@ class _$_Event implements _Event {
                 const DeepCollectionEquality().equals(other.date, date)) &&
             (identical(other.link, link) ||
                 const DeepCollectionEquality().equals(other.link, link)) &&
+            (identical(other.regionId, regionId) ||
+                const DeepCollectionEquality()
+                    .equals(other.regionId, regionId)) &&
             (identical(other.subregionId, subregionId) ||
                 const DeepCollectionEquality()
                     .equals(other.subregionId, subregionId)) &&
@@ -212,6 +228,7 @@ class _$_Event implements _Event {
       const DeepCollectionEquality().hash(name) ^
       const DeepCollectionEquality().hash(date) ^
       const DeepCollectionEquality().hash(link) ^
+      const DeepCollectionEquality().hash(regionId) ^
       const DeepCollectionEquality().hash(subregionId) ^
       const DeepCollectionEquality().hash(categoryId) ^
       const DeepCollectionEquality().hash(poster);
@@ -227,8 +244,9 @@ abstract class _Event implements Event {
       @required EventName name,
       @required DateTime date,
       @required EventLink link,
-      @required UniqueId subregionId,
-      @required UniqueId categoryId,
+      @required String regionId,
+      @required String subregionId,
+      @required String categoryId,
       @required Poster poster}) = _$_Event;
 
   @override
@@ -240,9 +258,11 @@ abstract class _Event implements Event {
   @override
   EventLink get link;
   @override
-  UniqueId get subregionId;
+  String get regionId;
   @override
-  UniqueId get categoryId;
+  String get subregionId;
+  @override
+  String get categoryId;
   @override
   Poster get poster;
   @override

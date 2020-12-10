@@ -20,6 +20,7 @@ class RegionsScreen extends StatelessWidget {
   //*    rename 'outros concelhos' to 'concelhos' if
   //* 3. empty results
   //* 4. RegionsModel
+  //* 5. All Events
   @override
   Widget build(BuildContext context) {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
@@ -28,14 +29,15 @@ class RegionsScreen extends StatelessWidget {
       builder: (_, category, __) {
         return SliverScaffold(
           drawer: CategoryDrawer(),
-          appbar: SliverStack(
+          appbar:
+              /*SliverStack(
             children: [
               SliverPositioned.fill(
                 child: Container(color: colorScheme.surface),
-              ),
+              ),*/
               SliverBar(title: category.name),
-            ],
-          ),
+          //   ],
+          // ),
           body: Selector<CalendarModel, DateTime>(
             selector: (_, calendar) => calendar.selected,
             builder: (_, ___, __) {
@@ -53,12 +55,12 @@ class RegionsScreen extends StatelessWidget {
                         ? SliverList(
                             delegate: SliverChildListDelegate(
                               [
-                                ListGroup(
-                                  first: true,
-                                  items: [
-                                    RegionItem(regions.all),
-                                  ],
-                                ),
+                                // ListGroup(
+                                //   first: true,
+                                //   items: [
+                                //     RegionItem(regions.all),
+                                //   ],
+                                // ),
                                 //! 2
                                 // ListSubtitle('Concelhos mais próximos'),
                                 // ListGroup(

@@ -33,7 +33,7 @@ class CategoryModel extends BaseModel {
   void listen() {
     loadInProgress();
     _eventRepository
-        .categoryCounters()
+        .categories()
         .listen((failureOrCategories) => failureOrCategories.fold(
               (f) => _loadFailure(f),
               (categories) => _loadSuccess(categories),

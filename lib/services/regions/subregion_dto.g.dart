@@ -6,15 +6,17 @@ part of 'subregion_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_SubregionDto _$_$_SubregionDtoFromJson(Map<String, dynamic> json) {
-  return _$_SubregionDto(
+SubregionDto _$SubregionDtoFromJson(Map<String, dynamic> json) {
+  return SubregionDto(
+    id: json['id'] as String,
     name: json['name'] as String,
-    eventIds: (json['eventIds'] as List)?.map((e) => e as String)?.toList(),
+    regionName: json['regionName'] as String,
   );
 }
 
-Map<String, dynamic> _$_$_SubregionDtoToJson(_$_SubregionDto instance) =>
+Map<String, dynamic> _$SubregionDtoToJson(SubregionDto instance) =>
     <String, dynamic>{
+      'id': instance.id,
       'name': instance.name,
-      'eventIds': instance.eventIds,
+      'regionName': instance.regionName,
     };
