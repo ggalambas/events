@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'dart:math';
+import 'package:events/config/constants.dart';
 import 'package:events/domain/events/i_event_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:events/app/helpers/date_time_x.dart';
@@ -49,7 +51,6 @@ class CalendarModel extends ChangeNotifier {
 
   bool isSelected(int daysAfter) => today.after(daysAfter).day == selected.day;
   bool isLastDayOfMonth(int daysAfter) => today.after(daysAfter + 1).day == 1;
-  bool isLastShownDay(int daysAfter) => daysAfter == totalDays - 1;
 
   String nextMonth(int daysAfter) => today.after(daysAfter + 1).monthName;
   String weekDay(int daysAfter) => today.after(daysAfter).weekdayName;
@@ -59,4 +60,66 @@ class CalendarModel extends ChangeNotifier {
 
   String get selectedDay => selected.day.toString();
   String get selectedMonth => selected.monthName;
+
+  // Scroll Controller
+
+  final ScrollController _controller = ScrollController();
+  ScrollController get controller => _controller;
+
+  void snapSelected() {
+    Future.microtask(() => _snapSelected());
+  }
+
+  void _snapSelected() {
+    final double snapWidth = kCalendarItemWidth * 0.75;
+    double offset = snapWidth;
+    double separator;
+
+    for (int i = 0; i < selected.day - today.day; i++) {
+      separator = isLastDayOfMonth(i)
+          ? kCalendarItemSpace * 7 / 3 + 12
+          : kCalendarItemSpace;
+      offset += separator + kCalendarItemWidth;
+    }
+
+    _jump(min(offset - snapWidth, controller.position.maxScrollExtent));
+  }
+
+  // controller.position.maxScrollExtent
+
+  void snapItems() {
+    Future.microtask(() => _snapItems());
+  }
+
+  void _snapItems() {
+    final double snapWidth = kCalendarItemWidth * 0.75;
+    double offset = snapWidth;
+    double separator;
+
+    if (controller.offset != controller.position.maxScrollExtent)
+      for (int i = 0; i < totalDays - 1; i++) {
+        separator = isLastDayOfMonth(i)
+            ? kCalendarItemSpace * 7 / 3 + 12
+            : kCalendarItemSpace;
+        if (controller.offset < offset) {
+          _animate(offset - snapWidth);
+          break;
+        }
+        offset += separator + kCalendarItemWidth;
+      }
+  }
+
+  void _animate(double snapOffset) {
+    controller.animateTo(
+      snapOffset,
+      duration: Duration(milliseconds: 200),
+      curve: Curves.easeOut,
+    );
+  }
+
+  void _jump(double snapOffset) {
+    controller.jumpTo(
+      snapOffset,
+    );
+  }
 }

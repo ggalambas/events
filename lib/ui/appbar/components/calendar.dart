@@ -21,36 +21,42 @@ class Calendar extends StatelessWidget {
         ),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(kBorderRadiusMedium),
-          child: ListView.separated(
-            scrollDirection: Axis.horizontal,
-            itemCount: calendar.totalDays,
-            separatorBuilder: (_, daysAfter) {
-              return !calendar.isLastShownDay(daysAfter) &&
-                      calendar.isLastDayOfMonth(daysAfter)
-                  ? Padding(
-                      padding: EdgeInsets.only(
-                        left: kCalendarItemSpace * 4 / 3,
-                        right: kCalendarItemSpace,
-                      ),
-                      child: RotatedBox(
-                        quarterTurns: -1,
-                        child: Text(
-                          calendar.nextMonth(daysAfter).toUpperCase(),
-                          textAlign: TextAlign.center,
-                          style: textTheme.overline.copyWith(fontSize: 12.0),
+          child: NotificationListener<ScrollEndNotification>(
+            onNotification: (_) {
+              calendar.snapItems();
+              return false;
+            },
+            child: ListView.separated(
+              controller: calendar.controller,
+              scrollDirection: Axis.horizontal,
+              itemCount: calendar.totalDays,
+              separatorBuilder: (_, daysAfter) {
+                return calendar.isLastDayOfMonth(daysAfter)
+                    ? Padding(
+                        padding: EdgeInsets.only(
+                          left: kCalendarItemSpace * 4 / 3,
+                          right: kCalendarItemSpace,
                         ),
-                      ),
-                    )
-                  : SizedBox(width: kCalendarItemSpace);
-            },
-            itemBuilder: (_, daysAfter) {
-              return CalendarItem(
-                weekDay: calendar.weekDay(daysAfter)[0].toUpperCase(),
-                day: calendar.day(daysAfter),
-                isSelected: calendar.isSelected(daysAfter),
-                onPressed: () => calendar.select(daysAfter),
-              );
-            },
+                        child: RotatedBox(
+                          quarterTurns: -1,
+                          child: Text(
+                            calendar.nextMonth(daysAfter).toUpperCase(),
+                            textAlign: TextAlign.center,
+                            style: textTheme.overline.copyWith(fontSize: 12.0),
+                          ),
+                        ),
+                      )
+                    : SizedBox(width: kCalendarItemSpace);
+              },
+              itemBuilder: (_, daysAfter) {
+                return CalendarItem(
+                  weekDay: calendar.weekDay(daysAfter)[0].toUpperCase(),
+                  day: calendar.day(daysAfter),
+                  isSelected: calendar.isSelected(daysAfter),
+                  onPressed: () => calendar.select(daysAfter),
+                );
+              },
+            ),
           ),
         ),
       ),

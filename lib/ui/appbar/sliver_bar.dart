@@ -11,8 +11,7 @@ class SliverBar extends StatelessWidget {
   const SliverBar({this.title, this.subtitle});
 
   //TODO: SliverBar
-  //* 1. Calendar button hidden when page not scrollable or make it work
-  //* 2. Snap items
+  //* 1. Snap items
 
   @override
   Widget build(BuildContext context) {

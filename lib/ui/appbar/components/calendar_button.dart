@@ -14,15 +14,16 @@ class CalendarButton extends StatelessWidget {
 
     return scroll.isFlexbarCollapsed
         ? Container(
-            //TODO: onPressed: close even when not scrollable
-            //* or remove button
             margin: EdgeInsets.only(right: kAppBarHorizPadding),
             width: kAppBarButtonWidth,
             padding: EdgeInsets.symmetric(
               vertical: (kToolbarHeight - kCalendarItemWidth) / 2,
             ),
             child: FlatButton(
-              onPressed: scroll.toggleFlexbar,
+              onPressed: () {
+                scroll.expandFlexBar();
+                calendar.snapSelected();
+              },
               color: theme.colorScheme.primary,
               padding: EdgeInsets.zero,
               shape: RoundedRectangleBorder(
@@ -40,7 +41,7 @@ class CalendarButton extends StatelessWidget {
             child: Center(
               child: IconButton(
                 icon: Icon(Icons.expand_less),
-                onPressed: scroll.toggleFlexbar,
+                onPressed: scroll.collapseFlexBar,
               ),
             ),
           );
