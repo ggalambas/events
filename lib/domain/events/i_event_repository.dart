@@ -10,10 +10,10 @@ abstract class IEventRepository {
   DateTime selectedDate;
   Region selectedRegion;
 
-  Stream<Either<EventFailure, List<Category>>> categoryCounters();
-  Stream<Either<EventFailure, List<Region>>> regionCounters();
-  Stream<Either<EventFailure, List<Subregion>>> regionEvents();
-  Future<List<Event>> subregionEvents(List<String> eventIds);
+  Stream<Either<EventFailure, List<Category>>> categories();
+  Stream<Either<EventFailure, List<Region>>> regions();
+  Stream<Either<EventFailure, List<Subregion>>> subregions();
+  Stream<Either<EventFailure, Event>> event(String eventId); //!
   // Stream<Either<EventFailure, List<Event>>> dayEvents(
   //   String category,
   //   DateTime day,
@@ -23,5 +23,7 @@ abstract class IEventRepository {
   //   DateTime day,
   //   String region,
   // );
-  Future<Either<EventFailure, Unit>> createEvent(Event event);
+  Future<Either<EventFailure, Unit>> create(Event event);
+  Future<Either<EventFailure, Unit>> update(Event event);
+  Future<Either<EventFailure, Unit>> delete(Event event);
 }

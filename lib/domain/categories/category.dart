@@ -1,23 +1,15 @@
 import 'package:events/domain/core/event_counter.dart';
-import 'package:events/domain/core/value_objects.dart';
+import 'package:events/domain/core/id_object.dart';
 import 'package:flutter/material.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'category.freezed.dart';
+class Category extends IdObject {
+  IconData icon;
+  EventCounter eventCounter;
 
-@freezed
-abstract class Category with _$Category {
-  const factory Category({
-    @required UniqueId id,
+  Category({
+    @required String id,
     @required String name,
-    @required IconData icon,
-    @required EventCounter eventCounter,
-  }) = _Category;
+    @required this.icon,
+    @required this.eventCounter,
+  }) : super(id: id, name: name);
 }
-
-//TODO == only equals id
-// @override
-// bool operator ==(dynamic other) => other is Category && other.id == id;
-
-// @override
-// external int get hashCode;

@@ -23,7 +23,7 @@ abstract class CategoryDto implements _$CategoryDto {
 
   factory CategoryDto.fromDomain(Category category) {
     return CategoryDto(
-      id: category.id.getOrCrash(),
+      id: category.id,
       name: category.name,
       icon: category.icon.codePoint,
       liveEvents: category.eventCounter.live,
@@ -33,7 +33,7 @@ abstract class CategoryDto implements _$CategoryDto {
 
   Category toDomain() {
     return Category(
-      id: UniqueId.fromUniqueString(id),
+      id: id,
       name: name,
       icon: IconData(icon, fontFamily: 'MaterialIcons'),
       eventCounter: EventCounter(live: liveEvents, total: totalEvents),

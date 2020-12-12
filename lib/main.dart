@@ -20,8 +20,8 @@ Future<void> main() async {
 }
 
 //TODO:
-//* 1. splash screen
-// https://flutter.dev/docs/development/ui/advanced/splash-screen
+//* 1. icons and then splash screen
+// splash screen -> https://flutter.dev/docs/development/ui/advanced/splash-screen
 //* 2. getOrCrash();
 
 class MyApp extends StatefulWidget {

@@ -6,17 +6,14 @@ part of 'region_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_RegionDto _$_$_RegionDtoFromJson(Map<String, dynamic> json) {
-  return _$_RegionDto(
+RegionDto _$RegionDtoFromJson(Map<String, dynamic> json) {
+  return RegionDto(
+    id: json['id'] as String,
     name: json['name'] as String,
-    liveEvents: json['liveEvents'] as int ?? 0,
-    totalEvents: json['totalEvents'] as int,
   );
 }
 
-Map<String, dynamic> _$_$_RegionDtoToJson(_$_RegionDto instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$RegionDtoToJson(RegionDto instance) => <String, dynamic>{
+      'id': instance.id,
       'name': instance.name,
-      'liveEvents': instance.liveEvents,
-      'totalEvents': instance.totalEvents,
     };

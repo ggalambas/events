@@ -1,13 +1,14 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:events/config/injection.dart';
 import 'package:events/domain/core/value_objects.dart';
 import 'package:events/domain/events/event.dart';
 import 'package:events/domain/events/i_event_repository.dart';
 import 'package:events/domain/events/value_objects.dart';
+import 'package:events/domain/regions/i_region_api.dart';
 import 'package:events/services/categories/category_dto.dart';
 import 'package:events/services/events/event_repository.dart';
-import 'package:events/services/regions/fake_region_api.dart';
 import 'package:faker/faker.dart';
 import 'package:events/services/core/firebase_helpers.dart';
 
@@ -16,12 +17,13 @@ Future populate() async {
   final Faker faker = Faker();
 
   final QuerySnapshot categoriesSnapshot =
-      await firestore.categoriesCollection.get();
+      await firestore.categoriesCollection().get();
   final List<String> categories = [];
   categoriesSnapshot.docs.forEach((doc) => categories.add(doc.id));
 
-  final FakeRegionApi regionApi = FakeRegionApi();
-  final List<String> subregions = await regionApi.subregionsIds();
+  final IRegionApi regionApi = getIt<IRegionApi>();
+  final List<String> subregions = [];
+  // regionApi.subregions.map((subregion) => subregion.id).toList();
 
   final IEventRepository eventRepository = EventRepository(firestore);
 
@@ -32,14 +34,14 @@ Future populate() async {
       name: EventName(faker.lorem.words(3).join(' ')),
       date: DateTime(2020, 12, faker.randomGenerator.integer(21, min: 7)),
       link: EventLink(faker.internet.httpUrl()),
-      subregionId: UniqueId.fromUniqueString(
-          subregions[faker.randomGenerator.integer(subregions.length)]),
-      categoryId: UniqueId.fromUniqueString(
-          categories[faker.randomGenerator.integer(categories.length)]),
+      regionId: subregions[faker.randomGenerator.integer(subregions.length)]
+          .substring(0, 4),
+      subregionId: subregions[faker.randomGenerator.integer(subregions.length)],
+      categoryId: categories[faker.randomGenerator.integer(categories.length)],
       poster: Poster(File(
           'https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F13%2F2017%2F10%2F04%2Fhonornativeland-2000.jpg')),
     );
-    eventRepository.createEvent(event);
+    eventRepository.create(event);
     print('event $i created');
   }
 }
@@ -48,11 +50,11 @@ void createCategories() {
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   for (int i = 1; i <= 15; i++) {
-    firestore.categoriesCollection.add(CategoryDto(
-      name: 'Categoria ${i.toString().padLeft(2, '0')}',
-      icon: 0xe643,
-      liveEvents: 0,
-      totalEvents: 0,
-    ).toJson());
+    firestore.categoriesCollection().add(CategoryDto(
+          name: 'Categoria ${i.toString().padLeft(2, '0')}',
+          icon: 0xe643,
+          liveEvents: 0,
+          totalEvents: 0,
+        ).toJson());
   }
 }

@@ -19,6 +19,7 @@ abstract class EventDto implements _$EventDto {
     @required String name,
     @required @ServerTimeStampConverter() Timestamp date,
     @required String link,
+    @required String regionId,
     @required String subregionId,
     @required String categoryId,
     @required String poster,
@@ -30,8 +31,9 @@ abstract class EventDto implements _$EventDto {
       name: event.name.getOrCrash(),
       date: Timestamp.fromDate(event.date),
       link: event.link.getOrCrash(),
-      subregionId: event.subregionId.getOrCrash(),
-      categoryId: event.categoryId.getOrCrash(),
+      regionId: event.regionId,
+      subregionId: event.subregionId,
+      categoryId: event.categoryId,
       poster: event.poster.getOrCrash().path, //TODO: store image on cloud
     );
   }
@@ -42,8 +44,9 @@ abstract class EventDto implements _$EventDto {
       name: EventName(name),
       date: date.toDate(),
       link: EventLink(link),
-      subregionId: UniqueId.fromUniqueString(subregionId),
-      categoryId: UniqueId.fromUniqueString(categoryId),
+      regionId: regionId,
+      subregionId: subregionId,
+      categoryId: categoryId,
       poster: Poster(File(poster)),
     );
   }

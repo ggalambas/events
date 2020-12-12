@@ -35,7 +35,7 @@ class EventsModel extends BaseModel {
   void listenToSubregions() {
     loadInProgress();
     _eventRepository
-        .regionEvents()
+        .subregions()
         .listen((failureOrEvents) => failureOrEvents.fold(
               (f) => _loadFailure(f),
               (subregions) => _loadSuccess(subregions),

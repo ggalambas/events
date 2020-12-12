@@ -1,14 +1,14 @@
+import 'package:events/domain/core/id_object.dart';
 import 'package:flutter/material.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'subregion.freezed.dart';
+class Subregion extends IdObject {
+  String regionName; //?
+  List<String> events;
 
-@freezed
-abstract class Subregion with _$Subregion {
-  const factory Subregion({
+  Subregion({
     @required String id,
-    @required String regionId, //?
     @required String name,
-    @required List<String> eventIds,
-  }) = _Subregion;
+    @required this.regionName,
+    this.events,
+  }) : super(id: id, name: name);
 }

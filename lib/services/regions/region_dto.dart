@@ -1,45 +1,36 @@
-import 'package:events/domain/core/event_counter.dart';
-import 'package:events/domain/core/value_objects.dart';
-import 'package:events/domain/regions/region.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:events/config/injection.dart';
+import 'package:events/domain/regions/i_region_api.dart';
+import 'package:events/domain/regions/region.dart';
+import 'package:events/services/core/event_counter_dto.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'region_dto.freezed.dart';
 part 'region_dto.g.dart';
 
-@freezed
-abstract class RegionDto implements _$RegionDto {
-  const RegionDto._();
+@JsonSerializable()
+class RegionDto {
+  String id;
+  String name;
 
-  const factory RegionDto({
-    @JsonKey(ignore: true) String id,
-    @required String name,
-    @Default(0) int liveEvents,
-    @required int totalEvents,
-  }) = _RegionDto;
-
-  factory RegionDto.fromDomain(Region region) {
-    return RegionDto(
-      id: region.id,
-      name: region.name,
-      liveEvents: region.eventCounter.live,
-      totalEvents: region.eventCounter.total,
-    );
-  }
+  RegionDto({
+    @required @JsonKey(name: 'dicofre') this.id,
+    @required @JsonKey(name: 'designacao') this.name,
+  });
 
   Region toDomain() {
     return Region(
       id: id,
       name: name,
-      eventCounter: EventCounter(live: liveEvents, total: totalEvents),
     );
   }
 
   factory RegionDto.fromJson(Map<String, dynamic> json) =>
       _$RegionDtoFromJson(json);
 
-  factory RegionDto.fromFirestore(DocumentSnapshot doc) =>
-      RegionDto.fromJson(doc.data()).copyWith(id: doc.id);
+  static Region fromFirestoreToDomain(DocumentSnapshot doc) {
+    final region = getIt<IRegionApi>().region(doc.id);
+    region.eventCounter = EventCounterDto.fromFirestore(doc).toDomain();
+    return region;
+  }
 }

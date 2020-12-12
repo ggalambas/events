@@ -1,45 +1,39 @@
+import 'package:events/config/injection.dart';
+import 'package:events/domain/events/i_event_repository.dart';
+import 'package:events/domain/regions/i_region_api.dart';
 import 'package:events/domain/regions/subregion.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'subregion_dto.freezed.dart';
 part 'subregion_dto.g.dart';
 
-@freezed
-abstract class SubregionDto implements _$SubregionDto {
-  const SubregionDto._();
+@JsonSerializable()
+class SubregionDto {
+  String id;
+  String name;
+  String regionName;
 
-  const factory SubregionDto({
-    @JsonKey(ignore: true) String id,
-    @JsonKey(ignore: true) String regionId,
-    @required String name,
-    @required List<String> eventIds,
-  }) = _SubregionDto;
-
-  factory SubregionDto.fromDomain(Subregion subregion) {
-    return SubregionDto(
-      id: subregion.id,
-      regionId: subregion.regionId,
-      name: subregion.name,
-      eventIds: subregion.eventIds,
-    );
-  }
+  SubregionDto({
+    @required @JsonKey(name: 'dicofre') this.id,
+    @required @JsonKey(name: 'freguesia') this.name,
+    @required @JsonKey(name: 'concelho') this.regionName,
+  });
 
   Subregion toDomain() {
     return Subregion(
       id: id,
-      regionId: regionId,
       name: name,
-      eventIds: eventIds,
+      regionName: regionName,
     );
   }
 
   factory SubregionDto.fromJson(Map<String, dynamic> json) =>
       _$SubregionDtoFromJson(json);
 
-  factory SubregionDto.fromFirestore(DocumentSnapshot doc) =>
-      SubregionDto.fromJson(doc.data())
-          .copyWith(id: doc.id, regionId: doc.reference.parent.parent.id);
+  static Subregion fromFirestoreToDomain(DocumentSnapshot doc) {
+    final subregion = getIt<IRegionApi>().subregion(doc.id);
+    subregion.events = doc.data()['events'] as List<String>;
+    return subregion;
+  }
 }
