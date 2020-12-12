@@ -8,6 +8,7 @@ import 'package:events/ui/appbar/sliver_bar.dart';
 import 'package:events/ui/body/components/list_group.dart';
 import 'package:events/ui/body/components/list_subtitle.dart';
 import 'package:events/ui/body/components/region_item.dart';
+import 'package:events/ui/body/components/sliver_empty_page.dart';
 import 'package:events/ui/body/sliver_scaffold.dart';
 import 'package:events/ui/drawer/category_drawer.dart';
 import 'package:flutter/material.dart';
@@ -78,11 +79,10 @@ class RegionsScreen extends StatelessWidget {
                             ),
                           )
                         //! 3
-                        : SliverFillRemaining(
-                            hasScrollBody: false,
-                            child: Text(
-                              'No events today for this category',
-                            ),
+                        : SliverEmptyPage(
+                            icon: category.icon,
+                            message:
+                                'Sem eventos de ${category.name} para este dia',
                           ),
                     failure: SliverFillRemaining(
                       hasScrollBody: false,
