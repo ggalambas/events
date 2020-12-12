@@ -1,4 +1,5 @@
 import 'package:events/app/appbar/calendar_model.dart';
+import 'package:events/app/appbar/calendar_scroll_model.dart';
 import 'package:events/config/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -8,6 +9,8 @@ class Calendar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final CalendarModel calendar = Provider.of<CalendarModel>(context);
+    final CalendarScrollModel calendarScroll =
+        Provider.of<CalendarScrollModel>(context);
     final TextTheme textTheme = Theme.of(context).textTheme;
     final double statusBarHeight = MediaQuery.of(context).padding.top;
 
@@ -23,11 +26,11 @@ class Calendar extends StatelessWidget {
           borderRadius: BorderRadius.circular(kBorderRadiusMedium),
           child: NotificationListener<ScrollEndNotification>(
             onNotification: (_) {
-              calendar.snapItems();
+              calendarScroll.snapItems();
               return false;
             },
             child: ListView.separated(
-              controller: calendar.controller,
+              controller: calendarScroll.controller,
               scrollDirection: Axis.horizontal,
               itemCount: calendar.totalDays,
               separatorBuilder: (_, daysAfter) {

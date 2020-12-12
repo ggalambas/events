@@ -1,6 +1,4 @@
 import 'dart:async';
-import 'dart:math';
-import 'package:events/config/constants.dart';
 import 'package:events/domain/events/i_event_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:events/app/helpers/date_time_x.dart';
@@ -63,65 +61,4 @@ class CalendarModel extends ChangeNotifier {
 
   String get selectedDay => selected.day.toString();
   String get selectedMonth => selected.monthName;
-
-  // Scroll Controller
-
-  final ScrollController _controller = ScrollController();
-  ScrollController get controller => _controller;
-
-  void snapSelected() {
-    Future.microtask(() => _snapSelected());
-  }
-
-  void _snapSelected() {
-    final double snapWidth = kCalendarItemWidth * 0.75;
-    double offset = snapWidth;
-    double separator;
-
-    for (int i = 0; i < selected.day - today.day; i++) {
-      separator = isLastDayOfMonth(i)
-          ? kCalendarItemSpace * 7 / 3 + 12
-          : kCalendarItemSpace;
-      offset += separator + kCalendarItemWidth;
-    }
-
-    _jump(min(offset - snapWidth, controller.position.maxScrollExtent));
-  }
-
-  void snapItems() {
-    Future.microtask(() => _snapItems());
-  }
-
-  void _snapItems() {
-    final double snapWidth = kCalendarItemWidth * 0.75;
-    double offset = snapWidth;
-    double separator;
-
-    if (controller.offset != controller.position.maxScrollExtent) {
-      for (int i = 0; i < totalDays - 1; i++) {
-        separator = isLastDayOfMonth(i)
-            ? kCalendarItemSpace * 7 / 3 + 12
-            : kCalendarItemSpace;
-        if (controller.offset < offset) {
-          _animate(offset - snapWidth);
-          break;
-        }
-        offset += separator + kCalendarItemWidth;
-      }
-    }
-  }
-
-  void _animate(double snapOffset) {
-    controller.animateTo(
-      snapOffset,
-      duration: kAnimationDuration,
-      curve: Curves.easeOut,
-    );
-  }
-
-  void _jump(double snapOffset) {
-    controller.jumpTo(
-      snapOffset,
-    );
-  }
 }

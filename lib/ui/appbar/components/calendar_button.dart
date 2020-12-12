@@ -1,4 +1,5 @@
 import 'package:events/app/appbar/calendar_model.dart';
+import 'package:events/app/appbar/calendar_scroll_model.dart';
 import 'package:events/app/appbar/scroll_model.dart';
 import 'package:events/config/constants.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +11,8 @@ class CalendarButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final CalendarModel calendar = Provider.of<CalendarModel>(context);
     final ScrollModel scroll = Provider.of<ScrollModel>(context);
+    final CalendarScrollModel calendarScroll =
+        Provider.of<CalendarScrollModel>(context);
     final ThemeData theme = Theme.of(context);
 
     return scroll.isFlexbarCollapsed
@@ -22,7 +25,7 @@ class CalendarButton extends StatelessWidget {
             child: FlatButton(
               onPressed: () {
                 scroll.expandFlexBar();
-                calendar.snapSelected();
+                calendarScroll.snapSelected();
               },
               color: theme.colorScheme.primary,
               padding: EdgeInsets.zero,
