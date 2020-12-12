@@ -22,21 +22,22 @@ Future populate() async {
   categoriesSnapshot.docs.forEach((doc) => categories.add(doc.id));
 
   final IRegionApi regionApi = getIt<IRegionApi>();
-  final List<String> subregions = [];
-  // regionApi.subregions.map((subregion) => subregion.id).toList();
+  final List<String> subregions =
+      regionApi.subregionsList().map((subregion) => subregion.id).toList();
 
   final IEventRepository eventRepository = EventRepository(firestore);
 
   Event event;
+  String subregionId;
   for (int i = 0; i < 1; i++) {
+    subregionId = subregions[faker.randomGenerator.integer(subregions.length)];
     event = Event(
       id: UniqueId(),
       name: EventName(faker.lorem.words(3).join(' ')),
-      date: DateTime(2020, 12, faker.randomGenerator.integer(21, min: 7)),
+      date: DateTime(2020, 12, faker.randomGenerator.integer(27, min: 13)),
       link: EventLink(faker.internet.httpUrl()),
-      regionId: subregions[faker.randomGenerator.integer(subregions.length)]
-          .substring(0, 4),
-      subregionId: subregions[faker.randomGenerator.integer(subregions.length)],
+      regionId: subregionId.substring(0, 4),
+      subregionId: subregionId,
       categoryId: categories[faker.randomGenerator.integer(categories.length)],
       poster: Poster(File(
           'https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F13%2F2017%2F10%2F04%2Fhonornativeland-2000.jpg')),

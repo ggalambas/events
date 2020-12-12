@@ -15,7 +15,17 @@ extension FirestoreX on FirebaseFirestore {
     return collection('events');
   }
 
-  // Query selectedEventsQuery() {}
+  Query selectedEventsQuery() {
+    final repo = getIt<IEventRepository>();
+    return collection('events')
+        .where('categoryId', isEqualTo: repo.selectedCategory.id)
+        .where('regionId', isEqualTo: repo.selectedRegion.id)
+        .where('date',
+            isGreaterThanOrEqualTo: repo.selectedDate.microsecondsSinceEpoch,
+            isLessThan: repo.selectedDate
+                .add(Duration(days: 1))
+                .microsecondsSinceEpoch);
+  }
 
   CollectionReference categoriesCollection() {
     return collection('categories');

@@ -87,8 +87,8 @@ class EventRepository implements IEventRepository {
   Stream<Either<EventFailure, List<Event>>> events() async* {
     //! this cant be called if selectedRegion == null
     //? change this to have an argument or throw exception
-    // final events = _firestore.selectedEventsQuery();
-    final events = _firestore.eventsCollection();
+    final events = _firestore.selectedEventsQuery();
+    // final events = _firestore.eventsCollection();
     yield* events
         .snapshots()
         .map((snapshot) => right<EventFailure, List<Event>>(

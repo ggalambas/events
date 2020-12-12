@@ -67,8 +67,7 @@ class EventsScreen extends StatelessWidget {
 }
 
 List<Widget> buildEvents(List<Subregion> subregions) {
-  print('buildng list');
-  List<Widget> list = [];
+  final List<Widget> list = [];
 
   for (final subregion in subregions) {
     list.add(ListSubtitle(subregion.name));

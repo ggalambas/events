@@ -43,7 +43,9 @@ class RegionApi implements IRegionApi {
   @override
   Subregion subregion(String id) => subregions[id];
 
-  // Map<String, dynamic> toJson() => {
-  //     "d": List<dynamic>.from(d.map((x) => x.toJson())),
+  @override
+  List<Region> regionsList() => regions.values.toList();
 
+  @override
+  List<Subregion> subregionsList() => subregions.values.toList();
 }

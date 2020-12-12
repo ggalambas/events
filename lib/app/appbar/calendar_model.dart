@@ -88,8 +88,6 @@ class CalendarModel extends ChangeNotifier {
     _jump(min(offset - snapWidth, controller.position.maxScrollExtent));
   }
 
-  // controller.position.maxScrollExtent
-
   void snapItems() {
     Future.microtask(() => _snapItems());
   }
