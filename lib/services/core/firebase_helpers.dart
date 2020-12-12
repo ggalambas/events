@@ -15,6 +15,8 @@ extension FirestoreX on FirebaseFirestore {
     return collection('events');
   }
 
+  // Query selectedEventsQuery() {}
+
   CollectionReference categoriesCollection() {
     return collection('categories');
   }
@@ -72,7 +74,7 @@ extension DocumentReferenceX on DocumentReference {
  *                                                            liveEvents,
  *                                                            totalEvents]
  * 
- * categoryRegionEvents/{categoryId}/days/{day}/regions/{regionId}/subregions/{subregionId}/[List<EventId>]
+ categoryRegionEvents/{categoryId}/days/{day}/regions/{regionId}/subregions/{subregionId}/[List<EventId>]
  * 
  * userEvents/{userId}/[List<EventId>]
  * user{userId}/[..userInfo]

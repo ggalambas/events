@@ -3,7 +3,6 @@ import 'package:events/domain/categories/category.dart';
 import 'package:events/domain/events/event.dart';
 import 'package:events/domain/events/event_failure.dart';
 import 'package:events/domain/regions/region.dart';
-import 'package:events/domain/regions/subregion.dart';
 
 abstract class IEventRepository {
   Category selectedCategory;
@@ -12,8 +11,7 @@ abstract class IEventRepository {
 
   Stream<Either<EventFailure, List<Category>>> categories();
   Stream<Either<EventFailure, List<Region>>> regions();
-  Stream<Either<EventFailure, List<Subregion>>> subregions();
-  Stream<Either<EventFailure, Event>> event(String eventId); //!
+  Stream<Either<EventFailure, List<Event>>> events();
   // Stream<Either<EventFailure, List<Event>>> dayEvents(
   //   String category,
   //   DateTime day,

@@ -4,7 +4,6 @@ import 'package:events/app/body/regions_model.dart';
 import 'package:events/app/drawer/category_model.dart';
 import 'package:events/config/injection.dart';
 import 'package:events/domain/categories/category.dart';
-import 'package:events/domain/events/event.dart';
 import 'package:events/domain/regions/subregion.dart';
 import 'package:events/ui/appbar/sliver_bar.dart';
 import 'package:events/ui/body/components/event_item.dart';
@@ -17,12 +16,10 @@ import 'package:provider/provider.dart';
 class EventsScreen extends StatelessWidget {
   final String regionName;
 
-  EventsScreen(this.regionName);
+  const EventsScreen(this.regionName);
 
   // TODO: EventsScreen
   //* 1. collapse appbar when openned
-  // final ScrollModel scroll = Provider.of<ScrollModel>(context);
-  // scroll.collapseFlexBar();
   //* 2. empty results
 
   @override
@@ -46,7 +43,7 @@ class EventsScreen extends StatelessWidget {
                 success: !events.isEmpty()
                     ? SliverList(
                         delegate: SliverChildListDelegate(
-                          eventsList(events),
+                          buildEvents(events.subregions),
                         ),
                       )
                     //! 2
@@ -69,20 +66,18 @@ class EventsScreen extends StatelessWidget {
   }
 }
 
-List<Widget> eventsList(EventsModel events) {
-  final List<Widget> list = [];
+List<Widget> buildEvents(List<Subregion> subregions) {
+  print('buildng list');
+  List<Widget> list = [];
 
-  List<EventItem> eventItems;
-
-  for (final subregion in events.subregions) {
+  for (final subregion in subregions) {
     list.add(ListSubtitle(subregion.name));
-
-    // eventItems = [];
-    // for (final eventId in subregion.eventIds) {
-    //   // eventItems.add(EventItem(events.getEvents(event));
-    // }
-
-    // list.add(ListGroup(items: eventItems));
+    list.add(ListGroup(
+      items: [
+        for (final event in subregion.events) EventItem(event),
+      ],
+    ));
   }
+
   return list;
 }

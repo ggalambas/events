@@ -18,19 +18,21 @@ class RegionApi implements IRegionApi {
 
   @factoryMethod
   factory RegionApi.fromJson(
-    @Named('regions') List<Map<String, dynamic>> regionsJson,
-    @Named('subregions') List<Map<String, dynamic>> subregionsJson,
+    @Named('regions') List regionsJson,
+    @Named('subregions') List subregionsJson,
   ) {
     return RegionApi(
       regions: Map<String, Region>.fromIterable(
-        regionsJson.map((x) => RegionDto.fromJson(x).toDomain()),
-        key: (x) => x.id as String,
-        value: (x) => x as Region,
+        regionsJson.map(
+            (x) => RegionDto.fromJson(x as Map<String, dynamic>).toDomain()),
+        key: (region) => region.id as String,
+        value: (region) => region as Region,
       ),
       subregions: Map<String, Subregion>.fromIterable(
-        subregionsJson.map((x) => SubregionDto.fromJson(x).toDomain()),
-        key: (x) => x.id as String,
-        value: (x) => x as Subregion,
+        subregionsJson.map(
+            (x) => SubregionDto.fromJson(x as Map<String, dynamic>).toDomain()),
+        key: (subregion) => subregion.id as String,
+        value: (subregion) => subregion as Subregion,
       ),
     );
   }

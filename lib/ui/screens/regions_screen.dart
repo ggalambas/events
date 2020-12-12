@@ -3,7 +3,6 @@ import 'package:events/app/body/regions_model.dart';
 import 'package:events/app/drawer/category_model.dart';
 import 'package:events/config/injection.dart';
 import 'package:events/domain/categories/category.dart';
-import 'package:events/domain/regions/region.dart';
 import 'package:events/ui/appbar/sliver_bar.dart';
 import 'package:events/ui/body/components/list_group.dart';
 import 'package:events/ui/body/components/list_subtitle.dart';
@@ -21,6 +20,7 @@ class RegionsScreen extends StatelessWidget {
   //* 3. empty results
   //* 4. RegionsModel
   //* 5. All Events
+
   @override
   Widget build(BuildContext context) {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
@@ -72,7 +72,7 @@ class RegionsScreen extends StatelessWidget {
                                 ListSubtitle('Concelhos'),
                                 ListGroup(
                                   items: [
-                                    for (Region region in regions.others)
+                                    for (final region in regions.others)
                                       RegionItem(region),
                                   ],
                                 ),

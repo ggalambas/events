@@ -1,6 +1,8 @@
 import 'package:events/app/core/base_model.dart';
+import 'package:events/domain/events/event.dart';
 import 'package:events/domain/events/event_failure.dart';
 import 'package:events/domain/events/i_event_repository.dart';
+import 'package:events/domain/regions/i_region_api.dart';
 import 'package:events/domain/regions/subregion.dart';
 import 'package:injectable/injectable.dart';
 
@@ -9,9 +11,10 @@ export 'package:events/app/core/base_model.dart';
 @Injectable()
 class EventsModel extends BaseModel {
   final IEventRepository _eventRepository;
+  final IRegionApi _regionApi;
 
-  EventsModel(this._eventRepository) {
-    listenToSubregions();
+  EventsModel(this._eventRepository, this._regionApi) {
+    listen();
   }
 
   List<Subregion> _subregions = [];
@@ -22,8 +25,24 @@ class EventsModel extends BaseModel {
   EventFailure _failure;
   EventFailure get failure => _failure;
 
-  void _loadSuccess(List<Subregion> subregions) {
-    _subregions = subregions;
+  void _loadSuccess(List<Event> events) {
+    events.sort((a, b) => a.subregionId.compareTo(b.subregionId));
+
+    //? refactorization
+    _subregions = [];
+    Subregion subregion;
+    String id;
+
+    for (final event in events) {
+      if (id == null || id != event.subregionId) {
+        id = event.subregionId;
+        subregion = _regionApi.subregion(id);
+        _subregions.add(subregion);
+        subregion.events = [];
+      }
+      subregion.events.add(event);
+    }
+
     loadSuccess();
   }
 
@@ -32,13 +51,11 @@ class EventsModel extends BaseModel {
     loadFailure();
   }
 
-  void listenToSubregions() {
+  void listen() {
     loadInProgress();
-    _eventRepository
-        .subregions()
-        .listen((failureOrEvents) => failureOrEvents.fold(
-              (f) => _loadFailure(f),
-              (subregions) => _loadSuccess(subregions),
-            ));
+    _eventRepository.events().listen((failureOrEvents) => failureOrEvents.fold(
+          (f) => _loadFailure(f),
+          (events) => _loadSuccess(events),
+        ));
   }
 }

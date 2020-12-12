@@ -16,9 +16,6 @@ class RegionsModel extends BaseModel {
     listen();
   }
 
-  // Region _all = Region.empty(); //!
-  // Region get all => _all;
-
   List<Region> _near = [];
   List<Region> get near => _near;
 

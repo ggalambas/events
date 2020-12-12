@@ -8,11 +8,9 @@ import 'package:events/domain/events/event_failure.dart';
 import 'package:events/domain/events/i_event_repository.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:events/domain/regions/region.dart';
-import 'package:events/domain/regions/subregion.dart';
 import 'package:events/services/categories/category_dto.dart';
 import 'package:events/services/events/event_dto.dart';
 import 'package:events/services/regions/region_dto.dart';
-import 'package:events/services/regions/subregion_dto.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:events/services/core/firebase_helpers.dart';
@@ -37,11 +35,14 @@ class EventRepository implements IEventRepository {
     eventCounter: EventCounter(live: 0, total: 0),
   );
 
+  //!
   @override
-  DateTime selectedDate = DateTime.now();
+  DateTime selectedDate =
+      DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
 
+  //!
   @override
-  Region selectedRegion;
+  Region selectedRegion = Region(id: '0101', name: 'Águeda');
 
   @override
   Stream<Either<EventFailure, List<Category>>> categories() async* {
@@ -83,34 +84,18 @@ class EventRepository implements IEventRepository {
   }
 
   @override
-  Stream<Either<EventFailure, List<Subregion>>> subregions() async* {
+  Stream<Either<EventFailure, List<Event>>> events() async* {
     //! this cant be called if selectedRegion == null
     //? change this to have an argument or throw exception
-    final subregions = _firestore.subregionsCollection();
-    yield* subregions
-        .snapshots()
-        .map((snapshot) => right<EventFailure, List<Subregion>>(
-              snapshot.docs
-                  .map((doc) => SubregionDto.fromFirestoreToDomain(doc))
-                  .toList(),
-            ))
-        .handleError((e) {
-      if (e is FirebaseException && e.message.contains('PERMISSION_DENIED')) {
-        return left(const EventFailure.insufficientPermission());
-      } else {
-        return left(const EventFailure.unexpected());
-      }
-    });
-  }
-
-  @override
-  Stream<Either<EventFailure, Event>> event(String eventId) async* {
+    // final events = _firestore.selectedEventsQuery();
     final events = _firestore.eventsCollection();
     yield* events
-        .doc(eventId)
         .snapshots()
-        .map((doc) =>
-            right<EventFailure, Event>(EventDto.fromFirestore(doc).toDomain()))
+        .map((snapshot) => right<EventFailure, List<Event>>(
+              snapshot.docs
+                  .map((doc) => EventDto.fromFirestore(doc).toDomain())
+                  .toList(),
+            ))
         .handleError((e) {
       if (e is FirebaseException && e.message.contains('PERMISSION_DENIED')) {
         return left(const EventFailure.insufficientPermission());

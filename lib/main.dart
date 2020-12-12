@@ -14,7 +14,7 @@ import 'app/drawer/category_model.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  configureInjection(Environment.prod);
+  await configureInjection(Environment.prod);
   await Firebase.initializeApp();
   runApp(MyApp());
 }

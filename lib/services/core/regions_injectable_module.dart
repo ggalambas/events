@@ -10,13 +10,13 @@ abstract class RegionsInjectableModule {
 
   @Named('regions')
   @lazySingleton
-  Future<List<Map<String, dynamic>>> get regionsJson async =>
-      jsonDecode(await rootBundle.loadString(_regionsPath))['d']
-          as List<Map<String, dynamic>>;
+  @preResolve
+  Future<List> get regionsJson async =>
+      jsonDecode(await rootBundle.loadString(_regionsPath))['d'] as List;
 
   @Named('subregions')
   @lazySingleton
-  Future<List<Map<String, dynamic>>> get subregionsJson async =>
-      jsonDecode(await rootBundle.loadString(_subregionsPath))['d']
-          as List<Map<String, dynamic>>;
+  @preResolve
+  Future<List> get subregionsJson async =>
+      jsonDecode(await rootBundle.loadString(_subregionsPath))['d'] as List;
 }
