@@ -1,5 +1,4 @@
 import 'package:events/config/injection.dart';
-import 'package:events/domain/events/i_event_repository.dart';
 import 'package:events/domain/regions/i_region_api.dart';
 import 'package:events/domain/regions/subregion.dart';
 import 'package:flutter/cupertino.dart';
