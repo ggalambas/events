@@ -37,13 +37,12 @@ Future<GetIt> $initGetIt(
   gh.lazySingleton<List<dynamic>>(() => list, instanceName: 'regions');
   final list1 = await regionsInjectableModule.subregionsJson;
   gh.lazySingleton<List<dynamic>>(() => list1, instanceName: 'subregions');
+  gh.factory<RegionsModel>(() => RegionsModel(get<IEventRepository>()));
   gh.factory<CalendarModel>(() => CalendarModel(get<IEventRepository>()));
   gh.factory<CategoryModel>(() => CategoryModel(get<IEventRepository>()));
   gh.lazySingleton<IRegionApi>(() => RegionApi.fromJson(
       get<List<dynamic>>(instanceName: 'regions'),
       get<List<dynamic>>(instanceName: 'subregions')));
-  gh.factory<RegionsModel>(
-      () => RegionsModel(get<IEventRepository>(), get<IRegionApi>()));
   gh.factory<EventsModel>(
       () => EventsModel(get<IEventRepository>(), get<IRegionApi>()));
   return get;

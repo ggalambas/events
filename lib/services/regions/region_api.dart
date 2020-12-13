@@ -11,8 +11,8 @@ class RegionApi implements IRegionApi {
   Map<String, Region> regions;
   Map<String, Subregion> subregions;
 
-  //TODO: RegionApi
-  //* 1. failures > item not found
+  //TODO
+  //* exceptions > item not found
 
   RegionApi({@required this.regions, @required this.subregions});
 

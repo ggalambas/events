@@ -9,6 +9,9 @@ import 'package:events/ui/body/components/list_subtitle.dart';
 import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
 
+// TODO
+//* 1. Voice Search
+
 class EventSearch extends SearchDelegate {
   final BuildContext context; //!
   EventSearch({this.context});
@@ -67,9 +70,7 @@ class EventSearch extends SearchDelegate {
       query.isEmpty
           ? IconButton(
               icon: Icon(Icons.mic),
-              onPressed: () {
-                // TODO: Voice Search
-              },
+              onPressed: () {}, //! 1
             )
           : IconButton(
               icon: Icon(Icons.clear),

@@ -5,12 +5,16 @@ import 'package:events/domain/core/failures.dart';
 import 'package:events/domain/core/value_objects.dart';
 import 'package:events/domain/core/value_validators.dart';
 
+//TODO
+//* 1. max length
+//* 2. advised length
+
 class EventName extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> value;
 
-  static const advisedLength = 30; //TODO advised length
-  static const maxLength = 50; //TODO EventName max length
+  static const advisedLength = 30; //! 2
+  static const maxLength = 50; //! 1
 
   factory EventName(String input) {
     assert(input != null);

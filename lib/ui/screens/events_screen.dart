@@ -19,9 +19,8 @@ class EventsScreen extends StatelessWidget {
 
   const EventsScreen(this.regionName);
 
-  // TODO: EventsScreen
-  //* 1. collapse appbar when openned
-  //* 2. empty results
+  //TODO
+  //* Collapse appbar when openned
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +46,6 @@ class EventsScreen extends StatelessWidget {
                           buildEvents(events.subregions),
                         ),
                       )
-                    //! 2
                     : SliverEmptyPage(
                         icon: category.icon,
                         message:

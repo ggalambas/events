@@ -2,6 +2,9 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'failures.freezed.dart';
 
+//TODO
+//* 1. Auth value failure
+
 @freezed
 abstract class ValueFailure<T> with _$ValueFailure<T> {
   const factory ValueFailure.exceedingLength({
@@ -23,7 +26,7 @@ abstract class ValueFailure<T> with _$ValueFailure<T> {
   const factory ValueFailure.wrongImageDimensions({
     @required T failedValue,
   }) = WrongImageDimensions<T>;
-  //TODO Auth value failure
+  //! 1
 //   const factory ValueFailure.invalidEmail({
 //     @required T failedValue,
 //   }) = InvalidEmail<T>;

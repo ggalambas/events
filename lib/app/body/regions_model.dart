@@ -1,18 +1,18 @@
 import 'package:events/app/core/base_model.dart';
 import 'package:events/domain/events/event_failure.dart';
 import 'package:events/domain/events/i_event_repository.dart';
-import 'package:events/domain/regions/i_region_api.dart';
 import 'package:events/domain/regions/region.dart';
 import 'package:injectable/injectable.dart';
-
 export 'package:events/app/core/base_model.dart';
+
+//TODO
+//* Regions Location
 
 @Injectable()
 class RegionsModel extends BaseModel {
   final IEventRepository _eventRepository;
-  final IRegionApi _regionApi;
 
-  RegionsModel(this._eventRepository, this._regionApi) {
+  RegionsModel(this._eventRepository) {
     listen();
   }
 
@@ -29,6 +29,7 @@ class RegionsModel extends BaseModel {
 
   void _loadSuccess(List<Region> regions) {
     _others = regions;
+    _near = [];
     loadSuccess();
   }
 

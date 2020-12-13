@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:events/app/appbar/scroll_model.dart';
 import 'package:sliver_tools/sliver_tools.dart';
 
-//TODO SliverScaffold
+//TODO
 //* 1. Swipe screen to change day
 
 class SliverScaffold extends StatelessWidget {

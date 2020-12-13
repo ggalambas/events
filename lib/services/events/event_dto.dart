@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:events/domain/core/value_objects.dart';
 import 'package:events/domain/events/event.dart';
 import 'package:events/domain/events/value_objects.dart';
@@ -9,6 +8,9 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'event_dto.freezed.dart';
 part 'event_dto.g.dart';
+
+//TODO
+//* 1. store poster on cloud
 
 @freezed
 abstract class EventDto implements _$EventDto {
@@ -22,7 +24,7 @@ abstract class EventDto implements _$EventDto {
     @required String regionId,
     @required String subregionId,
     @required String categoryId,
-    @required String poster,
+    @required String poster, //! 1
   }) = _EventDto;
 
   factory EventDto.fromDomain(Event event) {
@@ -34,7 +36,7 @@ abstract class EventDto implements _$EventDto {
       regionId: event.regionId,
       subregionId: event.subregionId,
       categoryId: event.categoryId,
-      poster: event.poster.getOrCrash().path, //TODO: store image on cloud
+      poster: event.poster.getOrCrash().path, //! 1
     );
   }
 
@@ -47,7 +49,7 @@ abstract class EventDto implements _$EventDto {
       regionId: regionId,
       subregionId: subregionId,
       categoryId: categoryId,
-      poster: Poster(File(poster)),
+      poster: Poster(File(poster)), //! 1
     );
   }
 

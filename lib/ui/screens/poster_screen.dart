@@ -13,11 +13,11 @@ class PosterScreen extends StatefulWidget {
   _PosterScreenState createState() => _PosterScreenState();
 }
 
-//TODO: PosterScreen
+//TODO
 //* 1. Loading time (save on cache? or whatever)
 //* 2. Bookmark, save and change icon
 //* 3. Make LongPress properly remove systemUIOverlays
-//* 4. Know more can't be clicked multiple times
+//* 4. Know more shouldn't be able to be clicked multiple times
 
 class _PosterScreenState extends State<PosterScreen> {
   // String get name => widget.event.name.getOrCrash();

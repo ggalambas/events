@@ -3,8 +3,10 @@ import 'package:events/domain/categories/category.dart';
 import 'package:events/domain/events/event_failure.dart';
 import 'package:events/domain/events/i_event_repository.dart';
 import 'package:injectable/injectable.dart';
-
 export 'package:events/app/core/base_model.dart';
+
+//TODO
+//* 1. Initial Category
 
 @Injectable()
 class CategoryModel extends BaseModel {
@@ -40,7 +42,7 @@ class CategoryModel extends BaseModel {
             ));
   }
 
-  //TODO: initial category
+  //! 1
   Category get selected => _eventRepository.selectedCategory;
   set selected(Category category) {
     _eventRepository.selectedCategory = category;

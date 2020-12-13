@@ -19,10 +19,11 @@ Future<void> main() async {
   runApp(MyApp());
 }
 
-//TODO: mian screen
-//* 1. icons and then splash screen
+//TODO
+//* 1. icon
+//* 2. splash screen
 // splash screen -> https://flutter.dev/docs/development/ui/advanced/splash-screen
-//* 2. getOrCrash();
+//* 3. getOrCrash();
 
 class MyApp extends StatefulWidget {
   @override

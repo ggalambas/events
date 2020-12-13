@@ -14,12 +14,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class RegionsScreen extends StatelessWidget {
-  //TODO: RegionsScreen
-  //* 2. remove closer regions subitle when no closer regions
+  //TODO
+  //* 1. remove closer regions subitle when no closer regions
   //*    rename 'outros concelhos' to 'concelhos' if
-  //* 3. empty results
-  //* 4. RegionsModel
-  //* 5. All Events
+  //* 2. all Events
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +27,7 @@ class RegionsScreen extends StatelessWidget {
       builder: (_, category, __) {
         return SliverScaffold(
           drawer: CategoryDrawer(),
+          //! 2
           appbar:
               /*SliverStack(
             children: [
@@ -55,13 +54,14 @@ class RegionsScreen extends StatelessWidget {
                         ? SliverList(
                             delegate: SliverChildListDelegate(
                               [
+                                //! 2
                                 // ListGroup(
                                 //   first: true,
                                 //   items: [
                                 //     RegionItem(regions.all),
                                 //   ],
                                 // ),
-                                //! 2
+                                //! 1
                                 // ListSubtitle('Concelhos mais próximos'),
                                 // ListGroup(
                                 //   items: [
@@ -79,7 +79,6 @@ class RegionsScreen extends StatelessWidget {
                               ],
                             ),
                           )
-                        //! 3
                         : SliverEmptyPage(
                             icon: category.icon,
                             message:

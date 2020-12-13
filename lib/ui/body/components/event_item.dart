@@ -5,6 +5,10 @@ import 'package:events/domain/events/event.dart';
 import 'package:flutter/material.dart';
 import 'package:events/app/helpers/date_time_x.dart';
 
+//TODO
+//* 1. [BUG] splash behind group
+//* 2. Bookmark
+
 class EventItem extends StatelessWidget {
   final Event event;
 
@@ -28,12 +32,12 @@ class EventItem extends StatelessWidget {
       ),
       title: Text(name, style: theme.textTheme.bodyText1),
       trailing: IconButton(
-        //TODO [BUG] splash behind group
+        //! 1
         icon: Icon(
           Icons.bookmark_border,
           color: theme.colorScheme.onBackground,
         ),
-        onPressed: () {}, // TODO: Bookmark, save and change icon
+        onPressed: () {}, //! 2
       ),
     );
   }

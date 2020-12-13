@@ -4,8 +4,8 @@ import 'package:events/app/appbar/calendar_model.dart';
 import 'package:events/config/constants.dart';
 import 'package:flutter/material.dart';
 
-//TODO: CalendarScrollModel
-//* 1. Poupar bué contas
+//TODO
+//* Poupar for cycles
 
 class CalendarScrollModel {
   final CalendarModel calendar;

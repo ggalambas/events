@@ -20,11 +20,10 @@ class EventRepository implements IEventRepository {
   final FirebaseFirestore _firestore;
 
   EventRepository(this._firestore);
-  //TODO: EventRepository
+  //TODO
   //* 1. Exceptions
-  //* 4. subregionEvents
-  //* 5. initial category
-  //* 6. save not just day but year and month
+  //* 2. save not just day but year and month
+  //* 3. remove subregion events collection
 
   //!
   @override

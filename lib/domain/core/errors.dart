@@ -1,6 +1,7 @@
 import 'package:events/domain/core/failures.dart';
 
-// TODO Auth error
+//TODO
+//* Auth error
 // class NotAuthenticatedError extends Error {}
 
 class UnexpectedValueError extends Error {

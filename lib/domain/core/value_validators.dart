@@ -4,6 +4,12 @@ import 'package:dartz/dartz.dart';
 import 'package:events/domain/core/failures.dart';
 import 'package:string_validator/string_validator.dart';
 
+//TODO
+//* 1. UrlValidation
+//* 2. ImageValidation
+//* 3. Image Dimensions validation
+//* 4. Auth validators
+
 Either<ValueFailure<String>, String> validateMaxStringLength(
   String input,
   int maxLength,
@@ -34,7 +40,7 @@ Either<ValueFailure<String>, String> validateSingleLine(String input) {
 }
 
 Either<ValueFailure<String>, String> validateUrl(String input) {
-  //TODO UrlValidation check arguments
+  //! 1
   if (isURL(input)) {
     return right(input);
   } else {
@@ -43,7 +49,7 @@ Either<ValueFailure<String>, String> validateUrl(String input) {
 }
 
 Either<ValueFailure<File>, File> validateImage(File input) {
-  //TODO ImageValidation
+  //! 2
   if (true) {
     return right(input);
   } else {
@@ -52,7 +58,7 @@ Either<ValueFailure<File>, File> validateImage(File input) {
 }
 
 Either<ValueFailure<File>, File> validateDimensions(File input) {
-  //TODO Image Dimensions validation
+  //! 3
   if (true) {
     return right(input);
   } else {
@@ -60,7 +66,7 @@ Either<ValueFailure<File>, File> validateDimensions(File input) {
   }
 }
 
-//TODO Auth value validators
+//! 4
 // Either<ValueFailure<String>, String> validateEmailAddress(String input) {
 //   const emailRegex =
 //       r"""^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+""";
