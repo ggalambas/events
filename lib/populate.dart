@@ -11,6 +11,8 @@ import 'package:events/services/categories/category_dto.dart';
 import 'package:events/services/events/event_repository.dart';
 import 'package:faker/faker.dart';
 import 'package:events/services/core/firebase_helpers.dart';
+import 'package:events/app/helpers/string_x.dart';
+import 'package:events/app/helpers/date_time_x.dart';
 
 Future populate() async {
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -35,14 +37,20 @@ Future populate() async {
     subregionId = subregions[faker.randomGenerator.integer(subregions.length)];
     event = Event(
       id: UniqueId(),
-      name: EventName(faker.lorem.words(3).join(' ')),
-      date: DateTime(2020, 12, faker.randomGenerator.integer(27, min: 13)),
+      name: EventName(faker.lorem.words(3).join(' ').capitalize()),
+      date: DateTime(
+        2020,
+        12,
+        faker.randomGenerator
+            .integer(DateTime.now().after(14).day, min: DateTime.now().day),
+        faker.randomGenerator.integer(24),
+        faker.randomGenerator.integer(12) * 5,
+      ),
       link: EventLink(faker.internet.httpUrl()),
       regionId: subregionId.substring(0, 4),
       subregionId: subregionId,
       categoryId: categories[faker.randomGenerator.integer(categories.length)],
-      poster: Poster(File(
-          'https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F13%2F2017%2F10%2F04%2Fhonornativeland-2000.jpg')),
+      poster: Poster(File(faker.image.image(width: 360, height: 720))),
     );
     eventRepository.create(event);
     print('event $i created');
