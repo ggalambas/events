@@ -14,21 +14,14 @@ class PosterScreen extends StatefulWidget {
 }
 
 //TODO
-//* 1. Loading time (save on cache? or whatever)
-//* 2. Bookmark, save and change icon
+//* 1. Bookmark
 //* 3. Make LongPress properly remove systemUIOverlays
 //* 4. Know more shouldn't be able to be clicked multiple times
 
 class _PosterScreenState extends State<PosterScreen> {
-  // String get name => widget.event.name.getOrCrash();
-  // String get posterURL => widget.event.poster.getOrCrash().path;
-  // String get url => widget.event.link.getOrCrash();
-  //! - - - - - - - - - - - - - - !
-  String get name => 'Aladdin';
-  String get posterURL =>
-      'https://br.web.img3.acsta.net/pictures/18/10/11/11/47/0874456.jpg';
-  String get url => 'https://pt.wikipedia.org/wiki/Aladdin_(filme_de_2019)';
-  //! - - - - - - - - - - - - - - !
+  String get name => widget.event.name.getOrCrash();
+  String get posterURL => widget.event.poster.getOrCrash().path;
+  String get url => widget.event.link.getOrCrash();
 
   bool _longPressing = false;
   bool get longPressing => _longPressing;
@@ -42,7 +35,6 @@ class _PosterScreenState extends State<PosterScreen> {
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
-          //! 1
           image: NetworkImage(posterURL),
           fit: BoxFit.cover,
         ),
@@ -71,7 +63,7 @@ class _PosterScreenState extends State<PosterScreen> {
                       Icons.bookmark_border,
                       color: theme.colorScheme.onBackground,
                     ),
-                    onPressed: () {}, //! 2
+                    onPressed: () {}, //! 1
                   ),
                 ),
               ),
