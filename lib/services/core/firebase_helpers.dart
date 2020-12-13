@@ -42,21 +42,6 @@ extension FirestoreX on FirebaseFirestore {
         .doc(day ?? repo.selectedDate.day.toString())
         .collection('regions');
   }
-
-  CollectionReference subregionsCollection([
-    String categoryId,
-    String day,
-    String regionId,
-  ]) {
-    final repo = getIt<IEventRepository>();
-    return collection('categoryRegionEvents')
-        .doc(categoryId ?? repo.selectedCategory.id)
-        .collection('days')
-        .doc(day ?? repo.selectedDate.day.toString())
-        .collection('regions')
-        .doc(regionId ?? repo.selectedRegion.id)
-        .collection('subregions');
-  }
 }
 
 extension DocumentReferenceX on DocumentReference {

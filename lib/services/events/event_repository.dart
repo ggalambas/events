@@ -24,6 +24,7 @@ class EventRepository implements IEventRepository {
   //* 1. Exceptions
   //* 2. save not just day but year and month
   //* 3. remove subregion events collection
+  //* 4. rename collections
 
   //!
   @override
@@ -127,11 +128,6 @@ class EventRepository implements IEventRepository {
       final regions = _firestore.regionsCollection(
           eventDto.categoryId, event.date.day.toString());
       await regions.doc(eventDto.regionId).setOrIncrementTotalEvents();
-
-      //* update subregions list
-      final subregions = _firestore.subregionsCollection(
-          eventDto.categoryId, event.date.day.toString(), eventDto.regionId);
-      await subregions.doc(eventDto.subregionId).addToEventsList(eventDto.id);
 
       return right(unit);
     } on FirebaseException catch (e) {
