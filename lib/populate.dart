@@ -19,7 +19,9 @@ Future populate() async {
   final QuerySnapshot categoriesSnapshot =
       await firestore.categoriesCollection().get();
   final List<String> categories = [];
-  categoriesSnapshot.docs.forEach((doc) => categories.add(doc.id));
+  for (final QueryDocumentSnapshot doc in categoriesSnapshot.docs) {
+    categories.add(doc.id);
+  }
 
   final IRegionApi regionApi = getIt<IRegionApi>();
   final List<String> subregions =

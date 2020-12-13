@@ -12,7 +12,6 @@ import 'package:events/ui/body/sliver_scaffold.dart';
 import 'package:events/ui/drawer/category_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sliver_tools/sliver_tools.dart';
 
 class RegionsScreen extends StatelessWidget {
   //TODO: RegionsScreen
@@ -24,7 +23,7 @@ class RegionsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+    // final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return Selector<CategoryModel, Category>(
       selector: (_, category) => category.selected,
       builder: (_, category, __) {

@@ -22,18 +22,16 @@ class RegionApi implements IRegionApi {
     @Named('subregions') List subregionsJson,
   ) {
     return RegionApi(
-      regions: Map<String, Region>.fromIterable(
-        regionsJson.map(
-            (x) => RegionDto.fromJson(x as Map<String, dynamic>).toDomain()),
-        key: (region) => region.id as String,
-        value: (region) => region as Region,
-      ),
-      subregions: Map<String, Subregion>.fromIterable(
-        subregionsJson.map(
-            (x) => SubregionDto.fromJson(x as Map<String, dynamic>).toDomain()),
-        key: (subregion) => subregion.id as String,
-        value: (subregion) => subregion as Subregion,
-      ),
+      regions: {
+        for (var region in regionsJson.map(
+            (x) => RegionDto.fromJson(x as Map<String, dynamic>).toDomain()))
+          region.id: region
+      },
+      subregions: {
+        for (var subregion in subregionsJson.map(
+            (x) => SubregionDto.fromJson(x as Map<String, dynamic>).toDomain()))
+          subregion.id: subregion
+      },
     );
   }
 

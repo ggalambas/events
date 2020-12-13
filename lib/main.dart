@@ -19,7 +19,7 @@ Future<void> main() async {
   runApp(MyApp());
 }
 
-//TODO:
+//TODO: mian screen
 //* 1. icons and then splash screen
 // splash screen -> https://flutter.dev/docs/development/ui/advanced/splash-screen
 //* 2. getOrCrash();

@@ -1,22 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:events/config/injection.dart';
-import 'package:events/domain/core/event_counter.dart';
 import 'package:events/domain/regions/i_region_api.dart';
 import 'package:events/domain/regions/region.dart';
 import 'package:events/services/core/event_counter_dto.dart';
 import 'package:flutter/material.dart';
-// import 'package:json_annotation/json_annotation.dart';
 
-// part 'region_dto.g.dart';
-
-// @JsonSerializable()
 class RegionDto {
   String id;
   String name;
 
   RegionDto({
-    @required /*@JsonKey(name: 'dicofre', required: true)*/ this.id,
-    @required /*@JsonKey(name: 'designacao', required: true)*/ this.name,
+    @required this.id,
+    @required this.name,
   });
 
   Region toDomain() {
@@ -25,9 +20,6 @@ class RegionDto {
       name: name,
     );
   }
-
-  // factory RegionDto.fromJson(Map<String, dynamic> json) =>
-  //     _$RegionDtoFromJson(json);
 
   factory RegionDto.fromJson(Map<String, dynamic> json) => RegionDto(
         id: json['dicofre'] as String,
