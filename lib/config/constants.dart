@@ -13,9 +13,10 @@ const double kInputHorizPadding = 20.0;
 const double kSubmitVertMargin = 10.0;
 const double kAltHorizMargin = 5.0;
 const double kAltVertMargin = 10.0;
+const double kFormCaptionPadding = 8.0;
 
 // Swipe Up
-const double kSwipeUpHeight = 100.0;
+const double kSwipeUpHeight = 80.0;
 const double kSwipeUpPadding = 15.0;
 
 // Drawer

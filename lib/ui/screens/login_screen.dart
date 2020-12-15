@@ -2,8 +2,14 @@ import 'package:auto_route/auto_route.dart';
 import 'package:events/config/constants.dart';
 import 'package:events/config/routes/router.gr.dart';
 import 'package:events/ui/auth/components/alt_sign_in_button.dart';
+import 'package:events/ui/auth/components/input_field.dart';
+import 'package:events/ui/auth/components/submit_button.dart';
 import 'package:events/ui/widgets/swipe_up.dart';
 import 'package:flutter/material.dart';
+
+//TODO
+//* 1. Auth
+//* 2. Forgot password
 
 class LoginScreen extends StatelessWidget {
   @override
@@ -19,7 +25,7 @@ class LoginScreen extends StatelessWidget {
             child: Column(
               children: [
                 Expanded(
-                  flex: 20,
+                  flex: 10,
                   child: Center(
                     child: Container(
                       height: 72,
@@ -33,29 +39,37 @@ class LoginScreen extends StatelessWidget {
                   keyboardType: TextInputType.emailAddress,
                 ),
                 InputField(
-                  hintText: 'Password',
+                  hintText: 'Palavra passe',
                   obscureText: true,
                 ),
                 SubmitButton(
                   text: 'Entrar',
-                  onPressed: () =>
-                      ExtendedNavigator.root.replace(Routes.regionsScreen), //!
+                  onPressed: () => ExtendedNavigator.root
+                      .replace(Routes.regionsScreen), //! 1
+                ),
+                Text(
+                  'Esqueceu-se da palava passe?',
+                  style: theme.textTheme.caption,
+                  textAlign: TextAlign.center,
                 ),
                 Spacer(),
-                Text(
-                  'ou conecta-te com',
-                  style: theme.textTheme.bodyText1.copyWith(
-                    color: theme.colorScheme.onBackground,
+                Padding(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: kFormCaptionPadding),
+                  child: Text(
+                    'ou conecta-te com',
+                    style: theme.textTheme.bodyText1,
+                    textAlign: TextAlign.center,
                   ),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     AltSignInButton.google(
-                      onPressed: null, //!
+                      onPressed: null, //! 1
                     ),
                     AltSignInButton.facebook(
-                      onPressed: null, //!
+                      onPressed: null, //! 1
                     ),
                   ],
                 ),
@@ -67,68 +81,6 @@ class LoginScreen extends StatelessWidget {
               ],
             ),
           ),
-        ),
-      ),
-    );
-  }
-}
-
-class SubmitButton extends StatelessWidget {
-  final String text;
-  final void Function() onPressed;
-
-  const SubmitButton({this.text = '', @required this.onPressed});
-
-  @override
-  Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: kSubmitVertMargin),
-      child: FlatButton(
-        height: kFormItemHeight,
-        minWidth: double.infinity,
-        color: theme.colorScheme.primary,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(kBorderRadiusBig),
-        ),
-        onPressed: onPressed,
-        child: Text(text, style: theme.textTheme.button),
-      ),
-    );
-  }
-}
-
-class InputField extends StatelessWidget {
-  final String hintText;
-  final TextInputType keyboardType;
-  final bool obscureText;
-
-  const InputField({
-    this.hintText = '',
-    this.keyboardType = TextInputType.text,
-    this.obscureText = false,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
-    return Container(
-      height: kFormItemHeight,
-      margin: EdgeInsets.symmetric(vertical: kInputVertMargin),
-      padding: EdgeInsets.symmetric(horizontal: kInputHorizPadding),
-      decoration: BoxDecoration(
-        border: Border.all(color: theme.colorScheme.onBackground, width: 0),
-        borderRadius: BorderRadius.circular(kBorderRadiusBig),
-      ),
-      child: TextField(
-        obscureText: obscureText,
-        style: theme.textTheme.bodyText1,
-        cursorColor: theme.colorScheme.primary,
-        keyboardType: keyboardType,
-        decoration: InputDecoration(
-          hintText: hintText,
-          hintStyle: theme.textTheme.bodyText1,
-          border: InputBorder.none,
         ),
       ),
     );

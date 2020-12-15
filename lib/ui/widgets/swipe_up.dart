@@ -24,19 +24,11 @@ class _SwipeUpState extends State<SwipeUp> {
   double get initialOffset => _initialOffset;
   set initialOffset(double offset) => setState(() => _initialOffset = offset);
 
-  double _sens;
-  double get sens => _sens;
-  set sens(double sensitivity) => setState(() => _sens = sensitivity);
-  double get maxSens => 0.25;
-  double get maxOffset => 20.0;
+  double get maxSwipeOffset => 20.0;
   double multiplier(double offset) =>
-      Curves.easeOutCubic.transformInternal(offset / maxOffset);
-
-  @override
-  void initState() {
-    super.initState();
-    _sens = maxSens;
-  }
+      maxSwipeOffset *
+      Curves.easeOutCubic
+          .transformInternal(offset / MediaQuery.of(context).size.height);
 
   @override
   Widget build(BuildContext context) {
@@ -46,20 +38,18 @@ class _SwipeUpState extends State<SwipeUp> {
         initialOffset = details.globalPosition.dy;
       },
       onVerticalDragUpdate: (details) {
-        final double offset =
-            (initialOffset - details.globalPosition.dy) * sens;
-        if (offset > 0 && swipeOffset + offset < maxOffset) {
-          swipeOffset += offset;
-          sens = maxSens - maxSens * multiplier(swipeOffset);
+        final double offset = initialOffset - details.globalPosition.dy;
+        if (offset > 0 && multiplier(offset) < maxSwipeOffset) {
+          swipeOffset = multiplier(offset);
         }
       },
       onVerticalDragEnd: (details) {
-        if (swipeOffset > 0.9 * maxOffset) widget.onSwipe();
+        if (swipeOffset > 0.4 * maxSwipeOffset) widget.onSwipe();
         swipeOffset = 0;
       },
       onTap: () {
         swipe = false;
-        swipeOffset = maxOffset;
+        swipeOffset = maxSwipeOffset;
         widget.onSwipe();
         Future.delayed(kAnimationDuration * 2, () {
           swipeOffset = 0;
@@ -79,6 +69,7 @@ class _SwipeUpState extends State<SwipeUp> {
             Text(
               widget.text,
               style: theme.textTheme.bodyText1,
+              textAlign: TextAlign.center,
             ),
           ],
         ),

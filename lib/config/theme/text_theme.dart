@@ -84,12 +84,13 @@ TextTheme textTheme({
       fontWeight: medium, // medium
       letterSpacing: 0.25, // 1.25
     ),
-    // caption: TextStyle(
-    //   color: onSurface,
-    //   fontSize: 12.0, // 12.0
-    //   fontWeight: regular, // regular
-    //   letterSpacing: 0.4, // 0.4
-    // ),
+    caption: TextStyle(
+      //* Login/Register text after button
+      color: onBackground,
+      fontSize: 12.0, // 12.0
+      fontWeight: regular, // regular
+      letterSpacing: 0.4, // 0.4
+    ),
     overline: TextStyle(
       //* AppBar > week days, month(size: 12)
       color: onBackground,
