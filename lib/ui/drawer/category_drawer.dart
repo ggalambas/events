@@ -13,6 +13,8 @@ class CategoryDrawer extends StatelessWidget {
   //* 2. Saved Events
   //* 3. Favorite Categories
   //*    If theres no favorites, change 'other categories' to 'categories'
+  //* 4. Counters are just for today's day
+
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);

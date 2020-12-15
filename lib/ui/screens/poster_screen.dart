@@ -1,118 +1,126 @@
 import 'dart:ui';
+import 'package:events/app/helpers/awesome_icon.dart';
 import 'package:events/config/constants.dart';
 import 'package:events/domain/events/event.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_tabs/flutter_custom_tabs.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class PosterScreen extends StatefulWidget {
+//TODO
+//* 1. Bookmark
+//* 2. Share
+//* 3. Buttons shouldn't be able to be clicked multiple times
+//* 4. custom tabs
+
+class PosterScreen extends StatelessWidget {
   final Event event;
 
   const PosterScreen({this.event});
 
-  @override
-  _PosterScreenState createState() => _PosterScreenState();
-}
-
-//TODO
-//* 1. Bookmark
-//* 3. Make LongPress properly remove systemUIOverlays
-//* 4. Know more shouldn't be able to be clicked multiple times
-
-class _PosterScreenState extends State<PosterScreen> {
-  String get name => widget.event.name.getOrCrash();
-  String get posterURL => widget.event.poster.getOrCrash().path;
-  String get url => widget.event.link.getOrCrash();
-
-  bool _longPressing = false;
-  bool get longPressing => _longPressing;
-  set longPressing(bool pressing) => setState(() {
-        _longPressing = pressing;
-      });
+  String get name => event.name.getOrCrash();
+  String get posterURL => event.poster.getOrCrash().path;
+  String get url => event.link.getOrCrash();
 
   @override
   Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
-    return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: NetworkImage(posterURL),
-          fit: BoxFit.cover,
-        ),
-      ),
-      child: AnimatedOpacity(
-        opacity: longPressing ? 0 : 1,
-        duration: kAnimationDuration,
-        child: Scaffold(
-          appBar: AppBar(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.vertical(
-                bottom: Radius.circular(kBorderRadiusBig),
+    const double appBarBorderRadius = kBorderRadiusBig;
+    final TextTheme textTheme = Theme.of(context).textTheme;
+    return Stack(
+      children: [
+        SafeArea(
+          child: Container(
+            margin: EdgeInsets.only(top: kToolbarHeight - appBarBorderRadius),
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: NetworkImage(posterURL),
+                fit: BoxFit.cover,
               ),
             ),
-            title: Text(
-              name,
-              style: theme.textTheme.headline6,
+          ),
+        ),
+        Scaffold(
+          backgroundColor: Colors.transparent,
+          appBar: AppBar(
+            automaticallyImplyLeading: false,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.vertical(
+                bottom: Radius.circular(appBarBorderRadius),
+              ),
             ),
+            title: Text(name, style: textTheme.bodyText1),
             actions: [
-              Container(
-                margin: EdgeInsets.only(right: kAppBarHorizPadding),
-                width: kAppBarButtonWidth,
-                child: Center(
-                  child: IconButton(
-                    icon: Icon(
-                      Icons.bookmark_border,
-                      color: theme.colorScheme.onBackground,
-                    ),
-                    onPressed: () {}, //! 1
-                  ),
-                ),
+              IconButton(
+                icon: Icon(Icons.close),
+                onPressed: () => Navigator.pop(context),
               ),
             ],
           ),
-          backgroundColor: Colors.transparent,
-          body: GestureDetector(
-            //! 3
-            onLongPressStart: (_) {
-              // SystemChrome.setEnabledSystemUIOverlays([]);
-              longPressing = true;
-            },
-            onLongPressEnd: (_) {
-              longPressing = false;
-              // SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
-            },
-          ),
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerFloat,
-          floatingActionButton: RaisedButton(
-            //! 4
-            onPressed: () async {
-              try {
-                await launch(
-                  url,
-                  option: CustomTabsOption(
-                    enableUrlBarHiding: true,
-                    enableDefaultShare: true,
-                    showPageTitle: true,
-                    animation: CustomTabsAnimation.slideIn(),
-                    extraCustomTabs: <String>[
-                      'org.mozilla.firefox',
-                      'com.microsoft.emmx'
-                    ],
-                  ),
-                );
-              } catch (e) {
-                // An exception is thrown if browser app is not installed on Android device.
-                debugPrint(e.toString()); //! review this
-              }
-            },
-            color: theme.colorScheme.surface,
-            textColor: theme.colorScheme.onSurface,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(kBorderRadiusBig),
-            ),
-            child: Text('Saber mais', style: theme.textTheme.bodyText1),
+          floatingActionButton: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              PosterFAB(
+                icon: AwesomeIcon(FontAwesomeIcons.info),
+                onPressed: () async {
+                  //! 4
+                  try {
+                    await launch(
+                      url,
+                      option: CustomTabsOption(
+                        enableUrlBarHiding: true,
+                        showPageTitle: true,
+                        animation: CustomTabsAnimation.slideIn(),
+                        extraCustomTabs: <String>[
+                          'org.mozilla.firefox',
+                          'com.microsoft.emmx'
+                        ],
+                      ),
+                    );
+                  } catch (e) {
+                    // An exception is thrown if browser app is not installed on Android device.
+                    debugPrint(e.toString()); //! review this
+                  }
+                },
+              ),
+              PosterFAB(
+                icon: AwesomeIcon(FontAwesomeIcons.share),
+                onPressed: () {
+                  //! 2
+                },
+              ),
+              PosterFAB(
+                icon: Icon(Icons.bookmark_border),
+                onPressed: () {
+                  //! 1
+                },
+              ),
+            ],
           ),
         ),
+      ],
+    );
+  }
+}
+
+class PosterFAB extends StatelessWidget {
+  final Widget icon;
+  final void Function() onPressed;
+
+  const PosterFAB({@required this.icon, @required this.onPressed});
+
+  @override
+  Widget build(BuildContext context) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: kPosterFABPadding),
+      child: FloatingActionButton(
+        heroTag: null,
+        // mini: true,
+        backgroundColor: colorScheme.surface,
+        foregroundColor: colorScheme.onSurface,
+        onPressed: onPressed,
+        child: icon,
       ),
     );
   }

@@ -6,6 +6,8 @@ ThemeData theme(ColorScheme colorScheme) => ThemeData(
       brightness: colorScheme.brightness,
       primaryColor: colorScheme.primary,
       canvasColor: colorScheme.surface,
+      scaffoldBackgroundColor: colorScheme.background,
+      cursorColor: colorScheme.primary,
       appBarTheme: AppBarTheme(
         color: colorScheme.surface,
         brightness: colorScheme.brightness,
@@ -13,16 +15,17 @@ ThemeData theme(ColorScheme colorScheme) => ThemeData(
           color: colorScheme.onSurface,
         ),
       ),
-      scaffoldBackgroundColor: colorScheme.background,
       textTheme: textTheme(
         onSurface: colorScheme.onSurface,
         onPrimary: colorScheme.onPrimary,
         onBackground: colorScheme.onBackground,
+      ),
+      iconTheme: IconThemeData(
+        color: colorScheme.onSurface,
       ),
       dividerTheme: DividerThemeData(
         space: 0.0,
         indent: 12.0,
         endIndent: 12.0,
       ),
-      cursorColor: colorScheme.primary,
     );

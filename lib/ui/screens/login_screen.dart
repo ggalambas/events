@@ -1,159 +1,134 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:events/config/constants.dart';
 import 'package:events/config/routes/router.gr.dart';
+import 'package:events/ui/auth/components/alt_sign_in_button.dart';
+import 'package:events/ui/widgets/swipe_up.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
 
 class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    FlutterStatusbarcolor.setStatusBarWhiteForeground(false);
     final ThemeData theme = Theme.of(context);
-    return Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [
-            theme.colorScheme.primary,
-            theme.colorScheme.primaryVariant,
-          ],
-        ),
-      ),
-      child: Scaffold(
-        resizeToAvoidBottomInset: false, //!
-        appBar: AppBar(
-          elevation: 0,
-          backgroundColor: Colors.transparent,
-        ),
-        backgroundColor: Colors.transparent,
-        body: Column(
-          children: [
-            SizedBox(
-              height: 200,
-              child: Center(
-                child: Text(
-                  'Name/Logo',
-                  style:
-                      theme.textTheme.headline4.copyWith(color: Colors.white),
-                ),
-              ),
-            ),
-            Spacer(flex: 3),
-            Column(
-              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Scaffold(
+      backgroundColor: theme.colorScheme.surface,
+      body: SingleChildScrollView(
+        child: Container(
+          height: MediaQuery.of(context).size.height,
+          padding: EdgeInsets.symmetric(horizontal: kFormHorizPadding),
+          child: SafeArea(
+            child: Column(
               children: [
-                Container(
-                  height: 45,
-                  width: 300,
-                  decoration: BoxDecoration(
-                    color: theme.colorScheme.surface,
-                    borderRadius: BorderRadius.circular(kBorderRadiusBig),
-                  ),
-                  padding: EdgeInsets.symmetric(horizontal: 20),
+                Expanded(
+                  flex: 20,
                   child: Center(
-                    child: TextField(
-                      style: TextStyle(color: theme.colorScheme.onSurface),
-                      cursorColor: theme.colorScheme.primary,
-                      keyboardType: TextInputType.emailAddress,
-                      decoration: InputDecoration(
-                        hintText: 'email',
-                        hintStyle: TextStyle(
-                          color: theme.colorScheme.onBackground,
-                        ),
-                        border: InputBorder.none,
-                      ),
+                    child: Container(
+                      height: 72,
+                      width: 72,
+                      color: theme.colorScheme.primary,
                     ),
                   ),
                 ),
-                SizedBox(height: 10),
-                Container(
-                  height: 45,
-                  width: 300,
-                  decoration: BoxDecoration(
-                    color: theme.colorScheme.surface,
-                    borderRadius: BorderRadius.circular(kBorderRadiusBig),
-                  ),
-                  padding: EdgeInsets.symmetric(horizontal: 20),
-                  child: Center(
-                    child: TextField(
-                      obscureText: true, //!
-                      style: TextStyle(color: theme.colorScheme.onSurface),
-                      cursorColor: theme.colorScheme.primary,
-                      keyboardType: TextInputType.text, //!
-                      decoration: InputDecoration(
-                        hintText: 'password', //!
-                        hintStyle: TextStyle(
-                          color: theme.colorScheme.onBackground,
-                        ),
-                        border: InputBorder.none,
-                      ),
-                    ),
-                  ),
+                InputField(
+                  hintText: 'Email',
+                  keyboardType: TextInputType.emailAddress,
                 ),
-                SizedBox(height: 15),
-                FlatButton(
-                  height: 45,
-                  minWidth: 300,
+                InputField(
+                  hintText: 'Password',
+                  obscureText: true,
+                ),
+                SubmitButton(
+                  text: 'Entrar',
                   onPressed: () =>
-                      ExtendedNavigator.root.push(Routes.regionsScreen),
-                  color: theme.colorScheme.primary,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(kBorderRadiusBig),
-                  ),
-                  child: Text('Entrar', style: theme.textTheme.button),
+                      ExtendedNavigator.root.replace(Routes.regionsScreen), //!
                 ),
-              ],
-            ),
-            Spacer(flex: 3),
-            Column(
-              children: [
+                Spacer(),
                 Text(
                   'ou conecta-te com',
                   style: theme.textTheme.bodyText1.copyWith(
-                    color: theme.colorScheme.onPrimary,
+                    color: theme.colorScheme.onBackground,
                   ),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
-                      'Google',
-                      style: theme.textTheme.bodyText2.copyWith(
-                        color: Colors.redAccent,
-                      ),
+                    AltSignInButton.google(
+                      onPressed: null, //!
                     ),
-                    SizedBox(width: 10),
-                    Text(
-                      'Facebook',
-                      style: theme.textTheme.bodyText2.copyWith(
-                        color: Colors.blueAccent,
-                      ),
+                    AltSignInButton.facebook(
+                      onPressed: null, //!
                     ),
                   ],
                 ),
+                SwipeUp(
+                  'Ainda não criaste a tua conta? Regista-te',
+                  onSwipe: () =>
+                      ExtendedNavigator.root.push(Routes.registerScreen),
+                ),
               ],
             ),
-            Spacer(flex: 6),
-            GestureDetector(
-              onTap: () => ExtendedNavigator.root.push(Routes.registerScreen),
-              child: Column(
-                children: [
-                  Icon(
-                    Icons.keyboard_arrow_up,
-                    color: theme.colorScheme.onPrimary,
-                  ),
-                  Text(
-                    "Ainda não criaste a tua conta? Regista-te.",
-                    style: theme.textTheme.bodyText1.copyWith(
-                      color: theme.colorScheme.onPrimary,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Spacer(),
-          ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class SubmitButton extends StatelessWidget {
+  final String text;
+  final void Function() onPressed;
+
+  const SubmitButton({this.text = '', @required this.onPressed});
+
+  @override
+  Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: kSubmitVertMargin),
+      child: FlatButton(
+        height: kFormItemHeight,
+        minWidth: double.infinity,
+        color: theme.colorScheme.primary,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(kBorderRadiusBig),
+        ),
+        onPressed: onPressed,
+        child: Text(text, style: theme.textTheme.button),
+      ),
+    );
+  }
+}
+
+class InputField extends StatelessWidget {
+  final String hintText;
+  final TextInputType keyboardType;
+  final bool obscureText;
+
+  const InputField({
+    this.hintText = '',
+    this.keyboardType = TextInputType.text,
+    this.obscureText = false,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    return Container(
+      height: kFormItemHeight,
+      margin: EdgeInsets.symmetric(vertical: kInputVertMargin),
+      padding: EdgeInsets.symmetric(horizontal: kInputHorizPadding),
+      decoration: BoxDecoration(
+        border: Border.all(color: theme.colorScheme.onBackground, width: 0),
+        borderRadius: BorderRadius.circular(kBorderRadiusBig),
+      ),
+      child: TextField(
+        obscureText: obscureText,
+        style: theme.textTheme.bodyText1,
+        cursorColor: theme.colorScheme.primary,
+        keyboardType: keyboardType,
+        decoration: InputDecoration(
+          hintText: hintText,
+          hintStyle: theme.textTheme.bodyText1,
+          border: InputBorder.none,
         ),
       ),
     );

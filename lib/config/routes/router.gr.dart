@@ -15,14 +15,17 @@ import '../../ui/screens/login_screen.dart';
 import '../../ui/screens/poster_screen.dart';
 import '../../ui/screens/regions_screen.dart';
 import '../../ui/screens/register_screen.dart';
+import '../../ui/screens/splash_screen.dart';
 
 class Routes {
-  static const String loginScreen = '/login-screen';
+  static const String splashScreen = '/splash-screen';
+  static const String loginScreen = '/';
   static const String registerScreen = '/register-screen';
-  static const String regionsScreen = '/';
+  static const String regionsScreen = '/regions-screen';
   static const String eventsScreen = '/events-screen';
   static const String posterScreen = '/poster-screen';
   static const all = <String>{
+    splashScreen,
     loginScreen,
     registerScreen,
     regionsScreen,
@@ -35,6 +38,7 @@ class Router extends RouterBase {
   @override
   List<RouteDef> get routes => _routes;
   final _routes = <RouteDef>[
+    RouteDef(Routes.splashScreen, page: SplashScreen),
     RouteDef(Routes.loginScreen, page: LoginScreen),
     RouteDef(Routes.registerScreen, page: RegisterScreen),
     RouteDef(Routes.regionsScreen, page: RegionsScreen),
@@ -44,6 +48,12 @@ class Router extends RouterBase {
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
   final _pagesMap = <Type, AutoRouteFactory>{
+    SplashScreen: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => SplashScreen(),
+        settings: data,
+      );
+    },
     LoginScreen: (data) {
       return MaterialPageRoute<dynamic>(
         builder: (context) => LoginScreen(),
@@ -86,6 +96,8 @@ class Router extends RouterBase {
 /// *************************************************************************
 
 extension RouterExtendedNavigatorStateX on ExtendedNavigatorState {
+  Future<dynamic> pushSplashScreen() => push<dynamic>(Routes.splashScreen);
+
   Future<dynamic> pushLoginScreen() => push<dynamic>(Routes.loginScreen);
 
   Future<dynamic> pushRegisterScreen() => push<dynamic>(Routes.registerScreen);

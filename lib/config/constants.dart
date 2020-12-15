@@ -3,8 +3,20 @@ const double kBorderRadiusMedium = 10.0;
 const double kBorderRadiusSmall = 5.0;
 
 const Duration kAnimationDuration = Duration(milliseconds: 200);
-
 const double kPrimaryOpacity = 0.15;
+
+// Form
+const double kFormHorizPadding = 30.0;
+const double kFormItemHeight = 45.0;
+const double kInputVertMargin = 5.0;
+const double kInputHorizPadding = 20.0;
+const double kSubmitVertMargin = 10.0;
+const double kAltHorizMargin = 5.0;
+const double kAltVertMargin = 10.0;
+
+// Swipe Up
+const double kSwipeUpHeight = 100.0;
+const double kSwipeUpPadding = 15.0;
 
 // Drawer
 const double kDrawerPadding = 8.0;
@@ -24,3 +36,6 @@ const double kSubtitleHeight = 24.0;
 const double kSubtitleLeftPadding = 16.0;
 const double kCounterSize = 24.0;
 const double kCounterHorizPadding = 3.0;
+
+// Poster
+const double kPosterFABPadding = 8.0;

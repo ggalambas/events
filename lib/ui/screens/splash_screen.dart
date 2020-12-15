@@ -4,7 +4,9 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    return SafeArea(
+    return Container(
+      color: theme.colorScheme.surface,
+      padding: EdgeInsets.only(bottom: 48), //!
       child: Column(
         children: [
           Expanded(
