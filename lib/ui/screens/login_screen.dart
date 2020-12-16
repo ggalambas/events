@@ -25,7 +25,7 @@ class LoginScreen extends StatelessWidget {
             child: Column(
               children: [
                 Expanded(
-                  flex: 10,
+                  flex: 20,
                   child: Center(
                     child: Container(
                       height: 72,
@@ -52,7 +52,7 @@ class LoginScreen extends StatelessWidget {
                   style: theme.textTheme.caption,
                   textAlign: TextAlign.center,
                 ),
-                Spacer(),
+                Spacer(flex: 2),
                 Padding(
                   padding:
                       EdgeInsets.symmetric(horizontal: kFormCaptionPadding),
@@ -73,6 +73,7 @@ class LoginScreen extends StatelessWidget {
                     ),
                   ],
                 ),
+                Spacer(),
                 SwipeUp(
                   'Ainda não criaste a tua conta? Regista-te',
                   onSwipe: () =>

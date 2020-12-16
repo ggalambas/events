@@ -24,8 +24,14 @@ class RegisterScreen extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: kFormHorizPadding),
           child: SafeArea(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Spacer(),
+                Text(
+                  'Cria a tua\nconta!',
+                  style: theme.textTheme.headline3,
+                ),
+                Spacer(),
                 InputField(
                   hintText: 'Nome',
                 ),
@@ -51,6 +57,7 @@ class RegisterScreen extends StatelessWidget {
                     textAlign: TextAlign.center,
                   ),
                 ),
+                Spacer(flex: 2),
               ],
             ),
           ),

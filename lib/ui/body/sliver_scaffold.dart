@@ -68,7 +68,7 @@ class SliverScaffold extends StatelessWidget {
             ),
           ),
           //! button to populate
-          floatingActionButton: FloatingActionButton(onPressed: populate),
+          // floatingActionButton: FloatingActionButton(onPressed: populate),
         );
       },
     );

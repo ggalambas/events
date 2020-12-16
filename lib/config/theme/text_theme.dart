@@ -18,17 +18,18 @@ TextTheme textTheme({
       letterSpacing: 1.5, // -1.5
     ),
     // headline2: TextStyle(
-    //   // color: onSurface,
+    //   color: onSurface,
     //   fontSize: 60.0,
     //   fontWeight: light,
     //   letterSpacing: -0.5,
     // ),
-    // headline3: TextStyle(
-    //   // color: onSurface,
-    //   fontSize: 48.0,
-    //   fontWeight: regular,
-    //   letterSpacing: 0.0,
-    // ),
+    headline3: TextStyle(
+      //* RegisterScreen > title
+      color: onSurface,
+      fontSize: 48.0,
+      fontWeight: regular,
+      letterSpacing: 0.0,
+    ),
     // headline4: TextStyle(
     //   // color: onSurface,
     //   fontSize: 34.0,
