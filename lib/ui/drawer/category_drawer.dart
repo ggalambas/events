@@ -24,11 +24,10 @@ class CategoryDrawer extends StatelessWidget {
         children: [
           UserAccountsDrawerHeader(
             //! 1
-            accountEmail: Text('galambas@gmail.com'),
-            accountName: Text('galambas'),
-            decoration: BoxDecoration(
-              color: theme.colorScheme.primaryVariant,
-            ),
+            accountEmail:
+                Text('galambas@gmail.com', style: theme.textTheme.bodyText1),
+            accountName: Text('galambas', style: theme.textTheme.bodyText2),
+            decoration: BoxDecoration(color: theme.colorScheme.surface),
             margin: EdgeInsets.zero,
           ),
           Expanded(

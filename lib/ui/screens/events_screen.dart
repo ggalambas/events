@@ -19,15 +19,13 @@ class EventsScreen extends StatelessWidget {
 
   const EventsScreen(this.regionName);
 
-  //TODO
-  //* Collapse appbar when openned
-
   @override
   Widget build(BuildContext context) {
     final Category category =
         Provider.of<CategoryModel>(context, listen: false).selected;
     return SliverScaffold(
-      appbar: SliverBar(title: category.name, subtitle: regionName),
+      appBar: SliverBar(title: category.name, subtitle: regionName),
+      appBarCollapsed: true,
       body: Selector<CalendarModel, DateTime>(
         selector: (_, calendar) => calendar.selected,
         builder: (_, ___, __) {

@@ -25,11 +25,9 @@ class ScrollModel extends ChangeNotifier {
 
   void snapFlexbar() {
     if (_controller.offset > 0 && _controller.offset < _flexbarHeight) {
-      Future.microtask(
-        () => _controller.offset / _flexbarHeight > 0.5
-            ? collapseFlexBar()
-            : expandFlexBar(),
-      );
+      _controller.offset / _flexbarHeight > 0.5
+          ? collapseFlexBar()
+          : expandFlexBar();
     }
   }
 
@@ -38,11 +36,15 @@ class ScrollModel extends ChangeNotifier {
   }
 
   void collapseFlexBar() {
-    _animate(_flexbarHeight);
+    Future.microtask(() => _animate(_flexbarHeight));
   }
 
   void expandFlexBar() {
-    _animate(0);
+    Future.microtask(() => _animate(0));
+  }
+
+  void hardCollapseFlexBar() {
+    Future.microtask(() => _controller.jumpTo(_flexbarHeight));
   }
 
   void _animate(double snapOffset) {

@@ -11,6 +11,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 //* 2. Share
 //* 3. Buttons shouldn't be able to be clicked multiple times
 //* 4. custom tabs
+//* 5. more buttons (tickets, etc)
 
 class PosterScreen extends StatelessWidget {
   final Event event;
@@ -87,7 +88,7 @@ class PosterScreen extends StatelessWidget {
           floatingActionButton: Row(
             children: [
               Spacer(),
-              FlatButton(
+              RaisedButton(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(kBorderRadiusBig),
                 ),
@@ -103,6 +104,7 @@ class PosterScreen extends StatelessWidget {
                 },
               ),
               Spacer(),
+              //! 5
             ],
           ),
         ),
