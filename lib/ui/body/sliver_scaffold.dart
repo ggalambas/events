@@ -30,7 +30,9 @@ class SliverScaffold extends StatelessWidget {
       providers: [
         Provider<CalendarScrollModel>(
             create: (_) => CalendarScrollModel(calendar)),
-        ChangeNotifierProvider<ScrollModel>(create: (_) => ScrollModel())
+        ChangeNotifierProvider<ScrollModel>(
+          create: (_) => ScrollModel(),
+        ),
       ],
       builder: (context, _) {
         final CalendarScrollModel calendarScroll =
