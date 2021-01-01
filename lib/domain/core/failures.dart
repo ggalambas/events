@@ -26,11 +26,10 @@ abstract class ValueFailure<T> with _$ValueFailure<T> {
   const factory ValueFailure.wrongImageDimensions({
     @required T failedValue,
   }) = WrongImageDimensions<T>;
-  //! 1
-//   const factory ValueFailure.invalidEmail({
-//     @required T failedValue,
-//   }) = InvalidEmail<T>;
-//   const factory ValueFailure.shortPassword({
-//     @required T failedValue,
-//   }) = ShortPassword<T>;
+  const factory ValueFailure.invalidEmail({
+    @required T failedValue,
+  }) = InvalidEmail<T>;
+  const factory ValueFailure.shortPassword({
+    @required T failedValue,
+  }) = ShortPassword<T>;
 }

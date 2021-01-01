@@ -1,21 +1,20 @@
 {
   "project_info": {
-    "project_number": "44304425536",
-    "firebase_url": "https://events-916b7.firebaseio.com",
-    "project_id": "events-916b7",
-    "storage_bucket": "events-916b7.appspot.com"
+    "project_number": "375872138767",
+    "project_id": "events-a18b8",
+    "storage_bucket": "events-a18b8.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:44304425536:android:b72aafc25af6d61ff7f5a5",
+        "mobilesdk_app_id": "1:375872138767:android:5a37e06840a8165ba87d7a",
         "android_client_info": {
           "package_name": "com.galambas.events"
         }
       },
       "oauth_client": [
         {
-          "client_id": "44304425536-7g7ldoono6j1anbrit3egk2iob6dfkgs.apps.googleusercontent.com",
+          "client_id": "375872138767-3pvqclg1lrsj3blk1mc0430fude87dns.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.galambas.events",
@@ -23,20 +22,20 @@
           }
         },
         {
-          "client_id": "44304425536-ipgru4eq02vusaduaa3le46i5g7hvin2.apps.googleusercontent.com",
+          "client_id": "375872138767-l6c3ntjk3f56msjlen51g7a6jidusc2k.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAYREDXwA3DUEQopCK3Hb9d2uc576r1wMs"
+          "current_key": "AIzaSyDiBC1rVaOroWKyImaY0_2iTFO6QCT2nCA"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "44304425536-ipgru4eq02vusaduaa3le46i5g7hvin2.apps.googleusercontent.com",
+              "client_id": "375872138767-l6c3ntjk3f56msjlen51g7a6jidusc2k.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

@@ -5,11 +5,15 @@ class InputField extends StatelessWidget {
   final String hintText;
   final TextInputType keyboardType;
   final bool obscureText;
+  final void Function(String) onChanged;
+  final String Function(String) validator;
 
   const InputField({
     this.hintText = '',
     this.keyboardType = TextInputType.text,
     this.obscureText = false,
+    this.onChanged,
+    this.validator,
   });
 
   @override
@@ -23,7 +27,7 @@ class InputField extends StatelessWidget {
         border: Border.all(color: theme.colorScheme.onBackground, width: 0),
         borderRadius: BorderRadius.circular(kBorderRadiusBig),
       ),
-      child: TextField(
+      child: TextFormField(
         obscureText: obscureText,
         style: theme.textTheme.bodyText1,
         cursorColor: theme.colorScheme.primary,
@@ -33,6 +37,9 @@ class InputField extends StatelessWidget {
           hintStyle: theme.textTheme.bodyText1,
           border: InputBorder.none,
         ),
+        autocorrect: false,
+        onChanged: onChanged,
+        validator: validator,
       ),
     );
   }

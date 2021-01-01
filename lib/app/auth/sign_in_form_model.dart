@@ -1,78 +1,117 @@
-// import 'package:dartz/dartz.dart';
-// import 'package:flutter/foundation.dart';
+import 'package:dartz/dartz.dart';
+import 'package:events/domain/auth/auth_failure.dart';
+import 'package:events/domain/auth/i_auth_facade.dart';
+import 'package:events/domain/auth/value_objects.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
+import 'package:injectable/injectable.dart';
 
-// class SignInFormModel extends ChangeNotifier {
-//   final IAuthFacade _authFacade;
+@Injectable()
+class SignInFormModel extends ChangeNotifier {
+  final IAuthFacade _authFacade;
 
-//   SignInFormModel(this._authFacade);
+  SignInFormModel(this._authFacade);
 
-//   EmailAdress _emailAdress = EmailAdress('');
-//   EmailAdress get emailAdress => _emailAdress;
-//   set emailAdress(String email) {
-//     _emailAdress = EmailAdress(email);
-//     _authFailureOrSuccessOption = none();
-//     notifyListeners();
-//   }
+  String _name = '';
+  EmailAddress _emailAddress = EmailAddress('');
+  Password _password = Password('');
 
-//   Password _password = Password('');
-//   Password get password => _password;
-//   set password(String pass) {
-//     _password = Password(pass);
-//     _authFailureOrSuccessOption = none();
-//     notifyListeners();
-//   }
+  void nameChanged(String name) {
+    _name = name;
+    _authFailureOrSuccessOption = none();
+    notifyListeners();
+  }
 
-//   bool _showErrorMessages = false;
-//   bool get showErrorMessages => _showErrorMessages;
+  void emailChanged(String email) {
+    _emailAddress = EmailAddress(email);
+    _authFailureOrSuccessOption = none();
+    notifyListeners();
+  }
 
-//   bool _isSubmitting = false;
-//   bool get isSubmitting => _isSubmitting;
+  void passwordChanged(String pass) {
+    _password = Password(pass);
+    _authFailureOrSuccessOption = none();
+    notifyListeners();
+  }
 
-//   Option<Either<AuthFailure, Unit>> _authFailureOrSuccessOption = none();
-//   Option<Either<AuthFailure, Unit>> get authFailureOrSuccessOption =>
-//       _authFailureOrSuccessOption;
+  String emailValidated({String invalidEmail}) => _emailAddress.value.fold(
+        (f) => f.maybeMap(
+          invalidEmail: (_) => invalidEmail,
+          orElse: () => null,
+        ),
+        (_) => null,
+      );
 
-//   Future signInWithEmailAndPassword() async {
-//     __actionWithEmailAndPassword(_authFacade.signInWithEmailAndPassword);
-//   }
+  String passwordValidated({String shortPassword}) => _password.value.fold(
+        (f) => f.maybeMap(
+          shortPassword: (_) => shortPassword,
+          orElse: () => null,
+        ),
+        (_) => null,
+      );
 
-//   Future registerWithEmailAndPassword() async {
-//     __actionWithEmailAndPassword(_authFacade.registerWithEmailAndPassword);
-//   }
+  bool _showErrorMessages = false;
+  bool get showErrorMessages => _showErrorMessages;
 
-//   Future _actionWithEmailAndPassword() async* {
-//     if (!_isSubmitting) {
-//       Either<AuthFailure, Unit> failureOrSuccess;
+  bool _isSubmitting = false;
+  bool get isSubmitting => _isSubmitting;
 
-//       if (_emailAdress.isValid() && _password.isValid()) {
-//         _isSubmitting = true;
-//         _authFailureOrSuccessOption = none();
-//         notifyListeners();
+  Option<Either<AuthFailure, Unit>> _authFailureOrSuccessOption = none();
+  Option<Either<AuthFailure, Unit>> get authFailureOrSuccessOption =>
+      _authFailureOrSuccessOption;
 
-//         failureOrSuccess = await forwardedCall(
-//           emailAdress: _emailAdress,
-//           password: _password,
-//         );
-//       }
+  Future registerWithEmailAndPassword() async =>
+      _actionWithEmailAndPassword(register: true);
 
-//       _isSubmitting = false;
-//       _showErrorMessages = true;
-//       _authFailureOrSuccessOption = optionOf(failureOrSuccess);
-//       notifyListeners();
-//     }
-//   }
+  Future signInWithEmailAndPassword() async => _actionWithEmailAndPassword();
 
-//   Future signInWithGoogle() async* {
-//     if (!_isSubmitting) {
-//       _isSubmitting = true;
-//       _authFailureOrSuccessOption = none();
-//       notifyListeners();
+  Future signInWithGoogle() async =>
+      _actionWithAltSignIn(_authFacade.signInWithGoogle);
 
-//       final failureOrSuccess = await _authFacade.signInWithGoogle();
+  Future signInWithFacebook() async =>
+      _actionWithAltSignIn(_authFacade.signInWithFacebook);
 
-//       _isSubmitting = false;
-//       _authFailureOrSuccessOption = some(failureOrSuccess);
-//       notifyListeners();
-//     }
-//   }
-// }
+  Future _actionWithEmailAndPassword({bool register = false}) async {
+    if (!_isSubmitting) {
+      Either<AuthFailure, Unit> failureOrSuccess;
+
+      if (_emailAddress.isValid() && _password.isValid()) {
+        _isSubmitting = true;
+        _authFailureOrSuccessOption = none();
+        notifyListeners();
+
+        failureOrSuccess = register
+            ? await _authFacade.registerWithEmailAndPassword(
+                emailAddress: _emailAddress,
+                password: _password,
+                name: _name,
+              )
+            : await _authFacade.signInWithEmailAndPassword(
+                emailAddress: _emailAddress,
+                password: _password,
+              );
+      }
+
+      _isSubmitting = false;
+      _showErrorMessages = true;
+      _authFailureOrSuccessOption = optionOf(failureOrSuccess);
+      notifyListeners();
+    }
+  }
+
+  Future _actionWithAltSignIn(
+    Future<Option<Either<AuthFailure, Unit>>> Function() forwardedCall,
+  ) async {
+    if (!_isSubmitting) {
+      _isSubmitting = true;
+      _authFailureOrSuccessOption = none();
+      notifyListeners();
+
+      final failureOrSuccessOption = await forwardedCall();
+
+      _isSubmitting = false;
+      _authFailureOrSuccessOption = failureOrSuccessOption;
+      notifyListeners();
+    }
+  }
+}

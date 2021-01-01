@@ -69,3 +69,15 @@ void createCategories() {
         ).toJson());
   }
 }
+
+void changeEventsDate() {
+  final FirebaseFirestore firestore = FirebaseFirestore.instance;
+  final events = firestore.eventsCollection();
+  events.snapshots().map(
+        (snapshot) => snapshot.docs.map(
+          (doc) => events.doc(doc.id).update(
+            {'date': FieldValue.increment(Duration(days: 5).inMicroseconds)},
+          ),
+        ),
+      );
+}

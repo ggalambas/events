@@ -8,7 +8,6 @@ import 'package:string_validator/string_validator.dart';
 //* 1. UrlValidation
 //* 2. ImageValidation
 //* 3. Image Dimensions validation
-//* 4. Auth validators
 
 Either<ValueFailure<String>, String> validateMaxStringLength(
   String input,
@@ -66,21 +65,20 @@ Either<ValueFailure<File>, File> validateDimensions(File input) {
   }
 }
 
-//! 4
-// Either<ValueFailure<String>, String> validateEmailAddress(String input) {
-//   const emailRegex =
-//       r"""^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+""";
-//   if (RegExp(emailRegex).hasMatch(input)) {
-//     return right(input);
-//   } else {
-//     return left(ValueFailure.invalidEmail(failedValue: input));
-//   }
-// }
+Either<ValueFailure<String>, String> validateEmailAddress(String input) {
+  const emailRegex =
+      r"""^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+""";
+  if (RegExp(emailRegex).hasMatch(input)) {
+    return right(input);
+  } else {
+    return left(ValueFailure.invalidEmail(failedValue: input));
+  }
+}
 
-// Either<ValueFailure<String>, String> validatePassword(String input) {
-//   if (input.length >= 6) {
-//     return right(input);
-//   } else {
-//     return left(ValueFailure.shortPassword(failedValue: input));
-//   }
-// }
+Either<ValueFailure<String>, String> validatePassword(String input) {
+  if (input.length >= 6) {
+    return right(input);
+  } else {
+    return left(ValueFailure.shortPassword(failedValue: input));
+  }
+}

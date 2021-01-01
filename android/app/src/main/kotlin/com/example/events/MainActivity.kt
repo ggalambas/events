@@ -1,4 +1,4 @@
-package com.example.events
+package com.galambas.events
 
 import io.flutter.embedding.android.FlutterActivity
 

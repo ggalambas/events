@@ -25,6 +25,7 @@ class EventRepository implements IEventRepository {
   //* 2. save not just day but year and month
   //* 3. remove subregion events collection
   //* 4. rename collections
+  //* 5. order events and regions
 
   //!
   @override
