@@ -1,24 +1,22 @@
 import 'package:events/app/appbar/calendar_model.dart';
 import 'package:events/app/appbar/calendar_scroll_model.dart';
-import 'package:events/populate.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'package:events/app/appbar/scroll_model.dart';
 import 'package:sliver_tools/sliver_tools.dart';
 
-//TODO
-//* 1. Swipe screen to change day
-
 class SliverScaffold extends StatelessWidget {
   final Widget drawer;
-  final Widget appbar;
+  final Widget appBar;
   final Widget body;
+  final bool appBarCollapsed;
 
   const SliverScaffold({
     this.drawer,
-    @required this.appbar,
+    @required this.appBar,
     this.body,
+    this.appBarCollapsed = false,
   });
 
   @override
@@ -32,7 +30,9 @@ class SliverScaffold extends StatelessWidget {
       providers: [
         Provider<CalendarScrollModel>(
             create: (_) => CalendarScrollModel(calendar)),
-        ChangeNotifierProvider<ScrollModel>(create: (_) => ScrollModel())
+        ChangeNotifierProvider<ScrollModel>(
+          create: (_) => ScrollModel(),
+        ),
       ],
       builder: (context, _) {
         final CalendarScrollModel calendarScroll =
@@ -40,6 +40,7 @@ class SliverScaffold extends StatelessWidget {
         final ScrollModel scroll =
             Provider.of<ScrollModel>(context, listen: false);
         calendarScroll.snapSelected();
+        if (appBarCollapsed) scroll.hardCollapseFlexBar();
         return Scaffold(
           drawer: drawer,
           body: NotificationListener<ScrollEndNotification>(
@@ -53,7 +54,7 @@ class SliverScaffold extends StatelessWidget {
             child: CustomScrollView(
               controller: scroll.controller,
               slivers: <Widget>[
-                appbar,
+                appBar,
                 SliverStack(
                   children: [
                     SliverToBoxAdapter(

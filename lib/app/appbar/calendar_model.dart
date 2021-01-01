@@ -41,8 +41,6 @@ class CalendarModel extends ChangeNotifier {
         DateTime.now().day,
       );
 
-  // Calendar
-
   int get totalDays => 14;
 
   void select(int daysAfter) {

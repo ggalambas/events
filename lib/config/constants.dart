@@ -38,5 +38,10 @@ const double kSubtitleLeftPadding = 16.0;
 const double kCounterSize = 24.0;
 const double kCounterHorizPadding = 3.0;
 
+// Empty List
+const double kEmptyPaddingRatio = 1 / 5;
+const double kEmptyIconSize = 45.0;
+const double kEmptySpacerHeight = 15.0;
+
 // Poster
 const double kPosterFABPadding = 8.0;

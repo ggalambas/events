@@ -1,7 +1,5 @@
+import 'package:events/config/constants.dart';
 import 'package:flutter/material.dart';
-
-//TODO
-//* hardcoded values
 
 class SliverEmptyPage extends StatelessWidget {
   final IconData icon;
@@ -12,15 +10,16 @@ class SliverEmptyPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+    final double screenWidth = MediaQuery.of(context).size.width;
     return SliverFillRemaining(
         hasScrollBody: false,
         child: Padding(
-          padding: EdgeInsets.all(MediaQuery.of(context).size.width / 4), //!
+          padding: EdgeInsets.all(screenWidth * kEmptyPaddingRatio),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(icon, size: 45), //!
-              SizedBox(height: 15), //!
+              Icon(icon, size: kEmptyIconSize),
+              SizedBox(height: kEmptySpacerHeight),
               Text(
                 message,
                 textAlign: TextAlign.center,

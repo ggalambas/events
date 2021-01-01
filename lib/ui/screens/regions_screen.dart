@@ -28,7 +28,7 @@ class RegionsScreen extends StatelessWidget {
         return SliverScaffold(
           drawer: CategoryDrawer(),
           //! 2
-          appbar:
+          appBar:
               /*SliverStack(
             children: [
               SliverPositioned.fill(
