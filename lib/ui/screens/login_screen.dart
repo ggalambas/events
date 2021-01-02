@@ -11,8 +11,6 @@ import 'package:events/ui/auth/components/submit_button.dart';
 import 'package:events/ui/widgets/swipe_up.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:auto_route/auto_route.dart';
-import 'package:events/config/routes/router.gr.dart';
 
 //TODO
 //* 1. Auth
