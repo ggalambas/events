@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 // Light Mode
 
 ColorScheme lightPallete = ColorScheme(
-  primary: Colors.deepPurpleAccent,
+  primary: Color(0xFF651FFF), // deepPurpleAccent[400]
   primaryVariant: Color(0xFF6200EA), // deepPurpleAccent[700]
   secondary: Color(0xFF00E5FF),
   secondaryVariant: Color(0xFF00B8D4),
@@ -21,7 +21,7 @@ ColorScheme lightPallete = ColorScheme(
 // Dark Mode
 
 ColorScheme darkPallete = ColorScheme(
-  primary: Color(0xFF7C4DFF), // deepPurpleAccent[200]
+  primary: Color(0xFF7C4DFF), // deepPurpleAccent
   primaryVariant: Color(0xFF6200EA), // deepPurpleAccent[700]
   secondary: Color(0xFF18FFFF),
   secondaryVariant: Color(0xFF18FFFF), // same as secondary

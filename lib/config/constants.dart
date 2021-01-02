@@ -1,9 +1,18 @@
+import 'package:flutter/material.dart';
+
+// Default values
 const double kBorderRadiusBig = 15.0;
 const double kBorderRadiusMedium = 10.0;
 const double kBorderRadiusSmall = 5.0;
 
 const Duration kAnimationDuration = Duration(milliseconds: 200);
 const double kPrimaryOpacity = 0.15;
+
+// Sign In
+const Color kGoogleLightColor = Color(0xFFFF1744); // redAccent[400]
+const Color kGoogleDarkColor = Colors.redAccent;
+const Color kFacebookLightColor = Color(0xFF2979FF); // blueAccent[400]
+const Color kFacebookDarkColor = Colors.blueAccent;
 
 // Form
 const double kFormHorizPadding = 30.0;

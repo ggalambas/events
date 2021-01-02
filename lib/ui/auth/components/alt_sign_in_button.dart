@@ -5,25 +5,29 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class AltSignInButton extends StatelessWidget {
   final IconData icon;
-  final Color color;
+  final Color lightColor;
+  final Color darkColor;
   final void Function() onPressed;
 
   const AltSignInButton._({
     @required this.icon,
     @required this.onPressed,
-    @required this.color,
+    @required this.lightColor,
+    @required this.darkColor,
   });
 
   factory AltSignInButton.google({@required void Function() onPressed}) =>
       AltSignInButton._(
         icon: FontAwesomeIcons.google,
-        color: Colors.redAccent,
+        lightColor: kGoogleLightColor,
+        darkColor: kGoogleDarkColor,
         onPressed: onPressed,
       );
   factory AltSignInButton.facebook({@required void Function() onPressed}) =>
       AltSignInButton._(
         icon: FontAwesomeIcons.facebookF,
-        color: Colors.blueAccent,
+        lightColor: kFacebookLightColor,
+        darkColor: kFacebookDarkColor,
         onPressed: onPressed,
       );
 
@@ -38,7 +42,8 @@ class AltSignInButton extends StatelessWidget {
         vertical: kAltVertMargin,
       ),
       decoration: BoxDecoration(
-        color: color,
+        color:
+            colorScheme.brightness == Brightness.light ? lightColor : darkColor,
         borderRadius: BorderRadius.circular(kBorderRadiusBig),
       ),
       child: IconButton(
