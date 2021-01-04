@@ -5,7 +5,7 @@ import 'package:events/domain/auth/value_objects.dart';
 import 'package:firebase_auth/firebase_auth.dart' hide User;
 import 'package:firebase_auth/firebase_auth.dart' as firebase show User;
 import 'package:flutter/foundation.dart';
-// import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
 // import 'package:events/services/auth/firebase_user_mapper.dart';
@@ -23,12 +23,12 @@ import 'package:injectable/injectable.dart';
 class FirebaseAuthFacade implements IAuthFacade {
   final FirebaseAuth _firebaseAuth;
   final GoogleSignIn _googleSignIn;
-  // final FacebookAuth _facebookAuth;
+  final FacebookAuth _facebookAuth;
 
   FirebaseAuthFacade(
     this._firebaseAuth,
     this._googleSignIn,
-    // this._facebookAuth,
+    this._facebookAuth,
   );
 
   // @override
@@ -111,25 +111,36 @@ class FirebaseAuthFacade implements IAuthFacade {
     }
   }
 
-  // @override
-  // Future<Option<Either<AuthFailure, Unit>>> signInWithFacebook() async {
-  //   try {
-  //     // Trigger the sign-in flow
-  //     final facebookUser = await _facebookAuth.login();
-  //     if (facebookUser == null) {
-  //       return none();
-  //     }
+  @override
+  Future<Option<Either<AuthFailure, Unit>>> signInWithFacebook() async {
+    try {
+      // Trigger the sign-in flow
+      final facebookAuth = await _facebookAuth.login();
 
-  //     // Create a credential from the access token
-  //     final authCredential =
-  //         FacebookAuthProvider.credential(facebookUser.token);
+      // final facebookUser = await _facebookAuth.getUserData();
 
-  //     await _firebaseAuth.signInWithCredential(authCredential);
-  //     return some(right(unit));
-  //   } on FirebaseAuthException catch (_) {
-  //     return some(left(const AuthFailure.serverError()));
-  //   }
-  // }
+      // Create a credential from the access token
+      final authCredential =
+          FacebookAuthProvider.credential(facebookAuth.token);
+
+      await _firebaseAuth.signInWithCredential(authCredential);
+      return some(right(unit));
+    } on FirebaseAuthException catch (_) {
+      return some(left(const AuthFailure.serverError()));
+    } on FacebookAuthException catch (e) {
+      switch (e.errorCode) {
+        case FacebookAuthErrorCode.CANCELLED:
+          //* login cancelled
+          return none();
+        case FacebookAuthErrorCode.FAILED:
+        //* "login failed"
+        case FacebookAuthErrorCode.OPERATION_IN_PROGRESS:
+        //* You have a previous login operation in progress
+        default:
+          return some(left(const AuthFailure.serverError()));
+      }
+    }
+  }
 
   // @override
   // Future signOut() => Future.wait([

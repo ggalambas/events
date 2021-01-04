@@ -4,6 +4,7 @@
 // InjectableConfigGenerator
 // **************************************************************************
 
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get_it/get_it.dart';
@@ -35,11 +36,15 @@ Future<GetIt> $initGetIt(
   final gh = GetItHelper(get, environment, environmentFilter);
   final firebaseInjectableModule = _$FirebaseInjectableModule();
   final regionsInjectableModule = _$RegionsInjectableModule();
+  gh.lazySingleton<FacebookAuth>(() => firebaseInjectableModule.facebookAuth);
   gh.lazySingleton<FirebaseAuth>(() => firebaseInjectableModule.firebaseAuth);
   gh.lazySingleton<FirebaseFirestore>(() => firebaseInjectableModule.firestore);
   gh.lazySingleton<GoogleSignIn>(() => firebaseInjectableModule.googleSignIn);
-  gh.lazySingleton<IAuthFacade>(
-      () => FirebaseAuthFacade(get<FirebaseAuth>(), get<GoogleSignIn>()));
+  gh.lazySingleton<IAuthFacade>(() => FirebaseAuthFacade(
+        get<FirebaseAuth>(),
+        get<GoogleSignIn>(),
+        get<FacebookAuth>(),
+      ));
   gh.lazySingleton<IEventRepository>(
       () => EventRepository(get<FirebaseFirestore>()));
   final list = await regionsInjectableModule.regionsJson;
