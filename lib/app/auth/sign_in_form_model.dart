@@ -68,8 +68,8 @@ class SignInFormModel extends ChangeNotifier {
   Future signInWithGoogle() async =>
       _actionWithAltSignIn(_authFacade.signInWithGoogle);
 
-  Future signInWithFacebook() async =>
-      _actionWithAltSignIn(_authFacade.signInWithFacebook);
+  // Future signInWithFacebook() async =>
+  //     _actionWithAltSignIn(_authFacade.signInWithFacebook);
 
   Future _actionWithEmailAndPassword({bool register = false}) async {
     if (!_isSubmitting) {

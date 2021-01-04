@@ -2,10 +2,10 @@ import 'package:events/config/constants.dart';
 import 'package:flutter/material.dart';
 
 class SwipeUp extends StatefulWidget {
-  final String text;
+  final Widget child;
   final void Function() onSwipe;
 
-  const SwipeUp(this.text, {this.onSwipe});
+  const SwipeUp({this.child, this.onSwipe});
 
   @override
   _SwipeUpState createState() => _SwipeUpState();
@@ -24,15 +24,17 @@ class _SwipeUpState extends State<SwipeUp> {
   double get initialOffset => _initialOffset;
   set initialOffset(double offset) => setState(() => _initialOffset = offset);
 
-  double get maxSwipeOffset => 20.0;
+  double get maxSwipeOffset => 99;
   double multiplier(double offset) =>
       maxSwipeOffset *
       Curves.easeOutCubic
           .transformInternal(offset / MediaQuery.of(context).size.height);
 
+  double get swipeOffsetGoal => maxSwipeOffset / 3;
+  bool get swiped => swipeOffset > swipeOffsetGoal;
+
   @override
   Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
     return GestureDetector(
       onVerticalDragStart: (details) {
         initialOffset = details.globalPosition.dy;
@@ -44,12 +46,12 @@ class _SwipeUpState extends State<SwipeUp> {
         }
       },
       onVerticalDragEnd: (details) {
-        if (swipeOffset > 0.4 * maxSwipeOffset) widget.onSwipe();
+        if (swiped) widget.onSwipe();
         swipeOffset = 0;
       },
       onTap: () {
         swipe = false;
-        swipeOffset = maxSwipeOffset;
+        swipeOffset = swipeOffsetGoal;
         widget.onSwipe();
         Future.delayed(kAnimationDuration * 2, () {
           swipeOffset = 0;
@@ -58,19 +60,17 @@ class _SwipeUpState extends State<SwipeUp> {
       },
       child: AnimatedContainer(
         height: kSwipeUpHeight,
-        padding: EdgeInsets.only(bottom: kSwipeUpPadding + swipeOffset),
+        padding: EdgeInsets.only(bottom: kSwipeUpPadding),
         color: Colors.transparent,
         curve: Curves.easeOutCubic,
         duration: swipe ? Duration.zero : kAnimationDuration,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
+            Spacer(flex: 100 - swipeOffset.ceil()),
             Icon(Icons.keyboard_arrow_up),
-            Text(
-              widget.text,
-              style: theme.textTheme.bodyText1,
-              textAlign: TextAlign.center,
-            ),
+            widget.child,
+            Spacer(flex: 1 + swipeOffset.ceil()),
           ],
         ),
       ),

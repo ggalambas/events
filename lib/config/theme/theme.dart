@@ -5,7 +5,9 @@ ThemeData theme(ColorScheme colorScheme) => ThemeData(
       colorScheme: colorScheme,
       brightness: colorScheme.brightness,
       primaryColor: colorScheme.primary,
+      accentColor: colorScheme.secondary,
       canvasColor: colorScheme.surface,
+      backgroundColor: colorScheme.surface,
       scaffoldBackgroundColor: colorScheme.background,
       cursorColor: colorScheme.primary,
       appBarTheme: AppBarTheme(
