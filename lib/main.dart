@@ -30,12 +30,27 @@ class MyApp extends StatefulWidget {
   _MyAppState createState() => _MyAppState();
 }
 
-class _MyAppState extends State<MyApp> {
+class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   @override
   void initState() {
     super.initState();
-    ThemeConfig.statusBarListener(WidgetsBinding.instance.window);
     initializeDateFormatting('pt_PT');
+    WidgetsBinding.instance.addObserver(this);
+    ThemeConfig.statusBarListener(WidgetsBinding.instance.window);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      ThemeConfig.statusBarListener(WidgetsBinding.instance.window);
+    }
+    super.didChangeAppLifecycleState(state);
   }
 
   @override

@@ -48,7 +48,6 @@ class CalendarScrollModel {
 
     for (int i = 0; i < calendar.totalDays; i++) {
       offsetList[i] = offset - snapWidth;
-      print(offsetList[i]); //!
       separator = calendar.isLastDayOfMonth(i)
           ? kCalendarItemSpace * 7 / 3 + 12
           : kCalendarItemSpace;
