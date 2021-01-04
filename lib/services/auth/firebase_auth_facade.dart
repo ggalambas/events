@@ -8,6 +8,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
+import 'package:flutter/services.dart';
 // import 'package:events/services/auth/firebase_user_mapper.dart';
 
 // TODO
@@ -91,6 +92,8 @@ class FirebaseAuthFacade implements IAuthFacade {
     try {
       // Trigger the authentication flow
       final googleUser = await _googleSignIn.signIn();
+
+      //?
       if (googleUser == null) {
         return none();
       }
@@ -108,6 +111,12 @@ class FirebaseAuthFacade implements IAuthFacade {
       return some(right(unit));
     } on FirebaseAuthException catch (_) {
       return some(left(const AuthFailure.serverError()));
+    } on PlatformException catch (e) {
+      if (e.code == 'sign_in_canceled') {
+        return none();
+      } else {
+        return some(left(const AuthFailure.serverError()));
+      }
     }
   }
 
@@ -130,12 +139,14 @@ class FirebaseAuthFacade implements IAuthFacade {
     } on FacebookAuthException catch (e) {
       switch (e.errorCode) {
         case FacebookAuthErrorCode.CANCELLED:
-          //* login cancelled
+          print('login cancelled');
           return none();
         case FacebookAuthErrorCode.FAILED:
-        //* "login failed"
+          print('login failed');
+          return some(left(const AuthFailure.serverError()));
         case FacebookAuthErrorCode.OPERATION_IN_PROGRESS:
-        //* You have a previous login operation in progress
+          print('You have a previous login operation in progress');
+          return some(left(const AuthFailure.serverError()));
         default:
           return some(left(const AuthFailure.serverError()));
       }
