@@ -99,7 +99,7 @@ class LoginScreen extends StatelessWidget {
               ),
               AltSignInButton.facebook(
                 onPressed: () async {
-                  // await signInForm.signInWithFacebook();
+                  await signInForm.signInWithFacebook();
                   _showError(context, signInForm.authFailureOrSuccessOption);
                 },
               ),
