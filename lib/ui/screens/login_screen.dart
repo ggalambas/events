@@ -90,14 +90,10 @@ class LoginScreen extends StatelessWidget {
                     textAlign: TextAlign.center,
                   ),
                   Spacer(flex: 2),
-                  Padding(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: kFormCaptionPadding),
-                    child: Text(
-                      'ou conecta-te com',
-                      style: theme.textTheme.bodyText1,
-                      textAlign: TextAlign.center,
-                    ),
+                  Text(
+                    'ou conecta-te com',
+                    style: theme.textTheme.bodyText1,
+                    textAlign: TextAlign.center,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
