@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 
 abstract class IAuthFacade {
   // Future<Option<User>> getSignedInUser();
+  Future<Either<AuthFailure, Unit>> signInAnonymously();
   Future<Either<AuthFailure, Unit>> registerWithEmailAndPassword({
     @required EmailAddress emailAddress,
     @required Password password,
