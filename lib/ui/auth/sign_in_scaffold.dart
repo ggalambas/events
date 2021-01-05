@@ -20,19 +20,17 @@ class SignInScaffold extends StatelessWidget {
           : null,
       extendBodyBehindAppBar: ableToGoBack,
       backgroundColor: theme.colorScheme.surface,
-      body: SingleChildScrollView(
+      body: SafeArea(
         child: Stack(
           children: [
-            SafeArea(
-              child: Loading.linear(isLoading: signInForm.isSubmitting),
-            ),
-            GestureDetector(
-              onTap: () => FocusScope.of(context).unfocus(),
-              behavior: HitTestBehavior.translucent,
-              child: Container(
-                height: MediaQuery.of(context).size.height,
-                padding: EdgeInsets.symmetric(horizontal: kFormHorizPadding),
-                child: SafeArea(
+            SingleChildScrollView(
+              child: GestureDetector(
+                onTap: () => FocusScope.of(context).unfocus(),
+                behavior: HitTestBehavior.translucent,
+                child: Container(
+                  height: MediaQuery.of(context).size.height -
+                      MediaQuery.of(context).padding.top,
+                  padding: EdgeInsets.symmetric(horizontal: kFormHorizPadding),
                   child: Form(
                     autovalidateMode: signInForm.showErrorMessages
                         ? AutovalidateMode.always
@@ -42,6 +40,7 @@ class SignInScaffold extends StatelessWidget {
                 ),
               ),
             ),
+            Loading.linear(isLoading: signInForm.isSubmitting),
           ],
         ),
       ),
