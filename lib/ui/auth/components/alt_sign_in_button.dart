@@ -1,54 +1,59 @@
-import 'package:events/app/helpers/awesome_icon.dart';
 import 'package:events/config/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class AltSignInButton extends StatelessWidget {
-  final IconData icon;
-  final Color lightColor;
-  final Color darkColor;
+  final String assetName;
+  final String label;
   final void Function() onPressed;
 
   const AltSignInButton._({
-    @required this.icon,
+    @required this.assetName,
+    @required this.label,
     @required this.onPressed,
-    @required this.lightColor,
-    @required this.darkColor,
   });
 
   factory AltSignInButton.google({@required void Function() onPressed}) =>
       AltSignInButton._(
-        icon: FontAwesomeIcons.google,
-        lightColor: kGoogleLightColor,
-        darkColor: kGoogleDarkColor,
+        assetName: 'assets/icons/google_icon.svg',
+        label: 'Google',
         onPressed: onPressed,
       );
   factory AltSignInButton.facebook({@required void Function() onPressed}) =>
       AltSignInButton._(
-        icon: FontAwesomeIcons.facebookF,
-        lightColor: kFacebookLightColor,
-        darkColor: kFacebookDarkColor,
+        assetName: 'assets/icons/facebook_icon.svg',
+        label: 'Facebook',
         onPressed: onPressed,
       );
 
   @override
   Widget build(BuildContext context) {
-    final ColorScheme colorScheme = Theme.of(context).colorScheme;
-    return Container(
-      height: kFormItemHeight,
-      width: kFormItemHeight,
-      margin: EdgeInsets.symmetric(
-        horizontal: kAltHorizMargin,
-        vertical: kAltVertMargin,
+    final ThemeData theme = Theme.of(context);
+    return OutlinedButton.icon(
+      style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
+          shape: MaterialStateProperty.all<OutlinedBorder>(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(kBorderRadiusBig),
+            ),
+          ),
+          side: MaterialStateProperty.all<BorderSide>(
+            BorderSide(
+              color: theme.colorScheme.onBackground,
+              width: 0,
+            ),
+          ),
+          minimumSize:
+              MaterialStateProperty.all<Size>(Size(0, kFormItemHeight))),
+      onPressed: onPressed,
+      icon: SvgPicture.asset(
+        assetName,
+        width: 24,
+        height: 24,
       ),
-      decoration: BoxDecoration(
-        color:
-            colorScheme.brightness == Brightness.light ? lightColor : darkColor,
-        borderRadius: BorderRadius.circular(kBorderRadiusBig),
-      ),
-      child: IconButton(
-        icon: AwesomeIcon(icon, color: colorScheme.onPrimary),
-        onPressed: onPressed,
+      label: Text(
+        label,
+        style: theme.textTheme.button.copyWith(color: kAltLabelColor),
       ),
     );
   }
