@@ -16,7 +16,8 @@ const double kInputHorizPadding = 20.0;
 const double kSubmitVertMargin = 10.0;
 const double kFormCaptionPadding = 8.0;
 const double kAltVertMargin = 10.0;
-const double kAltSpacing = 5.0;
+const double kAltSpacing = 8.0;
+const double kAltRunSpacing = 4.0;
 const Color kAltLabelColor = Color(0xFF5F6368);
 
 // Swipe Up

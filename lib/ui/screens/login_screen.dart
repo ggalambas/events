@@ -97,7 +97,7 @@ class LoginScreen extends StatelessWidget {
             child: Wrap(
               alignment: WrapAlignment.center,
               spacing: kAltSpacing,
-              runSpacing: kAltSpacing,
+              runSpacing: kAltRunSpacing,
               children: [
                 AltSignInButton.google(
                   onPressed: () async {
