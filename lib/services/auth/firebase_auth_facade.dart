@@ -17,7 +17,7 @@ import 'package:flutter/services.dart';
 //*    https://firebase.flutter.dev/docs/auth/usage/#verifying-a-users-email
 //* 3. link user accounts
 //*    https://firebase.flutter.dev/docs/auth/usage/#linking-user-accounts
-//* 3. check failures
+//* 3. account providers error
 //*    https://firebase.flutter.dev/docs/auth/error-handling/
 
 @LazySingleton(as: IAuthFacade)
@@ -136,8 +136,12 @@ class FirebaseAuthFacade implements IAuthFacade {
       await _firebaseAuth.signInWithCredential(authCredential);
 
       return some(right(unit));
-    } on FirebaseAuthException catch (_) {
-      return some(left(const AuthFailure.serverError()));
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'account-exists-with-different-credential') {
+        return some(left(const AuthFailure.serverError())); //!
+      } else {
+        return some(left(const AuthFailure.serverError()));
+      }
     } on FacebookAuthException catch (e) {
       switch (e.errorCode) {
         case FacebookAuthErrorCode.CANCELLED:
@@ -162,3 +166,52 @@ class FirebaseAuthFacade implements IAuthFacade {
   //       _firebaseAuth.signOut(),
   //     ]);
 }
+
+// //!
+//         // The account already exists with a different credential
+//         final String email = e.email;
+//         final AuthCredential pendingCredential = e.credential;
+
+//         // Fetch a list of what sign-in methods exist for the conflicting user
+//         final List<String> userSignInMethods =
+//             await _firebaseAuth.fetchSignInMethodsForEmail(email);
+
+//         // If the user has several sign-in methods,
+//         // the first method in the list will be the "recommended" method to use.
+//         if (userSignInMethods.first == 'password') {
+//           //! Prompt the user to enter their password
+//           String password = '...';
+
+//           // Sign the user in to their account with the password
+//           final UserCredential userCredential =
+//               await _firebaseAuth.signInWithEmailAndPassword(
+//             email: email,
+//             password: password,
+//           );
+
+//           // Link the pending credential with the existing account
+//           await userCredential.user.linkWithCredential(pendingCredential);
+
+//           //! Success! Go back to your application flow
+//           return goToApplication();
+//         }
+
+//         // Since other providers are now external, you must now sign the user in with another
+//         // auth provider, such as Facebook.
+//         if (userSignInMethods.first == 'facebook.com') {
+//           //! Create a new Facebook credential
+//           String accessToken = await triggerFacebookAuthentication();
+//           FacebookAuthCredential facebookAuthCredential =
+//               FacebookAuthProvider.credential(accessToken);
+
+//           // Sign the user in with the credential
+//           UserCredential userCredential =
+//               await _firebaseAuth.signInWithCredential(facebookAuthCredential);
+
+//           // Link the pending credential with the existing account
+//           await userCredential.user.linkWithCredential(pendingCredential);
+
+//           //! Success! Go back to your application flow
+//           return goToApplication();
+//         }
+//         //!
