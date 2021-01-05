@@ -8,21 +8,16 @@ const double kBorderRadiusSmall = 5.0;
 const Duration kAnimationDuration = Duration(milliseconds: 200);
 const double kPrimaryOpacity = 0.15;
 
-// Sign In
-const Color kGoogleLightColor = Color(0xFFFF1744); // redAccent[400]
-const Color kGoogleDarkColor = Colors.redAccent;
-const Color kFacebookLightColor = Color(0xFF2979FF); // blueAccent[400]
-const Color kFacebookDarkColor = Colors.blueAccent;
-
 // Form
 const double kFormHorizPadding = 30.0;
 const double kFormItemHeight = 45.0;
 const double kInputVertMargin = 5.0;
 const double kInputHorizPadding = 20.0;
 const double kSubmitVertMargin = 10.0;
-const double kAltHorizMargin = 5.0;
-const double kAltVertMargin = 10.0;
 const double kFormCaptionPadding = 8.0;
+const double kAltVertMargin = 10.0;
+const double kAltSpacing = 5.0;
+const Color kAltLabelColor = Color(0xFF5F6368);
 
 // Swipe Up
 const double kSwipeUpHeight = 80.0;

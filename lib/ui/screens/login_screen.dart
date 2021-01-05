@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:dartz/dartz.dart';
 import 'package:events/app/auth/sign_in_form_model.dart';
+import 'package:events/config/constants.dart';
 import 'package:events/config/routes/router.gr.dart';
 import 'package:events/domain/auth/auth_failure.dart';
 import 'package:events/ui/auth/components/alt_sign_in_button.dart';
@@ -84,22 +85,29 @@ class LoginScreen extends StatelessWidget {
             style: theme.textTheme.bodyText1,
             textAlign: TextAlign.center,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              AltSignInButton.google(
-                onPressed: () async {
-                  await signInForm.signInWithGoogle();
-                  _showError(context, signInForm.authFailureOrSuccessOption);
-                },
-              ),
-              AltSignInButton.facebook(
-                onPressed: () async {
-                  await signInForm.signInWithFacebook();
-                  _showError(context, signInForm.authFailureOrSuccessOption);
-                },
-              ),
-            ],
+          Padding(
+            padding: EdgeInsets.symmetric(
+              vertical: kAltVertMargin,
+            ),
+            child: Wrap(
+              alignment: WrapAlignment.center,
+              spacing: kAltSpacing,
+              runSpacing: kAltSpacing,
+              children: [
+                AltSignInButton.google(
+                  onPressed: () async {
+                    await signInForm.signInWithGoogle();
+                    _showError(context, signInForm.authFailureOrSuccessOption);
+                  },
+                ),
+                AltSignInButton.facebook(
+                  onPressed: () async {
+                    await signInForm.signInWithFacebook();
+                    _showError(context, signInForm.authFailureOrSuccessOption);
+                  },
+                ),
+              ],
+            ),
           ),
           Spacer(),
           SwipeUp(
