@@ -114,4 +114,18 @@ class SignInFormModel extends ChangeNotifier {
       notifyListeners();
     }
   }
+
+  Future signInAnonymously() async {
+    if (!_isSubmitting) {
+      _isSubmitting = true;
+      _authFailureOrSuccessOption = none();
+      notifyListeners();
+
+      final failureOrSuccessOption = await _authFacade.signInAnonymously();
+
+      _isSubmitting = false;
+      _authFailureOrSuccessOption = some(failureOrSuccessOption);
+      notifyListeners();
+    }
+  }
 }

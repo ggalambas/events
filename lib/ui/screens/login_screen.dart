@@ -16,10 +16,11 @@ import 'package:provider/provider.dart';
 //TODO
 //* 1. Terms and Conditions
 //* 2. Forgot password
-//* 3. skip sign in
+//* 3. skip sign in > anonymous sign in
 //* 4. input validation style
-//* CHECK auth facade TODOS
+
 //* NEXT email verification screen
+//* https://firebase.flutter.dev/docs/auth/usage/#verifying-a-users-email
 
 class LoginScreen extends StatelessWidget {
   void _showError(
