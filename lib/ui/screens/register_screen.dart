@@ -42,6 +42,8 @@ class RegisterScreen extends StatelessWidget {
           Spacer(),
           InputField(
             hintText: 'Nome',
+            keyboardType: TextInputType.name,
+            onChanged: signInForm.nameChanged,
             textInputAction: TextInputAction.next,
           ),
           InputField(

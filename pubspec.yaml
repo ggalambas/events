@@ -40,7 +40,7 @@ dependencies:
   google_sign_in: ^4.5.6
   http: ^0.12.2
   image_picker: ^0.6.7+17
-  injectable: ^1.0.5
+  injectable: ^1.0.7
   intl: ^0.16.1
   json_annotation: ^3.1.1
   provider: ^4.3.2+3

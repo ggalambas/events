@@ -51,7 +51,7 @@ class FirebaseAuthFacade implements IAuthFacade {
         password: passwordStr,
       );
 
-      authCredential.user.updateProfile(displayName: name);
+      await authCredential.user.updateProfile(displayName: name);
 
       return right(unit);
     } on FirebaseAuthException catch (e) {
@@ -108,6 +108,7 @@ class FirebaseAuthFacade implements IAuthFacade {
       );
 
       await _firebaseAuth.signInWithCredential(authCredential);
+
       return some(right(unit));
     } on FirebaseAuthException catch (_) {
       return some(left(const AuthFailure.serverError()));
@@ -133,6 +134,7 @@ class FirebaseAuthFacade implements IAuthFacade {
           FacebookAuthProvider.credential(facebookAuth.token);
 
       await _firebaseAuth.signInWithCredential(authCredential);
+
       return some(right(unit));
     } on FirebaseAuthException catch (_) {
       return some(left(const AuthFailure.serverError()));

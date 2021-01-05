@@ -9,7 +9,7 @@ void showError(
   Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption,
   void Function() success,
 ) {
-  ThemeData theme = Theme.of(context);
+  final ThemeData theme = Theme.of(context);
   authFailureOrSuccessOption.fold(
     () => null,
     (failureOrSuccess) => failureOrSuccess.fold(
