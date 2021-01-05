@@ -38,7 +38,10 @@ class LoginScreen extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
     final SignInFormModel signInForm = Provider.of<SignInFormModel>(context);
     return SignInScaffold(
-      ableToSkip: true,
+      onSkip: () async {
+        await signInForm.signInAnonymously();
+        _showError(context, signInForm.authFailureOrSuccessOption);
+      },
       child: Column(
         children: [
           Expanded(

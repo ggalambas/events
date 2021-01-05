@@ -7,12 +7,12 @@ import 'package:provider/provider.dart';
 class SignInScaffold extends StatelessWidget {
   final Widget child;
   final bool ableToGoBack;
-  final bool ableToSkip;
+  final void Function() onSkip;
 
   const SignInScaffold({
     @required this.child,
     this.ableToGoBack = false,
-    this.ableToSkip = false,
+    this.onSkip,
   });
 
   @override
@@ -23,7 +23,7 @@ class SignInScaffold extends StatelessWidget {
       appBar: AppBar(
         elevation: 0,
         automaticallyImplyLeading: ableToGoBack,
-        actions: ableToSkip
+        actions: onSkip != null
             ? [
                 Padding(
                   padding: EdgeInsets.all(kFormCaptionPadding),
@@ -33,7 +33,7 @@ class SignInScaffold extends StatelessWidget {
                       child: Text('Ignorar este passo'),
                     ),
                     label: Icon(Icons.east),
-                    onPressed: () {},
+                    onPressed: onSkip,
                     highlightColor: Colors.transparent,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(kBorderRadiusBig),
