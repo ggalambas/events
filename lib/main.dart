@@ -61,6 +61,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
         final ThemeConfig theme = Provider.of<ThemeConfig>(context);
         return MaterialApp(
           debugShowCheckedModeBanner: false, //!
+          title: 'Events', //!
           theme: theme.light,
           darkTheme: theme.dark,
           themeMode: theme.mode,
