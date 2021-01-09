@@ -7,18 +7,42 @@ import 'package:provider/provider.dart';
 class SignInScaffold extends StatelessWidget {
   final Widget child;
   final bool ableToGoBack;
+  final void Function() onSkip;
 
-  const SignInScaffold({@required this.child, this.ableToGoBack = false});
+  const SignInScaffold({
+    @required this.child,
+    this.ableToGoBack = false,
+    this.onSkip,
+  });
 
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final SignInFormModel signInForm = Provider.of<SignInFormModel>(context);
     return Scaffold(
-      appBar: ableToGoBack
-          ? AppBar(backgroundColor: Colors.transparent, elevation: 0)
-          : null,
-      extendBodyBehindAppBar: ableToGoBack,
+      appBar: AppBar(
+        elevation: 0,
+        automaticallyImplyLeading: ableToGoBack,
+        actions: onSkip != null
+            ? [
+                Padding(
+                  padding: EdgeInsets.all(kFormCaptionPadding),
+                  child: FlatButton.icon(
+                    icon: Padding(
+                      padding: EdgeInsets.only(left: kFormCaptionPadding),
+                      child: Text('Ignorar este passo'),
+                    ),
+                    label: Icon(Icons.east),
+                    onPressed: onSkip,
+                    highlightColor: Colors.transparent,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(kBorderRadiusBig),
+                    ),
+                  ),
+                ),
+              ]
+            : null,
+      ),
       backgroundColor: theme.colorScheme.surface,
       body: SafeArea(
         child: Stack(
@@ -29,7 +53,8 @@ class SignInScaffold extends StatelessWidget {
                 behavior: HitTestBehavior.translucent,
                 child: Container(
                   height: MediaQuery.of(context).size.height -
-                      MediaQuery.of(context).padding.top,
+                      MediaQuery.of(context).padding.top -
+                      kToolbarHeight,
                   padding: EdgeInsets.symmetric(horizontal: kFormHorizPadding),
                   child: Form(
                     autovalidateMode: signInForm.showErrorMessages

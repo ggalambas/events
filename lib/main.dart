@@ -64,6 +64,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
         final AuthModel auth = Provider.of<AuthModel>(context);
         return MaterialApp(
           debugShowCheckedModeBanner: false, //!
+          title: 'Events', //!
           theme: theme.light,
           darkTheme: theme.dark,
           themeMode: theme.mode,
