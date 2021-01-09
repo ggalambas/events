@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:events/app/appbar/calendar_model.dart';
+import 'package:events/app/auth/auth_model.dart';
 import 'package:events/app/auth/sign_in_form_model.dart';
 import 'package:events/app/drawer/category_model.dart';
 import 'package:events/config/injection.dart';
@@ -24,6 +25,7 @@ Future<void> main() async {
 //* 2. splash screen
 // splash screen -> https://flutter.dev/docs/development/ui/advanced/splash-screen
 //* 3. getOrCrash();
+//* 4. hero animations
 
 class MyApp extends StatefulWidget {
   @override
@@ -59,6 +61,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
       providers: providers,
       builder: (context, _) {
         final ThemeConfig theme = Provider.of<ThemeConfig>(context);
+        final AuthModel auth = Provider.of<AuthModel>(context);
         return MaterialApp(
           debugShowCheckedModeBanner: false, //!
           theme: theme.light,
@@ -66,6 +69,9 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
           themeMode: theme.mode,
           builder: ExtendedNavigator.builder<auto.Router>(
             router: auto.Router(),
+            initialRoute: auth.isAuthenticated
+                ? auto.Routes.regionsScreen
+                : auto.Routes.loginScreen,
           ),
         );
       },
@@ -74,6 +80,9 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
 }
 
 List<SingleChildWidget> providers = [
+  ChangeNotifierProvider<AuthModel>.value(
+    value: getIt<AuthModel>(),
+  ),
   ChangeNotifierProvider<ThemeConfig>(
     create: (_) => ThemeConfig(),
   ),

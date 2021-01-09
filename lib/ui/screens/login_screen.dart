@@ -16,7 +16,7 @@ import 'package:provider/provider.dart';
 //TODO
 //* 1. Terms and Conditions
 //* 2. Forgot password
-//* 3. skip sign in > anonymous sign in
+//* 3. skip sign in if already logged in
 //* 4. input validation style
 
 //* NEXT email verification screen

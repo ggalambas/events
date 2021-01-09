@@ -13,6 +13,7 @@ class SubmitButton extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: kSubmitVertMargin),
       child: FlatButton(
+        //TODO TextButton
         height: kFormItemHeight,
         minWidth: double.infinity,
         color: theme.colorScheme.primary,

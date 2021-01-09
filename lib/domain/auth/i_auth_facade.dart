@@ -1,10 +1,11 @@
 import 'package:dartz/dartz.dart';
 import 'package:events/domain/auth/auth_failure.dart';
+import 'package:events/domain/auth/user.dart';
 import 'package:events/domain/auth/value_objects.dart';
 import 'package:flutter/foundation.dart';
 
 abstract class IAuthFacade {
-  // Future<Option<User>> getSignedInUser();
+  Option<User> getSignedInUser();
   Future<Either<AuthFailure, Unit>> signInAnonymously();
   Future<Either<AuthFailure, Unit>> registerWithEmailAndPassword({
     @required EmailAddress emailAddress,

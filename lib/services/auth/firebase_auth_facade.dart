@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:events/domain/auth/auth_failure.dart';
 import 'package:events/domain/auth/i_auth_facade.dart';
+import 'package:events/domain/auth/user.dart';
 import 'package:events/domain/auth/value_objects.dart';
 import 'package:firebase_auth/firebase_auth.dart' hide User;
 import 'package:firebase_auth/firebase_auth.dart' as firebase show User;
@@ -9,7 +10,7 @@ import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
 import 'package:flutter/services.dart';
-// import 'package:events/services/auth/firebase_user_mapper.dart';
+import 'package:events/services/auth/firebase_user_mapper.dart';
 
 //TODO
 //* 1. link user accounts
@@ -28,9 +29,9 @@ class FirebaseAuthFacade implements IAuthFacade {
     this._facebookAuth,
   );
 
-  // @override
-  // Future<Option<User>> getSignedInUser() async =>
-  //     optionOf(_firebaseAuth.currentUser?.toDomain());
+  @override
+  Option<User> getSignedInUser() =>
+      optionOf(_firebaseAuth.currentUser?.toDomain());
 
   @override
   Future<Either<AuthFailure, Unit>> signInAnonymously() async {

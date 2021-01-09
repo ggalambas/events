@@ -18,6 +18,9 @@ class RegionsScreen extends StatelessWidget {
   //* 1. remove closer regions subitle when no closer regions
   //*    rename 'outros concelhos' to 'concelhos' if
   //* 2. all Events
+  //* 3. filter regions based on residence and current location
+  //* 4. order regions by name
+  //* 5. last list group fix bottom border radius
 
   @override
   Widget build(BuildContext context) {

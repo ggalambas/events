@@ -10,10 +10,11 @@ class CategoryDrawer extends StatelessWidget {
   //TODO
   //* 0. Give categories a name and icon
   //* 1. Header
-  //* 2. Saved Events
+  //* 2. bookmarks
   //* 3. Favorite Categories
   //*    If theres no favorites, change 'other categories' to 'categories'
   //* 4. Counters are just for today's day
+  //* 5. select initial category
 
   @override
   Widget build(BuildContext context) {

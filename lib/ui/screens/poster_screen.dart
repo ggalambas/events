@@ -88,7 +88,7 @@ class PosterScreen extends StatelessWidget {
           floatingActionButton: Row(
             children: [
               Spacer(),
-              RaisedButton(
+              RaisedButton( // TODO ElevatedButton
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(kBorderRadiusBig),
                 ),

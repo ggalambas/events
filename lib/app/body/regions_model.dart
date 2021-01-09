@@ -5,9 +5,6 @@ import 'package:events/domain/regions/region.dart';
 import 'package:injectable/injectable.dart';
 export 'package:events/app/core/base_model.dart';
 
-//TODO
-//* Regions Location
-
 @Injectable()
 class RegionsModel extends BaseModel {
   final IEventRepository _eventRepository;

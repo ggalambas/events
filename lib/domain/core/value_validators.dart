@@ -8,6 +8,7 @@ import 'package:string_validator/string_validator.dart';
 //* 1. UrlValidation
 //* 2. ImageValidation
 //* 3. Image Dimensions validation
+//* 4. email validation
 
 Either<ValueFailure<String>, String> validateMaxStringLength(
   String input,

@@ -22,7 +22,7 @@ class CalendarButton extends StatelessWidget {
             padding: EdgeInsets.symmetric(
               vertical: (kToolbarHeight - kCalendarItemWidth) / 2,
             ),
-            child: FlatButton(
+            child: FlatButton( //TODO TextButton
               onPressed: () {
                 scroll.expandFlexBar();
                 calendarScroll.snapSelected();

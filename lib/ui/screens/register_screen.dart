@@ -9,9 +9,14 @@ import 'package:events/ui/auth/components/sign_in_error.dart';
 import 'package:events/ui/auth/components/submit_button.dart';
 import 'package:events/ui/auth/sign_in_scaffold.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_custom_tabs/flutter_custom_tabs.dart';
 import 'package:provider/provider.dart';
 
 class RegisterScreen extends StatelessWidget {
+  // TODO
+  //* its scrolling wtf?
+  //* review Terms and Conditions
+
   void _showError(
     BuildContext context,
     Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption,
@@ -73,15 +78,60 @@ class RegisterScreen extends StatelessWidget {
           ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: kFormCaptionPadding),
-            child: Text(
-              'Ao criar uma conta está a aceitar os nossos Termos e Condições',
-              style: theme.textTheme.caption,
+            child: Text.rich(
+              TextSpan(
+                children: [
+                  TextSpan(
+                    text: 'Ao criar uma conta está a aceitar os nossos ',
+                    style: theme.textTheme.caption,
+                  ),
+                  WidgetSpan(
+                    child: GestureDetector(
+                      onTap: () => _launch(
+                          'https://www.livesport.eu/terms/flashscore_com/'), //! wrong url
+                      child: Text(
+                        'Termos e Condições',
+                        style: theme.textTheme.caption
+                            .copyWith(decoration: TextDecoration.underline),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
               textAlign: TextAlign.center,
             ),
+            // child: Text(
+            //   'Ao criar uma conta está a aceitar os nossos Termos e Condições',
+            //   style: theme.textTheme.caption,
+            //   textAlign: TextAlign.center,
+            // ), //! delete this after check
           ),
           Spacer(flex: 2),
         ],
       ),
     );
+  }
+
+  Future _launch(String url) async {
+    //! copy paste from posters screen
+    try {
+      await launch(
+        url,
+        option: CustomTabsOption(
+            enableUrlBarHiding: true,
+            showPageTitle: true,
+            animation: CustomTabsAnimation.slideIn(),
+            extraCustomTabs: <String>[
+              'org.mozilla.firefox',
+              'com.microsoft.emmx'
+            ],
+            headers: {
+              'title': 'Terms'
+            }),
+      );
+    } catch (e) {
+      // An exception is thrown if browser app is not installed on Android device.
+      debugPrint(e.toString()); //! review this
+    }
   }
 }

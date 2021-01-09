@@ -11,6 +11,7 @@ import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
+import '../app/auth/auth_model.dart';
 import '../app/appbar/calendar_model.dart';
 import '../app/drawer/category_model.dart';
 import '../services/events/event_repository.dart';
@@ -47,12 +48,14 @@ Future<GetIt> $initGetIt(
       ));
   gh.lazySingleton<IEventRepository>(
       () => EventRepository(get<FirebaseFirestore>()));
-  final list = await regionsInjectableModule.regionsJson;
-  gh.lazySingleton<List<dynamic>>(() => list, instanceName: 'regions');
-  final list1 = await regionsInjectableModule.subregionsJson;
-  gh.lazySingleton<List<dynamic>>(() => list1, instanceName: 'subregions');
+  final resolvedList = await regionsInjectableModule.regionsJson;
+  gh.lazySingleton<List<dynamic>>(() => resolvedList, instanceName: 'regions');
+  final resolvedList1 = await regionsInjectableModule.subregionsJson;
+  gh.lazySingleton<List<dynamic>>(() => resolvedList1,
+      instanceName: 'subregions');
   gh.factory<RegionsModel>(() => RegionsModel(get<IEventRepository>()));
   gh.factory<SignInFormModel>(() => SignInFormModel(get<IAuthFacade>()));
+  gh.factory<AuthModel>(() => AuthModel(get<IAuthFacade>()));
   gh.factory<CalendarModel>(() => CalendarModel(get<IEventRepository>()));
   gh.factory<CategoryModel>(() => CategoryModel(get<IEventRepository>()));
   gh.lazySingleton<IRegionApi>(() => RegionApi.fromJson(

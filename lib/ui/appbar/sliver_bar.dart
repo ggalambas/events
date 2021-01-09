@@ -5,6 +5,10 @@ import 'package:events/ui/appbar/components/search.dart';
 import 'package:flutter/material.dart';
 
 class SliverBar extends StatelessWidget {
+  //TODO
+  //? 1. days into classes
+  //* 2. add event counter circles
+
   final String title;
   final String subtitle;
 
