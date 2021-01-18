@@ -18,5 +18,5 @@ abstract class IAuthFacade {
   });
   Future<Option<Either<AuthFailure, Unit>>> signInWithGoogle();
   Future<Option<Either<AuthFailure, Unit>>> signInWithFacebook();
-  // Future signOut();
+  Future signOut();
 }

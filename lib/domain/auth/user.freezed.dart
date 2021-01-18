@@ -36,6 +36,7 @@ mixin _$User {
   String get name;
   EmailAddress get email;
 
+  @JsonKey(ignore: true)
   $UserCopyWith<User> get copyWith;
 }
 
@@ -137,6 +138,7 @@ class _$_User implements _User {
       const DeepCollectionEquality().hash(name) ^
       const DeepCollectionEquality().hash(email);
 
+  @JsonKey(ignore: true)
   @override
   _$UserCopyWith<_User> get copyWith =>
       __$UserCopyWithImpl<_User>(this, _$identity);
@@ -155,5 +157,6 @@ abstract class _User implements User {
   @override
   EmailAddress get email;
   @override
+  @JsonKey(ignore: true)
   _$UserCopyWith<_User> get copyWith;
 }

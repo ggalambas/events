@@ -14,11 +14,13 @@ import 'package:google_sign_in/google_sign_in.dart';
 import '../app/auth/auth_model.dart';
 import '../app/appbar/calendar_model.dart';
 import '../app/drawer/category_model.dart';
+import '../services/categories/category_repository.dart';
 import '../services/events/event_repository.dart';
 import '../app/body/events_model.dart';
 import '../services/auth/firebase_auth_facade.dart';
 import '../services/core/firebase_injectable_module.dart';
 import '../domain/auth/i_auth_facade.dart';
+import '../domain/categories/i_category_repository.dart';
 import '../domain/events/i_event_repository.dart';
 import '../domain/regions/i_region_api.dart';
 import '../services/regions/region_api.dart';
@@ -46,6 +48,8 @@ Future<GetIt> $initGetIt(
         get<GoogleSignIn>(),
         get<FacebookAuth>(),
       ));
+  gh.lazySingleton<ICategoryRepository>(
+      () => CategoryRepository(get<FirebaseFirestore>()));
   gh.lazySingleton<IEventRepository>(
       () => EventRepository(get<FirebaseFirestore>()));
   final resolvedList = await regionsInjectableModule.regionsJson;
@@ -53,14 +57,16 @@ Future<GetIt> $initGetIt(
   final resolvedList1 = await regionsInjectableModule.subregionsJson;
   gh.lazySingleton<List<dynamic>>(() => resolvedList1,
       instanceName: 'subregions');
-  gh.factory<RegionsModel>(() => RegionsModel(get<IEventRepository>()));
   gh.factory<SignInFormModel>(() => SignInFormModel(get<IAuthFacade>()));
   gh.factory<AuthModel>(() => AuthModel(get<IAuthFacade>()));
   gh.factory<CalendarModel>(() => CalendarModel(get<IEventRepository>()));
-  gh.factory<CategoryModel>(() => CategoryModel(get<IEventRepository>()));
+  gh.factory<CategoryModel>(
+      () => CategoryModel(get<ICategoryRepository>(), get<IEventRepository>()));
   gh.lazySingleton<IRegionApi>(() => RegionApi.fromJson(
       get<List<dynamic>>(instanceName: 'regions'),
       get<List<dynamic>>(instanceName: 'subregions')));
+  gh.factory<RegionsModel>(
+      () => RegionsModel(get<IEventRepository>(), get<IRegionApi>()));
   gh.factory<EventsModel>(
       () => EventsModel(get<IEventRepository>(), get<IRegionApi>()));
   return get;

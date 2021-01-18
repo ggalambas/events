@@ -1,17 +1,17 @@
 import 'dart:async';
 
 import 'package:dartz/dartz.dart';
+import 'package:events/config/injection.dart';
 import 'package:events/domain/categories/category.dart';
-import 'package:events/domain/core/event_counter.dart';
+import 'package:events/domain/categories/i_category_repository.dart';
 import 'package:events/domain/events/event.dart';
-import 'package:events/domain/events/event_failure.dart';
+import 'package:events/domain/core/repository_failure.dart';
 import 'package:events/domain/events/i_event_repository.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:events/domain/regions/i_region_api.dart';
 import 'package:events/domain/regions/region.dart';
-import 'package:events/services/categories/category_dto.dart';
+import 'package:events/services/events/event_counter_dto.dart';
 import 'package:events/services/events/event_dto.dart';
-import 'package:events/services/regions/region_dto.dart';
-import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:events/services/core/firebase_helpers.dart';
 
@@ -22,160 +22,148 @@ class EventRepository implements IEventRepository {
   EventRepository(this._firestore);
   //TODO
   //* 1. Exceptions
-  //* 2. save not just day but year and month
-  //* 3. remove subregion events collection
-  //* 4. rename collections
-  //* 5. order events and regions
+  //* 2. order events and regions
+  //* 3. transactions
+  //*    https://firebase.flutter.dev/docs/firestore/usage#transactionshttps://firebase.flutter.dev/docs/firestore/usage#transactions
+  //* 4. do wee need List getters for categories and regions or can it be removed?
 
-  //!
   @override
-  Category selectedCategory = Category(
-    id: 'MqwY5zioIvOI7p6CCPT4',
-    name: 'Categoria 01',
-    icon: IconData(58947),
-    eventCounter: EventCounter(live: 0, total: 0),
+  DateTime selectedDay = DateTime(
+    DateTime.now().year,
+    DateTime.now().month,
+    DateTime.now().day,
   );
 
-  //!
   @override
-  DateTime selectedDate =
-      DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
+  Stream<Either<RepositoryFailure, List<Category>>> categoryCounters() async* {
+    Map<String, Category> categories;
+    final categoriesOrFailure = await getIt<ICategoryRepository>().categories();
+    categoriesOrFailure.fold((f) => left(f), (c) => categories = c);
 
-  //!
-  @override
-  Region selectedRegion = Region(id: '0101', name: 'Águeda');
-
-  @override
-  Stream<Either<EventFailure, List<Category>>> categories() async* {
-    final categories = _firestore.categoriesCollection();
-    yield* categories
-        .orderBy('name')
+    final counters = _firestore.categoryCounters;
+    yield* counters
         .snapshots()
-        .map((snapshot) => right<EventFailure, List<Category>>(
+        .map((snapshot) => right<RepositoryFailure, List<Category>>(
               snapshot.docs
-                  .map((doc) => CategoryDto.fromFirestore(doc).toDomain())
+                  .map((doc) => categories[doc.id].add(
+                      eventCounter:
+                          EventCounterDto.fromFirestore(doc).toDomain()))
                   .toList(),
             ))
         .handleError((e) {
       if (e is FirebaseException && e.message.contains('PERMISSION_DENIED')) {
-        return left(const EventFailure.insufficientPermission());
+        return left(const RepositoryFailure.insufficientPermission());
       } else {
-        return left(const EventFailure.unexpected());
+        return left(const RepositoryFailure.unexpected());
       }
     });
   }
 
   @override
-  Stream<Either<EventFailure, List<Region>>> regions() async* {
-    final regions = _firestore.regionsCollection();
-    yield* regions
+  Stream<Either<RepositoryFailure, List<Region>>> dayCounters() async* {}
+
+  @override
+  Stream<Either<RepositoryFailure, List<Region>>> regionCounters() async* {
+    final Map<String, Region> regions = getIt<IRegionApi>().regions;
+
+    final counters = _firestore.regionCounters;
+    yield* counters
         .snapshots()
-        .map((snapshot) => right<EventFailure, List<Region>>(
+        .map((snapshot) => right<RepositoryFailure, List<Region>>(
               snapshot.docs
-                  .map((doc) => RegionDto.fromFirestoreToDomain(doc))
+                  .map((doc) => regions[doc.id].add(
+                      eventCounter:
+                          EventCounterDto.fromFirestore(doc).toDomain()))
                   .toList(),
             ))
         .handleError((e) {
       if (e is FirebaseException && e.message.contains('PERMISSION_DENIED')) {
-        return left(const EventFailure.insufficientPermission());
+        return left(const RepositoryFailure.insufficientPermission());
       } else {
-        return left(const EventFailure.unexpected());
+        return left(const RepositoryFailure.unexpected());
       }
     });
   }
 
   @override
-  Stream<Either<EventFailure, List<Event>>> events() async* {
-    //! this cant be called if selectedRegion == null
-    //? change this to have an argument or throw exception
-    final events = _firestore.selectedEventsQuery();
-    // final events = _firestore.eventsCollection();
+  Stream<Either<RepositoryFailure, List<Event>>> watchSelected() =>
+      _watch(_firestore.selectedEvents());
+
+  @override
+  Stream<Either<RepositoryFailure, List<Event>>> watchAll() =>
+      _watch(_firestore.eventsCollection);
+
+  Stream<Either<RepositoryFailure, List<Event>>> _watch(Query events) async* {
     yield* events
         .snapshots()
-        .map((snapshot) => right<EventFailure, List<Event>>(
+        .map((snapshot) => right<RepositoryFailure, List<Event>>(
               snapshot.docs
                   .map((doc) => EventDto.fromFirestore(doc).toDomain())
                   .toList(),
             ))
         .handleError((e) {
       if (e is FirebaseException && e.message.contains('PERMISSION_DENIED')) {
-        return left(const EventFailure.insufficientPermission());
+        return left(const RepositoryFailure.insufficientPermission());
       } else {
-        return left(const EventFailure.unexpected());
+        return left(const RepositoryFailure.unexpected());
       }
     });
   }
 
   @override
-  Future<Either<EventFailure, Unit>> create(Event event) async {
+  Future<Either<RepositoryFailure, Unit>> create(Event event) async {
     try {
-      //! take intou account that if one throws an exception,
-      //! the other had already changed the database
-
-      //! transactions
-      // https://firebase.flutter.dev/docs/firestore/usage#transactionshttps://firebase.flutter.dev/docs/firestore/usage#transactions
-
       final eventDto = EventDto.fromDomain(event);
 
-      //* add Event to events Collection
-      final events = _firestore.eventsCollection();
+      final events = _firestore.eventsCollection;
       await events.doc(eventDto.id).set(eventDto.toJson());
-
-      //* update Category counter
-      final categories = _firestore.categoriesCollection();
-      await categories.doc(eventDto.categoryId).incrementTotalEvents();
-
-      //* update Regions counter
-      final regions = _firestore.regionsCollection(
-          eventDto.categoryId, event.date.day.toString());
-      await regions.doc(eventDto.regionId).setOrIncrementTotalEvents();
 
       return right(unit);
     } on FirebaseException catch (e) {
       if (e.message.contains('PERMISSION_DENIED')) {
-        return left(const EventFailure.insufficientPermission());
+        return left(const RepositoryFailure.insufficientPermission());
       } else {
-        return left(const EventFailure.unexpected());
+        return left(const RepositoryFailure.unexpected());
       }
     }
   }
 
   @override
-  Future<Either<EventFailure, Unit>> update(Event event) async {
+  Future<Either<RepositoryFailure, Unit>> update(Event event) async {
     try {
       final eventDto = EventDto.fromDomain(event);
 
-      final events = _firestore.eventsCollection();
+      final events = _firestore.eventsCollection;
       await events.doc(eventDto.id).update(eventDto.toJson());
 
       return right(unit);
     } on FirebaseException catch (e) {
       if (e.message.contains('PERMISSION_DENIED')) {
-        return left(const EventFailure.insufficientPermission());
+        return left(const RepositoryFailure.insufficientPermission());
       } else if (e.message.contains('NOT_FOUND')) {
-        return left(const EventFailure.unableToUpdate());
+        return left(const RepositoryFailure.unableToUpdate());
       } else {
-        return left(const EventFailure.unexpected());
+        return left(const RepositoryFailure.unexpected());
       }
     }
   }
 
   @override
-  Future<Either<EventFailure, Unit>> delete(Event event) async {
+  Future<Either<RepositoryFailure, Unit>> delete(Event event) async {
     try {
       final eventId = event.id.getOrCrash();
 
-      final events = _firestore.eventsCollection();
+      final events = _firestore.eventsCollection;
       await events.doc(eventId).delete();
 
       return right(unit);
     } on FirebaseException catch (e) {
       if (e.message.contains('PERMISSION_DENIED')) {
-        return left(const EventFailure.insufficientPermission());
+        return left(const RepositoryFailure.insufficientPermission());
       } else if (e.message.contains('NOT_FOUND')) {
-        return left(const EventFailure.unableToUpdate());
+        return left(const RepositoryFailure.unableToUpdate());
       } else {
-        return left(const EventFailure.unexpected());
+        return left(const RepositoryFailure.unexpected());
       }
     }
   }

@@ -4,6 +4,8 @@ import 'package:events/domain/core/value_objects.dart';
 
 part 'user.freezed.dart';
 
+//TODO: Anonymous User
+
 @freezed
 abstract class User with _$User {
   const factory User({
@@ -11,4 +13,10 @@ abstract class User with _$User {
     @required String name,
     @required EmailAddress email,
   }) = _User;
+
+  factory User.anonymous({@required UniqueId id}) => User(
+        id: id,
+        name: 'Anonymous',
+        email: EmailAddress('ano@ny.mous'),
+      );
 }

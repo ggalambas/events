@@ -19,6 +19,9 @@ class SliverScaffold extends StatelessWidget {
     this.appBarCollapsed = false,
   });
 
+  //TODO:
+  //* create Event
+
   @override
   Widget build(BuildContext context) {
     final double screenSize = MediaQuery.of(context).size.height;
@@ -68,8 +71,11 @@ class SliverScaffold extends StatelessWidget {
               ],
             ),
           ),
-          //! button to populate
-          // floatingActionButton: FloatingActionButton(onPressed: populate),
+          //!
+          floatingActionButton: FloatingActionButton(
+            onPressed: () => print('Create Event'),
+            child: Icon(Icons.add),
+          ),
         );
       },
     );

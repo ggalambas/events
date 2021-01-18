@@ -20,15 +20,11 @@ class _$CategoryDtoTearOff {
   _CategoryDto call(
       {@JsonKey(ignore: true) String id,
       @required String name,
-      @required int icon,
-      @required int liveEvents,
-      @required int totalEvents}) {
+      @required int icon}) {
     return _CategoryDto(
       id: id,
       name: name,
       icon: icon,
-      liveEvents: liveEvents,
-      totalEvents: totalEvents,
     );
   }
 
@@ -48,10 +44,9 @@ mixin _$CategoryDto {
   String get id;
   String get name;
   int get icon;
-  int get liveEvents;
-  int get totalEvents;
 
   Map<String, dynamic> toJson();
+  @JsonKey(ignore: true)
   $CategoryDtoCopyWith<CategoryDto> get copyWith;
 }
 
@@ -60,12 +55,7 @@ abstract class $CategoryDtoCopyWith<$Res> {
   factory $CategoryDtoCopyWith(
           CategoryDto value, $Res Function(CategoryDto) then) =
       _$CategoryDtoCopyWithImpl<$Res>;
-  $Res call(
-      {@JsonKey(ignore: true) String id,
-      String name,
-      int icon,
-      int liveEvents,
-      int totalEvents});
+  $Res call({@JsonKey(ignore: true) String id, String name, int icon});
 }
 
 /// @nodoc
@@ -81,16 +71,11 @@ class _$CategoryDtoCopyWithImpl<$Res> implements $CategoryDtoCopyWith<$Res> {
     Object id = freezed,
     Object name = freezed,
     Object icon = freezed,
-    Object liveEvents = freezed,
-    Object totalEvents = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed ? _value.id : id as String,
       name: name == freezed ? _value.name : name as String,
       icon: icon == freezed ? _value.icon : icon as int,
-      liveEvents: liveEvents == freezed ? _value.liveEvents : liveEvents as int,
-      totalEvents:
-          totalEvents == freezed ? _value.totalEvents : totalEvents as int,
     ));
   }
 }
@@ -102,12 +87,7 @@ abstract class _$CategoryDtoCopyWith<$Res>
           _CategoryDto value, $Res Function(_CategoryDto) then) =
       __$CategoryDtoCopyWithImpl<$Res>;
   @override
-  $Res call(
-      {@JsonKey(ignore: true) String id,
-      String name,
-      int icon,
-      int liveEvents,
-      int totalEvents});
+  $Res call({@JsonKey(ignore: true) String id, String name, int icon});
 }
 
 /// @nodoc
@@ -125,16 +105,11 @@ class __$CategoryDtoCopyWithImpl<$Res> extends _$CategoryDtoCopyWithImpl<$Res>
     Object id = freezed,
     Object name = freezed,
     Object icon = freezed,
-    Object liveEvents = freezed,
-    Object totalEvents = freezed,
   }) {
     return _then(_CategoryDto(
       id: id == freezed ? _value.id : id as String,
       name: name == freezed ? _value.name : name as String,
       icon: icon == freezed ? _value.icon : icon as int,
-      liveEvents: liveEvents == freezed ? _value.liveEvents : liveEvents as int,
-      totalEvents:
-          totalEvents == freezed ? _value.totalEvents : totalEvents as int,
     ));
   }
 }
@@ -146,13 +121,9 @@ class _$_CategoryDto extends _CategoryDto {
   const _$_CategoryDto(
       {@JsonKey(ignore: true) this.id,
       @required this.name,
-      @required this.icon,
-      @required this.liveEvents,
-      @required this.totalEvents})
+      @required this.icon})
       : assert(name != null),
         assert(icon != null),
-        assert(liveEvents != null),
-        assert(totalEvents != null),
         super._();
 
   factory _$_CategoryDto.fromJson(Map<String, dynamic> json) =>
@@ -165,14 +136,10 @@ class _$_CategoryDto extends _CategoryDto {
   final String name;
   @override
   final int icon;
-  @override
-  final int liveEvents;
-  @override
-  final int totalEvents;
 
   @override
   String toString() {
-    return 'CategoryDto(id: $id, name: $name, icon: $icon, liveEvents: $liveEvents, totalEvents: $totalEvents)';
+    return 'CategoryDto(id: $id, name: $name, icon: $icon)';
   }
 
   @override
@@ -184,13 +151,7 @@ class _$_CategoryDto extends _CategoryDto {
             (identical(other.name, name) ||
                 const DeepCollectionEquality().equals(other.name, name)) &&
             (identical(other.icon, icon) ||
-                const DeepCollectionEquality().equals(other.icon, icon)) &&
-            (identical(other.liveEvents, liveEvents) ||
-                const DeepCollectionEquality()
-                    .equals(other.liveEvents, liveEvents)) &&
-            (identical(other.totalEvents, totalEvents) ||
-                const DeepCollectionEquality()
-                    .equals(other.totalEvents, totalEvents)));
+                const DeepCollectionEquality().equals(other.icon, icon)));
   }
 
   @override
@@ -198,10 +159,9 @@ class _$_CategoryDto extends _CategoryDto {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(name) ^
-      const DeepCollectionEquality().hash(icon) ^
-      const DeepCollectionEquality().hash(liveEvents) ^
-      const DeepCollectionEquality().hash(totalEvents);
+      const DeepCollectionEquality().hash(icon);
 
+  @JsonKey(ignore: true)
   @override
   _$CategoryDtoCopyWith<_CategoryDto> get copyWith =>
       __$CategoryDtoCopyWithImpl<_CategoryDto>(this, _$identity);
@@ -217,9 +177,7 @@ abstract class _CategoryDto extends CategoryDto {
   const factory _CategoryDto(
       {@JsonKey(ignore: true) String id,
       @required String name,
-      @required int icon,
-      @required int liveEvents,
-      @required int totalEvents}) = _$_CategoryDto;
+      @required int icon}) = _$_CategoryDto;
 
   factory _CategoryDto.fromJson(Map<String, dynamic> json) =
       _$_CategoryDto.fromJson;
@@ -232,9 +190,6 @@ abstract class _CategoryDto extends CategoryDto {
   @override
   int get icon;
   @override
-  int get liveEvents;
-  @override
-  int get totalEvents;
-  @override
+  @JsonKey(ignore: true)
   _$CategoryDtoCopyWith<_CategoryDto> get copyWith;
 }

@@ -1,7 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
 
-part of 'event_failure.dart';
+part of 'repository_failure.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -10,8 +10,8 @@ part of 'event_failure.dart';
 T _$identity<T>(T value) => value;
 
 /// @nodoc
-class _$EventFailureTearOff {
-  const _$EventFailureTearOff();
+class _$RepositoryFailureTearOff {
+  const _$RepositoryFailureTearOff();
 
 // ignore: unused_element
   _Unexpected unexpected() {
@@ -31,10 +31,10 @@ class _$EventFailureTearOff {
 
 /// @nodoc
 // ignore: unused_element
-const $EventFailure = _$EventFailureTearOff();
+const $RepositoryFailure = _$RepositoryFailureTearOff();
 
 /// @nodoc
-mixin _$EventFailure {
+mixin _$RepositoryFailure {
   @optionalTypeArgs
   TResult when<TResult extends Object>({
     @required TResult unexpected(),
@@ -64,19 +64,20 @@ mixin _$EventFailure {
 }
 
 /// @nodoc
-abstract class $EventFailureCopyWith<$Res> {
-  factory $EventFailureCopyWith(
-          EventFailure value, $Res Function(EventFailure) then) =
-      _$EventFailureCopyWithImpl<$Res>;
+abstract class $RepositoryFailureCopyWith<$Res> {
+  factory $RepositoryFailureCopyWith(
+          RepositoryFailure value, $Res Function(RepositoryFailure) then) =
+      _$RepositoryFailureCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$EventFailureCopyWithImpl<$Res> implements $EventFailureCopyWith<$Res> {
-  _$EventFailureCopyWithImpl(this._value, this._then);
+class _$RepositoryFailureCopyWithImpl<$Res>
+    implements $RepositoryFailureCopyWith<$Res> {
+  _$RepositoryFailureCopyWithImpl(this._value, this._then);
 
-  final EventFailure _value;
+  final RepositoryFailure _value;
   // ignore: unused_field
-  final $Res Function(EventFailure) _then;
+  final $Res Function(RepositoryFailure) _then;
 }
 
 /// @nodoc
@@ -87,7 +88,8 @@ abstract class _$UnexpectedCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$UnexpectedCopyWithImpl<$Res> extends _$EventFailureCopyWithImpl<$Res>
+class __$UnexpectedCopyWithImpl<$Res>
+    extends _$RepositoryFailureCopyWithImpl<$Res>
     implements _$UnexpectedCopyWith<$Res> {
   __$UnexpectedCopyWithImpl(
       _Unexpected _value, $Res Function(_Unexpected) _then)
@@ -103,7 +105,7 @@ class _$_Unexpected implements _Unexpected {
 
   @override
   String toString() {
-    return 'EventFailure.unexpected()';
+    return 'RepositoryFailure.unexpected()';
   }
 
   @override
@@ -171,7 +173,7 @@ class _$_Unexpected implements _Unexpected {
   }
 }
 
-abstract class _Unexpected implements EventFailure {
+abstract class _Unexpected implements RepositoryFailure {
   const factory _Unexpected() = _$_Unexpected;
 }
 
@@ -184,7 +186,7 @@ abstract class _$InsufficientPermissionCopyWith<$Res> {
 
 /// @nodoc
 class __$InsufficientPermissionCopyWithImpl<$Res>
-    extends _$EventFailureCopyWithImpl<$Res>
+    extends _$RepositoryFailureCopyWithImpl<$Res>
     implements _$InsufficientPermissionCopyWith<$Res> {
   __$InsufficientPermissionCopyWithImpl(_InsufficientPermission _value,
       $Res Function(_InsufficientPermission) _then)
@@ -200,7 +202,7 @@ class _$_InsufficientPermission implements _InsufficientPermission {
 
   @override
   String toString() {
-    return 'EventFailure.insufficientPermission()';
+    return 'RepositoryFailure.insufficientPermission()';
   }
 
   @override
@@ -268,7 +270,7 @@ class _$_InsufficientPermission implements _InsufficientPermission {
   }
 }
 
-abstract class _InsufficientPermission implements EventFailure {
+abstract class _InsufficientPermission implements RepositoryFailure {
   const factory _InsufficientPermission() = _$_InsufficientPermission;
 }
 
@@ -281,7 +283,7 @@ abstract class _$UnableToUpdateCopyWith<$Res> {
 
 /// @nodoc
 class __$UnableToUpdateCopyWithImpl<$Res>
-    extends _$EventFailureCopyWithImpl<$Res>
+    extends _$RepositoryFailureCopyWithImpl<$Res>
     implements _$UnableToUpdateCopyWith<$Res> {
   __$UnableToUpdateCopyWithImpl(
       _UnableToUpdate _value, $Res Function(_UnableToUpdate) _then)
@@ -297,7 +299,7 @@ class _$_UnableToUpdate implements _UnableToUpdate {
 
   @override
   String toString() {
-    return 'EventFailure.unableToUpdate()';
+    return 'RepositoryFailure.unableToUpdate()';
   }
 
   @override
@@ -365,6 +367,6 @@ class _$_UnableToUpdate implements _UnableToUpdate {
   }
 }
 
-abstract class _UnableToUpdate implements EventFailure {
+abstract class _UnableToUpdate implements RepositoryFailure {
   const factory _UnableToUpdate() = _$_UnableToUpdate;
 }

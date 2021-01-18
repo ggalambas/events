@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:events/domain/core/errors.dart';
-import 'package:events/domain/core/failures.dart';
+import 'package:events/domain/core/value_failures.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:uuid/uuid.dart';
 

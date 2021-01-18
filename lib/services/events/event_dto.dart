@@ -20,11 +20,13 @@ abstract class EventDto implements _$EventDto {
     @JsonKey(ignore: true) String id,
     @required String name,
     @required @ServerTimeStampConverter() Timestamp date,
+    @required @ServerTimeStampConverter() Timestamp day,
     @required String link,
     @required String regionId,
     @required String subregionId,
     @required String categoryId,
     @required String poster, //! 1
+    @required String ownerId,
   }) = _EventDto;
 
   factory EventDto.fromDomain(Event event) {
@@ -32,11 +34,14 @@ abstract class EventDto implements _$EventDto {
       id: event.id.getOrCrash(),
       name: event.name.getOrCrash(),
       date: Timestamp.fromDate(event.date),
+      day: Timestamp.fromDate(
+          DateTime(event.date.year, event.date.month, event.date.day)),
       link: event.link.getOrCrash(),
       regionId: event.regionId,
       subregionId: event.subregionId,
       categoryId: event.categoryId,
       poster: event.poster.getOrCrash().path, //! 1
+      ownerId: event.ownerId.getOrCrash(),
     );
   }
 
@@ -50,6 +55,7 @@ abstract class EventDto implements _$EventDto {
       subregionId: subregionId,
       categoryId: categoryId,
       poster: Poster(File(poster)), //! 1
+      ownerId: UniqueId.fromUniqueString(ownerId),
     );
   }
 

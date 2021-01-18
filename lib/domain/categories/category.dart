@@ -4,12 +4,16 @@ import 'package:flutter/material.dart';
 
 class Category extends IdObject {
   IconData icon;
-  EventCounter eventCounter;
+  EventCounter eventCounter = EventCounter.empty();
 
   Category({
     @required String id,
     @required String name,
     @required this.icon,
-    @required this.eventCounter,
   }) : super(id: id, name: name);
+
+  Category add({EventCounter eventCounter}) {
+    this.eventCounter = eventCounter;
+    return this;
+  }
 }

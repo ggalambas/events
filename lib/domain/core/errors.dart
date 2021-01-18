@@ -1,8 +1,8 @@
-import 'package:events/domain/core/failures.dart';
+import 'package:events/domain/core/value_failures.dart';
 
 //TODO
 //* Auth error
-// class NotAuthenticatedError extends Error {}
+class NotAuthenticatedError extends Error {}
 
 class UnexpectedValueError extends Error {
   final ValueFailure valueFailure;

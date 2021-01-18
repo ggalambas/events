@@ -15,9 +15,9 @@ class CalendarModel extends ChangeNotifier {
     selected.day == _today.day ? selected = day : notifyListeners();
   }
 
-  DateTime get selected => _eventRepository.selectedDate;
+  DateTime get selected => _eventRepository.selectedDay;
   set selected(DateTime date) {
-    _eventRepository.selectedDate = date;
+    _eventRepository.selectedDay = date;
     notifyListeners();
   }
 

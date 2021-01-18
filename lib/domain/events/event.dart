@@ -15,6 +15,6 @@ abstract class Event with _$Event {
     @required String subregionId,
     @required String categoryId,
     @required Poster poster,
-    // @required UniqueId ownerId,
+    @required UniqueId ownerId,
   }) = _Event;
 }

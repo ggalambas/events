@@ -1,6 +1,7 @@
 import 'package:events/app/core/base_model.dart';
-import 'package:events/domain/events/event_failure.dart';
+import 'package:events/domain/core/repository_failure.dart';
 import 'package:events/domain/events/i_event_repository.dart';
+import 'package:events/domain/regions/i_region_api.dart';
 import 'package:events/domain/regions/region.dart';
 import 'package:injectable/injectable.dart';
 export 'package:events/app/core/base_model.dart';
@@ -8,9 +9,10 @@ export 'package:events/app/core/base_model.dart';
 @Injectable()
 class RegionsModel extends BaseModel {
   final IEventRepository _eventRepository;
+  final IRegionApi _regionApi;
 
-  RegionsModel(this._eventRepository) {
-    listen();
+  RegionsModel(this._eventRepository, this._regionApi) {
+    // listen(); //TODO !!!
   }
 
   List<Region> _near = [];
@@ -19,8 +21,8 @@ class RegionsModel extends BaseModel {
   List<Region> _others = [];
   List<Region> get others => _others;
 
-  EventFailure _failure;
-  EventFailure get failure => _failure;
+  RepositoryFailure _failure;
+  RepositoryFailure get failure => _failure;
 
   bool isEmpty() => _near.isEmpty && _others.isEmpty;
 
@@ -30,7 +32,7 @@ class RegionsModel extends BaseModel {
     loadSuccess();
   }
 
-  void _loadFailure(EventFailure f) {
+  void _loadFailure(RepositoryFailure f) {
     _failure = failure;
     loadFailure();
   }
@@ -38,16 +40,16 @@ class RegionsModel extends BaseModel {
   void listen() {
     loadInProgress();
     _eventRepository
-        .regions()
+        .regionCounters()
         .listen((failureOrRegions) => failureOrRegions.fold(
               (f) => _loadFailure(f),
               (regions) => _loadSuccess(regions),
             ));
   }
 
-  Region get selected => _eventRepository.selectedRegion;
+  Region get selected => _regionApi.selected;
   set selected(Region region) {
-    _eventRepository.selectedRegion = region;
-    notifyListeners(); //?
+    _regionApi.selected = region;
+    notifyListeners();
   }
 }

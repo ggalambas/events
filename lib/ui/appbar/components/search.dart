@@ -40,6 +40,7 @@ class EventSearch extends SearchDelegate {
           'https://br.web.img3.acsta.net/pictures/18/10/11/11/47/0874456.jpg',
         ),
       ),
+      ownerId: UniqueId.fromUniqueString('owner$i'),
     ),
   );
   static final List<Event> recents = [];

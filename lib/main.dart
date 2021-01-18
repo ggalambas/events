@@ -8,6 +8,7 @@ import 'package:events/config/theme/theme_config.dart';
 import 'package:events/config/routes/router.gr.dart' as auto;
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:injectable/injectable.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:provider/provider.dart';
@@ -17,6 +18,9 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await configureInjection(Environment.prod);
   await Firebase.initializeApp();
+  // Firebase security rules -> https://firebase.google.com/docs/rules/basics
+  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  // IOS orientation setup -> https://greymag.medium.com/flutter-orientation-lock-portrait-only-c98910ebd769
   runApp(MyApp());
 }
 

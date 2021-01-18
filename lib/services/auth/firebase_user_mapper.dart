@@ -5,10 +5,14 @@ import 'package:events/domain/core/value_objects.dart';
 
 extension FirebaseUserDomainX on firebase.User {
   User toDomain() {
-    return User(
-      id: UniqueId.fromUniqueString(uid),
-      name: displayName,
-      email: EmailAddress(email),
-    );
+    return isAnonymous
+        ? User.anonymous(
+            id: UniqueId.fromUniqueString(uid),
+          )
+        : User(
+            id: UniqueId.fromUniqueString(uid),
+            name: displayName,
+            email: EmailAddress(email),
+          );
   }
 }

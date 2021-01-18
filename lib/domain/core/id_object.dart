@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
 class IdObject {
+  //TODO
+  //* clean categories, rgions, subregions, dtos files
+
   final String id;
   final String name;
 

@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:dartz/dartz.dart';
-import 'package:events/domain/core/failures.dart';
+import 'package:events/domain/core/value_failures.dart';
 import 'package:string_validator/string_validator.dart';
 
 //TODO

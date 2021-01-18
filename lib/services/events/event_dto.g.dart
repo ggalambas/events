@@ -10,11 +10,13 @@ _$_EventDto _$_$_EventDtoFromJson(Map<String, dynamic> json) {
   return _$_EventDto(
     name: json['name'] as String,
     date: const ServerTimeStampConverter().fromJson(json['date'] as int),
+    day: const ServerTimeStampConverter().fromJson(json['day'] as int),
     link: json['link'] as String,
     regionId: json['regionId'] as String,
     subregionId: json['subregionId'] as String,
     categoryId: json['categoryId'] as String,
     poster: json['poster'] as String,
+    ownerId: json['ownerId'] as String,
   );
 }
 
@@ -22,9 +24,11 @@ Map<String, dynamic> _$_$_EventDtoToJson(_$_EventDto instance) =>
     <String, dynamic>{
       'name': instance.name,
       'date': const ServerTimeStampConverter().toJson(instance.date),
+      'day': const ServerTimeStampConverter().toJson(instance.day),
       'link': instance.link,
       'regionId': instance.regionId,
       'subregionId': instance.subregionId,
       'categoryId': instance.categoryId,
       'poster': instance.poster,
+      'ownerId': instance.ownerId,
     };

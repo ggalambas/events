@@ -22,7 +22,8 @@ class _$EventTearOff {
       @required String regionId,
       @required String subregionId,
       @required String categoryId,
-      @required Poster poster}) {
+      @required Poster poster,
+      @required UniqueId ownerId}) {
     return _Event(
       id: id,
       name: name,
@@ -32,6 +33,7 @@ class _$EventTearOff {
       subregionId: subregionId,
       categoryId: categoryId,
       poster: poster,
+      ownerId: ownerId,
     );
   }
 }
@@ -50,7 +52,9 @@ mixin _$Event {
   String get subregionId;
   String get categoryId;
   Poster get poster;
+  UniqueId get ownerId;
 
+  @JsonKey(ignore: true)
   $EventCopyWith<Event> get copyWith;
 }
 
@@ -66,7 +70,8 @@ abstract class $EventCopyWith<$Res> {
       String regionId,
       String subregionId,
       String categoryId,
-      Poster poster});
+      Poster poster,
+      UniqueId ownerId});
 }
 
 /// @nodoc
@@ -87,6 +92,7 @@ class _$EventCopyWithImpl<$Res> implements $EventCopyWith<$Res> {
     Object subregionId = freezed,
     Object categoryId = freezed,
     Object poster = freezed,
+    Object ownerId = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed ? _value.id : id as UniqueId,
@@ -99,6 +105,7 @@ class _$EventCopyWithImpl<$Res> implements $EventCopyWith<$Res> {
       categoryId:
           categoryId == freezed ? _value.categoryId : categoryId as String,
       poster: poster == freezed ? _value.poster : poster as Poster,
+      ownerId: ownerId == freezed ? _value.ownerId : ownerId as UniqueId,
     ));
   }
 }
@@ -116,7 +123,8 @@ abstract class _$EventCopyWith<$Res> implements $EventCopyWith<$Res> {
       String regionId,
       String subregionId,
       String categoryId,
-      Poster poster});
+      Poster poster,
+      UniqueId ownerId});
 }
 
 /// @nodoc
@@ -138,6 +146,7 @@ class __$EventCopyWithImpl<$Res> extends _$EventCopyWithImpl<$Res>
     Object subregionId = freezed,
     Object categoryId = freezed,
     Object poster = freezed,
+    Object ownerId = freezed,
   }) {
     return _then(_Event(
       id: id == freezed ? _value.id : id as UniqueId,
@@ -150,6 +159,7 @@ class __$EventCopyWithImpl<$Res> extends _$EventCopyWithImpl<$Res>
       categoryId:
           categoryId == freezed ? _value.categoryId : categoryId as String,
       poster: poster == freezed ? _value.poster : poster as Poster,
+      ownerId: ownerId == freezed ? _value.ownerId : ownerId as UniqueId,
     ));
   }
 }
@@ -164,7 +174,8 @@ class _$_Event implements _Event {
       @required this.regionId,
       @required this.subregionId,
       @required this.categoryId,
-      @required this.poster})
+      @required this.poster,
+      @required this.ownerId})
       : assert(id != null),
         assert(name != null),
         assert(date != null),
@@ -172,7 +183,8 @@ class _$_Event implements _Event {
         assert(regionId != null),
         assert(subregionId != null),
         assert(categoryId != null),
-        assert(poster != null);
+        assert(poster != null),
+        assert(ownerId != null);
 
   @override
   final UniqueId id;
@@ -190,10 +202,12 @@ class _$_Event implements _Event {
   final String categoryId;
   @override
   final Poster poster;
+  @override
+  final UniqueId ownerId;
 
   @override
   String toString() {
-    return 'Event(id: $id, name: $name, date: $date, link: $link, regionId: $regionId, subregionId: $subregionId, categoryId: $categoryId, poster: $poster)';
+    return 'Event(id: $id, name: $name, date: $date, link: $link, regionId: $regionId, subregionId: $subregionId, categoryId: $categoryId, poster: $poster, ownerId: $ownerId)';
   }
 
   @override
@@ -218,7 +232,9 @@ class _$_Event implements _Event {
                 const DeepCollectionEquality()
                     .equals(other.categoryId, categoryId)) &&
             (identical(other.poster, poster) ||
-                const DeepCollectionEquality().equals(other.poster, poster)));
+                const DeepCollectionEquality().equals(other.poster, poster)) &&
+            (identical(other.ownerId, ownerId) ||
+                const DeepCollectionEquality().equals(other.ownerId, ownerId)));
   }
 
   @override
@@ -231,8 +247,10 @@ class _$_Event implements _Event {
       const DeepCollectionEquality().hash(regionId) ^
       const DeepCollectionEquality().hash(subregionId) ^
       const DeepCollectionEquality().hash(categoryId) ^
-      const DeepCollectionEquality().hash(poster);
+      const DeepCollectionEquality().hash(poster) ^
+      const DeepCollectionEquality().hash(ownerId);
 
+  @JsonKey(ignore: true)
   @override
   _$EventCopyWith<_Event> get copyWith =>
       __$EventCopyWithImpl<_Event>(this, _$identity);
@@ -247,7 +265,8 @@ abstract class _Event implements Event {
       @required String regionId,
       @required String subregionId,
       @required String categoryId,
-      @required Poster poster}) = _$_Event;
+      @required Poster poster,
+      @required UniqueId ownerId}) = _$_Event;
 
   @override
   UniqueId get id;
@@ -266,5 +285,8 @@ abstract class _Event implements Event {
   @override
   Poster get poster;
   @override
+  UniqueId get ownerId;
+  @override
+  @JsonKey(ignore: true)
   _$EventCopyWith<_Event> get copyWith;
 }

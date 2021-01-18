@@ -1,5 +1,4 @@
 import 'package:events/domain/categories/category.dart';
-import 'package:events/domain/core/event_counter.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -16,8 +15,6 @@ abstract class CategoryDto implements _$CategoryDto {
     @JsonKey(ignore: true) String id,
     @required String name,
     @required int icon,
-    @required int liveEvents,
-    @required int totalEvents,
   }) = _CategoryDto;
 
   factory CategoryDto.fromDomain(Category category) {
@@ -25,8 +22,6 @@ abstract class CategoryDto implements _$CategoryDto {
       id: category.id,
       name: category.name,
       icon: category.icon.codePoint,
-      liveEvents: category.eventCounter.live,
-      totalEvents: category.eventCounter.total,
     );
   }
 
@@ -35,7 +30,6 @@ abstract class CategoryDto implements _$CategoryDto {
       id: id,
       name: name,
       icon: IconData(icon, fontFamily: 'MaterialIcons'),
-      eventCounter: EventCounter(live: liveEvents, total: totalEvents),
     );
   }
 

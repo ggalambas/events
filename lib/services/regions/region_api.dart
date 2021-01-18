@@ -8,11 +8,15 @@ import 'package:injectable/injectable.dart';
 
 @LazySingleton(as: IRegionApi)
 class RegionApi implements IRegionApi {
+  @override
   Map<String, Region> regions;
+
+  @override
   Map<String, Subregion> subregions;
 
   //TODO
   //* exceptions > item not found
+  //* selected Region
 
   RegionApi({@required this.regions, @required this.subregions});
 
@@ -34,6 +38,10 @@ class RegionApi implements IRegionApi {
       },
     );
   }
+
+  //!
+  @override
+  Region selected;
 
   @override
   Region region(String id) => regions[id];

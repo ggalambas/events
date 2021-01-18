@@ -18,12 +18,12 @@ class CategoryItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    final CategoryModel model =
-        Provider.of<CategoryModel>(context, listen: false);
-    final bool isSelected = model.isSelected(category);
     final BorderRadius borderRadius = BorderRadius.horizontal(
       right: Radius.circular(kBorderRadiusMedium),
     );
+    final CategoryModel model =
+        Provider.of<CategoryModel>(context, listen: false);
+    final bool isSelected = model.isSelected(category);
     return Padding(
       padding: EdgeInsets.only(right: kDrawerPadding),
       child: ClipRRect(
@@ -51,7 +51,8 @@ class CategoryItem extends StatelessWidget {
                     fontWeight: FontWeight.w500,
                   ),
           ),
-          trailing: Counters(counter, selected: isSelected),
+          trailing:
+              Counters(counter ?? EventCounter.empty(), selected: isSelected),
           selectedTileColor:
               theme.colorScheme.primary.withOpacity(kPrimaryOpacity),
         ),

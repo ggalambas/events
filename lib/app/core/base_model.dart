@@ -31,8 +31,10 @@ class BaseModel extends ChangeNotifier {
   Load _load = Load.inProgress;
   Load get load => _load;
   set load(Load load) {
-    _load = load;
-    notifyListeners();
+    if (_load != load) {
+      _load = load;
+      notifyListeners();
+    }
   }
 
   void loadInProgress() => load = Load.inProgress;
