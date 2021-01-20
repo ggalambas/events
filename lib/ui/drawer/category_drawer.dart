@@ -1,11 +1,12 @@
 import 'package:events/app/auth/auth_model.dart';
 import 'package:events/app/drawer/category_model.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:events/config/constants.dart';
+import 'package:events/config/routes/router.gr.dart';
 import 'package:events/domain/categories/category.dart';
 import 'package:events/ui/body/components/list_subtitle.dart';
 import 'package:events/ui/drawer/components/category_item.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 
 class CategoryDrawer extends StatelessWidget {
@@ -32,8 +33,10 @@ class CategoryDrawer extends StatelessWidget {
             accountName: Text(auth.name, style: theme.textTheme.bodyText2),
             currentAccountPicture: Container(color: theme.colorScheme.primary),
             otherAccountsPictures: [
-              Container(color: theme.colorScheme.primary),
-              Container(color: theme.colorScheme.secondary),
+              IconButton(
+                icon: Icon(Icons.settings),
+                onPressed: () => ExtendedNavigator.root.pushSettingsScreen(),
+              ),
             ],
             onDetailsPressed: () {},
             decoration: BoxDecoration(color: theme.colorScheme.surface),

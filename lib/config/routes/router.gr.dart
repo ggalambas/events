@@ -15,6 +15,7 @@ import '../../ui/screens/login_screen.dart';
 import '../../ui/screens/poster_screen.dart';
 import '../../ui/screens/regions_screen.dart';
 import '../../ui/screens/register_screen.dart';
+import '../../ui/screens/settings_screen.dart';
 
 class Routes {
   static const String loginScreen = '/login-screen';
@@ -22,12 +23,14 @@ class Routes {
   static const String regionsScreen = '/regions-screen';
   static const String eventsScreen = '/events-screen';
   static const String posterScreen = '/poster-screen';
+  static const String settingsScreen = '/settings-screen';
   static const all = <String>{
     loginScreen,
     registerScreen,
     regionsScreen,
     eventsScreen,
     posterScreen,
+    settingsScreen,
   };
 }
 
@@ -40,6 +43,7 @@ class Router extends RouterBase {
     RouteDef(Routes.regionsScreen, page: RegionsScreen),
     RouteDef(Routes.eventsScreen, page: EventsScreen),
     RouteDef(Routes.posterScreen, page: PosterScreen),
+    RouteDef(Routes.settingsScreen, page: SettingsScreen),
   ];
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
@@ -78,6 +82,12 @@ class Router extends RouterBase {
         settings: data,
       );
     },
+    SettingsScreen: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => SettingsScreen(),
+        settings: data,
+      );
+    },
   };
 }
 
@@ -107,6 +117,8 @@ extension RouterExtendedNavigatorStateX on ExtendedNavigatorState {
         Routes.posterScreen,
         arguments: PosterScreenArguments(event: event),
       );
+
+  Future<dynamic> pushSettingsScreen() => push<dynamic>(Routes.settingsScreen);
 }
 
 /// ************************************************************************

@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:events/app/helpers/awesome_icon.dart';
 import 'package:events/config/constants.dart';
 import 'package:events/domain/events/event.dart';
+import 'package:events/ui/appbar/rounded_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_tabs/flutter_custom_tabs.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -45,13 +46,12 @@ class PosterScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const double appBarBorderRadius = kBorderRadiusBig;
     final ThemeData theme = Theme.of(context);
     return Stack(
       children: [
         SafeArea(
           child: Container(
-            margin: EdgeInsets.only(top: kToolbarHeight - appBarBorderRadius),
+            margin: EdgeInsets.only(top: kToolbarHeight - kBorderRadiusBig),
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: NetworkImage(posterURL),
@@ -62,14 +62,10 @@ class PosterScreen extends StatelessWidget {
         ),
         Scaffold(
           backgroundColor: Colors.transparent,
-          appBar: AppBar(
+          appBar: RoundedBar(
             automaticallyImplyLeading: false,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.vertical(
-                bottom: Radius.circular(appBarBorderRadius),
-              ),
-            ),
-            title: Text(name, style: theme.textTheme.bodyText1),
+            title: name,
+            titleStyle: theme.textTheme.bodyText1,
             actions: [
               IconButton(
                 icon: Icon(Icons.bookmark_border),
@@ -88,7 +84,8 @@ class PosterScreen extends StatelessWidget {
           floatingActionButton: Row(
             children: [
               Spacer(),
-              RaisedButton( // TODO ElevatedButton
+              RaisedButton(
+                // TODO ElevatedButton
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(kBorderRadiusBig),
                 ),
