@@ -1,4 +1,7 @@
+import 'package:events/app/auth/auth_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:provider/provider.dart';
 
 class SplashScreen extends StatelessWidget {
   @override

@@ -1,8 +1,10 @@
 import 'package:dartz/dartz.dart';
+import 'package:events/app/auth/auth_model.dart';
 import 'package:events/domain/auth/auth_failure.dart';
 import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:provider/provider.dart';
 
 void showError(
   BuildContext context,
@@ -37,7 +39,10 @@ void showError(
                   ),
                 ),
               ).show(context)),
-      (_) => success(),
+      (_) {
+        Provider.of<AuthModel>(context, listen: false).setUser();
+        success();
+      },
     ),
   );
 }

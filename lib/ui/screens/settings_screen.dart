@@ -1,8 +1,11 @@
+import 'package:events/app/auth/auth_model.dart';
+import 'package:events/config/constants.dart';
 import 'package:events/ui/appbar/rounded_bar.dart';
 import 'package:events/ui/body/components/list_group.dart';
 import 'package:events/ui/body/components/list_subtitle.dart';
 import 'package:events/ui/settings/components/setting_item.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 //TODO
 //* Merge all listTiles
@@ -42,6 +45,20 @@ class SettingsScreen extends StatelessWidget {
               SettingItem.more(
                 title: 'Créditos',
                 onPressed: () {},
+              ),
+              ListTile(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(kBorderRadiusBig),
+                ),
+                dense: true,
+                title: Text(
+                  'Sair',
+                  style: theme.textTheme.bodyText1.copyWith(
+                    color: theme.colorScheme.error,
+                  ),
+                ),
+                onTap: () =>
+                    Provider.of<AuthModel>(context, listen: false).signedOut(),
               ),
             ],
           ),

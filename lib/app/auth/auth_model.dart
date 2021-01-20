@@ -1,5 +1,6 @@
 import 'package:events/domain/auth/i_auth_facade.dart';
 import 'package:events/domain/auth/user.dart';
+import 'package:events/domain/core/errors.dart';
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 
@@ -13,12 +14,18 @@ class AuthModel extends ChangeNotifier {
   //* listen to changes on here to do that navigation
 
   AuthModel(this._authFacade) {
-    authCheckRequested();
+    _authCheckRequested();
   }
 
   User _user;
   String get name => _user.name;
   String get email => _user.email.getOrCrash();
+
+  void setUser() {
+    _user = _authFacade
+        .getSignedInUser()
+        .getOrElse(() => throw NotAuthenticatedError());
+  }
 
   bool _isAuthenticated;
   bool get isAuthenticated => _isAuthenticated;
@@ -27,7 +34,7 @@ class AuthModel extends ChangeNotifier {
     notifyListeners(); //!
   }
 
-  Future authCheckRequested() async {
+  void _authCheckRequested() {
     final userOption = _authFacade.getSignedInUser();
     userOption.fold(
       () => isAuthenticated = false,
