@@ -1,6 +1,7 @@
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:events/config/constants.dart';
 import 'package:events/ui/overview/category_selector.dart';
+import 'package:events/ui/overview/region_selector.dart';
 import 'package:flutter/material.dart';
 
 class OverviewScreen extends StatelessWidget {
@@ -11,8 +12,7 @@ class OverviewScreen extends StatelessWidget {
 
     final List<Widget> _pages = [
       CategorySelector(),
-      CategorySelector(),
-      CategorySelector(),
+      RegionSelector(),
     ];
 
     return Scaffold(

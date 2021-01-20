@@ -9,33 +9,30 @@ class CategorySelector extends StatelessWidget {
     return PageItem(
       title: 'Categorias',
       subtitle: 'Seleciona as tuas categorias favoritas',
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(kBorderRadiusBig),
-        child: GridView.count(
-          crossAxisCount: 2,
-          childAspectRatio: 5 / 3,
-          mainAxisSpacing: kGridSpacing,
-          crossAxisSpacing: kGridSpacing,
-          padding: EdgeInsets.all(kGridSpacing),
-          children: List.generate(
-            15,
-            (i) => GestureDetector(
-              onTap: () {}, //! change card color
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(kBorderRadiusBig),
-                  border: Border.all(
-                    color: theme.colorScheme.onBackground,
-                    width: 0,
-                  ),
+      child: GridView.count(
+        crossAxisCount: 2,
+        childAspectRatio: 5 / 3,
+        mainAxisSpacing: kGridSpacing,
+        crossAxisSpacing: kGridSpacing,
+        padding: EdgeInsets.all(kGridSpacing),
+        children: List.generate(
+          15,
+          (i) => GestureDetector(
+            onTap: () {}, //! change card color
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(kBorderRadiusBig),
+                border: Border.all(
+                  color: theme.colorScheme.onBackground,
+                  width: 0,
                 ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(Icons.style),
-                    Text('Category ${i + 1}', style: theme.textTheme.bodyText1),
-                  ],
-                ),
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.style),
+                  Text('Category ${i + 1}', style: theme.textTheme.bodyText1),
+                ],
               ),
             ),
           ),

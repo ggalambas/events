@@ -30,7 +30,12 @@ class PageItem extends StatelessWidget {
             ],
           ),
         ),
-        Expanded(child: child),
+        Expanded(
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(kBorderRadiusBig),
+            child: child,
+          ),
+        ),
       ],
     );
   }
