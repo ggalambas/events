@@ -5,6 +5,7 @@ class RoundedBar extends StatelessWidget implements PreferredSizeWidget {
   final Widget leading;
   final bool automaticallyImplyLeading;
   final String title;
+  final String subtitle;
   final TextStyle titleStyle;
   final List<Widget> actions;
   final double elevation;
@@ -13,6 +14,7 @@ class RoundedBar extends StatelessWidget implements PreferredSizeWidget {
     this.leading,
     this.automaticallyImplyLeading = true,
     this.title,
+    this.subtitle,
     this.titleStyle,
     this.actions,
     this.elevation,
@@ -20,11 +22,19 @@ class RoundedBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
+    final TextTheme textTheme = Theme.of(context).textTheme;
     return AppBar(
       leading: leading,
       automaticallyImplyLeading: automaticallyImplyLeading,
-      title: Text(title, style: titleStyle ?? theme.textTheme.headline6),
+      title: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          if (title != null)
+            Text(title, style: titleStyle ?? textTheme.headline6),
+          if (subtitle != null) Text(subtitle, style: textTheme.subtitle1),
+        ],
+      ),
       actions: actions,
       elevation: elevation,
       shape: RoundedRectangleBorder(
@@ -32,7 +42,6 @@ class RoundedBar extends StatelessWidget implements PreferredSizeWidget {
           bottom: Radius.circular(kBorderRadiusBig),
         ),
       ),
-      // backgroundColor: theme.colorScheme.surface,
     );
   }
 

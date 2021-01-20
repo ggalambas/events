@@ -30,12 +30,12 @@ TextTheme textTheme({
       fontWeight: regular,
       letterSpacing: 0.0,
     ),
-    // headline4: TextStyle(
-    //   // color: onSurface,
-    //   fontSize: 34.0,
-    //   fontWeight: regular,
-    //   letterSpacing: 0.25,
-    // ),
+    headline4: TextStyle(
+      color: onSurface,
+      fontSize: 32.0, // 34.0
+      fontWeight: medium, // regular
+      letterSpacing: 0.25, // 0.25
+    ),
     // headline5: TextStyle(
     //   // color: onSurface,
     //   fontSize: 24.0,

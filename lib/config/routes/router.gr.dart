@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import '../../domain/events/event.dart';
 import '../../ui/screens/events_screen.dart';
 import '../../ui/screens/login_screen.dart';
+import '../../ui/screens/overview_screen.dart';
 import '../../ui/screens/poster_screen.dart';
 import '../../ui/screens/regions_screen.dart';
 import '../../ui/screens/register_screen.dart';
@@ -20,6 +21,7 @@ import '../../ui/screens/settings_screen.dart';
 class Routes {
   static const String loginScreen = '/login-screen';
   static const String registerScreen = '/register-screen';
+  static const String overviewScreen = '/overview-screen';
   static const String regionsScreen = '/regions-screen';
   static const String eventsScreen = '/events-screen';
   static const String posterScreen = '/poster-screen';
@@ -27,6 +29,7 @@ class Routes {
   static const all = <String>{
     loginScreen,
     registerScreen,
+    overviewScreen,
     regionsScreen,
     eventsScreen,
     posterScreen,
@@ -40,6 +43,7 @@ class Router extends RouterBase {
   final _routes = <RouteDef>[
     RouteDef(Routes.loginScreen, page: LoginScreen),
     RouteDef(Routes.registerScreen, page: RegisterScreen),
+    RouteDef(Routes.overviewScreen, page: OverviewScreen),
     RouteDef(Routes.regionsScreen, page: RegionsScreen),
     RouteDef(Routes.eventsScreen, page: EventsScreen),
     RouteDef(Routes.posterScreen, page: PosterScreen),
@@ -57,6 +61,12 @@ class Router extends RouterBase {
     RegisterScreen: (data) {
       return MaterialPageRoute<dynamic>(
         builder: (context) => RegisterScreen(),
+        settings: data,
+      );
+    },
+    OverviewScreen: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => OverviewScreen(),
         settings: data,
       );
     },
@@ -99,6 +109,8 @@ extension RouterExtendedNavigatorStateX on ExtendedNavigatorState {
   Future<dynamic> pushLoginScreen() => push<dynamic>(Routes.loginScreen);
 
   Future<dynamic> pushRegisterScreen() => push<dynamic>(Routes.registerScreen);
+
+  Future<dynamic> pushOverviewScreen() => push<dynamic>(Routes.overviewScreen);
 
   Future<dynamic> pushRegionsScreen() => push<dynamic>(Routes.regionsScreen);
 

@@ -35,7 +35,6 @@ class RegisterScreen extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
     final SignInFormModel signInForm = Provider.of<SignInFormModel>(context);
     return SignInScaffold(
-      ableToGoBack: true,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

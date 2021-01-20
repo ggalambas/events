@@ -1,17 +1,17 @@
 import 'package:events/app/auth/sign_in_form_model.dart';
 import 'package:events/config/constants.dart';
+import 'package:events/ui/appbar/rounded_bar.dart';
+import 'package:events/ui/appbar/skip_bar.dart';
 import 'package:events/ui/widgets/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class SignInScaffold extends StatelessWidget {
   final Widget child;
-  final bool ableToGoBack;
   final void Function() onSkip;
 
   const SignInScaffold({
     @required this.child,
-    this.ableToGoBack = false,
     this.onSkip,
   });
 
@@ -20,29 +20,7 @@ class SignInScaffold extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
     final SignInFormModel signInForm = Provider.of<SignInFormModel>(context);
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        automaticallyImplyLeading: ableToGoBack,
-        actions: onSkip != null
-            ? [
-                Padding(
-                  padding: EdgeInsets.all(kFormCaptionPadding),
-                  child: FlatButton.icon(
-                    icon: Padding(
-                      padding: EdgeInsets.only(left: kFormCaptionPadding),
-                      child: Text('Ignorar este passo'),
-                    ),
-                    label: Icon(Icons.east),
-                    onPressed: onSkip,
-                    highlightColor: Colors.transparent,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(kBorderRadiusBig),
-                    ),
-                  ),
-                ),
-              ]
-            : null,
-      ),
+      appBar: onSkip != null ? SkipBar(onSkip: onSkip) : AppBar(elevation: 0),
       backgroundColor: theme.colorScheme.surface,
       body: SafeArea(
         child: Stack(

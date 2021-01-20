@@ -24,6 +24,10 @@ const Color kAltLabelColor = Color(0xFF5F6368);
 const double kSwipeUpHeight = 80.0;
 const double kSwipeUpPadding = 15.0;
 
+// Overview
+const double kOverviewVertPadding = 32.0;
+const double kGridSpacing = 8.0;
+
 // Drawer
 const double kDrawerPadding = 8.0;
 

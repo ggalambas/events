@@ -30,7 +30,7 @@ class LoginScreen extends StatelessWidget {
       showError(
         context,
         authFailureOrSuccessOption,
-        () => ExtendedNavigator.root.replace(Routes.regionsScreen),
+        () => ExtendedNavigator.root.replace(Routes.overviewScreen), //!
       );
 
   @override

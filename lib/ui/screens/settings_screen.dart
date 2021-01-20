@@ -78,22 +78,7 @@ class SettingsScreen extends StatelessWidget {
             items: [
               SettingItem.selection(
                 title: 'Categoria inicial',
-                options: [
-                  'Categoria 1',
-                  'Categoria 2',
-                  'Categoria 3',
-                  'Categoria 4',
-                  'Categoria 5',
-                  'Categoria 6',
-                  'Categoria 7',
-                  'Categoria 8',
-                  'Categoria 9',
-                  'Categoria 10',
-                  'Categoria 11',
-                  'Categoria 12',
-                  'Categoria 13',
-                  'Categoria 14',
-                ],
+                options: List.generate(15, (i) => 'Category ${i + 1}'),
                 selected: selected,
                 onPressed: (i) => selected = i,
               ),
