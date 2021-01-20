@@ -1,9 +1,7 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:dartz/dartz.dart';
 import 'package:events/app/auth/sign_in_form_model.dart';
 import 'package:events/config/constants.dart';
 import 'package:events/config/routes/router.gr.dart';
-import 'package:events/domain/auth/auth_failure.dart';
 import 'package:events/ui/auth/components/alt_sign_in_button.dart';
 import 'package:events/ui/auth/components/input_field.dart';
 import 'package:events/ui/auth/components/sign_in_error.dart';
@@ -23,16 +21,6 @@ import 'package:provider/provider.dart';
 //* https://firebase.flutter.dev/docs/auth/usage/#verifying-a-users-email
 
 class LoginScreen extends StatelessWidget {
-  void _showError(
-    BuildContext context,
-    Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption,
-  ) =>
-      showError(
-        context,
-        authFailureOrSuccessOption,
-        () => ExtendedNavigator.root.replace(Routes.overviewScreen), //!
-      );
-
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
@@ -40,7 +28,7 @@ class LoginScreen extends StatelessWidget {
     return SignInScaffold(
       onSkip: () async {
         await signInForm.signInAnonymously();
-        _showError(context, signInForm.authFailureOrSuccessOption);
+        showError(context, signInForm.authFailureOrSuccessOption);
       },
       child: Column(
         children: [
@@ -76,7 +64,7 @@ class LoginScreen extends StatelessWidget {
             text: 'Entrar',
             onPressed: () async {
               await signInForm.signInWithEmailAndPassword();
-              _showError(context, signInForm.authFailureOrSuccessOption);
+              showError(context, signInForm.authFailureOrSuccessOption);
             },
           ),
           Text(
@@ -102,13 +90,13 @@ class LoginScreen extends StatelessWidget {
                 AltSignInButton.google(
                   onPressed: () async {
                     await signInForm.signInWithGoogle();
-                    _showError(context, signInForm.authFailureOrSuccessOption);
+                    showError(context, signInForm.authFailureOrSuccessOption);
                   },
                 ),
                 AltSignInButton.facebook(
                   onPressed: () async {
                     await signInForm.signInWithFacebook();
-                    _showError(context, signInForm.authFailureOrSuccessOption);
+                    showError(context, signInForm.authFailureOrSuccessOption);
                   },
                 ),
               ],
@@ -116,7 +104,7 @@ class LoginScreen extends StatelessWidget {
           ),
           Spacer(),
           SwipeUp(
-            onSwipe: () => ExtendedNavigator.root.push(Routes.registerScreen),
+            onSwipe: () => ExtendedNavigator.root.pushRegisterScreen(),
             child: Text(
               'Ainda não criaste a tua conta? Regista-te',
               style: theme.textTheme.bodyText1,

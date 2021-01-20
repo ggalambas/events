@@ -1,8 +1,8 @@
-import 'package:events/app/auth/auth_model.dart';
 import 'package:events/app/drawer/category_model.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:events/config/constants.dart';
 import 'package:events/config/routes/router.gr.dart';
+import 'package:events/domain/auth/user.dart';
 import 'package:events/domain/categories/category.dart';
 import 'package:events/ui/body/components/list_subtitle.dart';
 import 'package:events/ui/drawer/components/category_item.dart';
@@ -23,14 +23,15 @@ class CategoryDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final CategoryModel model = Provider.of<CategoryModel>(context);
-    final AuthModel auth = Provider.of<AuthModel>(context);
+    final User user = Provider.of<User>(context);
     return Drawer(
       child: Column(
         children: [
           UserAccountsDrawerHeader(
             //! 1
-            accountEmail: Text(auth.email, style: theme.textTheme.bodyText1),
-            accountName: Text(auth.name, style: theme.textTheme.bodyText2),
+            accountEmail:
+                Text(user.email.getOrCrash(), style: theme.textTheme.bodyText1),
+            accountName: Text(user.name, style: theme.textTheme.bodyText2),
             currentAccountPicture: Container(color: theme.colorScheme.primary),
             otherAccountsPictures: [
               IconButton(
