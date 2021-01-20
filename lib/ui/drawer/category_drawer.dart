@@ -5,7 +5,6 @@ import 'package:events/domain/categories/category.dart';
 import 'package:events/ui/body/components/list_subtitle.dart';
 import 'package:events/ui/drawer/components/category_item.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 
 class CategoryDrawer extends StatelessWidget {
