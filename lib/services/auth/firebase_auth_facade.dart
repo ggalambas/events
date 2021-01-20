@@ -4,7 +4,7 @@ import 'package:events/domain/auth/i_auth_facade.dart';
 import 'package:events/domain/auth/user.dart';
 import 'package:events/domain/auth/value_objects.dart';
 import 'package:firebase_auth/firebase_auth.dart' hide User;
-import 'package:firebase_auth/firebase_auth.dart' as firebase show User;
+// import 'package:firebase_auth/firebase_auth.dart' as firebase show User;
 import 'package:flutter/foundation.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -32,6 +32,11 @@ class FirebaseAuthFacade implements IAuthFacade {
   @override
   Option<User> getSignedInUser() =>
       optionOf(_firebaseAuth.currentUser?.toDomain());
+
+  @override
+  Stream<Option<User>> authStateChanges() => _firebaseAuth
+      .authStateChanges()
+      .map((user) => optionOf(user?.toDomain()));
 
   @override
   Future<Either<AuthFailure, Unit>> signInAnonymously() async {

@@ -1,9 +1,5 @@
-import 'package:auto_route/auto_route.dart';
-import 'package:dartz/dartz.dart';
 import 'package:events/app/auth/sign_in_form_model.dart';
 import 'package:events/config/constants.dart';
-import 'package:events/config/routes/router.gr.dart';
-import 'package:events/domain/auth/auth_failure.dart';
 import 'package:events/ui/auth/components/input_field.dart';
 import 'package:events/ui/auth/components/sign_in_error.dart';
 import 'package:events/ui/auth/components/submit_button.dart';
@@ -16,19 +12,6 @@ class RegisterScreen extends StatelessWidget {
   // TODO
   //* its scrolling wtf?
   //* review Terms and Conditions
-
-  void _showError(
-    BuildContext context,
-    Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption,
-  ) =>
-      showError(
-        context,
-        authFailureOrSuccessOption,
-        () {
-          Navigator.pop(context);
-          ExtendedNavigator.root.replace(Routes.regionsScreen);
-        },
-      );
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +56,7 @@ class RegisterScreen extends StatelessWidget {
             text: 'Registar',
             onPressed: () async {
               await signInForm.registerWithEmailAndPassword();
-              _showError(context, signInForm.authFailureOrSuccessOption);
+              showError(context, signInForm.authFailureOrSuccessOption);
             },
           ),
           Padding(

@@ -10,6 +10,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
 import '../../domain/events/event.dart';
+import '../../ui/screens/auth_screen.dart';
 import '../../ui/screens/events_screen.dart';
 import '../../ui/screens/login_screen.dart';
 import '../../ui/screens/poster_screen.dart';
@@ -18,6 +19,7 @@ import '../../ui/screens/register_screen.dart';
 import '../../ui/screens/settings_screen.dart';
 
 class Routes {
+  static const String authScreen = '/';
   static const String loginScreen = '/login-screen';
   static const String registerScreen = '/register-screen';
   static const String regionsScreen = '/regions-screen';
@@ -25,6 +27,7 @@ class Routes {
   static const String posterScreen = '/poster-screen';
   static const String settingsScreen = '/settings-screen';
   static const all = <String>{
+    authScreen,
     loginScreen,
     registerScreen,
     regionsScreen,
@@ -38,6 +41,7 @@ class Router extends RouterBase {
   @override
   List<RouteDef> get routes => _routes;
   final _routes = <RouteDef>[
+    RouteDef(Routes.authScreen, page: AuthScreen),
     RouteDef(Routes.loginScreen, page: LoginScreen),
     RouteDef(Routes.registerScreen, page: RegisterScreen),
     RouteDef(Routes.regionsScreen, page: RegionsScreen),
@@ -48,6 +52,12 @@ class Router extends RouterBase {
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
   final _pagesMap = <Type, AutoRouteFactory>{
+    AuthScreen: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => AuthScreen(),
+        settings: data,
+      );
+    },
     LoginScreen: (data) {
       return MaterialPageRoute<dynamic>(
         builder: (context) => LoginScreen(),
@@ -96,6 +106,8 @@ class Router extends RouterBase {
 /// *************************************************************************
 
 extension RouterExtendedNavigatorStateX on ExtendedNavigatorState {
+  Future<dynamic> pushAuthScreen() => push<dynamic>(Routes.authScreen);
+
   Future<dynamic> pushLoginScreen() => push<dynamic>(Routes.loginScreen);
 
   Future<dynamic> pushRegisterScreen() => push<dynamic>(Routes.registerScreen);
