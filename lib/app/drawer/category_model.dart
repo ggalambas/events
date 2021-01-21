@@ -17,7 +17,7 @@ class CategoryModel extends BaseModel {
   final IEventRepository _eventRepository;
 
   CategoryModel(this._categoryRepository, this._eventRepository) {
-    // getAll();
+    getAll();
   }
 
   List<Category> _categories = [];

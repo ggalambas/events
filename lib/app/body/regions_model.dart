@@ -12,7 +12,7 @@ class RegionsModel extends BaseModel {
   final IRegionApi _regionApi;
 
   RegionsModel(this._eventRepository, this._regionApi) {
-    // listen(); //TODO !!!
+    listen();
   }
 
   List<Region> _near = [];

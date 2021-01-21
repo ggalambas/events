@@ -10,6 +10,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../app/auth/auth_model.dart';
 import '../app/appbar/calendar_model.dart';
@@ -26,6 +27,7 @@ import '../domain/regions/i_region_api.dart';
 import '../services/regions/region_api.dart';
 import '../services/core/regions_injectable_module.dart';
 import '../app/body/regions_model.dart';
+import '../app/core/settings_model.dart';
 import '../app/auth/sign_in_form_model.dart';
 
 /// adds generated dependencies
@@ -39,6 +41,7 @@ Future<GetIt> $initGetIt(
   final gh = GetItHelper(get, environment, environmentFilter);
   final firebaseInjectableModule = _$FirebaseInjectableModule();
   final regionsInjectableModule = _$RegionsInjectableModule();
+  final settingsInjectableModule = _$SettingsInjectableModule();
   gh.lazySingleton<FacebookAuth>(() => firebaseInjectableModule.facebookAuth);
   gh.lazySingleton<FirebaseAuth>(() => firebaseInjectableModule.firebaseAuth);
   gh.lazySingleton<FirebaseFirestore>(() => firebaseInjectableModule.firestore);
@@ -57,6 +60,9 @@ Future<GetIt> $initGetIt(
   final resolvedList1 = await regionsInjectableModule.subregionsJson;
   gh.lazySingleton<List<dynamic>>(() => resolvedList1,
       instanceName: 'subregions');
+  final resolvedSharedPreferences =
+      await settingsInjectableModule.sharedPreferences;
+  gh.lazySingleton<SharedPreferences>(() => resolvedSharedPreferences);
   gh.factory<SignInFormModel>(() => SignInFormModel(get<IAuthFacade>()));
   gh.factory<AuthModel>(() => AuthModel(get<IAuthFacade>()));
   gh.factory<CalendarModel>(() => CalendarModel(get<IEventRepository>()));
@@ -67,6 +73,7 @@ Future<GetIt> $initGetIt(
       get<List<dynamic>>(instanceName: 'subregions')));
   gh.factory<RegionsModel>(
       () => RegionsModel(get<IEventRepository>(), get<IRegionApi>()));
+  gh.factory<SettingsModel>(() => SettingsModel(get<SharedPreferences>()));
   gh.factory<EventsModel>(
       () => EventsModel(get<IEventRepository>(), get<IRegionApi>()));
   return get;
@@ -75,3 +82,5 @@ Future<GetIt> $initGetIt(
 class _$FirebaseInjectableModule extends FirebaseInjectableModule {}
 
 class _$RegionsInjectableModule extends RegionsInjectableModule {}
+
+class _$SettingsInjectableModule extends SettingsInjectableModule {}

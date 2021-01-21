@@ -1,11 +1,13 @@
 import 'package:events/app/auth/auth_model.dart';
 import 'package:events/config/constants.dart';
+import 'package:events/config/theme/theme_config.dart';
 import 'package:events/ui/appbar/rounded_bar.dart';
 import 'package:events/ui/body/components/list_group.dart';
 import 'package:events/ui/body/components/list_subtitle.dart';
 import 'package:events/ui/settings/components/setting_item.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:events/app/core/settings_model.dart';
 
 //TODO
 //* Merge all listTiles
@@ -14,6 +16,9 @@ class SettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+    final settings = Provider.of<SettingsModel>(context);
+    final auth = Provider.of<AuthModel>(context, listen: false);
+    final themeConfig = Provider.of<ThemeConfig>(context, listen: false);
     int selected = 2;
     return Scaffold(
       appBar: RoundedBar(
@@ -57,8 +62,7 @@ class SettingsScreen extends StatelessWidget {
                     color: theme.colorScheme.error,
                   ),
                 ),
-                onTap: () =>
-                    Provider.of<AuthModel>(context, listen: false).signedOut(),
+                onTap: () => auth.signedOut(),
               ),
             ],
           ),
@@ -67,9 +71,9 @@ class SettingsScreen extends StatelessWidget {
             items: [
               SettingItem.selection(
                 title: 'Modo',
-                options: ['Claro', 'Escuro', 'Automático'],
-                selected: selected,
-                onPressed: (i) => selected = i,
+                options: themeConfig.options,
+                selected: themeConfig.selected,
+                onPressed: (i) => themeConfig.selected = i,
               ),
             ],
           ),

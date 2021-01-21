@@ -16,6 +16,16 @@ class ThemeConfig with ChangeNotifier {
   ThemeData get light => theme(lightPallete);
   ThemeData get dark => theme(darkPallete);
 
+  //? is it supposed to be here
+  List<String> get options => ThemeMode.values.map((mode) {
+        if (mode == ThemeMode.light) return 'Claro';
+        if (mode == ThemeMode.dark) return 'Escuro';
+        return 'Automático';
+      }).toList();
+  int get selected => ThemeMode.values.indexOf(mode);
+  set selected(int i) => mode = ThemeMode.values[i];
+  //! end
+
   /* to change this in the settings use
    * Provider.of<ThemeConfig>(context, listen: false).useDarkMode()
    * listen: false -> because when the theme changes the widget tree already
