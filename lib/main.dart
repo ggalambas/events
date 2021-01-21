@@ -1,8 +1,10 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:events/app/auth/auth_model.dart';
 import 'package:events/config/injection.dart';
 import 'package:events/config/theme/theme_config.dart';
 import 'package:events/config/routes/router.gr.dart' as auto;
 import 'package:events/providers.dart';
+import 'package:events/ui/auth/auth_builder.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -61,14 +63,16 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
       providers: mainProviders,
       builder: (context, _) {
         final ThemeConfig theme = Provider.of<ThemeConfig>(context);
-        return MaterialApp(
-          debugShowCheckedModeBanner: false, //!
-          title: 'Events', //!
-          theme: theme.light,
-          darkTheme: theme.dark,
-          themeMode: theme.mode,
-          builder: ExtendedNavigator.builder<auto.Router>(
-            router: auto.Router(),
+        return AuthBuilder(
+          child: MaterialApp(
+            debugShowCheckedModeBanner: false, //!
+            title: 'Events', //!
+            theme: theme.light,
+            darkTheme: theme.dark,
+            themeMode: theme.mode,
+            builder: ExtendedNavigator.builder<auto.Router>(
+              router: auto.Router(),
+            ),
           ),
         );
       },

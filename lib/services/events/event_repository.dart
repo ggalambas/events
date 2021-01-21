@@ -34,30 +34,36 @@ class EventRepository implements IEventRepository {
     DateTime.now().day,
   );
 
+  //! SWAP WITH COMMENTED FUNCTION WHEN COUNTERS GOT READY
   @override
   Stream<Either<RepositoryFailure, List<Category>>> categoryCounters() async* {
-    Map<String, Category> categories;
-    final categoriesOrFailure = await getIt<ICategoryRepository>().categories();
-    categoriesOrFailure.fold((f) => left(f), (c) => categories = c);
-
-    final counters = _firestore.categoryCounters;
-    yield* counters
-        .snapshots()
-        .map((snapshot) => right<RepositoryFailure, List<Category>>(
-              snapshot.docs
-                  .map((doc) => categories[doc.id].add(
-                      eventCounter:
-                          EventCounterDto.fromFirestore(doc).toDomain()))
-                  .toList(),
-            ))
-        .handleError((e) {
-      if (e is FirebaseException && e.message.contains('PERMISSION_DENIED')) {
-        return left(const RepositoryFailure.insufficientPermission());
-      } else {
-        return left(const RepositoryFailure.unexpected());
-      }
-    });
+    yield* getIt<ICategoryRepository>().getAll().asStream();
   }
+
+  // @override
+  // Stream<Either<RepositoryFailure, List<Category>>> categoryCounters() async* {
+  //   Map<String, Category> categories;
+  //   final categoriesOrFailure = await getIt<ICategoryRepository>().categories();
+  //   categoriesOrFailure.fold((f) => left(f), (c) => categories = c);
+
+  //   final counters = _firestore.categoryCounters;
+  //   yield* counters
+  //       .snapshots()
+  //       .map((snapshot) => right<RepositoryFailure, List<Category>>(
+  //             snapshot.docs
+  //                 .map((doc) => categories[doc.id].add(
+  //                     eventCounter:
+  //                         EventCounterDto.fromFirestore(doc).toDomain()))
+  //                 .toList(),
+  //           ))
+  //       .handleError((e) {
+  //     if (e is FirebaseException && e.message.contains('PERMISSION_DENIED')) {
+  //       return left(const RepositoryFailure.insufficientPermission());
+  //     } else {
+  //       return left(const RepositoryFailure.unexpected());
+  //     }
+  //   });
+  // }
 
   @override
   Stream<Either<RepositoryFailure, List<Region>>> dayCounters() async* {}

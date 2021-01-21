@@ -40,7 +40,8 @@ class RegionSelector extends StatelessWidget {
             Spacer(),
             SubmitButton(
               text: 'Avançar',
-              onPressed: () => ExtendedNavigator.root.pushRegionsScreen(),
+              onPressed: () =>
+                  ExtendedNavigator.of(context).pushRegionsScreen(),
             ),
           ],
         ),

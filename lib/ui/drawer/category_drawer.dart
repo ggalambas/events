@@ -36,7 +36,8 @@ class CategoryDrawer extends StatelessWidget {
             otherAccountsPictures: [
               IconButton(
                 icon: Icon(Icons.settings),
-                onPressed: () => ExtendedNavigator.root.pushSettingsScreen(),
+                onPressed: () =>
+                    ExtendedNavigator.of(context).pushSettingsScreen(),
               ),
             ],
             onDetailsPressed: () {},

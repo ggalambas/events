@@ -1,9 +1,7 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:events/app/auth/auth_model.dart';
-import 'package:events/domain/auth/user.dart';
-import 'package:events/providers.dart';
 import 'package:events/ui/screens/login_screen.dart';
 import 'package:events/ui/screens/overview_screen.dart';
-import 'package:events/ui/screens/regions_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -14,15 +12,8 @@ class AuthScreen extends StatelessWidget {
     final isAuthenticated = auth.isAuthenticated;
 
     if (isAuthenticated != null) {
-      return isAuthenticated
-          ? MultiProvider(
-              providers: userProviders +
-                  [Provider<User>.value(value: auth.signedInUser)],
-              child: OverviewScreen(), //!
-            )
-          : LoginScreen();
+      return isAuthenticated ? OverviewScreen() : LoginScreen();
     }
-
     return SplashScreen();
   }
 }

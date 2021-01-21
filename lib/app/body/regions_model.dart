@@ -12,7 +12,9 @@ class RegionsModel extends BaseModel {
   final IRegionApi _regionApi;
 
   RegionsModel(this._eventRepository, this._regionApi) {
-    listen();
+    //TODO: this needs the selected category to work or wtv
+    //* dealing with it in a later stage idk
+    // listen();
   }
 
   List<Region> _near = [];

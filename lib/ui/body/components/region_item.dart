@@ -27,7 +27,7 @@ class RegionItem extends StatelessWidget {
       dense: true,
       onTap: () {
         Provider.of<RegionsModel>(context, listen: false).selected = region;
-        ExtendedNavigator.root.pushEventsScreen(regionName: name);
+        ExtendedNavigator.of(context).pushEventsScreen(regionName: name);
       },
       title: Text(name, style: textTheme.bodyText1),
       trailing: Counters(counter),
