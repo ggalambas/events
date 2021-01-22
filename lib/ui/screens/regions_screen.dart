@@ -1,5 +1,5 @@
 import 'package:events/app/appbar/calendar_model.dart';
-import 'package:events/app/body/regions_model.dart';
+import 'package:events/app/body/region_counters_model.dart';
 import 'package:events/app/drawer/category_model.dart';
 import 'package:events/config/injection.dart';
 import 'package:events/domain/categories/category.dart';
@@ -43,11 +43,11 @@ class RegionsScreen extends StatelessWidget {
           body: Selector<CalendarModel, DateTime>(
             selector: (_, calendar) => calendar.selected,
             builder: (_, ___, __) {
-              return ChangeNotifierProvider<RegionsModel>.value(
-                value: getIt<RegionsModel>(),
+              return ChangeNotifierProvider<RegionCountersModel>.value(
+                value: getIt<RegionCountersModel>(),
                 builder: (context, _) {
-                  final RegionsModel regions =
-                      Provider.of<RegionsModel>(context);
+                  final RegionCountersModel regions =
+                      Provider.of<RegionCountersModel>(context);
                   return regions.load.map(
                     inProgress: SliverFillRemaining(
                       hasScrollBody: false,

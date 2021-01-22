@@ -1,7 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:events/domain/auth/auth_failure.dart';
 import 'package:events/domain/auth/user.dart';
+import 'package:events/domain/auth/user_prefs.dart';
 import 'package:events/domain/auth/value_objects.dart';
+import 'package:events/domain/core/repository_failure.dart';
 import 'package:flutter/foundation.dart';
 
 abstract class IAuthFacade {
@@ -20,4 +22,9 @@ abstract class IAuthFacade {
   Future<Option<Either<AuthFailure, Unit>>> signInWithGoogle();
   Future<Option<Either<AuthFailure, Unit>>> signInWithFacebook();
   Future signOut();
+
+  Stream<Either<RepositoryFailure, UserPrefs>> watchPreferences();
+  Future<Either<RepositoryFailure, Unit>> updatePreferences(
+      UserPrefs userPrefs);
+  Future<Either<RepositoryFailure, Unit>> deletePreferences();
 }

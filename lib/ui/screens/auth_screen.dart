@@ -1,4 +1,3 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:events/app/auth/auth_model.dart';
 import 'package:events/ui/screens/login_screen.dart';
 import 'package:events/ui/screens/overview_screen.dart';

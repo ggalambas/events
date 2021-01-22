@@ -43,8 +43,12 @@ class EventRepository implements IEventRepository {
   // @override
   // Stream<Either<RepositoryFailure, List<Category>>> categoryCounters() async* {
   //   Map<String, Category> categories;
-  //   final categoriesOrFailure = await getIt<ICategoryRepository>().categories();
-  //   categoriesOrFailure.fold((f) => left(f), (c) => categories = c);
+  //   final categoriesOrFailure = await getIt<ICategoryRepository>().getAll();
+  //   categoriesOrFailure.fold(
+  //     (f) => left(f),
+  //     (c) => categories =
+  //         Map.fromEntries(c.map((category) => MapEntry(category.id, category))),
+  //   );
 
   //   final counters = _firestore.categoryCounters;
   //   yield* counters

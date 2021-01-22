@@ -1,14 +1,12 @@
 import 'package:events/domain/regions/region.dart';
-import 'package:events/domain/regions/subregion.dart';
 
 abstract class IRegionApi {
+  Map<String, Region> countries;
+  Map<String, Region> states;
   Map<String, Region> regions;
-  Map<String, Subregion> subregions;
+  Map<String, Region> subregions;
 
   Region selected;
 
-  Region region(String id);
-  Subregion subregion(String id);
-  List<Region> regionsList();
-  List<Subregion> subregionsList();
+  Region subregion(String id);
 }

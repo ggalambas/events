@@ -1,6 +1,5 @@
 import 'package:events/app/auth/sign_in_form_model.dart';
 import 'package:events/config/constants.dart';
-import 'package:events/ui/appbar/rounded_bar.dart';
 import 'package:events/ui/appbar/skip_bar.dart';
 import 'package:events/ui/widgets/loading.dart';
 import 'package:flutter/material.dart';

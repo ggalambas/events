@@ -24,9 +24,10 @@ import '../domain/auth/i_auth_facade.dart';
 import '../domain/categories/i_category_repository.dart';
 import '../domain/events/i_event_repository.dart';
 import '../domain/regions/i_region_api.dart';
+import '../app/overview/overview_model.dart';
 import '../services/regions/region_api.dart';
-import '../services/core/regions_injectable_module.dart';
-import '../app/body/regions_model.dart';
+import '../app/body/region_counters_model.dart';
+import '../services/regions/regions_injectable_module.dart';
 import '../app/core/settings_model.dart';
 import '../app/auth/sign_in_form_model.dart';
 
@@ -50,16 +51,14 @@ Future<GetIt> $initGetIt(
         get<FirebaseAuth>(),
         get<GoogleSignIn>(),
         get<FacebookAuth>(),
+        get<FirebaseFirestore>(),
       ));
   gh.lazySingleton<ICategoryRepository>(
       () => CategoryRepository(get<FirebaseFirestore>()));
   gh.lazySingleton<IEventRepository>(
       () => EventRepository(get<FirebaseFirestore>()));
   final resolvedList = await regionsInjectableModule.regionsJson;
-  gh.lazySingleton<List<dynamic>>(() => resolvedList, instanceName: 'regions');
-  final resolvedList1 = await regionsInjectableModule.subregionsJson;
-  gh.lazySingleton<List<dynamic>>(() => resolvedList1,
-      instanceName: 'subregions');
+  gh.lazySingleton<List<dynamic>>(() => resolvedList);
   final resolvedSharedPreferences =
       await settingsInjectableModule.sharedPreferences;
   gh.lazySingleton<SharedPreferences>(() => resolvedSharedPreferences);
@@ -68,11 +67,12 @@ Future<GetIt> $initGetIt(
   gh.factory<CalendarModel>(() => CalendarModel(get<IEventRepository>()));
   gh.factory<CategoryModel>(
       () => CategoryModel(get<ICategoryRepository>(), get<IEventRepository>()));
-  gh.lazySingleton<IRegionApi>(() => RegionApi.fromJson(
-      get<List<dynamic>>(instanceName: 'regions'),
-      get<List<dynamic>>(instanceName: 'subregions')));
-  gh.factory<RegionsModel>(
-      () => RegionsModel(get<IEventRepository>(), get<IRegionApi>()));
+  gh.lazySingleton<IRegionApi>(
+      () => RegionApi.fromJson(regionsJson: get<List<dynamic>>()));
+  gh.factory<OverviewModel>(
+      () => OverviewModel(get<IAuthFacade>(), get<IRegionApi>()));
+  gh.factory<RegionCountersModel>(
+      () => RegionCountersModel(get<IEventRepository>(), get<IRegionApi>()));
   gh.factory<SettingsModel>(() => SettingsModel(get<SharedPreferences>()));
   gh.factory<EventsModel>(
       () => EventsModel(get<IEventRepository>(), get<IRegionApi>()));

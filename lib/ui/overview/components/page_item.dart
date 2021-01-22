@@ -21,7 +21,7 @@ class PageItem extends StatelessWidget {
                 title,
                 style: theme.textTheme.headline4,
               ),
-              SizedBox(height: 4),
+              SizedBox(height: kOverviewSpacing / 2),
               Text(
                 subtitle,
                 style: theme.textTheme.bodyText1,

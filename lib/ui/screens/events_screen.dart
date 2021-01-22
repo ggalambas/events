@@ -1,10 +1,10 @@
 import 'package:events/app/appbar/calendar_model.dart';
 import 'package:events/app/body/events_model.dart';
-import 'package:events/app/body/regions_model.dart';
+import 'package:events/app/body/region_counters_model.dart';
 import 'package:events/app/drawer/category_model.dart';
 import 'package:events/config/injection.dart';
 import 'package:events/domain/categories/category.dart';
-import 'package:events/domain/regions/subregion.dart';
+import 'package:events/domain/regions/region.dart';
 import 'package:events/ui/appbar/sliver_bar.dart';
 import 'package:events/ui/body/components/event_item.dart';
 import 'package:events/ui/body/components/list_group.dart';
@@ -62,7 +62,7 @@ class EventsScreen extends StatelessWidget {
   }
 }
 
-List<Widget> buildEvents(List<Subregion> subregions) {
+List<Widget> buildEvents(List<Region> subregions) {
   final List<Widget> list = [];
 
   for (final subregion in subregions) {

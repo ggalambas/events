@@ -49,27 +49,6 @@ class CategoryRepository implements ICategoryRepository {
   // }
 
   @override
-  Future<Either<RepositoryFailure, Map<String, Category>>> categories() async {
-    final categories = _firestore.categoriesCollection;
-    return categories
-        .orderBy('name')
-        .get()
-        .then((snapshot) => right<RepositoryFailure, Map<String, Category>>(
-              Map.fromEntries(snapshot.docs.map((doc) =>
-                  MapEntry(doc.id, CategoryDto.fromFirestore(doc).toDomain()))),
-            ))
-        .catchError((e) {
-      if (e is FirebaseException && e.message.contains('PERMISSION_DENIED')) {
-        return left<RepositoryFailure, Map<String, Category>>(
-            const RepositoryFailure.insufficientPermission());
-      } else {
-        return left<RepositoryFailure, Map<String, Category>>(
-            const RepositoryFailure.unexpected());
-      }
-    });
-  }
-
-  @override
   Future<Either<RepositoryFailure, List<Category>>> getAll() async {
     final categories = _firestore.categoriesCollection;
     return categories

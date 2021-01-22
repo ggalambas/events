@@ -22,7 +22,7 @@ class CategoryDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    final CategoryModel model = Provider.of<CategoryModel>(context);
+    final CategoryModel drawer = Provider.of<CategoryModel>(context);
     final User user = Provider.of<User>(context);
     return Drawer(
       child: Column(
@@ -48,7 +48,7 @@ class CategoryDrawer extends StatelessWidget {
             child: ListView(
               padding: EdgeInsets.only(top: kDrawerPadding),
               children: [
-                model.load.map(
+                drawer.load.map(
                   inProgress: Text('Loading'), //TODO: loading
                   success: Column(
                     children: [
@@ -61,7 +61,7 @@ class CategoryDrawer extends StatelessWidget {
                       //! 3
                       // ListSubtitle('Favoritos'),
                       ListSubtitle('Categorias'),
-                      for (Category category in model.categories)
+                      for (Category category in drawer.categories)
                         CategoryItem(category),
                     ],
                   ),

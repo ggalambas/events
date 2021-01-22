@@ -17,7 +17,7 @@ class CategoryModel extends BaseModel {
   final IEventRepository _eventRepository;
 
   CategoryModel(this._categoryRepository, this._eventRepository) {
-    getAll();
+    listen();
   }
 
   List<Category> _categories = [];
@@ -36,7 +36,7 @@ class CategoryModel extends BaseModel {
     loadFailure();
   }
 
-  void getAll() {
+  void listen() {
     loadInProgress();
     _eventRepository
         .categoryCounters()

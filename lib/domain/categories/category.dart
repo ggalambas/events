@@ -1,19 +1,30 @@
 import 'package:events/domain/core/event_counter.dart';
-import 'package:events/domain/core/id_object.dart';
 import 'package:flutter/material.dart';
 
-class Category extends IdObject {
+class Category {
+  String id;
+  String name;
   IconData icon;
   EventCounter eventCounter = EventCounter.empty();
 
   Category({
-    @required String id,
-    @required String name,
+    @required this.id,
+    @required this.name,
     @required this.icon,
-  }) : super(id: id, name: name);
+  });
 
   Category add({EventCounter eventCounter}) {
     this.eventCounter = eventCounter;
     return this;
   }
+
+  @override
+  bool operator ==(Object o) {
+    if (identical(this, o)) return true;
+
+    return o is Category && o.id == id;
+  }
+
+  @override
+  int get hashCode => id.hashCode;
 }

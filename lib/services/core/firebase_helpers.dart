@@ -10,11 +10,10 @@ extension FirestoreX on FirebaseFirestore {
   DocumentReference userDoc() {
     final userOption = getIt<IAuthFacade>().getSignedInUser();
     final user = userOption.getOrElse(() => throw NotAuthenticatedError());
-    return FirebaseFirestore.instance
-        .collection('users')
-        .doc(user.id.getOrCrash());
+    return FirebaseFirestore.instance.usersCollection.doc(user.id.getOrCrash());
   }
 
+  CollectionReference get usersCollection => collection('users');
   CollectionReference get categoriesCollection => collection('categories');
   CollectionReference get countersCollection => collection('counters');
   CollectionReference get eventsCollection => collection('events');

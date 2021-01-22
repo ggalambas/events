@@ -1,8 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:events/domain/auth/auth_failure.dart';
 import 'package:events/domain/auth/i_auth_facade.dart';
 import 'package:events/domain/auth/user.dart';
+import 'package:events/domain/auth/user_prefs.dart';
 import 'package:events/domain/auth/value_objects.dart';
+import 'package:events/domain/core/repository_failure.dart';
+import 'package:events/services/auth/user_prefs_dto.dart';
 import 'package:firebase_auth/firebase_auth.dart' hide User;
 // import 'package:firebase_auth/firebase_auth.dart' as firebase show User;
 import 'package:flutter/foundation.dart';
@@ -11,6 +15,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
 import 'package:flutter/services.dart';
 import 'package:events/services/auth/firebase_user_mapper.dart';
+import 'package:events/services/core/firebase_helpers.dart';
 
 //TODO
 //* 1. link user accounts
@@ -22,11 +27,13 @@ class FirebaseAuthFacade implements IAuthFacade {
   final FirebaseAuth _firebaseAuth;
   final GoogleSignIn _googleSignIn;
   final FacebookAuth _facebookAuth;
+  final FirebaseFirestore _firestore;
 
   FirebaseAuthFacade(
     this._firebaseAuth,
     this._googleSignIn,
     this._facebookAuth,
+    this._firestore,
   );
 
   @override
@@ -177,4 +184,81 @@ class FirebaseAuthFacade implements IAuthFacade {
         // _facebookAuth.logOut(),
         _firebaseAuth.signOut(),
       ]);
+
+  @override
+  Stream<Either<RepositoryFailure, UserPrefs>> watchPreferences() async* {
+    final userDoc = _firestore.userDoc();
+
+    yield* userDoc
+        .snapshots()
+        .map((doc) => right<RepositoryFailure, UserPrefs>(
+            UserPrefsDto.fromFirestore(doc).toDomain()))
+        .handleError((e) {
+      if (e is FirebaseException && e.message.contains('PERMISSION_DENIED')) {
+        return left(const RepositoryFailure.insufficientPermission());
+      } else {
+        return left(const RepositoryFailure.unexpected());
+      }
+    });
+  }
+
+  // @override
+  // Future<Either<RepositoryFailure, Unit>> createPreferences() async {
+  //   try {
+  //     final userDoc = _firestore.userDoc();
+  //     final userPrefsDto = UserPrefsDto.fromDomain(userPrefs);
+
+  //     await userDoc.update(userPrefsDto.toJson());
+
+  //     return right(unit);
+  //   } on FirebaseException catch (e) {
+  //     if (e.message.contains('PERMISSION_DENIED')) {
+  //       return left(const RepositoryFailure.insufficientPermission());
+  //     } else if (e.message.contains('NOT_FOUND')) {
+  //       return left(const RepositoryFailure.unableToUpdate());
+  //     } else {
+  //       return left(const RepositoryFailure.unexpected());
+  //     }
+  //   }
+  // }
+
+  @override
+  Future<Either<RepositoryFailure, Unit>> updatePreferences(
+      UserPrefs userPrefs) async {
+    try {
+      final userDoc = _firestore.userDoc();
+      final userPrefsDto = UserPrefsDto.fromDomain(userPrefs);
+
+      await userDoc.update(userPrefsDto.toJson());
+
+      return right(unit);
+    } on FirebaseException catch (e) {
+      if (e.message.contains('PERMISSION_DENIED')) {
+        return left(const RepositoryFailure.insufficientPermission());
+      } else if (e.message.contains('NOT_FOUND')) {
+        return left(const RepositoryFailure.unableToUpdate());
+      } else {
+        return left(const RepositoryFailure.unexpected());
+      }
+    }
+  }
+
+  @override
+  Future<Either<RepositoryFailure, Unit>> deletePreferences() async {
+    try {
+      final userDoc = _firestore.userDoc();
+
+      await userDoc.delete();
+
+      return right(unit);
+    } on FirebaseException catch (e) {
+      if (e.message.contains('PERMISSION_DENIED')) {
+        return left(const RepositoryFailure.insufficientPermission());
+      } else if (e.message.contains('NOT_FOUND')) {
+        return left(const RepositoryFailure.unableToUpdate());
+      } else {
+        return left(const RepositoryFailure.unexpected());
+      }
+    }
+  }
 }
