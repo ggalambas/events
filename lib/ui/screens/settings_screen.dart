@@ -26,29 +26,19 @@ class SettingsScreen extends StatelessWidget {
       ),
       body: ListView(
         children: [
-          ListSubtitle('Notificações'),
-          ListGroup(
-            items: [
-              SettingItem.toggle(
-                title: 'Receber notificações',
-                value: true,
-                onChanged: (newValue) {},
-              ),
-              SettingItem.more(
-                title: 'Definições de notificação',
-                onPressed: () {},
-              ),
-            ],
-          ),
           ListSubtitle('Conta'),
           ListGroup(
             items: [
               SettingItem.more(
-                title: 'Definições de conta',
+                title: 'Definições da conta',
                 onPressed: () {},
               ),
               SettingItem.more(
                 title: 'Créditos',
+                onPressed: () {},
+              ),
+              SettingItem.more(
+                title: 'Gestão de Eventos',
                 onPressed: () {},
               ),
               ListTile(
@@ -66,20 +56,29 @@ class SettingsScreen extends StatelessWidget {
               ),
             ],
           ),
-          ListSubtitle('Tema'),
+          ListSubtitle('Notificações'),
           ListGroup(
             items: [
-              SettingItem.selection(
-                title: 'Modo',
-                options: themeConfig.options,
-                selected: themeConfig.selected,
-                onPressed: (i) => themeConfig.selected = i,
+              SettingItem.toggle(
+                title: 'Receber notificações',
+                value: true,
+                onChanged: (newValue) {},
+              ),
+              SettingItem.more(
+                title: 'Definições de notificação',
+                onPressed: () {},
               ),
             ],
           ),
           ListSubtitle('Preferências'),
           ListGroup(
             items: [
+              SettingItem.selection(
+                title: 'Tema',
+                options: themeConfig.options,
+                selected: themeConfig.selected,
+                onPressed: (i) => themeConfig.selected = i,
+              ),
               SettingItem.selection(
                 title: 'Categoria inicial',
                 options: List.generate(15, (i) => 'Category ${i + 1}'),
@@ -90,9 +89,13 @@ class SettingsScreen extends StatelessWidget {
                 title: 'Categorias favoritas',
                 onPressed: () {},
               ),
+              SettingItem.more(
+                title: 'Local de residência',
+                onPressed: () {},
+              ),
             ],
           ),
-          ListSubtitle('Aplicação'),
+          ListSubtitle('Suporte'),
           ListGroup(
             items: [
               SettingItem.more(
@@ -107,6 +110,11 @@ class SettingsScreen extends StatelessWidget {
                 title: 'Feedback',
                 onPressed: () {},
               ),
+            ],
+          ),
+          ListSubtitle('Sobre'),
+          ListGroup(
+            items: [
               SettingItem.more(
                 title: 'Termos e Condições',
                 onPressed: () {},
