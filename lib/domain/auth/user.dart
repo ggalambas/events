@@ -17,6 +17,6 @@ abstract class User with _$User {
   factory User.anonymous({@required UniqueId id}) => User(
         id: id,
         name: 'Anonymous',
-        email: EmailAddress('ano@ny.mous'),
+        email: EmailAddress('anony@mo.us'),
       );
 }

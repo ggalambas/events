@@ -7,12 +7,14 @@ import 'package:injectable/injectable.dart';
 export 'package:events/app/core/base_model.dart';
 
 @Injectable()
-class RegionsModel extends BaseModel {
+class RegionCountersModel extends BaseModel {
   final IEventRepository _eventRepository;
   final IRegionApi _regionApi;
 
-  RegionsModel(this._eventRepository, this._regionApi) {
-    listen();
+  RegionCountersModel(this._eventRepository, this._regionApi) {
+    //TODO: this needs the selected category to work or wtv
+    //* dealing with it in a later stage idk
+    // listen();
   }
 
   List<Region> _near = [];

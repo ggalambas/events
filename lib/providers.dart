@@ -17,7 +17,7 @@ List<SingleChildWidget> mainProviders = [
   ),
   ChangeNotifierProvider<SignInFormModel>.value(
     value: getIt<SignInFormModel>(),
-  ),
+  ), //TODO: put this just at login and register
   ChangeNotifierProvider<SettingsModel>.value(
     value: getIt<SettingsModel>(),
   ),

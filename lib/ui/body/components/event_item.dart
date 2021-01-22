@@ -25,7 +25,7 @@ class EventItem extends StatelessWidget {
         borderRadius: BorderRadius.circular(kBorderRadiusBig),
       ),
       dense: true,
-      onTap: () => ExtendedNavigator.root.pushPosterScreen(event: event),
+      onTap: () => ExtendedNavigator.of(context).pushPosterScreen(event: event),
       leading: Text(
         date.time,
         style: theme.textTheme.bodyText2,

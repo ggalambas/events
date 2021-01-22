@@ -6,9 +6,7 @@ abstract class ICategoryRepository {
   Category selected;
   Future<Category> initial();
 
-  Future<Either<RepositoryFailure, Map<String, Category>>> categories();
   Future<Either<RepositoryFailure, List<Category>>> getAll();
-  // Future<Either<RepositoryFailure, List<Category>>> getFavorites(Category category);
   Future<Either<RepositoryFailure, Unit>> create(Category category);
   Future<Either<RepositoryFailure, Unit>> update(Category category);
   Future<Either<RepositoryFailure, Unit>> delete(Category category);

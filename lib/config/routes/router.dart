@@ -9,7 +9,6 @@ import 'package:events/ui/screens/regions_screen.dart';
 import 'package:events/ui/screens/register_screen.dart';
 import 'package:events/ui/screens/settings_screen.dart';
 
-//* ExtendedNavigator.root.pushHome
 //* flutter pub run build_runner watch --delete-conflicting-outputs
 
 @MaterialAutoRouter(

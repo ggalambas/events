@@ -68,7 +68,7 @@ class LoginScreen extends StatelessWidget {
             },
           ),
           Text(
-            'Esqueceu-se da palava passe?', //! 2
+            'Esqueceste a tua da palava passe?', //! 2
             style: theme.textTheme.caption,
             textAlign: TextAlign.center,
           ),
@@ -104,7 +104,7 @@ class LoginScreen extends StatelessWidget {
           ),
           Spacer(),
           SwipeUp(
-            onSwipe: () => ExtendedNavigator.root.pushRegisterScreen(),
+            onSwipe: () => ExtendedNavigator.of(context).pushRegisterScreen(),
             child: Text(
               'Ainda não criaste a tua conta? Regista-te',
               style: theme.textTheme.bodyText1,

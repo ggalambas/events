@@ -3,7 +3,7 @@ import 'package:events/domain/events/event.dart';
 import 'package:events/domain/core/repository_failure.dart';
 import 'package:events/domain/events/i_event_repository.dart';
 import 'package:events/domain/regions/i_region_api.dart';
-import 'package:events/domain/regions/subregion.dart';
+import 'package:events/domain/regions/region.dart';
 import 'package:injectable/injectable.dart';
 
 export 'package:events/app/core/base_model.dart';
@@ -17,8 +17,8 @@ class EventsModel extends BaseModel {
     listen();
   }
 
-  List<Subregion> _subregions = [];
-  List<Subregion> get subregions => _subregions;
+  List<Region> _subregions = [];
+  List<Region> get subregions => _subregions;
 
   bool isEmpty() => _subregions.isEmpty;
 
@@ -30,7 +30,7 @@ class EventsModel extends BaseModel {
 
     //? refactorization
     _subregions = [];
-    Subregion subregion;
+    Region subregion;
     String id;
 
     for (final event in events) {

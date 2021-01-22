@@ -1,5 +1,5 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:events/app/body/regions_model.dart';
+import 'package:events/app/body/region_counters_model.dart';
 import 'package:events/config/constants.dart';
 import 'package:events/config/routes/router.gr.dart';
 import 'package:events/domain/core/event_counter.dart';
@@ -26,8 +26,9 @@ class RegionItem extends StatelessWidget {
       ),
       dense: true,
       onTap: () {
-        Provider.of<RegionsModel>(context, listen: false).selected = region;
-        ExtendedNavigator.root.pushEventsScreen(regionName: name);
+        Provider.of<RegionCountersModel>(context, listen: false).selected =
+            region;
+        ExtendedNavigator.of(context).pushEventsScreen(regionName: name);
       },
       title: Text(name, style: textTheme.bodyText1),
       trailing: Counters(counter),

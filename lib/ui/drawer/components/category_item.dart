@@ -21,9 +21,9 @@ class CategoryItem extends StatelessWidget {
     final BorderRadius borderRadius = BorderRadius.horizontal(
       right: Radius.circular(kBorderRadiusMedium),
     );
-    final CategoryModel model =
+    final CategoryModel drawer =
         Provider.of<CategoryModel>(context, listen: false);
-    final bool isSelected = model.isSelected(category);
+    final bool isSelected = drawer.isSelected(category);
     return Padding(
       padding: EdgeInsets.only(right: kDrawerPadding),
       child: ClipRRect(
@@ -32,7 +32,7 @@ class CategoryItem extends StatelessWidget {
           shape: RoundedRectangleBorder(borderRadius: borderRadius),
           dense: true,
           onTap: () {
-            model.selected = category;
+            drawer.selected = category;
             Navigator.pop(context);
           },
           selected: isSelected,

@@ -11,7 +11,7 @@ import 'package:provider/provider.dart';
 class RegisterScreen extends StatelessWidget {
   // TODO
   //* its scrolling wtf?
-  //* review Terms and Conditions
+  //* review Terms and Conditions widget
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +64,7 @@ class RegisterScreen extends StatelessWidget {
               TextSpan(
                 children: [
                   TextSpan(
-                    text: 'Ao criar uma conta está a aceitar os nossos ',
+                    text: 'Ao criares uma conta estás a aceitar os nossos ',
                     style: theme.textTheme.caption,
                   ),
                   WidgetSpan(

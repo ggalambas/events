@@ -1,35 +1,45 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:events/app/overview/overview_model.dart';
 import 'package:events/config/constants.dart';
 import 'package:events/config/routes/router.gr.dart';
+import 'package:events/domain/regions/region.dart';
 import 'package:events/ui/auth/components/submit_button.dart';
 import 'package:events/ui/overview/components/dropdown.dart';
 import 'package:events/ui/overview/components/page_item.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide State;
+import 'package:provider/provider.dart';
 
 class RegionSelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+    final overview = Provider.of<OverviewModel>(context);
     return PageItem(
       title: 'Região',
       subtitle: 'Seleciona o teu local de residência',
       child: Padding(
-        padding: EdgeInsets.all(kGridSpacing),
+        padding: EdgeInsets.all(kOverviewSpacing),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Spacer(),
-            Dropdown(
+            Dropdown<Region>(
+              hint: 'Country',
+              value: overview.country,
+              onChanged: (value) => overview.country = value,
+              items: overview.countries,
+            ),
+            Dropdown<Region>(
               hint: 'Distrito',
-              items: List.generate(18, (i) => 'Distrito ${i + 1}'),
+              value: overview.state,
+              onChanged: (value) => overview.state = value,
+              items: overview.states.filteredBy(overview.country),
             ),
-            Dropdown(
+            Dropdown<Region>(
               hint: 'Concelho',
-              items: List.generate(16, (i) => 'Concelho ${i + 1}'),
-            ),
-            Dropdown(
-              hint: 'Concelho',
-              items: List.generate(11, (i) => 'Freguesia ${i + 1}'),
+              value: overview.region,
+              onChanged: (value) => overview.region = value,
+              items: overview.regions.filteredBy(overview.state),
             ),
             Spacer(),
             Text(
@@ -37,10 +47,15 @@ class RegionSelector extends StatelessWidget {
               style: theme.textTheme.bodyText1,
               textAlign: TextAlign.center,
             ),
-            Spacer(),
+            SizedBox(height: 8.0),
             SubmitButton(
               text: 'Avançar',
-              onPressed: () => ExtendedNavigator.root.pushRegionsScreen(),
+              onPressed: () =>
+                  ExtendedNavigator.of(context).pushRegionsScreen(),
+              // onPressed: () async {
+              //   await overview.setPreferences();
+              //   showError(context, overview.authFailureOrSuccessOption);
+              // },
             ),
           ],
         ),
