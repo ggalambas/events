@@ -1,5 +1,7 @@
 import 'package:events/app/auth/auth_model.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:events/config/constants.dart';
+import 'package:events/config/routes/router.gr.dart';
 import 'package:events/config/theme/theme_config.dart';
 import 'package:events/ui/appbar/rounded_bar.dart';
 import 'package:events/ui/body/components/list_group.dart';
@@ -91,7 +93,8 @@ class SettingsScreen extends StatelessWidget {
               ),
               SettingItem.more(
                 title: 'Local de residência',
-                onPressed: () {},
+                onPressed: () =>
+                    ExtendedNavigator.root.pushChangeRegionScreen(),
               ),
             ],
           ),
