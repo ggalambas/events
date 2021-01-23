@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route_annotations.dart';
+import 'package:events/ui/screens/change_region_screen.dart';
 import 'package:events/ui/screens/overview_screen.dart';
 import 'package:events/ui/screens/auth_screen.dart';
 import 'package:events/ui/screens/events_screen.dart';
@@ -21,6 +22,7 @@ import 'package:events/ui/screens/settings_screen.dart';
     MaterialRoute(page: EventsScreen),
     MaterialRoute(page: PosterScreen),
     MaterialRoute(page: SettingsScreen),
+    MaterialRoute(page: ChangeRegionScreen),
   ],
 )
 class $Router {}

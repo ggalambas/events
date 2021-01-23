@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 
 import '../../domain/events/event.dart';
 import '../../ui/screens/auth_screen.dart';
+import '../../ui/screens/change_region_screen.dart';
 import '../../ui/screens/events_screen.dart';
 import '../../ui/screens/login_screen.dart';
 import '../../ui/screens/overview_screen.dart';
@@ -28,6 +29,7 @@ class Routes {
   static const String eventsScreen = '/events-screen';
   static const String posterScreen = '/poster-screen';
   static const String settingsScreen = '/settings-screen';
+  static const String changeRegionScreen = '/change-region-screen';
   static const all = <String>{
     authScreen,
     loginScreen,
@@ -37,6 +39,7 @@ class Routes {
     eventsScreen,
     posterScreen,
     settingsScreen,
+    changeRegionScreen,
   };
 }
 
@@ -52,6 +55,7 @@ class Router extends RouterBase {
     RouteDef(Routes.eventsScreen, page: EventsScreen),
     RouteDef(Routes.posterScreen, page: PosterScreen),
     RouteDef(Routes.settingsScreen, page: SettingsScreen),
+    RouteDef(Routes.changeRegionScreen, page: ChangeRegionScreen),
   ];
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
@@ -108,6 +112,12 @@ class Router extends RouterBase {
         settings: data,
       );
     },
+    ChangeRegionScreen: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => ChangeRegionScreen(),
+        settings: data,
+      );
+    },
   };
 }
 
@@ -143,6 +153,9 @@ extension RouterExtendedNavigatorStateX on ExtendedNavigatorState {
       );
 
   Future<dynamic> pushSettingsScreen() => push<dynamic>(Routes.settingsScreen);
+
+  Future<dynamic> pushChangeRegionScreen() =>
+      push<dynamic>(Routes.changeRegionScreen);
 }
 
 /// ************************************************************************

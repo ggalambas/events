@@ -9,6 +9,7 @@ class RoundedBar extends StatelessWidget implements PreferredSizeWidget {
   final TextStyle titleStyle;
   final List<Widget> actions;
   final double elevation;
+  final bool withBackground;
 
   const RoundedBar({
     this.leading,
@@ -18,12 +19,13 @@ class RoundedBar extends StatelessWidget implements PreferredSizeWidget {
     this.titleStyle,
     this.actions,
     this.elevation,
+    this.withBackground = false,
   });
 
   @override
   Widget build(BuildContext context) {
-    final TextTheme textTheme = Theme.of(context).textTheme;
-    return AppBar(
+    final ThemeData theme = Theme.of(context);
+    AppBar appBar = AppBar(
       leading: leading,
       automaticallyImplyLeading: automaticallyImplyLeading,
       title: Column(
@@ -31,8 +33,9 @@ class RoundedBar extends StatelessWidget implements PreferredSizeWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (title != null)
-            Text(title, style: titleStyle ?? textTheme.headline6),
-          if (subtitle != null) Text(subtitle, style: textTheme.subtitle1),
+            Text(title, style: titleStyle ?? theme.textTheme.headline6),
+          if (subtitle != null)
+            Text(subtitle, style: theme.textTheme.subtitle1),
         ],
       ),
       actions: actions,
@@ -43,6 +46,14 @@ class RoundedBar extends StatelessWidget implements PreferredSizeWidget {
         ),
       ),
     );
+    return withBackground
+        ? Stack(
+            children: [
+              Container(color: theme.colorScheme.surface),
+              appBar,
+            ],
+          )
+        : appBar;
   }
 
   @override
