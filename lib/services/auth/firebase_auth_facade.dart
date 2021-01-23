@@ -21,6 +21,8 @@ import 'package:events/services/core/firebase_helpers.dart';
 //* 1. link user accounts
 //*    https://firebase.flutter.dev/docs/auth/usage/#linking-user-accounts
 //*    https://firebase.flutter.dev/docs/auth/error-handling/
+//* 2. delete user account and data if logout
+//?    what if the user just deletes the app
 
 @LazySingleton(as: IAuthFacade)
 class FirebaseAuthFacade implements IAuthFacade {
