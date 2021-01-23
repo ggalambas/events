@@ -18,10 +18,13 @@ class _$UserPrefsDtoTearOff {
 
 // ignore: unused_element
   _UserPrefsDto call(
-      {@required Map<int, String> categories, @required String region}) {
+      {@required List<String> categories,
+      @required String region,
+      @required List<String> events}) {
     return _UserPrefsDto(
       categories: categories,
       region: region,
+      events: events,
     );
   }
 
@@ -37,8 +40,9 @@ const $UserPrefsDto = _$UserPrefsDtoTearOff();
 
 /// @nodoc
 mixin _$UserPrefsDto {
-  Map<int, String> get categories;
+  List<String> get categories;
   String get region;
+  List<String> get events;
 
   Map<String, dynamic> toJson();
   @JsonKey(ignore: true)
@@ -50,7 +54,7 @@ abstract class $UserPrefsDtoCopyWith<$Res> {
   factory $UserPrefsDtoCopyWith(
           UserPrefsDto value, $Res Function(UserPrefsDto) then) =
       _$UserPrefsDtoCopyWithImpl<$Res>;
-  $Res call({Map<int, String> categories, String region});
+  $Res call({List<String> categories, String region, List<String> events});
 }
 
 /// @nodoc
@@ -65,12 +69,14 @@ class _$UserPrefsDtoCopyWithImpl<$Res> implements $UserPrefsDtoCopyWith<$Res> {
   $Res call({
     Object categories = freezed,
     Object region = freezed,
+    Object events = freezed,
   }) {
     return _then(_value.copyWith(
       categories: categories == freezed
           ? _value.categories
-          : categories as Map<int, String>,
+          : categories as List<String>,
       region: region == freezed ? _value.region : region as String,
+      events: events == freezed ? _value.events : events as List<String>,
     ));
   }
 }
@@ -82,7 +88,7 @@ abstract class _$UserPrefsDtoCopyWith<$Res>
           _UserPrefsDto value, $Res Function(_UserPrefsDto) then) =
       __$UserPrefsDtoCopyWithImpl<$Res>;
   @override
-  $Res call({Map<int, String> categories, String region});
+  $Res call({List<String> categories, String region, List<String> events});
 }
 
 /// @nodoc
@@ -99,12 +105,14 @@ class __$UserPrefsDtoCopyWithImpl<$Res> extends _$UserPrefsDtoCopyWithImpl<$Res>
   $Res call({
     Object categories = freezed,
     Object region = freezed,
+    Object events = freezed,
   }) {
     return _then(_UserPrefsDto(
       categories: categories == freezed
           ? _value.categories
-          : categories as Map<int, String>,
+          : categories as List<String>,
       region: region == freezed ? _value.region : region as String,
+      events: events == freezed ? _value.events : events as List<String>,
     ));
   }
 }
@@ -113,22 +121,26 @@ class __$UserPrefsDtoCopyWithImpl<$Res> extends _$UserPrefsDtoCopyWithImpl<$Res>
 
 /// @nodoc
 class _$_UserPrefsDto extends _UserPrefsDto {
-  const _$_UserPrefsDto({@required this.categories, @required this.region})
+  const _$_UserPrefsDto(
+      {@required this.categories, @required this.region, @required this.events})
       : assert(categories != null),
         assert(region != null),
+        assert(events != null),
         super._();
 
   factory _$_UserPrefsDto.fromJson(Map<String, dynamic> json) =>
       _$_$_UserPrefsDtoFromJson(json);
 
   @override
-  final Map<int, String> categories;
+  final List<String> categories;
   @override
   final String region;
+  @override
+  final List<String> events;
 
   @override
   String toString() {
-    return 'UserPrefsDto(categories: $categories, region: $region)';
+    return 'UserPrefsDto(categories: $categories, region: $region, events: $events)';
   }
 
   @override
@@ -139,14 +151,17 @@ class _$_UserPrefsDto extends _UserPrefsDto {
                 const DeepCollectionEquality()
                     .equals(other.categories, categories)) &&
             (identical(other.region, region) ||
-                const DeepCollectionEquality().equals(other.region, region)));
+                const DeepCollectionEquality().equals(other.region, region)) &&
+            (identical(other.events, events) ||
+                const DeepCollectionEquality().equals(other.events, events)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(categories) ^
-      const DeepCollectionEquality().hash(region);
+      const DeepCollectionEquality().hash(region) ^
+      const DeepCollectionEquality().hash(events);
 
   @JsonKey(ignore: true)
   @override
@@ -162,16 +177,19 @@ class _$_UserPrefsDto extends _UserPrefsDto {
 abstract class _UserPrefsDto extends UserPrefsDto {
   const _UserPrefsDto._() : super._();
   const factory _UserPrefsDto(
-      {@required Map<int, String> categories,
-      @required String region}) = _$_UserPrefsDto;
+      {@required List<String> categories,
+      @required String region,
+      @required List<String> events}) = _$_UserPrefsDto;
 
   factory _UserPrefsDto.fromJson(Map<String, dynamic> json) =
       _$_UserPrefsDto.fromJson;
 
   @override
-  Map<int, String> get categories;
+  List<String> get categories;
   @override
   String get region;
+  @override
+  List<String> get events;
   @override
   @JsonKey(ignore: true)
   _$UserPrefsDtoCopyWith<_UserPrefsDto> get copyWith;

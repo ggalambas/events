@@ -23,8 +23,9 @@ abstract class IAuthFacade {
   Future<Option<Either<AuthFailure, Unit>>> signInWithFacebook();
   Future signOut();
 
-  Stream<Either<RepositoryFailure, UserPrefs>> watchPreferences();
-  Future<Either<RepositoryFailure, Unit>> updatePreferences(
-      UserPrefs userPrefs);
-  Future<Either<RepositoryFailure, Unit>> deletePreferences();
+  Stream<Either<RepositoryFailure, bool>> watchPrefsExistance();
+  Stream<Either<RepositoryFailure, UserPrefs>> watchPrefs();
+  Future<Either<RepositoryFailure, Unit>> createPrefs(UserPrefs userPrefs);
+  Future<Either<RepositoryFailure, Unit>> updatePrefs(UserPrefs userPrefs);
+  Future<Either<RepositoryFailure, Unit>> deletePrefs();
 }

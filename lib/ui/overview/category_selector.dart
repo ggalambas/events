@@ -1,5 +1,5 @@
 import 'package:events/app/drawer/category_model.dart';
-import 'package:events/app/overview/overview_model.dart';
+import 'package:events/app/auth/overview_model.dart';
 import 'package:events/config/constants.dart';
 import 'package:events/domain/categories/category.dart';
 import 'package:events/ui/overview/components/page_item.dart';

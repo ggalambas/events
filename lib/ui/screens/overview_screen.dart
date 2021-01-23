@@ -1,9 +1,13 @@
-import 'package:events/app/overview/overview_model.dart';
+import 'package:auto_route/auto_route.dart';
+import 'package:events/app/auth/overview_model.dart';
 import 'package:events/config/constants.dart';
 import 'package:events/config/injection.dart';
+import 'package:events/config/routes/router.gr.dart';
 import 'package:events/ui/overview/category_selector.dart';
 import 'package:events/ui/overview/components/page_indicator.dart';
 import 'package:events/ui/overview/region_selector.dart';
+import 'package:events/ui/screens/regions_screen.dart';
+import 'package:events/ui/screens/splash_screen.dart';
 import 'package:events/ui/widgets/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -25,6 +29,11 @@ class OverviewScreen extends StatelessWidget {
       value: getIt<OverviewModel>(),
       builder: (context, _) {
         final overview = Provider.of<OverviewModel>(context);
+        final arePrefsSet = overview.arePrefsSet;
+
+        if (arePrefsSet == null) return SplashScreen();
+        if (arePrefsSet) return RegionsScreen();
+
         return Scaffold(
           backgroundColor: theme.colorScheme.surface,
           body: SafeArea(

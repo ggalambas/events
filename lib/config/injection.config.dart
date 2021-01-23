@@ -13,6 +13,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../app/auth/auth_model.dart';
+import '../app/auth/verification_model.dart' as events;
 import '../app/appbar/calendar_model.dart';
 import '../app/drawer/category_model.dart';
 import '../services/categories/category_repository.dart';
@@ -24,7 +25,7 @@ import '../domain/auth/i_auth_facade.dart';
 import '../domain/categories/i_category_repository.dart';
 import '../domain/events/i_event_repository.dart';
 import '../domain/regions/i_region_api.dart';
-import '../app/overview/overview_model.dart';
+import '../app/auth/overview_model.dart';
 import '../services/regions/region_api.dart';
 import '../app/body/region_counters_model.dart';
 import '../services/regions/regions_injectable_module.dart';
@@ -64,6 +65,7 @@ Future<GetIt> $initGetIt(
   gh.lazySingleton<SharedPreferences>(() => resolvedSharedPreferences);
   gh.factory<SignInFormModel>(() => SignInFormModel(get<IAuthFacade>()));
   gh.factory<AuthModel>(() => AuthModel(get<IAuthFacade>()));
+  gh.factory<events.AuthModel>(() => events.AuthModel(get<IAuthFacade>()));
   gh.factory<CalendarModel>(() => CalendarModel(get<IEventRepository>()));
   gh.factory<CategoryModel>(
       () => CategoryModel(get<ICategoryRepository>(), get<IEventRepository>()));

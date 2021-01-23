@@ -1,10 +1,9 @@
-import 'package:auto_route/auto_route.dart';
-import 'package:events/app/overview/overview_model.dart';
+import 'package:events/app/auth/overview_model.dart';
 import 'package:events/config/constants.dart';
-import 'package:events/config/routes/router.gr.dart';
 import 'package:events/domain/regions/region.dart';
 import 'package:events/ui/auth/components/submit_button.dart';
 import 'package:events/ui/overview/components/dropdown.dart';
+import 'package:events/ui/overview/components/overview_error.dart';
 import 'package:events/ui/overview/components/page_item.dart';
 import 'package:flutter/material.dart' hide State;
 import 'package:provider/provider.dart';
@@ -50,12 +49,10 @@ class RegionSelector extends StatelessWidget {
             SizedBox(height: 8.0),
             SubmitButton(
               text: 'Avançar',
-              onPressed: () =>
-                  ExtendedNavigator.of(context).pushRegionsScreen(),
-              // onPressed: () async {
-              //   await overview.setPreferences();
-              //   showError(context, overview.authFailureOrSuccessOption);
-              // },
+              onPressed: () async {
+                await overview.setPrefs();
+                showError(context, overview.prefsFailureOrSuccessOption);
+              },
             ),
           ],
         ),

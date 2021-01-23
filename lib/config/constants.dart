@@ -27,8 +27,8 @@ const double kSwipeUpPadding = 15.0;
 // Overview
 const double kOverviewVertPadding = 32.0;
 const double kOverviewSpacing = 8.0;
-const double kIndicatorDotSize = 10.0;
-const double kIndicatorDotSpace = 6.0;
+const double kIndicatorDotSize = 9.0;
+const double kIndicatorDotSpace = 8.0;
 
 // Drawer
 const double kDrawerPadding = 8.0;
