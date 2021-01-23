@@ -1,4 +1,5 @@
 import 'package:events/domain/auth/user_prefs.dart';
+import 'package:events/domain/events/event.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -12,14 +13,16 @@ abstract class UserPrefsDto implements _$UserPrefsDto {
   const UserPrefsDto._();
 
   const factory UserPrefsDto({
-    @required Map<int, String> categories,
+    @required List<String> categories,
     @required String region,
+    @required List<String> events,
   }) = _UserPrefsDto;
 
   factory UserPrefsDto.fromDomain(UserPrefs userPrefs) {
     return UserPrefsDto(
       categories: userPrefs.categories,
       region: userPrefs.region,
+      events: userPrefs.events,
     );
   }
 
@@ -27,6 +30,7 @@ abstract class UserPrefsDto implements _$UserPrefsDto {
     return UserPrefs(
       categories: categories,
       region: region,
+      events: events,
     );
   }
 

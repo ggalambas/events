@@ -1,11 +1,13 @@
 import 'package:flutter/foundation.dart';
 
 class UserPrefs {
-  Map<int, String> categories;
+  List<String> categories;
   String region;
+  List<String> events;
 
   UserPrefs({
-    @required categories,
-    @required region,
+    @required this.categories,
+    @required this.region,
+    @required this.events,
   });
 }

@@ -186,10 +186,26 @@ class FirebaseAuthFacade implements IAuthFacade {
       ]);
 
   @override
-  Stream<Either<RepositoryFailure, UserPrefs>> watchPreferences() async* {
+  Stream<Either<RepositoryFailure, bool>> watchPrefsExistance() {
     final userDoc = _firestore.userDoc();
 
-    yield* userDoc
+    return userDoc
+        .snapshots()
+        .map((doc) => right<RepositoryFailure, bool>(doc.exists))
+        .handleError((e) {
+      if (e is FirebaseException && e.message.contains('PERMISSION_DENIED')) {
+        return left(const RepositoryFailure.insufficientPermission());
+      } else {
+        return left(const RepositoryFailure.unexpected());
+      }
+    });
+  }
+
+  @override
+  Stream<Either<RepositoryFailure, UserPrefs>> watchPrefs() {
+    final userDoc = _firestore.userDoc();
+
+    return userDoc
         .snapshots()
         .map((doc) => right<RepositoryFailure, UserPrefs>(
             UserPrefsDto.fromFirestore(doc).toDomain()))
@@ -202,28 +218,29 @@ class FirebaseAuthFacade implements IAuthFacade {
     });
   }
 
-  // @override
-  // Future<Either<RepositoryFailure, Unit>> createPreferences() async {
-  //   try {
-  //     final userDoc = _firestore.userDoc();
-  //     final userPrefsDto = UserPrefsDto.fromDomain(userPrefs);
+  @override
+  Future<Either<RepositoryFailure, Unit>> createPrefs(
+      UserPrefs userPrefs) async {
+    try {
+      final userDoc = _firestore.userDoc();
+      final userPrefsDto = UserPrefsDto.fromDomain(userPrefs);
 
-  //     await userDoc.update(userPrefsDto.toJson());
+      await userDoc.set(userPrefsDto.toJson());
 
-  //     return right(unit);
-  //   } on FirebaseException catch (e) {
-  //     if (e.message.contains('PERMISSION_DENIED')) {
-  //       return left(const RepositoryFailure.insufficientPermission());
-  //     } else if (e.message.contains('NOT_FOUND')) {
-  //       return left(const RepositoryFailure.unableToUpdate());
-  //     } else {
-  //       return left(const RepositoryFailure.unexpected());
-  //     }
-  //   }
-  // }
+      return right(unit);
+    } on FirebaseException catch (e) {
+      if (e.message.contains('PERMISSION_DENIED')) {
+        return left(const RepositoryFailure.insufficientPermission());
+      } else if (e.message.contains('NOT_FOUND')) {
+        return left(const RepositoryFailure.unableToUpdate());
+      } else {
+        return left(const RepositoryFailure.unexpected());
+      }
+    }
+  }
 
   @override
-  Future<Either<RepositoryFailure, Unit>> updatePreferences(
+  Future<Either<RepositoryFailure, Unit>> updatePrefs(
       UserPrefs userPrefs) async {
     try {
       final userDoc = _firestore.userDoc();
@@ -244,7 +261,7 @@ class FirebaseAuthFacade implements IAuthFacade {
   }
 
   @override
-  Future<Either<RepositoryFailure, Unit>> deletePreferences() async {
+  Future<Either<RepositoryFailure, Unit>> deletePrefs() async {
     try {
       final userDoc = _firestore.userDoc();
 
