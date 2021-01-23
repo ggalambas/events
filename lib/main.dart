@@ -27,6 +27,7 @@ Future<void> main() async {
 // splash screen -> https://flutter.dev/docs/development/ui/advanced/splash-screen
 //* 3. getOrCrash();
 //* 4. hero animations
+//* 5. English (and Spanish?) language
 
 class MyApp extends StatefulWidget {
   @override

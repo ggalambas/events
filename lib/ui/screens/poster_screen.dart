@@ -6,6 +6,7 @@ import 'package:events/ui/appbar/rounded_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_tabs/flutter_custom_tabs.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:events/app/helpers/scaffold_x.dart';
 
 //TODO
 //* 1. Bookmark
@@ -13,6 +14,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 //* 3. Buttons shouldn't be able to be clicked multiple times
 //* 4. custom tabs
 //* 5. more buttons (tickets, etc)
+//* 6. rounded scaffold ?
 
 class PosterScreen extends StatelessWidget {
   final Event event;

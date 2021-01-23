@@ -17,13 +17,11 @@ class ListGroup extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    return Container(
-      decoration: BoxDecoration(
-        color: theme.colorScheme.surface,
-        borderRadius: first
-            ? BorderRadius.vertical(bottom: Radius.circular(kBorderRadiusBig))
-            : BorderRadius.circular(kBorderRadiusBig),
-      ),
+    return Material(
+      color: theme.colorScheme.surface,
+      borderRadius: first
+          ? BorderRadius.vertical(bottom: Radius.circular(kBorderRadiusBig))
+          : BorderRadius.circular(kBorderRadiusBig),
       child: Column(
         children: _itemsWithDivider,
       ),

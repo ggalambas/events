@@ -25,7 +25,7 @@ class RoundedBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    AppBar appBar = AppBar(
+    final AppBar appBar = AppBar(
       leading: leading,
       automaticallyImplyLeading: automaticallyImplyLeading,
       title: Column(
@@ -47,11 +47,9 @@ class RoundedBar extends StatelessWidget implements PreferredSizeWidget {
       ),
     );
     return withBackground
-        ? Stack(
-            children: [
-              Container(color: theme.colorScheme.surface),
-              appBar,
-            ],
+        ? Container(
+            color: theme.colorScheme.surface,
+            child: appBar,
           )
         : appBar;
   }
