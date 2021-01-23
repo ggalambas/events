@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
 
 import '../../domain/events/event.dart';
 import '../../ui/screens/auth_screen.dart';
-import '../../ui/screens/change_region_screen.dart';
+import '../../ui/screens/settings/change_region_screen.dart';
 import '../../ui/screens/events_screen.dart';
 import '../../ui/screens/login_screen.dart';
 import '../../ui/screens/overview_screen.dart';

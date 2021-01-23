@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 
 import 'package:events/app/appbar/scroll_model.dart';
 import 'package:sliver_tools/sliver_tools.dart';
+import 'package:events/app/helpers/scaffold_x.dart';
 
 class SliverScaffold extends StatelessWidget {
   final Widget drawer;
@@ -76,7 +77,7 @@ class SliverScaffold extends StatelessWidget {
             onPressed: () => print('Create Event'),
             child: Icon(Icons.add),
           ),
-        );
+        ).rounded(context);
       },
     );
   }

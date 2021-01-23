@@ -1,5 +1,5 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -15,7 +15,6 @@ class SettingsModel extends ChangeNotifier {
   // _prefs.getString('name');
   // delete value
   // _prefs.remove('name');
-
 }
 
 @module

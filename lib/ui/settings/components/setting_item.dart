@@ -4,11 +4,27 @@ import 'package:flutter/material.dart';
 class SettingItem extends StatelessWidget {
   final String title;
   final Widget Function(BuildContext) trailing;
+  final void Function() onTap;
 
   const SettingItem._({
     this.title,
     this.trailing,
+    this.onTap,
   });
+
+  @override
+  Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    return ListTile(
+      onTap: onTap,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(kBorderRadiusBig),
+      ),
+      dense: true,
+      title: Text(title, style: theme.textTheme.bodyText1),
+      trailing: trailing(context),
+    );
+  }
 
   factory SettingItem.toggle({
     @required String title,
@@ -26,14 +42,12 @@ class SettingItem extends StatelessWidget {
 
   factory SettingItem.more({
     @required String title,
-    @required void Function() onPressed,
+    @required void Function() onTap,
   }) =>
       SettingItem._(
         title: title,
-        trailing: (_) => IconButton(
-          icon: Icon(Icons.chevron_right),
-          onPressed: onPressed,
-        ),
+        trailing: (_) => Icon(Icons.chevron_right),
+        onTap: onTap,
       );
 
   factory SettingItem.selection({
@@ -101,17 +115,4 @@ class SettingItem extends StatelessWidget {
           );
         },
       );
-
-  @override
-  Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
-    return ListTile(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(kBorderRadiusBig),
-      ),
-      dense: true,
-      title: Text(title, style: theme.textTheme.bodyText1),
-      trailing: trailing(context),
-    );
-  }
 }

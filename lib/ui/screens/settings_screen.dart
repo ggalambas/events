@@ -10,6 +10,7 @@ import 'package:events/ui/settings/components/setting_item.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:events/app/core/settings_model.dart';
+import 'package:events/app/helpers/scaffold_x.dart';
 
 //TODO
 //* Merge all listTiles
@@ -17,11 +18,13 @@ import 'package:events/app/core/settings_model.dart';
 class SettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
     final settings = Provider.of<SettingsModel>(context);
     final auth = Provider.of<AuthModel>(context, listen: false);
     final themeConfig = Provider.of<ThemeConfig>(context, listen: false);
+
+    final ThemeData theme = Theme.of(context);
     int selected = 2;
+
     return Scaffold(
       appBar: RoundedBar(
         title: 'Settings',
@@ -33,15 +36,15 @@ class SettingsScreen extends StatelessWidget {
             items: [
               SettingItem.more(
                 title: 'Definições da conta',
-                onPressed: () {},
+                onTap: () {},
               ),
               SettingItem.more(
                 title: 'Créditos',
-                onPressed: () {},
+                onTap: () {},
               ),
               SettingItem.more(
                 title: 'Gestão de Eventos',
-                onPressed: () {},
+                onTap: () {},
               ),
               ListTile(
                 shape: RoundedRectangleBorder(
@@ -68,7 +71,7 @@ class SettingsScreen extends StatelessWidget {
               ),
               SettingItem.more(
                 title: 'Definições de notificação',
-                onPressed: () {},
+                onTap: () {},
               ),
             ],
           ),
@@ -89,12 +92,12 @@ class SettingsScreen extends StatelessWidget {
               ),
               SettingItem.more(
                 title: 'Categorias favoritas',
-                onPressed: () {},
+                onTap: () {},
               ),
               SettingItem.more(
                 title: 'Local de residência',
-                onPressed: () =>
-                    ExtendedNavigator.root.pushChangeRegionScreen(),
+                onTap: () =>
+                    ExtendedNavigator.of(context).pushChangeRegionScreen(),
               ),
             ],
           ),
@@ -103,15 +106,15 @@ class SettingsScreen extends StatelessWidget {
             items: [
               SettingItem.more(
                 title: 'Classificar a aplicação',
-                onPressed: () {},
+                onTap: () {},
               ),
               SettingItem.more(
                 title: 'FAQ',
-                onPressed: () {},
+                onTap: () {},
               ),
               SettingItem.more(
                 title: 'Feedback',
-                onPressed: () {},
+                onTap: () {},
               ),
             ],
           ),
@@ -120,11 +123,11 @@ class SettingsScreen extends StatelessWidget {
             items: [
               SettingItem.more(
                 title: 'Termos e Condições',
-                onPressed: () {},
+                onTap: () {},
               ),
               SettingItem.more(
                 title: 'Política de Privacidade',
-                onPressed: () {},
+                onTap: () {},
               ),
               SettingItem.info(
                 title: 'Versão',
@@ -134,6 +137,6 @@ class SettingsScreen extends StatelessWidget {
           ),
         ],
       ),
-    );
+    ).rounded(context);
   }
 }
