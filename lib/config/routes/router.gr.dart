@@ -11,13 +11,14 @@ import 'package:flutter/material.dart';
 
 import '../../domain/events/event.dart';
 import '../../ui/screens/auth_screen.dart';
-import '../../ui/screens/settings/change_region_screen.dart';
 import '../../ui/screens/events_screen.dart';
 import '../../ui/screens/login_screen.dart';
 import '../../ui/screens/overview_screen.dart';
 import '../../ui/screens/poster_screen.dart';
 import '../../ui/screens/regions_screen.dart';
 import '../../ui/screens/register_screen.dart';
+import '../../ui/screens/settings/change_region_screen.dart';
+import '../../ui/screens/settings/favorite_categories_screen.dart';
 import '../../ui/screens/settings_screen.dart';
 
 class Routes {
@@ -30,6 +31,7 @@ class Routes {
   static const String posterScreen = '/poster-screen';
   static const String settingsScreen = '/settings-screen';
   static const String changeRegionScreen = '/change-region-screen';
+  static const String favoriteCategoriesScreen = '/favorite-categories-screen';
   static const all = <String>{
     authScreen,
     loginScreen,
@@ -40,6 +42,7 @@ class Routes {
     posterScreen,
     settingsScreen,
     changeRegionScreen,
+    favoriteCategoriesScreen,
   };
 }
 
@@ -56,6 +59,7 @@ class Router extends RouterBase {
     RouteDef(Routes.posterScreen, page: PosterScreen),
     RouteDef(Routes.settingsScreen, page: SettingsScreen),
     RouteDef(Routes.changeRegionScreen, page: ChangeRegionScreen),
+    RouteDef(Routes.favoriteCategoriesScreen, page: FavoriteCategoriesScreen),
   ];
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
@@ -118,6 +122,12 @@ class Router extends RouterBase {
         settings: data,
       );
     },
+    FavoriteCategoriesScreen: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => FavoriteCategoriesScreen(),
+        settings: data,
+      );
+    },
   };
 }
 
@@ -156,6 +166,9 @@ extension RouterExtendedNavigatorStateX on ExtendedNavigatorState {
 
   Future<dynamic> pushChangeRegionScreen() =>
       push<dynamic>(Routes.changeRegionScreen);
+
+  Future<dynamic> pushFavoriteCategoriesScreen() =>
+      push<dynamic>(Routes.favoriteCategoriesScreen);
 }
 
 /// ************************************************************************

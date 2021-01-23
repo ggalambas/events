@@ -4,6 +4,9 @@ import 'package:events/ui/settings/components/setting_item.dart';
 import 'package:flutter/material.dart';
 import 'package:events/app/helpers/scaffold_x.dart';
 
+//TODO:
+// https://medium.com/flutterdevs/reorderable-listview-in-flutter-731324f0677b
+
 class FavoriteCategoriesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
