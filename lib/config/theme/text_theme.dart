@@ -5,9 +5,9 @@ TextTheme textTheme({
   @required Color onPrimary,
   @required Color onBackground,
 }) {
-  final FontWeight light = FontWeight.w300;
-  final FontWeight regular = FontWeight.w400;
-  final FontWeight medium = FontWeight.w500;
+  const FontWeight light = FontWeight.w300;
+  const FontWeight regular = FontWeight.w400;
+  const FontWeight medium = FontWeight.w500;
 
   return TextTheme(
     headline1: TextStyle(

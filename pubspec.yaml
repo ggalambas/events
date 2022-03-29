@@ -21,8 +21,6 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
-  flutter:
-    sdk: flutter
   auto_route: ^0.6.9
   cloud_firestore: ^0.16.0
   cloud_functions: ^0.9.0
@@ -32,6 +30,8 @@ dependencies:
   firebase_auth: ^0.20.0+1
   firebase_core: ^0.7.0
   flushbar: ^1.10.4
+  flutter:
+    sdk: flutter
   flutter_custom_tabs: ^0.6.0
   flutter_facebook_auth: ^2.0.0+1
   flutter_statusbarcolor: ^0.2.3
@@ -54,10 +54,10 @@ dependencies:
   uuid: ^2.2.2
 
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
   auto_route_generator: ^0.6.10
   build_runner: null
+  flutter_test:
+    sdk: flutter
   freezed: ^0.12.7
   injectable_generator: ^1.0.7
   json_serializable: ^3.5.1

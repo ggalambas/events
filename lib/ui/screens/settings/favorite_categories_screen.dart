@@ -22,7 +22,7 @@ class FavoriteCategoriesScreen extends StatelessWidget {
             items: [
               SettingItem.selection(
                 title: 'País',
-                options: ['Portugal'],
+                options: const ['Portugal'],
                 selected: 0,
                 onPressed: (i) {},
               ),

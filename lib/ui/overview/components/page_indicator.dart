@@ -22,7 +22,6 @@ class PageIndicator extends StatelessWidget {
         effect: ColorTransitionEffect(
           dotWidth: kIndicatorDotSize,
           dotHeight: kIndicatorDotSize,
-          spacing: kIndicatorDotSpace,
           dotColor: theme.colorScheme.background,
           activeDotColor: theme.colorScheme.primary,
         ),

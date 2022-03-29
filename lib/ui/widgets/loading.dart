@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
-abstract class Loading {
-  static Widget linear({@required bool isLoading}) =>
-      isLoading ? LinearProgressIndicator(minHeight: 4) : SizedBox(height: 4);
+mixin Loading {
+  static Widget linear({@required bool isLoading}) => isLoading
+      ? const LinearProgressIndicator(minHeight: 4)
+      : const SizedBox(height: 4);
 
   static Widget circular() => Container(
         alignment: Alignment.center,
-        child: CircularProgressIndicator(),
+        child: const CircularProgressIndicator(),
       );
 }

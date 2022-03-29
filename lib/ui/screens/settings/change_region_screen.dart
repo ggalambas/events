@@ -19,19 +19,19 @@ class ChangeRegionScreen extends StatelessWidget {
             items: [
               SettingItem.selection(
                 title: 'País',
-                options: ['Portugal'],
+                options: const ['Portugal'],
                 selected: 0,
                 onPressed: (i) {},
               ),
               SettingItem.selection(
                 title: 'Distrito',
-                options: ['Lisboa', 'Leiria', 'Setúbal'],
+                options: const ['Lisboa', 'Leiria', 'Setúbal'],
                 selected: 0,
                 onPressed: (i) {},
               ),
               SettingItem.selection(
                 title: 'Concelho',
-                options: ['Lagos', 'Mafra', 'Torres-Vedras'],
+                options: const ['Lagos', 'Mafra', 'Torres-Vedras'],
                 selected: 1,
                 onPressed: (i) {},
               ),
