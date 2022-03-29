@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:events/config/theme/palette.dart';
 import 'package:events/config/theme/theme.dart';
 import 'package:flutter/material.dart';
@@ -35,7 +37,7 @@ class ThemeConfig with ChangeNotifier {
   void useLightMode() => mode = ThemeMode.light;
   void useDarkMode() => mode = ThemeMode.dark;
 
-  static void statusBarListener(Window window) {
+  static void statusBarListener(SingletonFlutterWindow window) {
     _setSystemBarsColors(window.platformBrightness);
     window.onPlatformBrightnessChanged = () {
       _setSystemBarsColors(window.platformBrightness);
