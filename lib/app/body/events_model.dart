@@ -1,6 +1,6 @@
 import 'package:events/app/core/base_model.dart';
-import 'package:events/domain/events/event.dart';
 import 'package:events/domain/core/repository_failure.dart';
+import 'package:events/domain/events/event.dart';
 import 'package:events/domain/events/i_event_repository.dart';
 import 'package:events/domain/regions/i_region_api.dart';
 import 'package:events/domain/regions/region.dart';

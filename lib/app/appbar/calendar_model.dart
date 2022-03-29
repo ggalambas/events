@@ -1,7 +1,8 @@
 import 'dart:async';
+
+import 'package:events/app/helpers/date_time_x.dart';
 import 'package:events/domain/events/i_event_repository.dart';
 import 'package:flutter/material.dart';
-import 'package:events/app/helpers/date_time_x.dart';
 import 'package:injectable/injectable.dart';
 
 @Injectable()

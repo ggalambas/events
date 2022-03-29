@@ -1,10 +1,10 @@
 import 'dart:io';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:events/domain/core/value_objects.dart';
 import 'package:events/domain/events/event.dart';
 import 'package:events/domain/events/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:json_annotation/json_annotation.dart';
 
 part 'event_dto.freezed.dart';
 part 'event_dto.g.dart';

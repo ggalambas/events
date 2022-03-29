@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:events/config/injection.dart';
-import 'package:events/config/theme/theme_config.dart';
 import 'package:events/config/routes/router.gr.dart' as auto;
+import 'package:events/config/theme/theme_config.dart';
 import 'package:events/providers.dart';
 import 'package:events/ui/auth/auth_builder.dart';
 import 'package:firebase_core/firebase_core.dart';

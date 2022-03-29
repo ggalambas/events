@@ -1,19 +1,19 @@
 import 'dart:async';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:events/config/injection.dart';
 import 'package:events/domain/categories/category.dart';
 import 'package:events/domain/categories/i_category_repository.dart';
-import 'package:events/domain/events/event.dart';
 import 'package:events/domain/core/repository_failure.dart';
+import 'package:events/domain/events/event.dart';
 import 'package:events/domain/events/i_event_repository.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:events/domain/regions/i_region_api.dart';
 import 'package:events/domain/regions/region.dart';
+import 'package:events/services/core/firebase_helpers.dart';
 import 'package:events/services/events/event_counter_dto.dart';
 import 'package:events/services/events/event_dto.dart';
 import 'package:injectable/injectable.dart';
-import 'package:events/services/core/firebase_helpers.dart';
 
 @LazySingleton(as: IEventRepository)
 class EventRepository implements IEventRepository {

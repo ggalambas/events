@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
-import 'package:events/domain/events/event.dart';
 import 'package:events/domain/categories/category.dart';
-import 'package:events/domain/regions/region.dart';
 import 'package:events/domain/core/repository_failure.dart';
+import 'package:events/domain/events/event.dart';
+import 'package:events/domain/regions/region.dart';
 
 abstract class IEventRepository {
   DateTime selectedDay;

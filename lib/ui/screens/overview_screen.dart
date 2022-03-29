@@ -1,8 +1,6 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:events/app/auth/overview_model.dart';
 import 'package:events/config/constants.dart';
 import 'package:events/config/injection.dart';
-import 'package:events/config/routes/router.gr.dart';
 import 'package:events/ui/overview/category_selector.dart';
 import 'package:events/ui/overview/components/page_indicator.dart';
 import 'package:events/ui/overview/region_selector.dart';

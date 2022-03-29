@@ -1,4 +1,3 @@
-import 'package:events/config/injection.dart';
 import 'package:events/domain/regions/region.dart';
 import 'package:flutter/foundation.dart';
 

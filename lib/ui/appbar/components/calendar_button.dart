@@ -1,10 +1,10 @@
 import 'package:events/app/appbar/calendar_model.dart';
 import 'package:events/app/appbar/calendar_scroll_model.dart';
 import 'package:events/app/appbar/scroll_model.dart';
+import 'package:events/app/helpers/string_x.dart';
 import 'package:events/config/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:events/app/helpers/string_x.dart';
 
 class CalendarButton extends StatelessWidget {
   @override
@@ -22,7 +22,8 @@ class CalendarButton extends StatelessWidget {
             padding: EdgeInsets.symmetric(
               vertical: (kToolbarHeight - kCalendarItemWidth) / 2,
             ),
-            child: FlatButton( //TODO TextButton
+            child: FlatButton(
+              //TODO TextButton
               onPressed: () {
                 scroll.expandFlexBar();
                 calendarScroll.snapSelected();

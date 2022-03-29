@@ -1,5 +1,7 @@
-import 'package:events/app/auth/auth_model.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:events/app/auth/auth_model.dart';
+import 'package:events/app/core/settings_model.dart';
+import 'package:events/app/helpers/scaffold_x.dart';
 import 'package:events/config/constants.dart';
 import 'package:events/config/routes/router.gr.dart';
 import 'package:events/config/theme/theme_config.dart';
@@ -9,8 +11,6 @@ import 'package:events/ui/body/components/list_subtitle.dart';
 import 'package:events/ui/settings/components/setting_item.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:events/app/core/settings_model.dart';
-import 'package:events/app/helpers/scaffold_x.dart';
 
 //TODO
 //* Merge all listTiles

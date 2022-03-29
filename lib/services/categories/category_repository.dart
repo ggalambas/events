@@ -1,13 +1,13 @@
 import 'dart:async';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:events/domain/categories/category.dart';
-import 'package:events/domain/core/repository_failure.dart';
 import 'package:events/domain/categories/i_category_repository.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:events/domain/core/repository_failure.dart';
 import 'package:events/services/categories/category_dto.dart';
-import 'package:injectable/injectable.dart';
 import 'package:events/services/core/firebase_helpers.dart';
+import 'package:injectable/injectable.dart';
 
 @LazySingleton(as: ICategoryRepository)
 class CategoryRepository implements ICategoryRepository {

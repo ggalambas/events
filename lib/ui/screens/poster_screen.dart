@@ -1,4 +1,3 @@
-import 'dart:ui';
 import 'package:events/app/helpers/awesome_icon.dart';
 import 'package:events/config/constants.dart';
 import 'package:events/domain/events/event.dart';
@@ -6,7 +5,6 @@ import 'package:events/ui/appbar/rounded_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_tabs/flutter_custom_tabs.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:events/app/helpers/scaffold_x.dart';
 
 //TODO
 //* 1. Bookmark

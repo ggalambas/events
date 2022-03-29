@@ -1,9 +1,6 @@
-import 'package:events/domain/auth/user_prefs.dart';
-import 'package:events/domain/events/event.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:json_annotation/json_annotation.dart';
+import 'package:events/domain/auth/user_prefs.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'user_prefs_dto.freezed.dart';
 part 'user_prefs_dto.g.dart';

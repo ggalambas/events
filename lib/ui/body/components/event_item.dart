@@ -1,9 +1,9 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:events/app/helpers/date_time_x.dart';
 import 'package:events/config/constants.dart';
 import 'package:events/config/routes/router.gr.dart';
 import 'package:events/domain/events/event.dart';
 import 'package:flutter/material.dart';
-import 'package:events/app/helpers/date_time_x.dart';
 
 //TODO
 //* 1. [BUG] splash behind group

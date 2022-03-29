@@ -6,16 +6,16 @@ import 'package:events/domain/auth/user.dart';
 import 'package:events/domain/auth/user_prefs.dart';
 import 'package:events/domain/auth/value_objects.dart';
 import 'package:events/domain/core/repository_failure.dart';
+import 'package:events/services/auth/firebase_user_mapper.dart';
 import 'package:events/services/auth/user_prefs_dto.dart';
+import 'package:events/services/core/firebase_helpers.dart';
 import 'package:firebase_auth/firebase_auth.dart' hide User;
 // import 'package:firebase_auth/firebase_auth.dart' as firebase show User;
 import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
-import 'package:flutter/services.dart';
-import 'package:events/services/auth/firebase_user_mapper.dart';
-import 'package:events/services/core/firebase_helpers.dart';
 
 //TODO
 //* 1. link user accounts

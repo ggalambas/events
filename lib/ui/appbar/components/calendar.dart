@@ -1,9 +1,9 @@
 import 'package:events/app/appbar/calendar_model.dart';
 import 'package:events/app/appbar/calendar_scroll_model.dart';
 import 'package:events/config/constants.dart';
+import 'package:events/ui/appbar/components/calendar_item.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:events/ui/appbar/components/calendar_item.dart';
 
 class Calendar extends StatelessWidget {
   @override

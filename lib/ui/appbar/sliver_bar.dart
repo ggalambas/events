@@ -1,6 +1,6 @@
 import 'package:events/config/constants.dart';
-import 'package:events/ui/appbar/components/calendar_button.dart';
 import 'package:events/ui/appbar/components/calendar.dart';
+import 'package:events/ui/appbar/components/calendar_button.dart';
 import 'package:events/ui/appbar/components/search.dart';
 import 'package:flutter/material.dart';
 

@@ -1,6 +1,5 @@
 import 'package:events/app/appbar/calendar_model.dart';
 import 'package:events/app/body/events_model.dart';
-import 'package:events/app/body/region_counters_model.dart';
 import 'package:events/app/drawer/category_model.dart';
 import 'package:events/config/injection.dart';
 import 'package:events/domain/categories/category.dart';

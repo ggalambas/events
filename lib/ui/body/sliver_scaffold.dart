@@ -1,11 +1,10 @@
 import 'package:events/app/appbar/calendar_model.dart';
 import 'package:events/app/appbar/calendar_scroll_model.dart';
+import 'package:events/app/appbar/scroll_model.dart';
+import 'package:events/app/helpers/scaffold_x.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import 'package:events/app/appbar/scroll_model.dart';
 import 'package:sliver_tools/sliver_tools.dart';
-import 'package:events/app/helpers/scaffold_x.dart';
 
 class SliverScaffold extends StatelessWidget {
   final Widget drawer;

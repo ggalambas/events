@@ -1,9 +1,9 @@
 import 'dart:math';
 
 import 'package:events/app/appbar/calendar_model.dart';
+import 'package:events/app/helpers/date_time_x.dart';
 import 'package:events/config/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:events/app/helpers/date_time_x.dart';
 
 //TODO
 //* Poupar for cycles
