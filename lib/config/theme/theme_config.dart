@@ -3,7 +3,12 @@ import 'dart:ui';
 import 'package:events/config/theme/palette.dart';
 import 'package:events/config/theme/theme.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
+import 'package:flutter/services.dart';
+
+extension BrightnessX on Brightness {
+  Brightness get other =>
+      this == Brightness.light ? Brightness.dark : Brightness.light;
+}
 
 class ThemeConfig with ChangeNotifier {
   ThemeMode _mode = ThemeMode.system;
@@ -44,23 +49,14 @@ class ThemeConfig with ChangeNotifier {
     };
   }
 
-  static void _setSystemBarsColors(Brightness brightness) {
-    if (brightness == Brightness.light) {
-      _setStatusBarColor(Colors.transparent, false);
-      _setNavigationBarColor(lightPallete.surface, false);
-    } else if (brightness == Brightness.dark) {
-      _setStatusBarColor(Colors.transparent, true);
-      _setNavigationBarColor(darkPallete.surface, true);
-    }
-  }
-
-  static void _setStatusBarColor(Color color, bool whiteForeground) {
-    FlutterStatusbarcolor.setStatusBarColor(color);
-    FlutterStatusbarcolor.setStatusBarWhiteForeground(whiteForeground);
-  }
-
-  static void _setNavigationBarColor(Color color, bool whiteForeground) {
-    FlutterStatusbarcolor.setNavigationBarColor(color);
-    FlutterStatusbarcolor.setNavigationBarWhiteForeground(whiteForeground);
-  }
+  static void _setSystemBarsColors(Brightness brightness) =>
+      SystemChrome.setSystemUIOverlayStyle(
+        SystemUiOverlayStyle(
+          statusBarColor: Colors.transparent,
+          statusBarBrightness: brightness.other,
+          statusBarIconBrightness: brightness.other,
+          systemNavigationBarIconBrightness: brightness.other,
+          systemNavigationBarColor: lightPallete.surface,
+        ),
+      );
 }
